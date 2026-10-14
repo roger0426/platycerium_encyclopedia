@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>鹿角蕨圖鑑</title>
+  <meta name="description" content="快速瀏覽鹿角蕨原生種、雜交種、照片與親本關係。">
+  <meta name="theme-color" content="#f6f4ee" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#151a17" media="(prefers-color-scheme: dark)">
+  <meta name="color-scheme" content="light dark">
+  <script>
+    // 在畫面繪製前套用使用者選的主題，避免閃爍
+    try { var t = localStorage.getItem("theme"); if (t === "light" || t === "dark") document.documentElement.dataset.theme = t; } catch (e) {}
+  </script>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#/">
+      <svg class="brand-icon" viewBox="0 0 32 32" aria-hidden="true"><use href="#frond"/></svg>
+      <span>鹿角蕨圖鑑</span>
+    </a>
+    <span class="brand-sub">Platycerium Field Guide</span>
+    <div class="view-switch" role="group" aria-label="顯示面板">
+      <button type="button" data-pane-toggle="graph" aria-pressed="false" title="顯示／隱藏親種關係圖">
+        <svg class="ic" aria-hidden="true"><use href="#i-graph"/></svg><span>關係圖</span></button>
+      <button type="button" data-pane-toggle="content" aria-pressed="true" title="顯示／隱藏圖鑑">
+        <svg class="ic" aria-hidden="true"><use href="#i-book"/></svg><span>圖鑑</span></button>
+    </div>
+    <button class="theme-btn" id="theme-btn" type="button"></button>
+  </header>
+
+  <div class="shell">
+    <!-- 左：親種關係圖 -->
+    <aside class="graph-pane" id="graph-pane" aria-label="親種關係圖" hidden>
+      <div class="pane-head">
+        <h2><svg class="ic" aria-hidden="true"><use href="#i-graph"/></svg>親種關係圖</h2>
+        <button type="button" class="pane-btn" data-graph-iso aria-pressed="true" title="顯示沒有雜交關係的原生種">孤立原生種</button>
+        <button type="button" class="pane-btn" data-graph-fit title="縮放至全覽">
+          <svg class="ic" aria-hidden="true"><use href="#i-fit"/></svg><span>全覽</span></button>
+        <button type="button" class="pane-close" data-pane-close="graph" aria-label="關閉關係圖">
+          <svg class="ic" aria-hidden="true"><use href="#i-close"/></svg></button>
+      </div>
+      <div class="cy" id="cy"></div>
+      <div class="graph-msg" id="graph-msg" hidden></div>
+      <div class="g-tip" id="graph-tip" aria-hidden="true"></div>
+      <div class="graph-legend" id="graph-legend"></div>
+    </aside>
+
+    <!-- 右：圖鑑（列表／品種頁） -->
+    <div class="content-pane" id="content-pane">
+      <div class="pane-head content-head">
+        <h2><svg class="ic" aria-hidden="true"><use href="#i-book"/></svg>圖鑑</h2>
+        <button type="button" class="pane-close" data-pane-close="content" aria-label="關閉圖鑑">
+          <svg class="ic" aria-hidden="true"><use href="#i-close"/></svg></button>
+      </div>
+      <main id="app" tabindex="-1"></main>
+    </div>
+  </div>
+
+  <!-- 燈箱 -->
+  <div class="lightbox" id="lightbox" hidden>
+    <button class="lb-close" data-lb="close" aria-label="關閉">✕</button>
+    <button class="lb-nav lb-prev" data-lb="prev" aria-label="上一張">‹</button>
+    <figure>
+      <img id="lb-img" alt="">
+      <figcaption id="lb-cap"></figcaption>
+    </figure>
+    <button class="lb-nav lb-next" data-lb="next" aria-label="下一張">›</button>
+  </div>
+
+  <!-- 共用圖示 -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="frond" viewBox="0 0 32 32">
+      <path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"
+        d="M16 30V17M16 17l-6-6M16 17l6-6M10 11L6 4M10 11l-1-8M22 11l4-7M22 11l1-8M16 24c-5 0-9-2-11-5M16 24c5 0 9-2 11-5"/>
+    </symbol>
+    <symbol id="i-size" viewBox="0 0 32 32">
+      <path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"
+        d="M16 30V17M16 17l-6-6M16 17l6-6M10 11L6 4M10 11l-1-8M22 11l4-7M22 11l1-8M16 24c-5 0-9-2-11-5M16 24c5 0 9-2 11-5"/>
+    </symbol>
+    <symbol id="i-auto" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="2"/>
+      <path fill="currentColor" d="M12 4a8 8 0 0 1 0 16z"/>
+    </symbol>
+    <symbol id="i-filter" viewBox="0 0 24 24">
+      <path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M4 6h16M7 12h10M10 18h4"/>
+    </symbol>
+    <symbol id="i-star" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5-4.8-4.6 6.6-.9z"/>
+    </symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24">
+      <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <circle cx="12" cy="12" r="4" fill="currentColor"/>
+        <path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/>
+      </g>
+    </symbol>
+    <symbol id="i-drop" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M12 2.5c3.6 4.6 6.2 8.1 6.2 11.3a6.2 6.2 0 0 1-12.4 0c0-3.2 2.6-6.7 6.2-11.3z"/>
+    </symbol>
+    <symbol id="i-humid" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M7 15a4 4 0 0 1-.5-8A5.5 5.5 0 0 1 17 8.6 3.3 3.3 0 0 1 17 15z"/>
+      <path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M8 18.5v2M12 18.5v3M16 18.5v2"/>
+    </symbol>
+    <symbol id="i-thermo" viewBox="0 0 24 24">
+      <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <path d="M10 13.5V5a2 2 0 0 1 4 0v8.5a4 4 0 1 1-4 0z"/><path d="M12 9v6"/>
+      </g>
+      <circle cx="12" cy="17" r="2" fill="currentColor"/>
+    </symbol>
+    <symbol id="i-pups" viewBox="0 0 24 24">
+      <g fill="none" stroke="currentColor" stroke-width="2"><circle cx="13" cy="10" r="6"/><circle cx="5.5" cy="17" r="3"/><circle cx="19" cy="19" r="2.2"/></g>
+    </symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24">
+      <path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M20 14.5A8.5 8.5 0 1 1 9.5 4 6.8 6.8 0 0 0 20 14.5z"/>
+    </symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24">
+      <path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+        d="M3 20c0-5 2-9 4-10l1.5 2L10 7l2 3 2-3 1.5 5L17 10c2 1 4 5 4 10zM12 20v-6M8 20l4-4 4 4"/>
+    </symbol>
+    <symbol id="i-hand" viewBox="0 0 24 24">
+      <path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+        d="M12 22v-9M12 13L7 7M12 13l5-6M7 7L4.5 2.5M7 7l.5-4.5M17 7l-.5-4.5M17 7l2.5-4.5"/>
+    </symbol>
+    <symbol id="i-p-up" viewBox="0 0 24 24">
+      <path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="M12 20V4M6 10l6-6 6 6"/>
+    </symbol>
+    <symbol id="i-p-spread" viewBox="0 0 24 24">
+      <path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/>
+    </symbol>
+    <symbol id="i-p-pendant" viewBox="0 0 24 24">
+      <path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="M12 4v16M6 14l6 6 6-6"/>
+    </symbol>
+    <symbol id="i-graph" viewBox="0 0 24 24">
+      <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2.5" y="3" width="7" height="5" rx="1.5"/><rect x="14.5" y="3" width="7" height="5" rx="1.5"/>
+        <rect x="8.5" y="16" width="7" height="5" rx="1.5"/><path d="M6 8v3.5h12V8M12 11.5V16"/>
+      </g>
+    </symbol>
+    <symbol id="i-book" viewBox="0 0 24 24">
+      <g fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round">
+        <rect x="3" y="3" width="7.5" height="7.5" rx="1.5"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="1.5"/>
+        <rect x="3" y="13.5" width="7.5" height="7.5" rx="1.5"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="1.5"/>
+      </g>
+    </symbol>
+    <symbol id="i-close" viewBox="0 0 24 24">
+      <path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" d="M6 6l12 12M18 6L6 18"/>
+    </symbol>
+    <symbol id="i-fit" viewBox="0 0 24 24">
+      <path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+        d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/>
+    </symbol>
+    <symbol id="i-google" viewBox="0 0 24 24">
+      <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.76h3.56c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+      <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.56-2.76c-.99.66-2.25 1.06-3.72 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84A11 11 0 0 0 12 23z"/>
+      <path fill="#FBBC05" d="M5.84 14.11A6.6 6.6 0 0 1 5.49 12c0-.73.13-1.44.35-2.11V7.05H2.18A11 11 0 0 0 1 12c0 1.78.43 3.45 1.18 4.95z"/>
+      <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15A10.55 10.55 0 0 0 12 1 11 11 0 0 0 2.18 7.05l3.66 2.84C6.71 7.31 9.14 5.38 12 5.38z"/>
+    </symbol>
+  </svg>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
