@@ -1,0 +1,565 @@
+﻿plant_id,field,summary,confidence,independent_sources,by_source,tiers
+alcicorne,size,M,高,1,學術 Hennipman & Roos 1982（T1）：D = 55 cm,T1
+alcicorne,shield_form,appressed,高,1,學術 Hennipman & Roos 1982（T1）：貼伏,T1
+alcicorne,shield_height,1,高,1,學術 Hennipman & Roos 1982（T1）：貼伏,T1
+alcicorne,shield_vein,no,高,1,學術 Hennipman & Roos 1982（T1）：埋入,T1
+alcicorne,shield_browning,withering,高,2,學術 Hennipman & Roos 1982（T1）：成熟後枯褐／美國 UF/IFAS（T2）：盾葉自然轉褐,T1|T2
+alcicorne,shield_fringe,none,高,1,學術 Hennipman & Roos 1982（T1）：無,T1
+alcicorne,fertile_posture,up,高,1,學術 Hennipman & Roos 1982（T1）：直立,T1
+alcicorne,fertile_length,25–85 cm,高,1,學術 Hennipman & Roos 1982（T1）：25–85 cm,T1
+alcicorne,fertile_split,2–3,高,1,學術 Hennipman & Roos 1982（T1）：2–3 回,T1
+alcicorne,fertile_hair,,,0,美國 Halling（T2）：非洲型：幾乎無毛、有蠟質（參考）／美國 Halling（T2）：馬達加斯加型：多毛（參考）,
+alcicorne,spore,tips,高,1,學術 Hennipman & Roos 1982（T1）：末端裂片,T1
+alcicorne,pups,yes,高,3,學術 Hennipman & Roos 1982（T1）：叢生／學術 Ciarle et al. 2025（T1）：叢生、多型／美國 UF/IFAS（T2）：會長側芽,T1|T2
+alcicorne,dormancy,,,0,,
+alcicorne,origin,肯亞、坦尚尼亞、羅德西亞（今辛巴威一帶）、莫三比克、葛摩、馬達加斯加、馬斯克林群島（留尼旺、模里西斯）,高,1,學術 Hennipman & Roos 1982（T1）：原產地,T1
+alcicorne,light,4,中,2,台灣 微體溫室（T3）：中強光（夏季遮陰 30%）／美國 Halling（T2）：明亮光線,T2|T3
+alcicorne,water,1,低,1,台灣 微體溫室（T3）：耐旱，介質全乾再澆透,T3
+alcicorne,min_temp,15,低,1,美國 UF/IFAS（T2）：半耐寒至 40 °F（參考）／台灣 微體溫室（T3）：保持 15 度以上,T3
+alcicorne,difficulty,1,低,1,美國 Halling（T2）：第 1 級（最容易）（參考）／台灣 微體溫室（T3）：新手／美國 UF/IFAS（T2）：容易（參考）,T3
+andinum,size,XL,高,1,學術 Hennipman & Roos 1982（T1）：D = 150 cm,T1
+andinum,shield_form,erect-wedge,高,1,學術 Hennipman & Roos 1982（T1）：直立楔形,T1
+andinum,shield_height,3,高,1,學術 Hennipman & Roos 1982（T1）：直立楔形，盾葉長上限 60 cm,T1
+andinum,shield_vein,no,高,1,學術 Hennipman & Roos 1982（T1）：埋入,T1
+andinum,shield_hair,5,中,1,美國 UF/IFAS（T2）：密被銀白毛,T2
+andinum,shield_browning,withering,高,1,學術 Hennipman & Roos 1982（T1）：成熟後枯褐,T1
+andinum,shield_fringe,above-stipe,高,1,學術 Hennipman & Roos 1982（T1）：葉柄上方,T1
+andinum,fertile_posture,pendant,高,1,學術 Hennipman & Roos 1982（T1）：下垂,T1
+andinum,fertile_length,100–200 cm 以上,高,1,學術 Hennipman & Roos 1982（T1）：100–200 cm 以上,T1
+andinum,fertile_split,3–5,高,1,學術 Hennipman & Roos 1982（T1）：3–5 回,T1
+andinum,fertile_hair,5,中,1,美國 UF/IFAS（T2）：密被銀白毛,T2
+andinum,spore,medial,高,1,學術 Hennipman & Roos 1982（T1）：裂片中段,T1
+andinum,pups,yes,高,3,學術 Hennipman & Roos 1982（T1）：叢生／學術 Ciarle et al. 2025（T1）：叢生、單型／美國 UF/IFAS（T2）：會長側芽,T1|T2
+andinum,origin,秘魯、玻利維亞,高,1,學術 Hennipman & Roos 1982（T1）：原產地,T1
+andinum,light,1,高,2,台灣 微體溫室（T3）：低弱光（夏季遮陰 70%）／美國 UF/IFAS（T2）：需要低光,T2|T3
+andinum,water,1,高,2,美國 UF/IFAS（T2）：兩次澆水間需乾燥／美國 Halling（T2）：不喜大量澆水,T2
+andinum,min_temp,16,低,1,美國 UF/IFAS（T2）：最低 60 °F,T2
+andinum,difficulty,5,低,1,美國 Halling（T2）：第 3 級（需些經驗）（參考）／台灣 微體溫室（T3）：進階／美國 UF/IFAS（T2）：中等難度（參考）,T3
+bifurcatum,size,M,中,2,學術 Hennipman & Roos 1982（T1）：D = 62.5 cm／新加坡 NParks（T2）：D = 90 cm,T1|T2
+bifurcatum,shield_form,,,0,,
+bifurcatum,shield_vein,no,高,1,學術 Hennipman & Roos 1982（T1）：埋入,T1
+bifurcatum,shield_browning,withering,高,1,學術 Hennipman & Roos 1982（T1）：成熟後枯褐,T1
+bifurcatum,shield_fringe,none,高,1,學術 Hennipman & Roos 1982（T1）：無,T1
+bifurcatum,fertile_posture,spread,高,1,學術 Hennipman & Roos 1982（T1）：展開,T1
+bifurcatum,fertile_length,35–90 cm,高,1,學術 Hennipman & Roos 1982（T1）：35–90 cm,T1
+bifurcatum,fertile_split,0–5,高,1,澳洲 Australian Tropical Ferns（T1）：0–5 回,T1
+bifurcatum,fertile_width,1,高,1,學術 Hennipman & Roos 1982（T1）：線形、狹三角形,T1
+bifurcatum,fertile_hair,3,中,2,學術 Hennipman & Roos 1982（T1）：密生／澳洲 Australian Tropical Ferns（T1）：上表面稀疏、下表面密生,T1
+bifurcatum,spore,tips,高,1,學術 Hennipman & Roos 1982（T1）：末端裂片,T1
+bifurcatum,pups,yes,高,3,學術 Hennipman & Roos 1982（T1）：叢生／學術 Ciarle et al. 2025（T1）：叢生、多型／美國 UF/IFAS（T2）：會長側芽,T1|T2
+bifurcatum,origin,澳洲東部（特別是內陸高原）,高,1,學術 Hennipman & Roos 1982（T1）：原產地,T1
+bifurcatum,light,3,中,4,台灣 微體溫室（T3）：中強光（夏季遮陰 30%）／新加坡 NParks（T2）：半日照／英國 RHS（T2）：半遮蔭／學術 Hennipman & Roos 1982（T1）：原生地：疏林草原（參考）／美國 NC State Extension（T2）：散射光至半遮蔭,T2|T3
+bifurcatum,water,3,中,3,新加坡 NParks（T2）：中等／英國 RHS（T2）：生長期充分澆水，冬季少澆／美國 NC State Extension（T2）：根部略乾再澆，不可全乾,T2
+bifurcatum,humidity,5,低,1,英國 RHS（T2）：高濕度、每日噴霧,T2
+bifurcatum,min_temp,13,低,1,英國 RHS（T2）：H1B（10–15 °C）／美國 UF/IFAS（T2）：短時間可耐 25–30 °F（參考）／美國 UF/IFAS（T2）：可耐 30 °F（參考）／英國 牛津植物園（T2）：可耐輕霜（參考）／美國 NC State Extension（T2）：可在 USDA Zone 10 戶外栽培（參考）,T2
+bifurcatum,difficulty,1,低,1,美國 Halling（T2）：第 1 級（最容易）（參考）／台灣 微體溫室（T3）：新手／美國 UF/IFAS（T2）：最容易（參考）,T3
+hillii,size,M,高,1,學術 Hennipman & Roos 1982（T1）：D = 47.5 cm,T1
+hillii,shield_form,appressed,高,3,學術 Hennipman & Roos 1982（T1）：貼伏／美國 Halling（T2）：緊貼附著物／澳洲 Australian Tropical Ferns（T1）：上緣全緣、緊貼附著物,T1|T2
+hillii,shield_height,1,高,1,學術 Hennipman & Roos 1982（T1）：貼伏,T1
+hillii,shield_vein,no,高,1,學術 Hennipman & Roos 1982（T1）：埋入,T1
+hillii,shield_browning,withering,高,2,學術 Hennipman & Roos 1982（T1）：成熟後枯褐／澳洲 Australian Tropical Ferns（T1）：很快轉褐,T1
+hillii,shield_fringe,none,高,1,學術 Hennipman & Roos 1982（T1）：無,T1
+hillii,fertile_posture,up,高,1,學術 Hennipman & Roos 1982（T1）：直立,T1
+hillii,fertile_length,25–70 cm,高,1,學術 Hennipman & Roos 1982（T1）：25–70 cm,T1
+hillii,fertile_split,1–5,高,1,澳洲 Australian Tropical Ferns（T1）：1–5 回,T1
+hillii,fertile_width,3,高,1,學術 Hennipman & Roos 1982（T1）：橢圓至倒卵形,T1
+hillii,fertile_hair,1,中,3,學術 Hennipman & Roos 1982（T1）：稀疏／澳洲 Australian Tropical Ferns（T1）：無毛或近無毛／美國 Halling（T2）：上表面蠟質、下表面有絨毛,T1|T2
+hillii,spore,tips,高,1,學術 Hennipman & Roos 1982（T1）：末端裂片,T1
+hillii,pups,yes,高,3,學術 Hennipman & Roos 1982（T1）：叢生／學術 Ciarle et al. 2025（T1）：叢生、多型／美國 UF/IFAS（T2）：會長側芽,T1|T2
+hillii,origin,新幾內亞、澳洲東部（特別是沿海地區）,高,1,學術 Hennipman & Roos 1982（T1）：原產地,T1
+hillii,light,1,低,1,台灣 微體溫室（T3）：低弱光（夏季遮陰 70%）／學術 Hennipman & Roos 1982（T1）：原生地：疏林草原（參考）,T3
+hillii,min_temp,,,0,美國 UF/IFAS（T2）：半耐寒至 40 °F（參考）,
+hillii,difficulty,1,低,1,美國 Halling（T2）：第 1 級（最容易）（參考）／台灣 微體溫室（T3）：新手／美國 UF/IFAS（T2）：容易（參考）,T3
+veitchii,size,M,高,1,學術 Hennipman & Roos 1982（T1）：D = 47.5 cm,T1
+veitchii,shield_form,erect-lobed,高,2,學術 Hennipman & Roos 1982（T1）：直立多裂／美國 Halling（T2）：盾葉上緣高聳指狀,T1|T2
+veitchii,shield_height,3,高,1,學術 Hennipman & Roos 1982（T1）：直立多裂，盾葉長上限 45 cm,T1
+veitchii,shield_vein,no,高,1,學術 Hennipman & Roos 1982（T1）：埋入,T1
+veitchii,shield_browning,withering,高,2,學術 Hennipman & Roos 1982（T1）：成熟後枯褐／澳洲 Australian Tropical Ferns（T1）：乾枯成粉灰色,T1
+veitchii,shield_fringe,none,高,1,學術 Hennipman & Roos 1982（T1）：無,T1
+veitchii,fertile_posture,up,高,1,學術 Hennipman & Roos 1982（T1）：直立,T1
+veitchii,fertile_length,25–70 cm,高,1,學術 Hennipman & Roos 1982（T1）：25–70 cm,T1
+veitchii,fertile_split,2–3,高,1,學術 Hennipman & Roos 1982（T1）：2–3 回,T1
+veitchii,fertile_width,1,高,1,學術 Hennipman & Roos 1982（T1）：線形、狹三角形,T1
+veitchii,fertile_hair,5,高,3,學術 Hennipman & Roos 1982（T1）：極密／美國 Halling（T2）：大量白毛／澳洲 Australian Tropical Ferns（T1）：濃密星狀毛,T1|T2
+veitchii,spore,tips,高,1,學術 Hennipman & Roos 1982（T1）：末端裂片,T1
+veitchii,pups,yes,高,4,學術 Hennipman & Roos 1982（T1）：叢生／學術 Ciarle et al. 2025（T1）：叢生、多型／美國 UF/IFAS（T2）：會長側芽／美國 Halling（T2）：容易長側芽,T1|T2
+veitchii,origin,澳洲東部,高,1,學術 Hennipman & Roos 1982（T1）：原產地,T1
+veitchii,light,4,中,4,台灣 微體溫室（T3）：中強光（夏季遮陰 30%）／英國 RHS（T2）：半遮蔭／美國 UF/IFAS（T2）：需要大量光線／美國 Halling（T2）：很高的光量／學術 Hennipman & Roos 1982（T1）：原生地：曝曬的岩石與灌叢（參考）,T2|T3
+veitchii,water,1,高,3,美國 Halling（T2）：澆太多容易出問題／台灣 微體溫室（T3）：耐旱、澆透不積水／澳洲 Australian Tropical Ferns（T1）：冷涼季節偏乾；具耐旱機制,T1|T2|T3
+veitchii,humidity,,,0,學術 Hennipman & Roos 1982（T1）：原生地：明顯乾季（參考）,
+veitchii,min_temp,13,低,1,英國 RHS（T2）：H1B（10–15 °C）／美國 UF/IFAS（T2）：半耐寒至 25–30 °F，可耐輕霜（參考）／美國 UF/IFAS（T2）：可耐 30 °F（參考）,T2
+veitchii,difficulty,1,低,1,美國 Halling（T2）：第 1 級（最容易）（參考）／台灣 微體溫室（T3）：新手／美國 UF/IFAS（T2）：容易（參考）,T3
+willinckii,size,M,高,1,學術 Hennipman & Roos 1982（T1）：D = 57.5 cm,T1
+willinckii,shield_form,erect-lobed,高,2,學術 Hennipman & Roos 1982（T1）：直立多裂／美國 Halling（T2）：高、深裂,T1|T2
+willinckii,shield_height,3,高,1,學術 Hennipman & Roos 1982（T1）：直立多裂，盾葉長上限 70 cm,T1
+willinckii,shield_vein,no,高,1,學術 Hennipman & Roos 1982（T1）：埋入,T1
+willinckii,shield_browning,withering,高,2,學術 Hennipman & Roos 1982（T1）：成熟後枯褐／美國 Halling（T2）：很快轉褐,T1|T2
+willinckii,shield_fringe,none,高,1,學術 Hennipman & Roos 1982（T1）：無,T1
+willinckii,fertile_posture,pendant,高,1,學術 Hennipman & Roos 1982（T1）：下垂,T1
+willinckii,fertile_length,25–90 cm,高,1,學術 Hennipman & Roos 1982（T1）：25–90 cm,T1
+willinckii,fertile_split,≤5,高,1,學術 Hennipman & Roos 1982（T1）：≤5 回,T1
+willinckii,fertile_width,1,高,1,學術 Hennipman & Roos 1982（T1）：狹三角形,T1
+willinckii,fertile_hair,3,高,1,學術 Hennipman & Roos 1982（T1）：密生,T1
+willinckii,spore,tips,高,1,學術 Hennipman & Roos 1982（T1）：末端裂片,T1
+willinckii,pups,yes,高,2,學術 Hennipman & Roos 1982（T1）：叢生／學術 Ciarle et al. 2025（T1）：叢生、多型,T1
+willinckii,origin,爪哇、小巽他群島,高,1,學術 Hennipman & Roos 1982（T1）：原產地,T1
+willinckii,light,3,高,2,台灣 微體溫室（T3）：中光（夏季遮陰 50%）／美國 Halling（T2）：中等光線,T2|T3
+willinckii,water,5,低,1,美國 Halling（T2）：水苔保持濕潤,T2
+willinckii,difficulty,1,低,1,美國 Halling（T2）：第 1 級（最容易）（參考）／台灣 微體溫室（T3）：新手,T3
+coronarium,size,L,高,1,學術 Hennipman & Roos 1982（T1）：D = 87.5 cm,T1
+coronarium,shield_form,erect-lobed,高,1,學術 Hennipman & Roos 1982（T1）：直立多裂,T1
+coronarium,shield_height,5,高,1,學術 Hennipman & Roos 1982（T1）：直立多裂，盾葉長上限 110 cm,T1
+coronarium,shield_vein,no,高,1,學術 Hennipman & Roos 1982（T1）：埋入,T1
+coronarium,shield_browning,green,高,1,學術 Hennipman & Roos 1982（T1）：保持綠色,T1
+coronarium,shield_fringe,above-stipe,高,1,學術 Hennipman & Roos 1982（T1）：葉柄上方,T1
+coronarium,fertile_posture,pendant,高,1,學術 Hennipman & Roos 1982（T1）：下垂,T1
+coronarium,fertile_length,50–125 cm,高,1,學術 Hennipman & Roos 1982（T1）：50–125 cm,T1
+coronarium,fertile_split,3–7,高,1,學術 Hennipman & Roos 1982（T1）：3–7 回,T1
+coronarium,spore,shell-lobe,高,1,學術 Hennipman & Roos 1982（T1）：獨立殼狀裂片,T1
+coronarium,pups,yes,高,3,學術 Hennipman & Roos 1982（T1）：叢生／學術 Ciarle et al. 2025（T1）：叢生、單型／美國 Halling（T2）：根莖分枝長出新株,T1|T2
+coronarium,origin,緬甸、泰國、越南、蘇門答臘、馬來半島、新加坡、廖內群島、邦加島、爪哇、阿南巴斯群島、婆羅洲（北部、東部）、菲律賓,高,1,學術 Hennipman & Roos 1982（T1）：原產地,T1
+coronarium,light,3,中,2,台灣 微體溫室（T3）：中光（夏季遮陰 50%）／新加坡 NParks（T2）：半日照、全日照／學術 Hennipman & Roos 1982（T1）：原生地：遮蔭低枝與曝曬高枝（參考）,T2|T3
+coronarium,water,2,中,2,新加坡 NParks（T2）：中等，偶爾噴霧／美國 Halling（T2）：容易澆太多,T2
+coronarium,humidity,3,低,1,美國 Halling（T2）：原產地多雨高濕（參考）／新加坡 NParks（T2）：偶爾噴霧／學術 Hennipman & Roos 1982（T1）：原生地：終年潮濕的森林（參考）,T2
+coronarium,difficulty,1,低,1,美國 Halling（T2）：第 4 級（有點難）（參考）／台灣 微體溫室（T3）：新手,T3
+elephantotis,size,M,高,1,學術 Hennipman & Roos 1982（T1）：D = 57.5 cm,T1
+elephantotis,shield_form,erect-wedge,高,1,學術 Hennipman & Roos 1982（T1）：直立楔形,T1
+elephantotis,shield_height,3,高,1,學術 Hennipman & Roos 1982（T1）：直立楔形，盾葉長上限 75 cm,T1
+elephantotis,shield_vein,no,高,1,學術 Hennipman & Roos 1982（T1）：埋入,T1
+elephantotis,shield_browning,green,高,1,學術 Hennipman & Roos 1982（T1）：保持綠色／美國 UF/IFAS（T2）：佛州栽培冬季盾葉轉褐（參考）,T1
+elephantotis,shield_fringe,above-stipe,高,1,學術 Hennipman & Roos 1982（T1）：葉柄上方,T1
+elephantotis,fertile_posture,pendant,高,1,學術 Hennipman & Roos 1982（T1）：下垂,T1
+elephantotis,fertile_length,40–75 cm,高,1,學術 Hennipman & Roos 1982（T1）：40–75 cm,T1
+elephantotis,fertile_split,0,高,1,學術 Hennipman & Roos 1982（T1）：0 回,T1
+elephantotis,fertile_width,5,高,1,學術 Hennipman & Roos 1982（T1）：不分裂,T1
+elephantotis,spore,tips,高,1,學術 Hennipman & Roos 1982（T1）：末端裂片,T1
+elephantotis,pups,yes,高,2,學術 Hennipman & Roos 1982（T1）：叢生／學術 Ciarle et al. 2025（T1）：叢生、多型（P. angolense）,T1
+elephantotis,origin,熱帶非洲大陸，西起塞內加爾、東至肯亞與莫三比克,高,1,學術 Hennipman & Roos 1982（T1）：原產地,T1
+elephantotis,light,4,中,2,台灣 微體溫室（T3）：中強光（夏季遮陰 30%）／美國 Halling（T2）：明亮、溫暖／學術 Hennipman & Roos 1982（T1）：原生地：含疏林草原（參考）,T2|T3
+elephantotis,water,3,低,2,美國 Halling（T2）：忌長期潮濕，乾旱萎凋可恢復／台灣 微體溫室（T3）：需水量大，不用等介質全乾,T2|T3
+elephantotis,min_temp,15,高,2,美國 UF/IFAS（T2）：最低 60 °F／台灣 微體溫室（T3）：保持 15 度以上,T2|T3
+elephantotis,difficulty,1,低,1,美國 Halling（T2）：第 3 級（需些經驗）（參考）／美國 UF/IFAS（T2）：中等難度（參考）／台灣 微體溫室（T3）：容易,T3
+ellisii,size,M,高,1,學術 Hennipman & Roos 1982（T1）：D = 45 cm,T1
+ellisii,shield_form,appressed,高,1,學術 Hennipman & Roos 1982（T1）：貼伏,T1
+ellisii,shield_height,1,高,1,學術 Hennipman & Roos 1982（T1）：貼伏,T1
+ellisii,shield_vein,no,高,1,學術 Hennipman & Roos 1982（T1）：埋入,T1
+ellisii,shield_browning,withering,高,1,學術 Hennipman & Roos 1982（T1）：成熟後枯褐,T1
+ellisii,shield_fringe,none,高,1,學術 Hennipman & Roos 1982（T1）：無,T1
+ellisii,fertile_posture,up,高,1,學術 Hennipman & Roos 1982（T1）：直立,T1
+ellisii,fertile_length,30–60 cm,高,1,學術 Hennipman & Roos 1982（T1）：30–60 cm,T1
+ellisii,fertile_split,0–1,高,1,學術 Hennipman & Roos 1982（T1）：0–1 回,T1
+ellisii,fertile_width,5,高,1,學術 Hennipman & Roos 1982（T1）：多為不分裂,T1
+ellisii,fertile_hair,1,中,1,美國 Halling（T2）：黃綠色、有蠟質,T2
+ellisii,spore,tips,高,1,學術 Hennipman & Roos 1982（T1）：末端裂片,T1
+ellisii,pups,yes,高,2,學術 Hennipman & Roos 1982（T1）：叢生／學術 Ciarle et al. 2025（T1）：叢生、單型,T1
+ellisii,origin,馬達加斯加（東部）,高,1,學術 Hennipman & Roos 1982（T1）：原產地,T1
+ellisii,light,2,中,2,台灣 微體溫室（T3）：中光（夏季遮陰 50%）／美國 Halling（T2）：全遮蔭,T2|T3
+ellisii,water,1,低,1,台灣 微體溫室（T3）：介質不宜長期潮溼,T3
+ellisii,humidity,5,低,1,美國 Halling（T2）：需要高濕度,T2
+ellisii,difficulty,3,低,1,美國 Halling（T2）：第 3 級（需些經驗）（參考）／台灣 微體溫室（T3）：中階,T3
+grande,size,XL,高,1,學術 Hennipman & Roos 1982（T1）：D = 135 cm,T1
+grande,shield_form,spreading-wedge,高,1,學術 Hennipman & Roos 1982（T1）：展開楔形,T1
+grande,shield_height,5,高,1,學術 Hennipman & Roos 1982（T1）：展開楔形，盾葉長上限 110 cm,T1
+grande,shield_vein,no,高,1,學術 Hennipman & Roos 1982（T1）：埋入,T1
+grande,shield_browning,green,高,1,學術 Hennipman & Roos 1982（T1）：保持綠色,T1
+grande,shield_fringe,encircling,高,1,學術 Hennipman & Roos 1982（T1）：環繞葉柄,T1
+grande,fertile_posture,spread|pendant,高,1,學術 Hennipman & Roos 1982（T1）：展開、側裂片下垂,T1
+grande,fertile_length,50–120 cm,高,1,學術 Hennipman & Roos 1982（T1）：50–120 cm,T1
+grande,fertile_split,3–7,高,1,學術 Hennipman & Roos 1982（T1）：3–7 回,T1
+grande,fertile_width,5,高,1,學術 Hennipman & Roos 1982（T1）：孢子囊群寬度上限 22 cm ≥ 20,T1
+grande,spore,sinus,高,1,學術 Hennipman & Roos 1982（T1）：分岔凹處,T1
+grande,pups,no,高,4,學術 Hennipman & Roos 1982（T1）：單生／學術 Ciarle et al. 2025（T1）：單生／美國 UF/IFAS（T2）：不長側芽／美國 Halling（T2）：不長側芽,T1|T2
+grande,origin,菲律賓民答那峨（1908 年另有一份標本記為提勞島）,高,1,學術 Hoshizaki & Price 1990（T1）：原產地（更正）,T1
+grande,light,3,高,3,新加坡 NParks（T2）：半日照／美國 Halling（T2）：50% 遮光網／台灣 微體溫室（T3）：中光為主（恆為散射光）,T2|T3
+grande,water,2,低,3,新加坡 NParks（T2）：多水、中等／美國 UF/IFAS（T2）：容易澆太多／台灣 微體溫室（T3）：長大後耐旱，介質全乾再澆透,T2|T3
+grande,humidity,5,低,1,美國 UF/IFAS（T2）：喜高濕度,T2
+grande,min_temp,17,高,2,美國 UF/IFAS（T2）：60 °F 以下會受害／美國 Halling（T2）：40–100 °F（參考）／台灣 微體溫室（T3）：18~35 度，保持 18 度以上,T2|T3
+grande,max_temp,35,低,1,美國 Halling（T2）：40–100 °F（參考）／台灣 微體溫室（T3）：18~35 度／台灣 微體溫室（T3）：原生地：與台灣相仿的 20~35 度（參考）,T3
+grande,difficulty,3,低,1,美國 Halling（T2）：第 2 級（相當容易）（參考）／台灣 微體溫室（T3）：中階／美國 UF/IFAS（T2）：難（參考）,T3
+holttumii,size,XL,高,1,學術 Hennipman & Roos 1982（T1）：D = 112.5 cm,T1
+holttumii,shield_form,spreading-wedge,高,1,學術 Hennipman & Roos 1982（T1）：展開楔形,T1
+holttumii,shield_height,5,高,1,學術 Hennipman & Roos 1982（T1）：展開楔形，盾葉長上限 115 cm,T1
+holttumii,shield_vein,no,高,1,學術 Hennipman & Roos 1982（T1）：埋入,T1
+holttumii,shield_browning,green,高,1,學術 Hennipman & Roos 1982（T1）：保持綠色,T1
+holttumii,shield_fringe,encircling,高,1,學術 Hennipman & Roos 1982（T1）：環繞葉柄,T1
+holttumii,fertile_posture,spread|pendant,高,1,學術 Hennipman & Roos 1982（T1）：展開、側裂片下垂,T1
+holttumii,fertile_length,95–125 cm,高,1,學術 Hennipman & Roos 1982（T1）：95–125 cm,T1
+holttumii,fertile_split,2–5,高,1,學術 Hennipman & Roos 1982（T1）：2–5 回,T1
+holttumii,fertile_width,5,高,1,學術 Hennipman & Roos 1982（T1）：孢子囊群寬度上限 35 cm ≥ 20,T1
+holttumii,spore,sinus,高,1,學術 Hennipman & Roos 1982（T1）：分岔凹處,T1
+holttumii,pups,no,高,3,學術 Hennipman & Roos 1982（T1）：單生／學術 Ciarle et al. 2025（T1）：單生／美國 Halling（T2）：不長側芽,T1|T2
+holttumii,origin,泰國、柬埔寨、寮國、越南、馬來半島,高,1,學術 Hennipman & Roos 1982（T1）：原產地,T1
+holttumii,light,3,中,2,台灣 微體溫室（T3）：中光（夏季遮陰 50%）／美國 Halling（T2）：明亮處,T2|T3
+holttumii,water,5,低,1,美國 Halling（T2）：生長期多澆、保持濕潤,T2
+holttumii,humidity,5,低,1,美國 Halling（T2）：高濕度,T2
+holttumii,min_temp,,,0,,
+holttumii,max_temp,,,0,,
+holttumii,difficulty,1,低,1,美國 Halling（T2）：第 3 級（需些經驗）（參考）／台灣 微體溫室（T3）：新手,T3
+madagascariense,size,S,高,1,學術 Hennipman & Roos 1982（T1）：D = 22.5 cm,T1
+madagascariense,shield_form,appressed,高,1,學術 Hennipman & Roos 1982（T1）：貼伏,T1
+madagascariense,shield_height,1,高,1,學術 Hennipman & Roos 1982（T1）：貼伏,T1
+madagascariense,shield_vein,yes,高,1,學術 Hennipman & Roos 1982（T1）：隆起,T1
+madagascariense,shield_browning,darkening,高,1,學術 Hennipman & Roos 1982（T1）：轉深綠,T1
+madagascariense,shield_fringe,encircling,高,1,學術 Hennipman & Roos 1982（T1）：環繞葉柄,T1
+madagascariense,fertile_posture,up,高,1,學術 Hennipman & Roos 1982（T1）：直立,T1
+madagascariense,fertile_length,10–30 cm,高,1,學術 Hennipman & Roos 1982（T1）：10–30 cm,T1
+madagascariense,fertile_split,1–3,高,1,學術 Hennipman & Roos 1982（T1）：1–3 回,T1
+madagascariense,spore,tips,高,1,學術 Hennipman & Roos 1982（T1）：末端裂片,T1
+madagascariense,pups,yes,高,2,學術 Hennipman & Roos 1982（T1）：叢生／學術 Ciarle et al. 2025（T1）：叢生、單型,T1
+madagascariense,origin,馬達加斯加,高,1,學術 Hennipman & Roos 1982（T1）：原產地,T1
+madagascariense,light,3,低,2,台灣 微體溫室（T3）：低弱光（夏季遮陰 70%）／美國 Exotica Esoterica（T2）：非常明亮,T2|T3
+madagascariense,water,4,中,2,美國 Exotica Esoterica（T2）：根團不可長時間乾燥／台灣 微體溫室（T3）：喜介質潮溼，但夏季待偏乾再澆,T2|T3
+madagascariense,humidity,5,高,2,美國 Exotica Esoterica（T2）：濕潤／美國 Halling（T2）：溫室、高濕度,T2
+madagascariense,min_temp,,,0,美國 Exotica Esoterica（T2）：短暫降到 40 多 °F／8 °C 無妨（參考）／美國 Halling（T2）：曾在 32–110 °F 栽培成功，應避免極端（參考）,
+madagascariense,max_temp,,,0,美國 Exotica Esoterica（T2）：短暫升到 90 多 °F／35 °C 無妨（參考）／美國 Halling（T2）：曾在 32–110 °F 栽培成功，應避免極端（參考）,
+madagascariense,difficulty,5,低,1,美國 Halling（T2）：第 4 級（有點難）（參考）／台灣 微體溫室（T3）：進階,T3
+quadridichotomum,size,S,高,1,學術 Hennipman & Roos 1982（T1）：D = 29 cm,T1
+quadridichotomum,shield_form,erect-wedge,高,1,學術 Hennipman & Roos 1982（T1）：直立楔形,T1
+quadridichotomum,shield_height,3,高,1,學術 Hennipman & Roos 1982（T1）：直立楔形，盾葉長上限 40 cm,T1
+quadridichotomum,shield_vein,no,高,1,學術 Hennipman & Roos 1982（T1）：埋入,T1
+quadridichotomum,shield_browning,withering,高,1,學術 Hennipman & Roos 1982（T1）：成熟後枯褐,T1
+quadridichotomum,shield_fringe,none,高,1,學術 Hennipman & Roos 1982（T1）：無,T1
+quadridichotomum,fertile_posture,pendant,高,1,學術 Hennipman & Roos 1982（T1）：下垂,T1
+quadridichotomum,fertile_length,15–40 cm,高,1,學術 Hennipman & Roos 1982（T1）：15–40 cm,T1
+quadridichotomum,fertile_split,2–4,高,1,學術 Hennipman & Roos 1982（T1）：2–4 回,T1
+quadridichotomum,fertile_hair,3,高,2,學術 Hennipman & Roos 1982（T1）：下表面密毛／美國 Halling（T2）：下表面密被褐毛,T1|T2
+quadridichotomum,spore,medial,高,1,學術 Hennipman & Roos 1982（T1）：裂片中段,T1
+quadridichotomum,pups,yes,高,2,學術 Hennipman & Roos 1982（T1）：叢生／學術 Ciarle et al. 2025（T1）：叢生、多型,T1
+quadridichotomum,dormancy,yes,高,2,學術 Hennipman & Roos 1982（T1）：原生地乾季孢子葉內捲／美國 Halling（T2）：乾季休眠、轉褐,T1|T2
+quadridichotomum,origin,馬達加斯加（西部與北部）,高,1,學術 Hennipman & Roos 1982（T1）：原產地,T1
+quadridichotomum,light,1,低,1,台灣 微體溫室（T3）：低弱光（夏季遮陰 70%）,T3
+quadridichotomum,water,5,低,1,美國 Halling（T2）：全年充分澆水、不給乾季休眠,T2
+quadridichotomum,humidity,,,0,學術 Hennipman & Roos 1982（T1）：原生地：約 6 個月嚴重乾季（參考）,
+quadridichotomum,difficulty,5,低,1,美國 Halling（T2）：第 5 級（困難）（參考）／台灣 微體溫室（T3）：進階,T3
+ridleyi,size,M,高,1,學術 Hennipman & Roos 1982（T1）：D = 37.5 cm／新加坡 NParks（T2）：D = 37.5 cm（參考）,T1
+ridleyi,shield_form,appressed,高,1,學術 Hennipman & Roos 1982（T1）：貼伏,T1
+ridleyi,shield_height,1,高,1,學術 Hennipman & Roos 1982（T1）：貼伏,T1
+ridleyi,shield_vein,yes,高,1,學術 Hennipman & Roos 1982（T1）：隆起,T1
+ridleyi,shield_browning,green,高,1,學術 Hennipman & Roos 1982（T1）：保持綠色,T1
+ridleyi,shield_fringe,none,高,1,學術 Hennipman & Roos 1982（T1）：無,T1
+ridleyi,fertile_posture,up,高,1,學術 Hennipman & Roos 1982（T1）：直立,T1
+ridleyi,fertile_length,25–50 cm,高,1,學術 Hennipman & Roos 1982（T1）：25–50 cm,T1
+ridleyi,fertile_split,5–8,高,1,學術 Hennipman & Roos 1982（T1）：5–8 回,T1
+ridleyi,spore,shell-lobe,高,1,學術 Hennipman & Roos 1982（T1）：獨立殼狀裂片,T1
+ridleyi,pups,no,高,2,學術 Hennipman & Roos 1982（T1）：單生／學術 Ciarle et al. 2025（T1）：單生,T1
+ridleyi,origin,泰國（存疑）、蘇門答臘、馬來半島、新加坡、林加群島、婆羅洲（東北部）,高,1,學術 Hennipman & Roos 1982（T1）：原產地,T1
+ridleyi,light,3,中,2,台灣 微體溫室（T3）：中光（夏季遮陰 50%）／新加坡 NParks（T2）：半日照、全日照／學術 Hennipman & Roos 1982（T1）：原生地：曝曬的高枝（參考）,T2|T3
+ridleyi,water,2,中,3,新加坡 NParks（T2）：中等，偶爾噴霧／美國 Halling（T2）：高濕環境中少澆水／台灣 微體溫室（T3）：夏季待介質偏乾再澆,T2|T3
+ridleyi,humidity,4,中,2,美國 Halling（T2）：低濕度地區難栽培／新加坡 NParks（T2）：偶爾噴霧／學術 Hennipman & Roos 1982（T1）：原生地：極濕的森林、沼澤（參考）,T2
+ridleyi,difficulty,3,高,2,美國 Halling（T2）：第 5 級（困難）（參考）／台灣 微體溫室（T3）：中階／新加坡 NParks（T2）：維護需求：中等,T2|T3
+stemaria,size,M,高,1,學術 Hennipman & Roos 1982（T1）：D = 60 cm,T1
+stemaria,shield_form,erect-wedge,高,1,學術 Hennipman & Roos 1982（T1）：直立楔形,T1
+stemaria,shield_height,3,高,1,學術 Hennipman & Roos 1982（T1）：直立楔形，盾葉長上限 60 cm,T1
+stemaria,shield_vein,no,高,1,學術 Hennipman & Roos 1982（T1）：埋入,T1
+stemaria,shield_browning,withering,高,1,學術 Hennipman & Roos 1982（T1）：成熟後枯褐,T1
+stemaria,shield_fringe,above-stipe,高,1,學術 Hennipman & Roos 1982（T1）：葉柄上方,T1
+stemaria,fertile_posture,spread,高,1,學術 Hennipman & Roos 1982（T1）：展開,T1
+stemaria,fertile_length,30–90 cm,高,1,學術 Hennipman & Roos 1982（T1）：30–90 cm,T1
+stemaria,fertile_split,1–2,高,1,學術 Hennipman & Roos 1982（T1）：1–2 回,T1
+stemaria,fertile_width,5,高,1,學術 Hennipman & Roos 1982（T1）：孢子囊群寬度上限 22 cm ≥ 20,T1
+stemaria,fertile_hair,3,中,1,美國 Halling（T2）：下表面多毛,T2
+stemaria,spore,sinus,高,1,學術 Hennipman & Roos 1982（T1）：分岔凹處,T1
+stemaria,pups,yes,高,3,學術 Hennipman & Roos 1982（T1）：叢生／學術 Ciarle et al. 2025（T1）：叢生、多型／美國 UF/IFAS（T2）：會長側芽,T1|T2
+stemaria,origin,西非至中非（含幾內亞灣島嶼）、烏干達,高,1,學術 Hennipman & Roos 1982（T1）：原產地,T1
+stemaria,light,1,高,2,台灣 微體溫室（T3）：低弱光（夏季遮陰 70%）／美國 Halling（T2）：一般栽培於低光／學術 Hennipman & Roos 1982（T1）：原生地：曝曬或遮蔭處（參考）,T2|T3
+stemaria,water,5,高,2,美國 UF/IFAS（T2）：需經常澆水／台灣 微體溫室（T3）：性喜暖溼，介質不沾水即可再澆,T2|T3
+stemaria,humidity,5,低,1,美國 UF/IFAS（T2）：需要高濕度,T2
+stemaria,min_temp,10,低,1,美國 UF/IFAS（T2）：不低於 50 °F,T2
+stemaria,difficulty,3,低,1,美國 Halling（T2）：第 3 級（需些經驗）（參考）／台灣 微體溫室（T3）：中階／美國 UF/IFAS（T2）：較難（參考）,T3
+superbum,size,XL,高,1,學術 Hennipman & Roos 1982（T1）：D = 125 cm,T1
+superbum,shield_form,spreading-wedge,高,1,學術 Hennipman & Roos 1982（T1）：展開楔形,T1
+superbum,shield_height,5,高,1,學術 Hennipman & Roos 1982（T1）：展開楔形，盾葉長上限 160 cm,T1
+superbum,shield_vein,no,高,1,學術 Hennipman & Roos 1982（T1）：埋入,T1
+superbum,shield_hair,3,高,1,澳洲 Australian Tropical Ferns（T1）：密被淡褐色星狀毛,T1
+superbum,shield_browning,green,高,1,學術 Hennipman & Roos 1982（T1）：保持綠色,T1
+superbum,shield_fringe,encircling,高,1,學術 Hennipman & Roos 1982（T1）：環繞葉柄,T1
+superbum,fertile_posture,spread|pendant,高,1,學術 Hennipman & Roos 1982（T1）：展開、側裂片下垂,T1
+superbum,fertile_length,75–160 cm,高,1,學術 Hennipman & Roos 1982（T1）：75–160 cm,T1
+superbum,fertile_split,3–5,高,2,學術 Hennipman & Roos 1982（T1）：3–5 回／澳洲 Australian Tropical Ferns（T1）：≤5 回,T1
+superbum,fertile_width,5,高,1,學術 Hennipman & Roos 1982（T1）：孢子囊群寬度上限 68 cm ≥ 20,T1
+superbum,spore,sinus,高,1,學術 Hennipman & Roos 1982（T1）：分岔凹處,T1
+superbum,pups,no,高,4,學術 Hennipman & Roos 1982（T1）：單生／學術 Ciarle et al. 2025（T1）：單生／美國 UF/IFAS（T2）：不長側芽／美國 Halling（T2）：不長側芽,T1|T2
+superbum,dormancy,,,0,,
+superbum,origin,澳洲東部（熱帶與亞熱帶）,高,1,學術 Hennipman & Roos 1982（T1）：原產地,T1
+superbum,light,3,中,3,英國 RHS（T2）：半遮蔭／美國 Halling（T2）：喜光強於一般鹿角蕨／學術 Hennipman & Roos 1982（T1）：原生地：有時曝露於峽谷岩石（參考）／台灣 微體溫室（T3）：中弱光為主，夏季降低照度,T2|T3
+superbum,water,1,高,2,美國 UF/IFAS（T2）：容易澆太多／澳洲 Australian Tropical Ferns（T1）：冷涼季節偏乾（參考）／台灣 微體溫室（T3）：水苔接近全乾才給水,T2|T3
+superbum,min_temp,15,高,2,英國 RHS（T2）：H1A（> 15 °C）／美國 UF/IFAS（T2）：短時間可耐 30 °F（參考）／美國 Halling（T2）：30–100 °F（參考）／台灣 微體溫室（T3）：15~27 度,T2|T3
+superbum,max_temp,27,低,1,美國 Halling（T2）：30–100 °F（參考）／台灣 微體溫室（T3）：夏季不超過 27 度／台灣 微體溫室（T3）：部分馴化個體可耐 33 度（參考）,T3
+superbum,difficulty,3,低,1,美國 Halling（T2）：第 2 級（相當容易）（參考）／台灣 微體溫室（T3）：中階／美國 UF/IFAS（T2）：難（參考）,T3
+wallichii,size,M,高,1,學術 Hennipman & Roos 1982（T1）：D = 50 cm,T1
+wallichii,shield_form,erect-multilobed,高,1,學術 Hennipman & Roos 1982（T1）：直立多上揚裂片,T1
+wallichii,shield_height,3,高,1,學術 Hennipman & Roos 1982（T1）：直立多上揚裂片，盾葉長上限 65 cm,T1
+wallichii,shield_vein,no,高,1,學術 Hennipman & Roos 1982（T1）：埋入,T1
+wallichii,shield_browning,withering,高,1,學術 Hennipman & Roos 1982（T1）：成熟後枯褐,T1
+wallichii,shield_fringe,above-stipe,高,1,學術 Hennipman & Roos 1982（T1）：葉柄上方,T1
+wallichii,fertile_posture,pendant,高,1,學術 Hennipman & Roos 1982（T1）：下垂,T1
+wallichii,fertile_length,25–75 cm,高,1,學術 Hennipman & Roos 1982（T1）：25–75 cm,T1
+wallichii,fertile_split,0–3,高,1,學術 Hennipman & Roos 1982（T1）：0–3 回,T1
+wallichii,spore,sinus,高,1,學術 Hennipman & Roos 1982（T1）：分岔凹處,T1
+wallichii,pups,no,高,3,學術 Hennipman & Roos 1982（T1）：單生／學術 Ciarle et al. 2025（T1）：單生／美國 Halling（T2）：極少長側芽,T1|T2
+wallichii,dormancy,yes,高,2,美國 Halling（T2）：栽培下常進入休眠／中國 博物一分鐘（T3）：旱季枯黃、雨季再萌發,T2|T3
+wallichii,origin,印度東部、緬甸、泰國、中國雲南,高,1,學術 Hennipman & Roos 1982（T1）：原產地,T1
+wallichii,light,3,低,1,台灣 微體溫室（T3）：中光（夏季遮陰 50%）,T3
+wallichii,humidity,5,低,1,美國 Halling（T2）：潮濕溫室,T2
+wallichii,min_temp,,,0,,
+wallichii,max_temp,,,0,,
+wallichii,difficulty,3,低,1,美國 Halling（T2）：第 5 級（困難）（參考）／台灣 微體溫室（T3）：中階,T3
+wandae,size,XL,高,1,學術 Hennipman & Roos 1982（T1）：D = 117.5 cm,T1
+wandae,shield_form,spreading-wedge,高,1,學術 Hennipman & Roos 1982（T1）：展開楔形,T1
+wandae,shield_height,5,高,1,學術 Hennipman & Roos 1982（T1）：展開楔形，盾葉長上限 125 cm,T1
+wandae,shield_vein,no,高,1,學術 Hennipman & Roos 1982（T1）：埋入,T1
+wandae,shield_browning,green,高,1,學術 Hennipman & Roos 1982（T1）：保持綠色,T1
+wandae,shield_fringe,encircling,高,1,學術 Hennipman & Roos 1982（T1）：環繞葉柄,T1
+wandae,fertile_posture,spread|pendant,高,1,學術 Hennipman & Roos 1982（T1）：展開、側裂片下垂,T1
+wandae,fertile_length,50–135 cm,高,1,學術 Hennipman & Roos 1982（T1）：50–135 cm,T1
+wandae,fertile_split,0–4,高,1,學術 Hennipman & Roos 1982（T1）：0–4 回,T1
+wandae,fertile_width,5,高,1,學術 Hennipman & Roos 1982（T1）：孢子囊群寬度上限 60 cm ≥ 20,T1
+wandae,spore,sinus,高,1,學術 Hennipman & Roos 1982（T1）：分岔凹處,T1
+wandae,pups,no,高,3,學術 Hennipman & Roos 1982（T1）：單生／學術 Ciarle et al. 2025（T1）：單生／美國 Halling（T2）：不長側芽,T1|T2
+wandae,origin,新幾內亞,高,1,學術 Hennipman & Roos 1982（T1）：原產地,T1
+wandae,light,4,中,2,台灣 微體溫室（T3）：中強光（夏季遮陰 30%）／美國 Halling（T2）：明亮散射光,T2|T3
+wandae,water,2,中,3,美國 UF/IFAS（T2）：容易澆太多／台灣 劉純安 2019（台大）（T1）：乾濕交替生長最佳（小苗）／台灣 微體溫室（T3）：水苔接近全乾再澆透,T1|T2|T3
+wandae,humidity,5,高,2,美國 UF/IFAS（T2）：高濕度／美國 Halling（T2）：溫室栽培以維持高濕,T2
+wandae,min_temp,15,高,3,美國 UF/IFAS（T2）：最低 60 °F／美國 Halling（T2）：喜 60–100 °F／美國 Halling（T2）：短時間可耐低溫，40 °F 以下受害（參考）／台灣 劉純安 2019（台大）（T1）：20/15 °C 正常、15/13 °C 寒害（小苗）,T1|T2
+wandae,max_temp,34,中,2,美國 Halling（T2）：喜 60–100 °F／台灣 劉純安 2019（台大）（T1）：30/25 °C 正常、35/30 °C 傷害光系統（小苗）,T1|T2
+wandae,difficulty,1,低,1,美國 Halling（T2）：第 2 級（相當容易）（參考）／台灣 微體溫室（T3）：新手／美國 UF/IFAS（T2）：難（參考）,T3
+elemaria,size,,,0,,
+elemaria,shield_vein,yes,高,1,學術 Hoshizaki & Price 1990（T1）：主脈略隆起,T1
+elemaria,shield_fringe,above-stipe,高,1,學術 Hoshizaki & Price 1990（T1）：芽點上方有盾葉組織的皺褶,T1
+elemaria,fertile_length,,,0,,
+elemaria,fertile_split,0,高,1,學術 Hoshizaki & Price 1990（T1）：不分岔（先端不規則鈍裂）,T1
+elemaria,fertile_width,5,高,1,學術 Hoshizaki & Price 1990（T1）：不分裂,T1
+elemaria,fertile_hair,1,中,1,美國 Halling（T2）：深綠色、上表面蠟質（下表面未知）,T2
+elemaria,spore,tips,高,1,學術 Hoshizaki & Price 1990（T1）：葉片上部三分之一,T1
+elemaria,pups,yes,高,1,學術 Hoshizaki & Price 1990（T1）：可由根芽（側芽）繁殖,T1
+elemaria,origin,美國加州帕薩迪納的苗圃中發現；不確定源於栽培或野外,高,1,學術 Hoshizaki & Price 1990（T1）：發現於加州苗圃,T1
+elemaria,water,1,低,1,美國 Halling（T2）：最常見的問題是澆水過多而腐爛,T2
+mentelosii,size,M,高,1,學術 Hoshizaki 1975（T1）：盾葉約 80 × 45–70 cm、孢子葉約 60 × 75 cm,T1
+mentelosii,shield_form,erect-lobed,高,1,學術 Hoshizaki 1975（T1）：長橢圓、上部葉狀而離開附著物，上緣不規則分裂成短裂片,T1
+mentelosii,shield_height,5,高,1,學術 Hoshizaki 1975（T1）：上部離開附著物，盾葉長約 80 cm,T1
+mentelosii,shield_fringe,encircling,高,1,學術 Hoshizaki 1975（T1）：芽點周圍的邊緣呈皺褶,T1
+mentelosii,fertile_length,60 cm,高,1,學術 Hoshizaki 1975（T1）：約 60 cm,T1
+mentelosii,fertile_split,≤5,高,1,學術 Hoshizaki 1975（T1）：數回分岔，至約 5 回,T1
+mentelosii,fertile_width,5,高,1,學術 Hoshizaki 1975（T1）：孢子囊群寬約 20 cm,T1
+mentelosii,spore,sinus,高,1,學術 Hoshizaki 1975（T1）：兩個新月形孢子囊群，位於第二回分岔凹處周圍,T1
+mentelosii,pups,no,中,1,美國 Halling（T2）：不像三角鹿角蕨會長側芽,T2
+mentelosii,origin,人工雜交：美國佛州邁阿密 Fantastic Gardens 的 Tom Mentelos 育成,高,1,學術 Hoshizaki 1975（T1）：佛州苗圃人工雜交,T1
+ridleyi-x-coronarium,fertile_posture,pendant,中,1,美國 Halling（T2）：孢子葉下垂,T2
+ridleyi-x-coronarium,origin,泰國人工雜交（Ploy-ratana 以混合孢子法育成）,高,1,學術 Ploy-ratana 2014（T1）：泰國人工雜交,T1
+ridleyi-x-coronarium,light,3,低,1,台灣 微體溫室（T3）：中光（夏季遮陰 50%）,T3
+ridleyi-x-coronarium,difficulty,1,低,1,台灣 微體溫室（T3）：新手,T3
+charles-alford,shield_form,,,0,,
+charles-alford,shield_fringe,encircling,中,1,美國 Halling（T2）：芽點周圍有皺褶,T2
+charles-alford,fertile_posture,,,0,,
+horne-surprise,shield_vein,yes,中,1,美國 Halling（T2）：盾葉有肋紋（較淺），具非猴的盾葉特徵,T2
+horne-surprise,fertile_posture,spread|pendant,中,1,美國 Halling（T2）：從芽點向外長出，再折向下彎,T2
+horne-surprise,fertile_split,2–3,中,1,美國 Halling（T2）：一次主要分岔，先端再分岔一兩次,T2
+horne-surprise,light,3,低,1,台灣 微體溫室（T3）：中光（夏季遮陰 50%）,T3
+horne-surprise,difficulty,1,低,1,台灣 微體溫室（T3）：新手,T3
+dawboy,shield_vein,yes,中,1,美國 Halling（T2）：盾葉有非猴的鬆餅狀網紋,T2
+dawboy,fertile_posture,up,中,1,美國 Halling（T2）：孢子葉較長、較直立,T2
+dawboy,spore,tips,中,1,美國 Halling（T2）：孢子囊群在葉先端,T2
+dawboy,humidity,,,0,美國 Halling（T2）：南加州戶外、濕度約 30% 仍可栽培（觀察）（參考）,
+larry-weed,shield_vein,yes,中,1,美國 Halling（T2）：盾葉有非猴典型的深溝紋,T2
+larry-weed,fertile_hair,1,中,1,美國 Halling（T2）：孢子葉較寬、蠟質、葉脈明顯,T2
+callard,dormancy,yes,低,1,台灣 卡呸醬（T3）：冬季休眠,T3
+roy-vail,shield_vein,yes,中,1,美國 Halling（T2）：盾葉有非猴的鬆餅狀網紋,T2
+hillii-x-willinckii,fertile_posture,pendant,中,1,美國 Halling（T2）：孢子葉從芽點側向長出後下垂,T2
+hillii-x-willinckii,min_temp,,,0,美國 Halling（T2）：Woodside 冬季常短暫低於冰點，大型植株仍存活（參考）,
+siamense,pups,,,0,,
+majus,fertile_posture,up,中,1,美國 Halling（T2）：孢子葉強烈直立,T2
+hillii-x-bifurcatum,pups,yes,低,1,泰國 Siam Exotica（T3）：以二叉 × 深綠示範分株,T3
+veitchii-x-willinckii,difficulty,1,低,1,台灣 阿金的便秘花園（T3）：生長快又好養,T3
+bifurcatum-mt-lewis,origin,澳洲 Mount Lewis,高,1,學術 Hoshizaki & Yansura 2021（T1）：澳洲 Mount Lewis,T1
+bifurcatum-mt-lewis,light,,,0,美國 Halling（T2）：原生地與銀鹿並排生長在全日照下（影片）（參考）,
+erawan,shield_vein,yes,低,1,台灣 微體溫室（T3）：營養葉有凹紋,T3
+erawan,difficulty,3,低,1,台灣 微體溫室（T3）：中等,T3
+neptune,fertile_hair,3,低,1,台灣 微體溫室（T3）：表面白毛明顯,T3
+neptune,difficulty,2,低,1,台灣 微體溫室（T3）：中偏易,T3
+antis,fertile_hair,3,低,1,台灣 微體溫室（T3）：表面白毛明顯,T3
+antis,difficulty,2,低,1,台灣 微體溫室（T3）：中偏易,T3
+burirom,difficulty,2,低,1,台灣 微體溫室（T3）：中偏易,T3
+alcicorne-x-elephantotis,light,3,低,1,台灣 阿金的便秘花園（T3）：訓養後可接受半日照,T3
+alcicorne-x-elephantotis,difficulty,1,高,2,台灣 微體溫室（T3）：容易／台灣 阿金的便秘花園（T3）：適合新手,T3
+grande-x-elephantotis,difficulty,2,低,1,台灣 微體溫室（T3）：中偏易,T3
+moose,light,1,低,1,台灣 微體溫室（T3）：低弱光（夏季遮陰 70%）,T3
+moose,difficulty,1,低,1,台灣 微體溫室（T3）：新手,T3
+pegasus,light,4,低,1,台灣 微體溫室（T3）：中強光（夏季遮陰 30%）／台灣 微體溫室（T3）：半日照至全日照,T3
+pegasus,water,1,低,1,台灣 微體溫室（T3）：較耐旱，水苔接近全乾再澆透,T3
+pegasus,difficulty,2,低,1,台灣 微體溫室（T3）：中階／台灣 微體溫室（T3）：相當推薦新手,T3
+pewchan,light,5,低,1,台灣 微體溫室（T3）：中強光（夏季遮陰 30%）,T3
+pewchan,difficulty,3,低,1,台灣 微體溫室（T3）：中階,T3
+white-hawk,light,5,低,1,台灣 微體溫室（T3）：中強光（夏季遮陰 30%）,T3
+white-hawk,difficulty,3,低,1,台灣 微體溫室（T3）：中階,T3
+white-shine,light,5,低,1,台灣 微體溫室（T3）：中強光（夏季遮陰 30%）,T3
+white-shine,difficulty,3,低,1,台灣 微體溫室（T3）：中階,T3
+monkey-north,light,5,低,1,台灣 微體溫室（T3）：中強光（夏季遮陰 30%）,T3
+monkey-north,difficulty,5,低,1,台灣 微體溫室（T3）：進階,T3
+ss-foong,light,3,低,1,台灣 微體溫室（T3）：中光（夏季遮陰 50%）,T3
+ss-foong,difficulty,3,低,1,台灣 微體溫室（T3）：中階,T3
+polar-bear,fertile_hair,5,低,1,台灣 阿金的便秘花園（T3）：雪白絨毛非常濃密,T3
+polar-bear,light,5,低,1,台灣 微體溫室（T3）：中強光（夏季遮陰 30%）,T3
+polar-bear,difficulty,3,低,1,台灣 微體溫室（T3）：中階,T3
+white-lover,fertile_hair,5,低,1,台灣 阿金的便秘花園（T3）：孢子葉面厚厚一層白色絨毛，極致銀白,T3
+foong-si-qi,size,,,0,,
+foong-si-qi,fertile_length,50–80 cm,低,1,台灣 微體溫室（T3）：3 年以上成株手長 50–80 cm,T3
+foong-si-qi,spore,tips,低,1,美國 Rainforest Flora（T3）：孢子長在孢子葉先端,T3
+foong-si-qi,pups,yes,低,1,台灣 微體溫室（T3）：多芽型,T3
+foong-si-qi,light,3,中,2,台灣 微體溫室（T3）：中光（夏季遮陰 50%）／台灣 微體溫室（T3）：成株中光至中強光／美國 Rainforest Flora（T3）：需要明亮濾光，避免直曬,T3
+foong-si-qi,water,1,高,2,台灣 微體溫室（T3）：本身耐旱，乾濕容忍力強／美國 Rainforest Flora（T3）：澆透後讓介質乾約 80%,T3
+foong-si-qi,min_temp,13,低,1,台灣 微體溫室（T3）：低於 5 度可能寒害（參考）／美國 Rainforest Flora（T3）：保持 55 °F 以上,T3
+foong-si-qi,difficulty,2,低,1,台灣 微體溫室（T3）：中階／台灣 微體溫室（T3）：相對好照顧／美國 Rainforest Flora（T3）：適合中階栽培者（參考）／德國 Jungle Leaves（T3）：不難照顧（組培 QQ）（參考）,T3
+geisha,fertile_hair,5,低,1,台灣 阿金的便秘花園（T3）：厚實的白毛,T3
+geisha,pups,yes,低,1,美國 Rainforest Flora（T3）：多芽（叢生）,T3
+geisha,light,3,低,1,美國 Rainforest Flora（T3）：需要明亮濾光，避免直曬,T3
+geisha,water,1,低,1,美國 Rainforest Flora（T3）：澆透後讓介質乾約 60–80%,T3
+geisha,min_temp,13,低,1,美國 Rainforest Flora（T3）：保持 55 °F 以上,T3
+geisha,difficulty,,,0,美國 Rainforest Flora（T3）：容易栽培（參考）,
+willinckii-moonlight,light,3,低,1,台灣 微體溫室（T3）：中光（夏季遮陰 50%）,T3
+willinckii-moonlight,water,1,低,1,台灣 微體溫室（T3）：月亮系列：耐旱喜透氣,T3
+willinckii-moonlight,difficulty,3,低,1,台灣 微體溫室（T3）：進階／台灣 微體溫室（T3）：中偏易,T3
+new-moon,water,1,低,1,台灣 微體溫室（T3）：月亮系列：耐旱喜透氣,T3
+new-moon,difficulty,2,低,1,台灣 微體溫室（T3）：中偏易,T3
+willinckii-yellow-moon,light,3,低,1,台灣 微體溫室（T3）：不直曬，4~8 小時半日照、明亮散射光,T3
+willinckii-yellow-moon,water,1,低,1,台灣 微體溫室（T3）：月亮系列：耐旱喜透氣,T3
+willinckii-yellow-moon,difficulty,3,低,1,台灣 微體溫室（T3）：中等,T3
+blue-moon,water,1,低,1,台灣 微體溫室（T3）：月亮系列：耐旱喜透氣,T3
+blue-moon,difficulty,3,低,1,台灣 微體溫室（T3）：中等,T3
+snow-moon,fertile_posture,spread|pendant,低,1,台灣 微體溫室（T3）：孢子葉向外延伸再下垂,T3
+snow-moon,water,1,低,1,台灣 微體溫室（T3）：月亮系列：耐旱喜透氣,T3
+snow-moon,difficulty,3,低,1,台灣 微體溫室（T3）：中等,T3
+willinckii-jade-girl,size,S,低,1,台灣 微體溫室（T3）：侏儒爪哇,T3
+willinckii-jade-girl,fertile_length,15 cm,低,1,德國 Jungle Leaves（T3）：約 15 cm（很老的植株 20 cm）,T3
+willinckii-jade-girl,fertile_hair,5,低,1,德國 Jungle Leaves（T3）：密覆白色分枝毛，呈粉狀,T3
+willinckii-jade-girl,pups,yes,低,1,德國 Jungle Leaves（T3）：數年後長成密叢,T3
+willinckii-jade-girl,light,3,低,1,台灣 微體溫室（T3）：中光（夏季遮陰 50%）／台灣 微體溫室（T3）：半遮陰陽台（明亮散射光）,T3
+willinckii-jade-girl,difficulty,4,低,1,台灣 微體溫室（T3）：進階／台灣 微體溫室（T3）：中等／德國 Jungle Leaves（T3）：生長慢但不難照顧（參考）,T3
+omg,size,S,低,1,台灣 微體溫室（T3）：侏儒爪哇,T3
+omg,light,3,低,1,台灣 微體溫室（T3）：中光（夏季遮陰 50%）／台灣 微體溫室（T3）：半遮陰陽台（明亮散射光）,T3
+omg,difficulty,4,中,2,台灣 微體溫室（T3）：進階／台灣 微體溫室（T3）：中等／台灣 阿金的便秘花園（T3）：比較進階的侏儒鹿角蕨,T3
+willinckii-bacteria,size,S,低,1,台灣 微體溫室（T3）：侏儒爪哇,T3
+willinckii-bacteria,fertile_length,10 cm,低,1,德國 Jungle Leaves（T3）：約 10 cm（很老的植株 15 cm）,T3
+willinckii-bacteria,fertile_hair,5,低,1,德國 Jungle Leaves（T3）：密覆白色分枝毛，呈粉狀,T3
+willinckii-bacteria,pups,yes,低,1,德國 Jungle Leaves（T3）：數年後長成密叢,T3
+willinckii-bacteria,light,1,低,1,台灣 微體溫室（T3）：低弱光（夏季遮陰 70%）,T3
+willinckii-bacteria,difficulty,3,低,2,台灣 微體溫室（T3）：進階／台灣 微體溫室（T3）：中偏難／德國 Jungle Leaves（T3）：生長慢但不難照顧（參考）／台灣 阿金的便秘花園（T3）：好照顧，侏儒系中適合入門,T3
+willinckii-golden-boy,size,S,低,1,台灣 微體溫室（T3）：侏儒爪哇,T3
+willinckii-golden-boy,light,1,低,1,台灣 微體溫室（T3）：低弱光（夏季遮陰 70%）,T3
+willinckii-golden-boy,difficulty,5,低,1,台灣 微體溫室（T3）：進階／台灣 微體溫室（T3）：難,T3
+willinckii-jenny,size,S,低,1,台灣 微體溫室（T3）：侏儒爪哇,T3
+willinckii-jenny,light,1,低,1,台灣 微體溫室（T3）：低弱光（夏季遮陰 70%）,T3
+willinckii-jenny,difficulty,5,低,1,台灣 微體溫室（T3）：進階／台灣 微體溫室（T3）：難,T3
+willinckii-nano,size,S,低,1,台灣 微體溫室（T3）：侏儒爪哇,T3
+willinckii-nano,difficulty,3,低,1,台灣 微體溫室（T3）：中等,T3
+willinckii-spur,size,S,低,1,台灣 微體溫室（T3）：侏儒爪哇,T3
+willinckii-spur,difficulty,5,低,1,台灣 微體溫室（T3）：難,T3
+fishbone,size,S,低,1,台灣 微體溫室（T3）：侏儒爪哇,T3
+fishbone,difficulty,5,低,1,台灣 微體溫室（T3）：難,T3
+gabriel,size,S,低,1,台灣 微體溫室（T3）：侏儒爪哇,T3
+gabriel,fertile_posture,spread,低,1,台灣 晴花鹿苑（T3）：如天使之翼向兩邊展開,T3
+gabriel,origin,Dwarf Nook 選拔的孢子苗,低,1,台灣 晴花鹿苑（T3）：Dwarf Nook 孢子苗,T3
+gabriel,difficulty,4,低,1,台灣 微體溫室（T3）：中偏難,T3
+willinckii-celso-tatsuta,light,5,低,1,台灣 微體溫室（T3）：中強光（夏季遮陰 30%）,T3
+willinckii-celso-tatsuta,difficulty,5,低,1,台灣 微體溫室（T3）：進階,T3
+ginka,fertile_posture,spread,低,1,台灣 晴花鹿苑（T3）：孢子葉向兩側展開,T3
+ginka,fertile_hair,5,低,1,台灣 晴花鹿苑（T3）：顯眼白皙的星狀毛,T3
+ginka,origin,泰國 Wanna 園區，由 FSQ 播孢苗特選,低,1,台灣 晴花鹿苑（T3）：泰國 Wanna,T3
+ginka,light,5,低,1,台灣 微體溫室（T3）：中強光（夏季遮陰 30%）,T3
+ginka,max_temp,,,0,台灣 晴花鹿苑（T3）：耐溫將近可達 35 度（參考）,
+ginka,difficulty,3,低,2,台灣 微體溫室（T3）：進階／台灣 晴花鹿苑（T3）：整體養護簡易,T3
+white-gizmo,fertile_posture,spread,低,1,台灣 晴花鹿苑（T3）：孢子葉如緞帶向兩側對稱展開,T3
+white-gizmo,origin,由 FSQ 孢子苗特選,低,1,台灣 晴花鹿苑（T3）：FSQ 孢子苗,T3
+kiyohime,fertile_posture,up,低,1,台灣 晴花鹿苑（T3）：孢子葉筆直挺立,T3
+kiyohime,difficulty,1,低,1,台灣 晴花鹿苑（T3）：種植門檻低，適合入門者,T3
+elsa,fertile_posture,up,低,1,台灣 晴花鹿苑（T3）：孢子葉短而挺立,T3
+elsa,difficulty,1,低,1,台灣 晴花鹿苑（T3）：簡單容易，新手也能養,T3
+hakuna-matata,fertile_hair,5,低,1,台灣 阿金的便秘花園（T3）：成株有厚實的白毛,T3
+hakuna-matata,difficulty,1,低,1,台灣 晴花鹿苑（T3）：養殖難度低,T3
+willinckii-pearl-queen,difficulty,1,低,1,台灣 晴花鹿苑（T3）：養護與種植容易,T3
+willinckii-white-swan,fertile_posture,pendant,低,1,台灣 晴花鹿苑（T3）：孢子葉向下垂擺,T3
+willinckii-anapat-9,fertile_posture,pendant,低,1,台灣 晴花鹿苑（T3）：下墜型的孢子葉,T3
+et,fertile_posture,pendant,低,1,台灣 晴花鹿苑（T3）：整體集中向前並自然下垂,T3
+et,fertile_hair,5,低,1,台灣 晴花鹿苑（T3）：覆蓋如白雪般的細緻絨毛,T3
+rydeen,fertile_posture,pendant,低,1,德國 Jungle Leaves（T3）：孢子葉下垂、近乎彎折，分岔細,T3
+veitchii-auburn-river,light,4,低,1,台灣 微體溫室（T3）：中至中強光／台灣 微體溫室（T3）：中強光（夏季遮陰 30%）／台灣 阿金的便秘花園（T3）：原生地能適應高日曬（參考）,T3
+veitchii-auburn-river,water,1,低,1,台灣 微體溫室（T3）：銀鹿各品系：耐旱喜透氣,T3
+veitchii-auburn-river,difficulty,5,低,1,台灣 微體溫室（T3）：進階,T3
+veitchii-wild,fertile_posture,up,低,1,台灣 微體溫室（T3）：孢子葉與營養葉皆聳立直上,T3
+veitchii-wild,light,4,低,1,台灣 微體溫室（T3）：中至中強光,T3
+veitchii-wild,water,1,低,1,台灣 微體溫室（T3）：銀鹿各品系：耐旱喜透氣,T3
+veitchii-nyx,fertile_posture,up,低,1,台灣 阿金的便秘花園（T3）：孢子葉非常立葉,T3
+veitchii-nyx,fertile_hair,5,低,1,台灣 微體溫室（T3）：孢子葉覆滿細小銀白絨毛,T3
+veitchii-nyx,light,2,低,1,台灣 微體溫室（T3）：中弱至中光,T3
+veitchii-nyx,water,1,低,1,台灣 微體溫室（T3）：銀鹿各品系：耐旱喜透氣,T3
+veitchii-lemoinei,fertile_hair,5,低,1,台灣 微體溫室（T3）：孢子葉覆滿白絨毛,T3
+veitchii-lemoinei,light,5,中,2,台灣 微體溫室（T3）：中強光（夏季遮陰 30%）／台灣 微體溫室（T3）：中至中強光；夏季遮陰 30~50%／台灣 阿金的便秘花園（T3）：喜愛日照強,T3
+veitchii-lemoinei,water,1,高,2,台灣 微體溫室（T3）：相對耐旱／台灣 阿金的便秘花園（T3）：喜愛乾旱,T3
+veitchii-lemoinei,difficulty,1,高,3,台灣 微體溫室（T3）：新手／台灣 微體溫室（T3）：適合新手入門／台灣 晴花鹿苑（T3）：新手入門熱門首選，適應度極高／台灣 阿金的便秘花園（T3）：好照顧,T3
+hillii-dragon,light,4,低,1,台灣 微體溫室（T3）：可遮陰 30%~50%,T3
+hillii-dragon,water,3,低,1,台灣 微體溫室（T3）：成株乾濕週期澆水,T3
+hillii-dragon,difficulty,1,低,1,台灣 微體溫室（T3）：對環境不挑，適合新手,T3
+hillii-mio,light,1,低,1,台灣 微體溫室（T3）：可提高遮光到 70%，日照需求低,T3
+hillii-mio,water,3,低,1,台灣 微體溫室（T3）：成株乾濕週期澆水,T3
+hillii-dwarf,size,S,低,1,台灣 微體溫室（T3）：侏儒，一般深綠的 ⅓ 到 ¼,T3
+hillii-dwarf,fertile_posture,up,低,1,台灣 阿金的便秘花園（T3）：整體型態自然上翹,T3
+hillii-dwarf,light,1,低,1,台灣 微體溫室（T3）：可提高遮光到 70%,T3
+hillii-dwarf,water,3,低,1,台灣 微體溫室（T3）：成株乾濕週期澆水,T3
+hillii-dwarf,max_temp,33,低,1,台灣 微體溫室（T3）：小苗：避免超過 33 度,T3
+hillii-dwarf,difficulty,1,低,1,台灣 阿金的便秘花園（T3）：好種好養，新手也能上手,T3
+ridleyi-thin,pups,no,低,1,台灣 阿金的便秘花園（T3）：單芽型,T3
+ridleyi-thin,light,3,高,2,台灣 微體溫室（T3）：亞猴各品系：明亮散射光／台灣 阿金的便秘花園（T3）：置於明亮散光處，避開高溫,T3
+ridleyi-thin,water,3,低,1,台灣 阿金的便秘花園（T3）：給水乾濕循環，不要常保過濕,T3
+ridleyi-thin,difficulty,3,低,1,台灣 微體溫室（T3）：中等,T3
+ridleyi-wide,light,3,低,1,台灣 微體溫室（T3）：亞猴各品系：明亮散射光,T3
+ridleyi-wide,water,1,低,1,台灣 卡呸醬（T3）：水苔盡量乾燥,T3
+ridleyi-wide,humidity,5,低,1,台灣 卡呸醬（T3）：喜空氣濕度,T3
+ridleyi-wide,difficulty,3,低,1,台灣 微體溫室（T3）：中等,T3
+ridleyi-round,light,3,低,1,台灣 微體溫室（T3）：亞猴各品系：明亮散射光,T3
+ridleyi-round,difficulty,3,低,1,台灣 微體溫室（T3）：中等,T3
+ridleyi-dwarf-silver,size,S,低,1,台灣 微體溫室（T3）：侏儒銀葉亞猴,T3
+ridleyi-dwarf-silver,light,3,低,1,台灣 微體溫室（T3）：亞猴各品系：明亮散射光,T3
+ridleyi-dwarf-silver,difficulty,2,低,1,台灣 微體溫室（T3）：中偏易,T3
+ridleyi-monkey-king,light,3,低,1,台灣 微體溫室（T3）：亞猴各品系：明亮散射光,T3
+ridleyi-monkey-king,difficulty,3,低,1,台灣 微體溫室（T3）：中等,T3
+alcicorne-africa,shield_hair,1,低,1,台灣 微體溫室（T3）：營養葉翠綠、光滑帶蠟質,T3
+alcicorne-africa,fertile_hair,1,中,2,美國 Halling（T2）：東非型孢子葉黃綠、蠟質、無毛、較窄／德國 Jungle Leaves（T3）：非洲型孢子葉毛稀疏,T2|T3
+alcicorne-africa,water,1,低,1,台灣 微體溫室（T3）：圓盾各品種：耐旱，可等介質全乾再澆,T3
+alcicorne-africa,min_temp,15,低,1,台灣 微體溫室（T3）：保持 15 度以上,T3
+alcicorne-madagascar,fertile_hair,3,低,2,德國 Jungle Leaves（T3）：馬達加斯加型孢子葉通常覆白毛／台灣 微體溫室（T3）：孢子葉較深色，仔細看才見星狀白毛,T3
+alcicorne-madagascar,water,1,低,1,台灣 微體溫室（T3）：圓盾各品種：耐旱，可等介質全乾再澆,T3
+alcicorne-madagascar,min_temp,15,低,1,台灣 微體溫室（T3）：保持 15 度以上,T3
+alcicorne-madagascar-dwarf,size,S,低,1,台灣 阿金的便秘花園（T3）：侏儒鹿角蕨,T3
+alcicorne-madagascar-dwarf,fertile_posture,up,低,1,德國 Jungle Leaves（T3）：孢子葉直立、很窄,T3
+alcicorne-madagascar-dwarf,light,3,低,1,台灣 阿金的便秘花園（T3）：明亮散射光與適當通風,T3
+alcicorne-madagascar-dwarf,water,1,低,1,台灣 微體溫室（T3）：圓盾各品種：耐旱，可等介質全乾再澆,T3
+alcicorne-madagascar-dwarf,min_temp,15,低,1,台灣 微體溫室（T3）：保持 15 度以上,T3
+alcicorne-madagascar-dwarf,difficulty,1,低,1,台灣 阿金的便秘花園（T3）：相當容易入門／德國 Jungle Leaves（T3）：生長慢，不難照顧（參考）,T3
+horne-surprise-darwin,shield_vein,yes,低,1,台灣 微體溫室（T3）：成熟營養葉有猴腦般的浮凸紋,T3
+elephantotis-mammoth,water,5,低,1,台灣 微體溫室（T3）：需水量大，水苔不沾手即可再澆,T3
+elephantotis-mammoth,min_temp,15,低,1,台灣 微體溫室（T3）：保持 15 度以上,T3
+elephantotis-mammoth,difficulty,1,低,1,台灣 微體溫室（T3）：容易,T3
+holttumii-x-elephantotis,pups,yes,低,1,泰國 Siam Exotica（T3）：能從根端長出新芽,T3
+holttumii-x-elephantotis,water,1,低,1,台灣 卡呸醬（T3）：怕水,T3
+holttumii-x-elephantotis,difficulty,4,低,1,台灣 卡呸醬（T3）：難顧，但比亞猴、非猴好顧,T3
+wandae-x-veitchii,light,5,低,1,台灣 阿金的便秘花園（T3）：可強曬，適合屋頂,T3
+bifurcatum-little-kitty,size,S,低,1,台灣 卡呸醬（T3）：thin & dwarf，小型品種,T3
+veitchii-akki,difficulty,1,高,2,台灣 晴花鹿苑（T3）：易於養護，新手喜愛／台灣 竹意軒（T3）：栽培性佳,T3
+paul-vespa,difficulty,1,低,1,台灣 竹意軒（T3）：栽培性很好,T3
+mountain-rabbit,pups,no,低,1,台灣 竹意軒（T3）：大型單芽種,T3
+willinckii-little-will,size,S,低,1,台灣 竹意軒（T3）：侏儒尺寸,T3
+willinckii-smurf,fertile_hair,5,低,1,台灣 阿金的便秘花園（T3）：藍底白厚毛,T3
+unicorn,fertile_hair,5,低,1,台灣 阿金的便秘花園（T3）：絨毛層次多、非常潔白,T3
+bifurcatum-white,pups,yes,低,1,台灣 晴花鹿苑（T3）：側芽發展迅速,T3
+bifurcatum-white,max_temp,,,0,台灣 晴花鹿苑（T3）：耐高溫接近 38 度（參考）,
+bifurcatum-white,difficulty,1,低,1,台灣 晴花鹿苑（T3）：養護簡單,T3
+bifurcatum-x-willinckii,fertile_posture,up,低,1,台灣 晴花鹿苑（T3）：孢子葉向上昂揚,T3
+wandae-dwarf,size,S,低,1,台灣 阿金的便秘花園（T3）：侏儒、捲葉的小女王,T3
+bifurcatum-netherlands,fertile_length,,,0,,
+bifurcatum-netherlands,light,3,低,1,美國 Cistus Nursery（T3）：明亮但避開直射,T3
+bifurcatum-netherlands,water,2,低,1,美國 Cistus Nursery（T3）：澆透後待乾；比其他型更耐頻繁澆水,T3
+kitshakood-thin-dwarf,size,S,低,1,台灣 阿金的便秘花園（T3）：thin leaf and dwarf,T3
+willinckii-kaguya,size,S,低,1,台灣 微體溫室（T3）：侏儒黃月的命名個體,T3
+willinckii-blue-queen,size,S,低,1,台灣 微體溫室（T3）：侏儒爪哇,T3
+willinckii-nook-dwarf,size,S,低,1,台灣 微體溫室（T3）：侏儒 Nook 系列,T3
+willinckii-kaohom,size,S,低,1,台灣 微體溫室（T3）：侏儒 Nook 系列,T3
+willinckii-watchara,size,S,低,1,台灣 微體溫室（T3）：侏儒爪哇 Watchara 系列,T3
