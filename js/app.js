@@ -2,14 +2,35 @@
   "use strict";
 
   const app = document.getElementById("app");
-  const DATA_FILES = { plants: "data/plants.csv", regions: "data/regions.csv", photos: "data/photos.csv" };
-  const TYPE_LABEL = { species: "原生種", hybrid: "雜交種" };
+  const DATA_FILES = { plants: "data/plants.csv", regions: "data/regions.csv", photos: "data/photos.csv", features: "data/features.csv" };
+  const TYPE_LABEL = { species: "原生種", hybrid: "雜交種", cultivar: "品系" };
+  // 資料可信度：親本、來源等說法的出處等級（原生種通常留空）
+  const CONFIDENCE = { documented: "有文獻", vendor: "業者・玩家說法", unknown: "來源待查" };
+  // 品系沒填的栽培欄位沿用 base（選拔來源）；形態欄位不沿用，因為品系本來就是外觀不同才被選出來
+  const INHERIT_FIELDS = ["region", "difficulty", "pups", "dormancy", "light", "light_note",
+    "water", "water_note", "humidity", "min_temp", "max_temp", "temp_note"];
   const SIZES = { S: "小型", M: "中型", L: "大型", XL: "巨型" };
   const POSTURES = { up: "直立", spread: "斜展", pendant: "下垂" };
+  // 特徵調查指引的受控詞彙
+  const SHIELD_FORMS = { appressed: "貼伏", "erect-wedge": "直立楔形", "erect-lobed": "直立多裂",
+    "erect-multilobed": "直立多上揚裂片", "spreading-wedge": "展開楔形" };
+  const SHIELD_BROWNING = { withering: "成熟後枯褐", green: "保持綠色", darkening: "轉深綠" };
+  const SHIELD_FRINGE = { none: "無", "above-stipe": "只在葉柄上方", encircling: "環繞葉柄" };
+  const SPORES = { tips: "末端裂片", sinus: "分岔凹處", medial: "裂片中段", "shell-lobe": "獨立殼狀裂片" };
+  const FEATURE_CONF = { "高": "high", "中": "mid", "低": "low" };
   // 0–5 分的欄位（空白 = 未知）
-  const SCORE_FIELDS = ["difficulty", "shield_height", "shield_vein", "shield_hair",
-    "fertile_split", "fertile_width", "fertile_hair", "light", "water", "humidity"];
+  const SCORE_FIELDS = ["difficulty", "shield_height", "shield_hair",
+    "fertile_width", "fertile_hair", "light", "water", "humidity"];
   const toScore = (v) => (v === "" || v == null || isNaN(Number(v)) ? null : Math.min(5, Math.max(0, Math.round(Number(v)))));
+  // 分岔次數記範圍：「2–3」「≤5」「0」→ { lo, hi, mid }
+  function parseSplit(v) {
+    const s = String(v || "").trim();
+    if (!s) return null;
+    const m = s.match(/^(≤)?(\d+)(?:[–-](\d+))?$/);
+    if (!m) return null;
+    const lo = m[1] ? 0 : Number(m[2]), hi = Number(m[3] ?? m[2]);
+    return { lo, hi, mid: (lo + hi) / 2, text: s };
+  }
 
   let ITEMS = [];          // 全部品種
   let BY_ID = new Map();
@@ -55,38 +76,71 @@
   }
 
   async function loadData() {
-    const [plants, regions, photos] = await Promise.all([
-      fetchCSV(DATA_FILES.plants), fetchCSV(DATA_FILES.regions), fetchCSV(DATA_FILES.photos)
+    const [plants, regions, photos, features] = await Promise.all([
+      fetchCSV(DATA_FILES.plants), fetchCSV(DATA_FILES.regions), fetchCSV(DATA_FILES.photos), fetchCSV(DATA_FILES.features)
     ]);
+
+    // 每個特徵的摘要值、可信度與各來源標記
+    const featuresById = new Map();
+    for (const f of features) {
+      if (!featuresById.has(f.plant_id)) featuresById.set(f.plant_id, {});
+      featuresById.get(f.plant_id)[f.field] = f;
+    }
 
     REGIONS = Object.fromEntries(regions.map((r) => [r.key, { label: r.label, color: r.color || "#6b7d72" }]));
 
-    const photosById = new Map();
+    // variant 欄有值（例如「斑葉」）的是變異株照片，另外收，不當封面也不混在主相簿
+    const photosById = new Map(), variantsById = new Map();
     for (const p of photos) {
       if (!p.id || !p.src) continue;
-      if (!photosById.has(p.id)) photosById.set(p.id, []);
-      photosById.get(p.id).push({ src: p.src, caption: p.caption, credit: p.credit, license: p.license, source: p.source });
+      const map = p.variant ? variantsById : photosById;
+      if (!map.has(p.id)) map.set(p.id, []);
+      map.get(p.id).push({ src: p.src, caption: p.caption, credit: p.credit, license: p.license, source: p.source, variant: p.variant || "" });
     }
 
     ITEMS = plants.filter((p) => p.id).map((p) => {
       const it = {
         ...p,
-        type: p.type === "hybrid" ? "hybrid" : "species",
+        type: TYPE_LABEL[p.type] ? p.type : "species",
         aka: splitList(p.aka),
         parents: splitList(p.parents),
+        base: p.base || "",
+        confidence: CONFIDENCE[p.confidence] ? p.confidence : "",
+        refs: splitList(p.refs),
         posture: splitList(p.fertile_posture),
         size: SIZES[p.size] ? p.size : "",
-        photos: photosById.get(p.id) || []
+        split: parseSplit(p.fertile_split),
+        features: featuresById.get(p.id) || {},
+        photos: photosById.get(p.id) || [],
+        variantPhotos: variantsById.get(p.id) || []
       };
       for (const k of SCORE_FIELDS) it[k] = toScore(p[k]);
       for (const k of ["min_temp", "max_temp"]) it[k] = p[k] === "" || p[k] == null || isNaN(Number(p[k])) ? null : Number(p[k]);
       return it;
     });
     BY_ID = new Map(ITEMS.map((it) => [it.id, it]));
+
+    // 品系：空白的栽培欄位往上沿用 base（base 也可能是品系，所以遞迴）
+    const done = new Set();
+    const inherit = (it, depth = 0) => {
+      if (done.has(it.id)) return;
+      done.add(it.id);
+      it.inherited = new Set();
+      const base = BY_ID.get(it.base);
+      if (!base || depth > 10) return;
+      inherit(base, depth + 1);
+      for (const k of INHERIT_FIELDS) {
+        const empty = it[k] == null || it[k] === "";
+        if (empty && base[k] != null && base[k] !== "") { it[k] = base[k]; it.inherited.add(k); }
+      }
+    };
+    ITEMS.forEach((it) => inherit(it));
   }
 
   const regionOf = (it) => REGIONS[it.region] || { label: it.region || "未分類", color: "#6b7d72" };
   const childrenOf = (id) => ITEMS.filter((it) => it.parents.includes(id));
+  const cultivarsOf = (id) => ITEMS.filter((it) => it.base === id);
+  const baseOf = (it) => BY_ID.get(it.base);
 
   // 短名：去掉「鹿角蕨」；只剩一個字時保留「鹿角」避免歧義（銀鹿角蕨 → 銀鹿角）
   function shortZh(it) {
@@ -95,24 +149,24 @@
     if (!s) return it.zh;
     return s.length === 1 ? `${s}鹿角` : s;
   }
-  // 交配式：原生種用短名；親本若是雜交種，有俗名用俗名，否則加括號展開
+  // 交配式：原生種、品系用短名；親本若是雜交種，有俗名用俗名，否則加括號展開
   function crossOf(it, depth = 0) {
     return it.parents.map((pid) => {
       const p = BY_ID.get(pid);
       if (!p) return pid;
-      if (p.type === "species") return shortZh(p);
+      if (p.type !== "hybrid") return shortZh(p);
       if (p.zh || depth > 4) return p.zh || p.name;
       return `(${crossOf(p, depth + 1)})`;
     }).join(" × ");
   }
-  // 標題：原生種 → 短名；雜交種 → 俗名（A × B × …），沒有俗名就只顯示交配式
+  // 標題：原生種、品系 → 短名；雜交種 → 俗名（A × B × …），沒有俗名就只顯示交配式
   function titleOf(it) {
-    if (it.type === "species" || !it.parents.length) return shortZh(it);
+    if (it.type !== "hybrid" || !it.parents.length) return shortZh(it);
     const cross = crossOf(it);
     return it.zh ? `${it.zh}（${cross}）` : cross;
   }
-  // 副標：英文名（與標題重複時省略）
-  const enOf = (it) => (it.en && it.en !== it.zh ? it.en : "");
+  // 副標：英文名（與標題或學名重複時省略）
+  const enOf = (it) => (it.en && it.en !== it.zh && !it.name.includes(it.en) ? it.en : "");
 
   /* ---------------- 佔位圖（沒有照片時） ---------------- */
   const placeholderCache = new Map();
@@ -160,6 +214,9 @@
   const sizeBadge = (it) => it.size
     ? `<span class="size-badge" title="尺寸：${SIZES[it.size]}">${icon("size")}${it.size}</span>` : "";
 
+  const confBadge = (it) => it.confidence
+    ? `<span class="conf ${it.confidence}" title="資料可信度">${esc(CONFIDENCE[it.confidence])}</span>` : "";
+
   const regionTag = (it) => {
     const r = regionOf(it);
     return `<span class="region"><span class="dot" style="background:${esc(r.color)}"></span>${esc(r.label)}</span>`;
@@ -185,7 +242,7 @@
     const en = enOf(it);
     const href = `#/p/${encodeURIComponent(it.id)}`;
     return `
-      <article class="card">
+      <article class="card" data-id="${esc(it.id)}">
         <div class="thumb">
           <img src="${esc(coverOf(it))}" alt="" loading="lazy" decoding="async">
           <span class="badge ${it.type}">${TYPE_LABEL[it.type]}</span>
@@ -199,6 +256,7 @@
           </div>
           <div class="card-latin">${esc(it.name)}</div>
           ${en ? `<div class="card-en">${esc(en)}</div>` : ""}
+          ${baseOf(it) ? `<div class="card-en">選自 ${esc(titleOf(baseOf(it)))}</div>` : ""}
           <div class="card-meta push">${regionTag(it)}${sizeBadge(it)}</div>
           <div class="card-meta">${stars(it.difficulty)}</div>
         </div>
@@ -227,11 +285,13 @@
     { key: "look", label: "外觀特徵", icon: "shield", mode: "all", options: [
       opt("silver", "銀白多毛", (it) => it.fertile_hair >= 4),
       opt("tall", "高聳盾葉", (it) => it.shield_height >= 4),
-      opt("veined", "葉脈隆起", (it) => it.shield_vein >= 4),
+      opt("veined", "葉脈隆起", (it) => it.shield_vein === "yes"),
       opt("wide", "寬葉", (it) => it.fertile_width >= 4),
-      opt("fewsplit", "少分岔", (it) => it.fertile_split != null && it.fertile_split <= 1),
-      opt("manysplit", "多回分岔", (it) => it.fertile_split >= 4),
-      opt("dormant", "有休眠期", (it) => it.dormancy === "yes")] }
+      opt("fewsplit", "少分岔", (it) => it.split != null && it.split.mid <= 1),
+      opt("manysplit", "多回分岔", (it) => it.split != null && it.split.mid >= 4),
+      opt("dormant", "有休眠期", (it) => it.dormancy === "yes")] },
+    { key: "confidence", label: "資料可信度", icon: "info", mode: "any",
+      options: Object.entries(CONFIDENCE).map(([k, lbl]) => opt(k, lbl, (it) => it.confidence === k)) }
   ];
   state.feat = Object.fromEntries(FEATURE_GROUPS.map((g) => [g.key, new Set()]));
   state.featOpen = false;
@@ -275,9 +335,9 @@
     { key: "min_temp", label: "耐寒性（最低溫度）", hint: (it) => `最低 ${it.min_temp}°C`, dirLabels: ["耐寒優先", "怕冷優先"] },
     { key: "max_temp", label: "耐熱性（最高溫度）", hint: (it) => `最高 ${it.max_temp}°C`, dirLabels: ["怕熱優先", "耐熱優先"], defaultDir: "desc" },
     { ...score("shield_height", "冠高"), label: "盾葉冠高" },
-    { ...score("shield_vein", "脈紋"), label: "盾葉脈紋" },
     { ...score("shield_hair", "盾葉絨毛"), label: "盾葉絨毛" },
-    { ...score("fertile_split", "分岔"), label: "孢子葉分岔" },
+    { key: "fertile_split", label: "孢子葉分岔", get: (it) => it.split?.mid ?? null,
+      hint: (it) => `分岔 ${it.split.text} 次`, dirLabels: ["少 → 多", "多 → 少"] },
     { ...score("fertile_width", "葉寬"), label: "孢子葉寬度" },
     { ...score("fertile_hair", "絨毛"), label: "孢子葉絨毛" },
     { key: "photos", label: "照片數量", get: (it) => it.photos.length, hint: (it) => `${it.photos.length} 張照片`, defaultDir: "desc" }
@@ -315,8 +375,9 @@
       if (state.region !== "all" && it.region !== state.region) return false;
       if (!matchesFeatures(it, skipKey)) return false;
       if (!q) return true;
-      const hay = [it.id, it.name, titleOf(it), it.en, ...it.aka, regionOf(it).label, it.origin,
-        ...it.parents.map((p) => BY_ID.get(p)?.name || p)].join(" ").toLowerCase();
+      const base = baseOf(it);
+      const hay = [it.id, it.name, titleOf(it), it.en, ...it.aka, regionOf(it).label, it.origin, it.breeder,
+        ...it.parents.map((p) => BY_ID.get(p)?.name || p), base?.name, base && titleOf(base)].join(" ").toLowerCase();
       return hay.includes(q);
     });
   }
@@ -327,10 +388,34 @@
     return `<button class="chip" data-group="${group}" data-value="${esc(value)}" aria-pressed="${pressed}">${dot}${esc(label)}</button>`;
   }
 
+  // 卡片大小拉桿：設定網格欄寬下限（px），未設定時沿用 CSS 的響應式預設
+  const CARD_MIN = 140, CARD_MAX = 360, CARD_DEFAULT = 220;
+
+  function initCardSize() {
+    const grid = app.querySelector("#grid"), input = app.querySelector("#card-size");
+    const apply = (px) => {
+      grid.classList.toggle("sized", px != null);
+      if (px != null) grid.style.setProperty("--card-min", `${px}px`);
+      else grid.style.removeProperty("--card-min");
+      input.value = px ?? CARD_DEFAULT;
+    };
+    let saved = null;
+    try { saved = parseInt(localStorage.getItem("card-size"), 10); } catch (e) { /* 無痕模式等 */ }
+    apply(saved >= CARD_MIN && saved <= CARD_MAX ? saved : null);
+
+    input.addEventListener("input", () => apply(Number(input.value)));
+    input.addEventListener("change", () => {
+      try { localStorage.setItem("card-size", input.value); } catch (e) { /* 無痕模式等 */ }
+    });
+    input.addEventListener("dblclick", () => {
+      apply(null);
+      try { localStorage.removeItem("card-size"); } catch (e) { /* 無痕模式等 */ }
+    });
+  }
+
   function renderList() {
     document.title = "鹿角蕨圖鑑";
-    const nSpecies = ITEMS.filter((i) => i.type === "species").length;
-    const nHybrid = ITEMS.length - nSpecies;
+    const nOf = (type) => ITEMS.filter((i) => i.type === type).length;
 
     app.innerHTML = `
       <div class="toolbar" id="toolbar">
@@ -345,8 +430,7 @@
         </div>
         <div class="chips" role="group" aria-label="類型">
           ${chip("type", "all", `全部 ${ITEMS.length}`)}
-          ${chip("type", "species", `原生種 ${nSpecies}`)}
-          ${chip("type", "hybrid", `雜交種 ${nHybrid}`)}
+          ${Object.entries(TYPE_LABEL).map(([k, lbl]) => chip("type", k, `${lbl} ${nOf(k)}`)).join("")}
         </div>
         <div class="chips" role="group" aria-label="地區">
           ${chip("region", "all", "所有地區")}
@@ -363,6 +447,10 @@
       </div>
       <div class="result-bar">
         <p class="result-count" id="count"></p>
+        <label class="card-size" title="調整卡片大小，雙擊還原">
+          ${icon("book")}
+          <input id="card-size" type="range" min="${CARD_MIN}" max="${CARD_MAX}" step="10" aria-label="卡片大小">
+        </label>
         <div class="sort">
           <label for="sort">排序</label>
           <select id="sort">${SORTS.map((s) =>
@@ -376,6 +464,7 @@
         照片來自 <a href="https://commons.wikimedia.org/" target="_blank" rel="noopener">Wikimedia Commons</a>，作者與授權標示於各照片下方。</footer>`;
 
     updateGrid();
+    initCardSize();
 
     app.querySelector("#q").addEventListener("input", (e) => { state.q = e.target.value; updateGrid(); });
     app.querySelectorAll(".chip[data-group]").forEach((btn) => btn.addEventListener("click", () => {
@@ -582,8 +671,15 @@
       ? `<div class="thumbs">${it.photos.map((p, i) =>
           `<button data-idx="${i}" aria-current="${i === 0}" aria-label="第 ${i + 1} 張"><img src="${esc(p.src)}" alt="" loading="lazy"></button>`).join("")}</div>`
       : "";
+    const variantsHTML = it.variantPhotos.length ? `
+      <div class="variant-photos">
+        <h3>變異株照片 <small>斑葉等非典型個體，不代表此種的一般外觀</small></h3>
+        <div class="thumbs">${it.variantPhotos.map((p, i) =>
+          `<button data-vidx="${i}" aria-label="變異株照片：${esc(p.variant)}"><img src="${esc(p.src)}" alt="" loading="lazy"><span>${esc(p.variant)}</span></button>`).join("")}</div>
+      </div>` : "";
 
-    const facts = [["原產地", it.origin], ["生長習性", it.growth]].filter(([, v]) => v);
+    const facts = [["原產地", esc(it.origin)], ["生長習性", esc(it.growth)], ["選育者", esc(it.breeder)],
+      ["資料來源", refsHTML(it.refs)]].filter(([, v]) => v);
 
     const parentsHTML = it.type === "hybrid" && it.parents.length ? `
       <section class="section">
@@ -594,6 +690,20 @@
         </div>
       </section>` : "";
 
+    const base = baseOf(it);
+    const baseHTML = base ? `
+      <section class="section">
+        <h2>選拔自 <small>此品系從這個${TYPE_LABEL[base.type]}選出</small></h2>
+        <div class="parents">${cardHTML(base)}</div>
+      </section>` : "";
+
+    const cultivars = cultivarsOf(id);
+    const cultivarsHTML = cultivars.length ? `
+      <section class="section">
+        <h2>品系 <small>${cultivars.length} 個從此選出的品系・產地型</small></h2>
+        <div class="rail">${cultivars.map(cardHTML).join("")}</div>
+      </section>` : "";
+
     const children = childrenOf(id);
     const childrenHTML = children.length ? `
       <section class="section">
@@ -601,8 +711,9 @@
         <div class="rail">${children.map(cardHTML).join("")}</div>
       </section>` : "";
 
-    const shown = new Set([id, ...it.parents, ...children.map((c) => c.id)]);
-    const siblings = ITEMS.filter((x) => x.region === it.region && !shown.has(x.id));
+    // 同地區：品系太多會淹沒列表，只列原生種與雜交種
+    const shown = new Set([id, it.base, ...it.parents, ...children.map((c) => c.id)]);
+    const siblings = ITEMS.filter((x) => x.region === it.region && x.type !== "cultivar" && !shown.has(x.id));
     const siblingsHTML = siblings.length ? `
       <section class="section">
         <h2>同地區的其他品種 <small>${esc(regionOf(it).label)}</small></h2>
@@ -617,19 +728,12 @@
       </nav>
 
       <article class="detail">
-        <div class="gallery">
-          <div class="gallery-main ${hasPhotos ? "" : "placeholder"}" id="gmain" role="${hasPhotos ? "button" : "img"}" tabindex="${hasPhotos ? 0 : -1}" aria-label="${hasPhotos ? "放大檢視照片" : "尚無照片"}">
-            <img id="gimg" src="${esc(coverOf(it))}" alt="${esc(titleOf(it))}">
-          </div>
-          <div class="gallery-cap" id="gcap">${hasPhotos ? photoCaption(it.photos[0]) : "尚無照片，可在 data/photos.csv 新增"}</div>
-          ${thumbs}
-        </div>
-
-        <div>
+        <div class="detail-head">
           <div class="title-block">
             <div class="tags">
               <span class="badge ${it.type}">${TYPE_LABEL[it.type]}</span>
               ${regionTag(it)}
+              ${confBadge(it)}
             </div>
             <h1>${esc(titleOf(it))}${googleLink(it, "lg")}</h1>
             <p class="latin">${esc(it.name)}</p>
@@ -638,15 +742,30 @@
           </div>
           ${it.desc ? `<p class="desc">${esc(it.desc)}</p>` : ""}
           ${it.note ? `<div class="note">${esc(it.note)}</div>` : ""}
+        </div>
+
+        <div class="gallery">
+          <div class="gallery-main ${hasPhotos ? "" : "placeholder"}" id="gmain" role="${hasPhotos ? "button" : "img"}" tabindex="${hasPhotos ? 0 : -1}" aria-label="${hasPhotos ? "放大檢視照片" : "尚無照片"}">
+            <img id="gimg" src="${esc(coverOf(it))}" alt="${esc(titleOf(it))}">
+          </div>
+          <div class="gallery-cap" id="gcap">${hasPhotos ? photoCaption(it.photos[0]) : "尚無照片，可在 data/photos.csv 新增"}</div>
+          ${thumbs}
+          ${variantsHTML}
+        </div>
+
+        <div class="detail-body">
           ${statsHTML(it)}
           ${traitsHTML(it)}
           ${facts.length ? `<dl class="facts">
-            ${facts.map(([k, v]) => `<div><dt>${k}</dt><dd>${esc(v)}</dd></div>`).join("")}
+            ${facts.map(([k, v]) => `<div><dt>${k}</dt><dd>${v}</dd></div>`).join("")}
           </dl>` : ""}
+          ${sourcesHTML(it)}
         </div>
       </article>
 
+      ${baseHTML}
       ${parentsHTML}
+      ${cultivarsHTML}
       ${childrenHTML}
       ${siblingsHTML}
 
@@ -661,10 +780,13 @@
       current = i;
       app.querySelector("#gimg").src = it.photos[i].src;
       app.querySelector("#gcap").innerHTML = photoCaption(it.photos[i]);
-      app.querySelectorAll(".thumbs button").forEach((b, j) => b.setAttribute("aria-current", String(i === j)));
+      app.querySelectorAll(".thumbs button[data-idx]").forEach((b, j) => b.setAttribute("aria-current", String(i === j)));
     };
-    app.querySelectorAll(".thumbs button").forEach((b) =>
+    app.querySelectorAll(".thumbs button[data-idx]").forEach((b) =>
       b.addEventListener("click", () => setPhoto(Number(b.dataset.idx))));
+    // 變異株照片只在燈箱裡瀏覽，不切換主圖
+    app.querySelectorAll(".thumbs button[data-vidx]").forEach((b) =>
+      b.addEventListener("click", () => lightbox.open(it.variantPhotos, Number(b.dataset.vidx), null)));
 
     if (hasPhotos) {
       const gmain = app.querySelector("#gmain");
@@ -687,17 +809,31 @@
     const text = `<span class="big">${lo ?? "?"}–${hi ?? "?"}°C</span>`;
     if (lo == null || hi == null) return text;
     return `<div class="trange">${text}
-      <span class="tbar" role="img" aria-label="可耐受 ${lo} 到 ${hi}°C">
+      <span class="tbar" role="img" aria-label="建議 ${lo} 到 ${hi}°C">
         <i style="left:${pct(lo)}%;right:${100 - pct(hi)}%"></i>
       </span></div>`;
   }
 
+  // 特徵調查指引 v1.3 的來源等級
+  const TIERS = { T1: "學術文獻", T2: "機構與專家", T3: "業者與玩家" };
+  const tierText = (tiers) => (tiers || "").split("|").filter(Boolean).map((t) => `${t} ${TIERS[t] || ""}`.trim()).join("、");
+
+  // 一個欄位的提示文字：「可信度 低（依據 T3 業者與玩家）」＋各來源標記（每個來源附 Tx）
+  function featureNote(it, field) {
+    const f = it.features[field];
+    if (!f) return "";
+    const head = f.summary && f.confidence
+      ? `可信度 ${f.confidence}${f.tiers ? `（依據 ${tierText(f.tiers)}）` : ""}` : "";
+    return [head, f.by_source].filter(Boolean).join("\n");
+  }
+
   function statsHTML(it) {
+    // 注記平時隱藏，hover／focus（觸控點按）時以浮動提示顯示
     const tile = (iconName, label, value, sub) => `
-      <div class="stat">
+      <div class="stat${sub ? " has-note" : ""}"${sub ? ` tabindex="0"` : ""}>
         <div class="stat-head">${icon(iconName)}<span>${label}</span></div>
         <div class="stat-val">${value}</div>
-        ${sub ? `<div class="stat-sub">${esc(sub)}</div>` : ""}
+        ${sub ? `<div class="stat-sub" role="tooltip">${esc(sub)}</div>` : ""}
       </div>`;
 
     const sizeScale = it.size
@@ -705,23 +841,32 @@
           `<span class="${k === it.size ? "on" : ""}">${icon("size")}<b>${k}</b></span>`).join("")}</span>`
       : `<span class="muted">未知</span>`;
 
+    // 浮動提示：摘要可信度、依據的來源等級（Tx）與各來源標記
+    const note = (...parts) => parts.filter(Boolean).join("\n");
+    const tempNote = [["最低溫", "min_temp"], ["最高溫", "max_temp"]]
+      .map(([n, k]) => featureNote(it, k) && `${n}｜${featureNote(it, k)}`).filter(Boolean).join("\n\n");
+
     const tiles = [
-      tile("size", "尺寸", sizeScale, [SIZES[it.size], it.size_note].filter(Boolean).join("・")),
-      tile("star", "栽培難度", stars(it.difficulty), DIFF_LABEL[it.difficulty || 0]),
-      tile("sun", "光照需求", iconRating(it.light, "sun", "光照"), it.light_note),
-      tile("drop", "澆水量", iconRating(it.water, "drop", "澆水"), it.water_note),
-      tile("humid", "空氣濕度", iconRating(it.humidity, "humid", "濕度"), ""),
-      tile("thermo", "適合溫度", tempRange(it), it.temp_note),
+      tile("size", "尺寸", sizeScale, note(SIZES[it.size], featureNote(it, "size") || it.size_note)),
+      tile("star", "栽培難度", stars(it.difficulty), note(DIFF_LABEL[it.difficulty || 0], featureNote(it, "difficulty"))),
+      tile("sun", "光照需求", iconRating(it.light, "sun", "光照"), featureNote(it, "light") || it.light_note),
+      tile("drop", "澆水量", iconRating(it.water, "drop", "澆水"), featureNote(it, "water") || it.water_note),
+      tile("humid", "空氣濕度", iconRating(it.humidity, "humid", "濕度"), featureNote(it, "humidity")),
+      tile("thermo", "建議溫度", tempRange(it), tempNote || it.temp_note),
       tile("pups", "繁殖方式",
         it.pups === "yes" ? "群生型" : it.pups === "no" ? "單株型" : `<span class="muted">未知</span>`,
-        it.pups === "yes" ? "會長側芽，可分株" : it.pups === "no" ? "不長側芽，以孢子繁殖" : ""),
+        note(it.pups === "yes" ? "會長側芽，可分株" : it.pups === "no" ? "不長側芽，以孢子繁殖" : "", featureNote(it, "pups"))),
       tile("moon", "休眠期",
         it.dormancy === "yes" ? "有" : it.dormancy === "no" ? "無明顯休眠" : `<span class="muted">未知</span>`,
-        it.dormancy === "yes" ? "休眠期需減少澆水" : "")
+        note(it.dormancy === "yes" ? "休眠期需減少澆水" : "", featureNote(it, "dormancy")))
     ];
+    const base = baseOf(it);
+    const inherited = base && [...it.inherited].some((k) => k !== "region")
+      ? `<p class="hint">栽培條件尚未個別調查，暫時沿用「${esc(titleOf(base))}」的資料。</p>` : "";
     return `<section class="block">
       <h2 class="block-h">快速指標</h2>
       <div class="stats">${tiles.join("")}</div>
+      ${inherited}
     </section>`;
   }
 
@@ -735,11 +880,16 @@
           `<span class="${it.posture.includes(k) ? "on" : ""}">${icon("p-" + k)}${lbl}</span>`).join("")}</span>`
       : "";
 
+    const vocab = (map, v) => text(map[v] || v);
+    const vein = { yes: "隆起", no: "埋入" }[it.shield_vein] || "";
+    const split = it.split ? (it.split.text === "0" ? "不分岔" : `${esc(it.split.text)} 次`) : "";
+
     const shield = [
-      row("冠形", text(it.shield_form)),
+      row("冠形", vocab(SHIELD_FORMS, it.shield_form)),
       row("冠高", meter(it.shield_height, "貼伏", "高聳", "冠高")),
-      row("顏色", text(it.shield_color)),
-      row("脈紋", meter(it.shield_vein, "平滑", "隆起", "脈紋")),
+      row("老化", vocab(SHIELD_BROWNING, it.shield_browning)),
+      row("領片", vocab(SHIELD_FRINGE, it.shield_fringe)),
+      row("脈紋", vein),
       row("絨毛", meter(it.shield_hair, "光滑", "密毛", "絨毛")),
       row("概述", text(it.shield))
     ].join("");
@@ -747,11 +897,10 @@
     const fertile = [
       row("姿態", posture),
       row("長度", text(it.fertile_length)),
-      row("分岔", meter(it.fertile_split, "不分岔", "多回", "分岔程度")),
+      row("分岔", split),
       row("葉寬", meter(it.fertile_width, "細", "寬", "葉寬")),
-      row("顏色", text(it.fertile_color)),
       row("絨毛", meter(it.fertile_hair, "光滑", "密毛", "絨毛")),
-      row("孢子囊", text(it.spore)),
+      row("孢子囊", vocab(SPORES, it.spore)),
       row("概述", text(it.fertile))
     ].join("");
 
@@ -769,9 +918,67 @@
       <p class="hint">評分為品種間的相對比較（1–5），實際表現會因個體、品系與環境而異。</p>`;
   }
 
+  /* ---------- 詳細頁：特徵來源與可信度 ---------- */
+  const FEATURE_LABELS = [
+    ["size", "尺寸"], ["shield_form", "盾葉冠形"], ["shield_height", "盾葉冠高"], ["shield_browning", "盾葉老化"],
+    ["shield_fringe", "盾葉領片"], ["shield_vein", "盾葉脈紋"], ["shield_hair", "盾葉絨毛"],
+    ["fertile_posture", "孢子葉姿態"], ["fertile_length", "孢子葉長度"], ["fertile_split", "孢子葉分岔"],
+    ["fertile_width", "孢子葉寬度"], ["fertile_hair", "孢子葉絨毛"], ["spore", "孢子囊位置"],
+    ["pups", "側芽"], ["dormancy", "休眠期"], ["origin", "原產地"],
+    ["light", "光照"], ["water", "澆水"], ["humidity", "濕度"], ["min_temp", "建議最低溫"], ["max_temp", "建議最高溫"],
+    ["difficulty", "栽培難度"]
+  ];
+  const VALUE_LABELS = {
+    shield_form: SHIELD_FORMS, shield_browning: SHIELD_BROWNING, shield_fringe: SHIELD_FRINGE, spore: SPORES,
+    shield_vein: { yes: "隆起", no: "埋入" }, pups: { yes: "叢生", no: "單生" }, dormancy: { yes: "有", no: "無" },
+    fertile_posture: { up: "直立", spread: "展開", pendant: "下垂", "spread|pendant": "展開、側裂片下垂" }
+  };
+
+  function featureValue(field, v) {
+    if (!v) return `<span class="muted">未知</span>`;
+    if (VALUE_LABELS[field]) return esc(VALUE_LABELS[field][v] || v);
+    if (field === "min_temp" || field === "max_temp") return `${esc(v)}°C`;
+    if (field === "size") return `${esc(SIZES[v] || "")} ${esc(v)}`;
+    if (SCORE_FIELDS.includes(field)) return `${esc(v)}/5`;
+    return esc(v);
+  }
+
+  function sourcesHTML(it) {
+    const rows = FEATURE_LABELS.filter(([k]) => it.features[k]).map(([k, label]) => {
+      const f = it.features[k];
+      const conf = f.summary && FEATURE_CONF[f.confidence]
+        ? `<span class="fconf ${FEATURE_CONF[f.confidence]}"${f.tiers ? ` title="依據 ${esc(tierText(f.tiers))}"` : ""}>可信度 ${esc(f.confidence)}${
+            f.tiers ? ` · ${esc(f.tiers.split("|").join("/"))}` : ""}</span>` : "";
+      return `<div><dt>${label}</dt><dd>
+        <div class="fsum">${featureValue(k, f.summary)}${conf}</div>
+        ${f.by_source ? `<div class="fsrc">${esc(f.by_source)}</div>` : ""}
+      </dd></div>`;
+    });
+    if (!rows.length) return "";
+    const version = it.survey_version ? `依特徵調查指引 ${esc(it.survey_version)} 整理。` : "";
+    return `<section class="block">
+      <details class="feature-src">
+        <summary>特徵來源與可信度</summary>
+        <dl class="facts">${rows.join("")}</dl>
+        <p class="hint">${version}摘要值依各來源換算後平均；標「參考」的來源（原生地棲地、耐受紀錄、其他地區的難度評等）只顯示，不計入摘要。來源等級：T1 學術文獻、T2 機構與專家、T3 業者與玩家；型態欄位只有 T3 來源時，可信度一律為低。</p>
+      </details>
+    </section>`;
+  }
+
+  // 資料來源：顯示網域名稱，連到原始網址
+  function refsHTML(refs) {
+    const links = refs.filter((u) => /^https?:\/\//i.test(u)).map((u) => {
+      let host = u;
+      try { host = new URL(u).hostname.replace(/^www\./, ""); } catch (e) { /* 網址格式錯誤就顯示原文 */ }
+      return `<a href="${esc(u)}" target="_blank" rel="noopener">${esc(host)}</a>`;
+    });
+    return links.length ? `<span class="refs">${links.join("")}</span>` : "";
+  }
+
   // 照片說明：說明文字 · 作者 · 授權，作者連到原始出處
   function photoCaption(p) {
     const parts = [];
+    if (p.variant) parts.push(`<strong>變異株・${esc(p.variant)}</strong>`);
     if (p.caption) parts.push(esc(p.caption));
     const who = esc(p.credit || "來源");
     if (p.source) {
@@ -853,6 +1060,61 @@
     if (panes.graph) graph.show(); else graph.hide();
   }
 
+  /* 分隔線：拖拉調整左右比例（存百分比，視窗縮放時維持比例；上下限與 CSS 的 clamp 相同） */
+  (() => {
+    const divider = document.getElementById("pane-divider");
+    const shell = document.querySelector(".shell");
+    const DEFAULT = 45.45, GRAPH_MIN = 300, CONTENT_MIN = 380;
+    const clampPct = (pct) => {
+      const w = shell.clientWidth || 1;
+      const lo = GRAPH_MIN / w * 100, hi = 100 - CONTENT_MIN / w * 100;
+      return Math.round(Math.min(Math.max(pct, lo), Math.max(lo, hi)) * 100) / 100;
+    };
+    const apply = (pct, save) => {
+      shell.style.setProperty("--split", pct + "%");
+      divider.setAttribute("aria-valuenow", String(Math.round(pct)));
+      if (save) try { localStorage.setItem("split", String(pct)); } catch (e) { /* 無痕模式等 */ }
+    };
+    let saved = NaN;
+    try { saved = parseFloat(localStorage.getItem("split")); } catch (e) { /* 無痕模式等 */ }
+    apply(saved > 0 && saved < 100 ? saved : DEFAULT, false);
+    divider.setAttribute("aria-valuemin", "0");
+    divider.setAttribute("aria-valuemax", "100");
+
+    const pctAt = (x) => {
+      const r = shell.getBoundingClientRect();
+      return clampPct((x - r.left) / r.width * 100);
+    };
+    divider.addEventListener("pointerdown", (e) => {
+      if (e.button !== 0) return;
+      e.preventDefault();
+      divider.setPointerCapture(e.pointerId);
+      document.body.classList.add("resizing");
+      const move = (ev) => apply(pctAt(ev.clientX), false);
+      const end = (ev) => {
+        divider.removeEventListener("pointermove", move);
+        divider.removeEventListener("pointerup", end);
+        divider.removeEventListener("pointercancel", end);
+        document.body.classList.remove("resizing");
+        apply(pctAt(ev.clientX), true);
+      };
+      divider.addEventListener("pointermove", move);
+      divider.addEventListener("pointerup", end);
+      divider.addEventListener("pointercancel", end);
+    });
+    // 雙擊還原預設比例
+    divider.addEventListener("dblclick", () => apply(DEFAULT, true));
+    // 鍵盤：左右鍵微調，Shift 加大步距，Home／End 到上下限
+    divider.addEventListener("keydown", (e) => {
+      const cur = clampPct(parseFloat(shell.style.getPropertyValue("--split")) || DEFAULT);
+      const step = e.shiftKey ? 10 : 2;
+      const next = { ArrowLeft: cur - step, ArrowRight: cur + step, Home: 0, End: 100 }[e.key];
+      if (next === undefined) return;
+      e.preventDefault();
+      apply(clampPct(next), true);
+    });
+  })();
+
   document.addEventListener("click", (e) => {
     const t = e.target.closest("[data-pane-toggle], [data-pane-close], [data-graph-reveal]");
     if (!t) return;
@@ -880,12 +1142,19 @@
     const box = document.getElementById("cy");
     const msg = document.getElementById("graph-msg");
     const isoBtn = graphPane.querySelector("[data-graph-iso]");
+    const focusBtn = graphPane.querySelector("[data-graph-focus]");
     let d3 = null, svg = null, root = null, zoom = null, sim = null, loading = null;
     let nodes = [], links = [], byId = new Map(), up = new Map(), down = new Map();
     let selected = null, hovering = null, warming = false;
     let userMoved = false; // 使用者自己縮放／拖曳過就不再自動全覽
-    let showIsolated = true;
-    try { showIsolated = localStorage.getItem("graph-isolated") !== "0"; } catch (e) { /* 無痕模式等 */ }
+    let showIsolated = true, pinFocus = true; // pinFocus：品種頁期間持續淡化無關的品種
+    // 品種頁開著時節點固定不動（不漂浮、不重新模擬），離開品種頁才恢復
+    const frozen = () => calm || !!selected;
+    const resume = () => { if (sim && !frozen() && !graphPane.hidden && !document.hidden) sim.restart(); };
+    try {
+      showIsolated = localStorage.getItem("graph-isolated") !== "0";
+      pinFocus = localStorage.getItem("graph-focus") !== "0";
+    } catch (e) { /* 無痕模式等 */ }
 
     const loadScript = (src) => new Promise((ok, fail) => {
       const s = document.createElement("script");
@@ -897,56 +1166,59 @@
 
     const showMsg = (html) => { msg.innerHTML = html; msg.hidden = !html; };
 
-    // 節點標籤：原生種用短名；雜交種用俗名，沒有俗名就用交配式
-    const nodeLabel = (it) => (it.type === "species" ? shortZh(it) : it.zh || crossOf(it));
+    // 節點標籤：原生種、品系用短名；雜交種用俗名，沒有俗名就用交配式
+    const nodeLabel = (it) => (it.type === "hybrid" && it.parents.length ? it.zh || crossOf(it) : shortZh(it));
+    // 往上的連結：雜交親本（實線）＋ 品系的選拔來源（虛線）
+    const upIds = (it) => (it.base ? [...it.parents, it.base] : it.parents);
 
     const measure = (() => {
       const ctx = document.createElement("canvas").getContext("2d");
       return (text) => { ctx.font = `600 14px ${FONT}`; return ctx.measureText(text).width; };
     })();
 
-    // 世代：原生種 0，雜交種 = 最深的親本 + 1（之後有多代雜交也能分層）
+    // 世代：原生種 0，雜交種、品系 = 最深的親本／來源 + 1（之後有多代雜交也能分層）
     const genCache = new Map();
     function gen(id, depth = 0) {
       if (genCache.has(id)) return genCache.get(id);
       const it = BY_ID.get(id);
-      const g = !it || !it.parents.length || depth > 10 ? 0 : 1 + Math.max(...it.parents.map((p) => gen(p, depth + 1)));
+      const ups = it ? upIds(it) : [];
+      const g = !ups.length || depth > 10 ? 0 : 1 + Math.max(...ups.map((p) => gen(p, depth + 1)));
       genCache.set(id, g);
       return g;
     }
 
     function graphData() {
       const linked = new Set();
-      for (const it of ITEMS) if (it.parents.length) [it.id, ...it.parents].forEach((id) => linked.add(id));
+      for (const it of ITEMS) if (upIds(it).length) [it.id, ...upIds(it)].forEach((id) => linked.add(id));
 
       const list = [], edges = [], missing = new Set();
       const add = (id, label, type, color) =>
         list.push({ id, label, type, color, linked: linked.has(id), gen: gen(id),
-          w: Math.ceil(measure(label)) + (type === "hybrid" ? 40 : 26) });
+          w: Math.ceil(measure(label)) + (type === "hybrid" ? 40 : type === "cultivar" ? 32 : 26) });
 
       for (const it of ITEMS) {
         if (!showIsolated && !linked.has(it.id) && it.id !== selected) continue;
         add(it.id, nodeLabel(it), it.type, regionOf(it).color);
       }
-      for (const it of ITEMS) for (const pid of it.parents) {
+      for (const it of ITEMS) for (const pid of upIds(it)) {
         if (!BY_ID.has(pid) && !missing.has(pid)) {
           missing.add(pid);
-          console.warn(`[關係圖] ${it.id} 的親本「${pid}」不存在於 plants.csv`);
+          console.warn(`[關係圖] ${it.id} 的親本／來源「${pid}」不存在於 plants.csv`);
           add(pid, pid, "missing", "");
         }
-        edges.push({ id: `${pid}→${it.id}`, source: pid, target: it.id });
+        edges.push({ id: `${pid}→${it.id}`, source: pid, target: it.id, kind: pid === it.base ? "base" : "cross" });
       }
       return { list, edges };
     }
 
-    // 外形：原生種圓角矩形、雜交種六角形
+    // 外形：原生種圓角矩形、雜交種六角形、品系膠囊形
     function shapePath(d) {
       const hw = d.w / 2, hh = NODE_H / 2;
       if (d.type === "hybrid") {
         const c = 12;
         return `M${-hw},0L${-hw + c},${-hh}L${hw - c},${-hh}L${hw},0L${hw - c},${hh}L${-hw + c},${hh}Z`;
       }
-      const r = 9;
+      const r = d.type === "cultivar" ? hh : 9;
       return `M${-hw + r},${-hh}H${hw - r}Q${hw},${-hh} ${hw},${-hh + r}V${hh - r}Q${hw},${hh} ${hw - r},${hh}` +
         `H${-hw + r}Q${-hw},${hh} ${-hw},${hh - r}V${-hh + r}Q${-hw},${-hh} ${-hw + r},${-hh}Z`;
     }
@@ -1019,7 +1291,7 @@
       sim.force("collide").radius((d) => d.w / 2 + 8);
 
       linkSel = root.select(".g-links").selectAll("path").data(links, (l) => l.id)
-        .join("path").attr("class", "g-link");
+        .join("path").attr("class", (l) => `g-link ${l.kind}`);
       nodeSel = root.select(".g-nodes").selectAll("g.g-node").data(nodes, (d) => d.id)
         .join((enter) => {
           const g = enter.append("g");
@@ -1033,18 +1305,18 @@
       nodeSel.select(".g-shape").attr("d", shapePath);
       nodeSel.select("text").text((d) => d.label);
 
-      if (fresh) {
-        // 先在背景算到大致穩定，第一次顯示時不會亂飛
+      if (fresh || frozen()) {
+        // 先在背景算到大致穩定，第一次顯示時不會亂飛；品種頁期間也直接算好，不播放移動過程
         warming = true;
-        sim.alpha(1);
-        for (let i = 0; i < 320; i++) sim.tick();
+        sim.alpha(fresh ? 1 : .6);
+        for (let i = 0; i < (fresh ? 320 : 200); i++) sim.tick();
         warming = false;
         draw();
-        fit();
+        if (fresh) fit();
       } else {
         sim.alpha(.6);
       }
-      if (!calm) sim.restart();
+      if (frozen()) sim.stop(); else sim.restart();
       mark();
     }
 
@@ -1052,17 +1324,18 @@
       return d3.drag()
         .clickDistance(4)
         .on("start", (e, d) => {
-          if (!e.active) sim.alphaTarget(.25).restart();
+          if (!e.active && !frozen()) sim.alphaTarget(.25).restart();
           d.fx = d.x; d.fy = d.y;
           dragging = true;
           hideTip();
         })
-        .on("drag", (e, d) => { d.fx = e.x; d.fy = e.y; if (calm) { d.x = e.x; d.y = e.y; draw(); } })
+        // 固定時只移動被拖曳的節點，其他節點不受牽動
+        .on("drag", (e, d) => { d.fx = e.x; d.fy = e.y; if (frozen()) { d.x = e.x; d.y = e.y; draw(); } })
         .on("end", (e, d) => {
           if (!e.active) sim.alphaTarget(calm ? 0 : .02);
           d.fx = null; d.fy = null; // 放開後由彈簧拉回
           dragging = false;
-          if (calm) sim.alpha(.3).restart();
+          if (calm && !selected) sim.alpha(.3).restart();
         });
     }
 
@@ -1122,12 +1395,16 @@
       nodeSel.classed("sel", (d) => d.id === selected);
       linkSel.classed("lit", (l) => !!set && set.has(l.source.id ?? l.source) && set.has(l.target.id ?? l.target));
       nodeSel.filter((d) => d.id === selected).raise();
+      focus(hovering);
     }
 
-    // 滑過時只留下該品種的祖先與後代
+    // 只留下該品種的祖先與後代：滑過時看滑過的品種；沒滑過時，若開啟血緣高亮就看目前的品種，
+    // 一直維持到回到圖鑑列表為止
     function focus(id) {
       hovering = id;
-      const set = id ? lineage(id) : null;
+      if (!nodeSel) return;
+      const key = id || (pinFocus && selected && byId.has(selected) ? selected : null);
+      const set = key ? lineage(key) : null;
       nodeSel.classed("faded", (d) => !!set && !set.has(d.id));
       linkSel.classed("faded", (l) => !!set && !(set.has(l.source.id) && set.has(l.target.id)));
     }
@@ -1200,12 +1477,14 @@
           const g = e.target.closest(".g-node");
           if (e.pointerType !== "mouse" || !g) return;
           const id = d3.select(g).datum().id;
+          if (!dragging) sim.stop(); // 滑過時暫停漂浮，節點才不會從游標下溜走
           focus(id);
           showTip(id, e);
         })
         .on("pointermove", (e) => { if (tipId) moveTip(e); })
         .on("pointerout", (e) => {
           if (e.pointerType !== "mouse" || e.relatedTarget?.closest?.(".g-node")) return;
+          if (!dragging) resume();
           focus(null);
           hideTip();
         });
@@ -1221,12 +1500,11 @@
         else if (!userMoved) fit();
       }).observe(box);
       document.addEventListener("visibilitychange", () => {
-        if (calm) return;
-        if (document.hidden || graphPane.hidden) sim.stop(); else sim.restart();
+        if (document.hidden || graphPane.hidden) sim.stop(); else resume();
       });
 
       graphPane.querySelector("#graph-legend").innerHTML = `
-        <span><i class="lg-sp"></i>原生種</span><span><i class="lg-hy"></i>雜交種</span>
+        <span><i class="lg-sp"></i>原生種</span><span><i class="lg-hy"></i>雜交種</span><span><i class="lg-cv"></i>品系</span>
         ${Object.values(REGIONS).map((r) => `<span><i class="dot" style="background:${esc(r.color)}"></i>${esc(r.label)}</span>`).join("")}`;
       build();
       if (selected) center(selected, 0);
@@ -1239,10 +1517,58 @@
       try { localStorage.setItem("graph-isolated", showIsolated ? "1" : "0"); } catch (e) { /* 無痕模式等 */ }
       if (!sim) return;
       build();
+      if (selected && byId.has(selected)) return fitLineage(selected, 500);
       userMoved = false;
       setTimeout(() => fit(500), 350); // 等新加入的節點稍微就位再全覽
     });
-    graphPane.querySelector("[data-graph-fit]").addEventListener("click", () => { userMoved = false; fit(500); });
+    focusBtn.setAttribute("aria-pressed", String(pinFocus));
+    focusBtn.addEventListener("click", () => {
+      pinFocus = !pinFocus;
+      focusBtn.setAttribute("aria-pressed", String(pinFocus));
+      try { localStorage.setItem("graph-focus", pinFocus ? "1" : "0"); } catch (e) { /* 無痕模式等 */ }
+      focus(hovering);
+    });
+    // 品種頁：縮放到高亮的血緣範圍；列表頁：全覽
+    const fitLineage = (id, dur) => fitTo([...lineage(id)].map((x) => byId.get(x)).filter(Boolean), { dur, pad: 60, maxK: 1.3 });
+    graphPane.querySelector("[data-graph-fit]").addEventListener("click", () => {
+      if (selected && byId.has(selected)) return fitLineage(selected, 500);
+      userMoved = false;
+      fit(500);
+    });
+
+    // 從圖鑑卡片預覽：效果等同滑過節點（暫停漂浮、只留血緣），並縮放到整個血緣，但不顯示懸浮框。
+    // 稍微延遲再套用，滑鼠掃過一排卡片時畫面才不會來回晃
+    let previewing = null, previewTimer = 0, beforePreview = null;
+    function applyPreview(id) {
+      if (!nodeSel || graphPane.hidden || !box.clientWidth) return;
+      if (id && !byId.has(id)) id = null;
+      if (id === previewing) return;
+      if (id && !previewing) beforePreview = d3.zoomTransform(svg.node()); // 列表頁離開時回到原本的視角
+      previewing = id;
+      nodeSel.classed("hover", (d) => d.id === id);
+      if (id) {
+        sim.stop();
+        nodeSel.filter((d) => d.id === id).raise();
+        focus(id);
+        // 縮放到能看到整個血緣（祖先＋後代）；沒有親緣的品種就只會置中它自己
+        fitLineage(id, 450);
+      } else {
+        resume();
+        focus(null);
+        if (selected && byId.has(selected)) center(selected, 450);
+        else if (beforePreview) go(beforePreview, 450);
+        beforePreview = null;
+      }
+    }
+    function clearPreview() {
+      clearTimeout(previewTimer);
+      if (!previewing) return;
+      previewing = null;
+      beforePreview = null;
+      hovering = null;
+      nodeSel?.classed("hover", false);
+      resume();
+    }
 
     return {
       // 面板打開時呼叫：第一次才載入 D3
@@ -1252,16 +1578,22 @@
           console.error(err);
           showMsg(`關係圖載入失敗：${esc(err.message)}<br>請確認網路連線後重新整理。`);
         });
-        else if (sim && !calm) sim.restart();
+        else resume();
       },
-      hide() { sim?.stop(); },
+      hide() { clearPreview(); sim?.stop(); },
+      preview(id) {
+        clearTimeout(previewTimer);
+        previewTimer = setTimeout(() => applyPreview(id), id ? 120 : 220);
+      },
       // 路由切換時同步目前的品種，並把它移到畫面中央
       select(id) {
         const prev = selected;
         selected = id;
+        clearPreview(); // 點卡片換頁時，卡片已被移除、不會再收到 pointerout
         if (!sim) return;
-        const isolated = (x) => x && BY_ID.has(x) && !BY_ID.get(x).parents.length && !childrenOf(x).length;
+        const isolated = (x) => x && BY_ID.has(x) && !upIds(BY_ID.get(x)).length && !childrenOf(x).length && !cultivarsOf(x).length;
         if (!showIsolated && (isolated(prev) || isolated(id))) build(); else mark();
+        if (id) sim.stop(); else resume();
         if (id && !graphPane.hidden) center(id);
       },
       // 「在關係圖中查看」：縮放到該品種的整個家族
@@ -1271,11 +1603,24 @@
         await loading;
         if (!sim) return;
         if (!byId.has(id)) build(); else mark();
+        sim.stop();
         userMoved = true;
-        fitTo([...lineage(id)].map((x) => byId.get(x)).filter(Boolean), { dur: 600, pad: 60, maxK: 1.3 });
+        fitLineage(id, 600);
       }
     };
   })();
+
+  // 圖鑑列表與品種頁的卡片：滑過時在關係圖中預覽該品種
+  app.addEventListener("pointerover", (e) => {
+    const card = e.target.closest(".card[data-id]");
+    if (!card || e.pointerType !== "mouse" || !panes.graph) return;
+    graph.preview(card.dataset.id);
+  });
+  app.addEventListener("pointerout", (e) => {
+    const card = e.target.closest(".card[data-id]");
+    if (!card || e.pointerType !== "mouse" || card.contains(e.relatedTarget)) return;
+    if (!e.relatedTarget?.closest?.(".card[data-id]")) graph.preview(null);
+  });
 
   /* ---------------- 鍵盤 ---------------- */
   let detailNav = null;

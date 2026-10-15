@@ -36,16 +36,27 @@
       <div class="pane-head">
         <h2><svg class="ic" aria-hidden="true"><use href="#i-graph"/></svg>親種關係圖</h2>
         <button type="button" class="pane-btn" data-graph-iso aria-pressed="true" title="顯示沒有雜交關係的原生種">孤立原生種</button>
-        <button type="button" class="pane-btn" data-graph-fit title="縮放至全覽">
-          <svg class="ic" aria-hidden="true"><use href="#i-fit"/></svg><span>全覽</span></button>
         <button type="button" class="pane-close" data-pane-close="graph" aria-label="關閉關係圖">
           <svg class="ic" aria-hidden="true"><use href="#i-close"/></svg></button>
       </div>
-      <div class="cy" id="cy"></div>
+      <div class="cy" id="cy">
+        <!-- 右下浮動按鈕：血緣高亮開關、回到全覽 -->
+        <div class="graph-fab">
+          <button type="button" class="fab-btn" data-graph-focus aria-pressed="true"
+            aria-label="血緣高亮" title="點選品種後，淡化其他無關的品種">
+            <svg class="ic" aria-hidden="true"><use href="#i-focus"/></svg></button>
+          <button type="button" class="fab-btn" data-graph-fit aria-label="全覽" title="縮放至全覽">
+            <svg class="ic" aria-hidden="true"><use href="#i-fit"/></svg></button>
+        </div>
+      </div>
       <div class="graph-msg" id="graph-msg" hidden></div>
       <div class="g-tip" id="graph-tip" aria-hidden="true"></div>
       <div class="graph-legend" id="graph-legend"></div>
     </aside>
+
+    <!-- 分隔線：雙開時可拖拉調整左右寬度 -->
+    <div class="pane-divider" id="pane-divider" role="separator" aria-orientation="vertical"
+      aria-label="調整關係圖與圖鑑寬度" aria-controls="graph-pane" tabindex="0" title="拖拉調整寬度，雙擊還原"></div>
 
     <!-- 右：圖鑑（列表／品種頁） -->
     <div class="content-pane" id="content-pane">
@@ -143,12 +154,23 @@
         <rect x="3" y="13.5" width="7.5" height="7.5" rx="1.5"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="1.5"/>
       </g>
     </symbol>
+    <symbol id="i-info" viewBox="0 0 24 24">
+      <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.01"/>
+      </g>
+    </symbol>
     <symbol id="i-close" viewBox="0 0 24 24">
       <path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" d="M6 6l12 12M18 6L6 18"/>
     </symbol>
     <symbol id="i-fit" viewBox="0 0 24 24">
       <path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
         d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/>
+    </symbol>
+    <symbol id="i-focus" viewBox="0 0 24 24">
+      <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <circle cx="12" cy="12" r="7.5"/><circle cx="12" cy="12" r="2.5" fill="currentColor"/>
+        <path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22"/>
+      </g>
     </symbol>
     <symbol id="i-google" viewBox="0 0 24 24">
       <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.76h3.56c2.08-1.92 3.28-4.74 3.28-8.09z"/>

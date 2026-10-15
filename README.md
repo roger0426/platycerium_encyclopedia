@@ -20,34 +20,42 @@ python3 -m http.server 8000
 | `data/plants.csv` | 品種資料，一列一個品種 |
 | `data/photos.csv` | 照片，一列一張，同一品種可有多列 |
 | `data/regions.csv` | 地區代號、名稱與代表色 |
+| `data/sources.csv` | 參考資料，一列一個網頁／文獻（網站目前還沒讀，供之後的引用機制使用） |
+| `data/citations.csv` | 引用：哪個品種的哪個說法出自哪個來源 |
 
 ### plants.csv 欄位
 
 | 欄位 | 說明 |
 | --- | --- |
 | `id` | 唯一代號（英文小寫、可用 `-`），也是網址 `#/p/<id>` |
-| `type` | `species`（原生種）或 `hybrid`（雜交種） |
-| `name` | 學名（雜交種寫交配式或栽培品種名，如 `Platycerium 'Elemaria'`） |
-| `zh` | 原生種：中文名；雜交種：俗名（沒有就留空） |
+| `type` | `species`（原生種）、`hybrid`（雜交種）或 `cultivar`（品系，見下方說明） |
+| `name` | 學名（雜交種寫交配式或栽培品種名，如 `Platycerium 'Elemaria'`；品系寫 `P. willinckii 'Nano'`） |
+| `zh` | 原生種：中文名；雜交種、品系：台灣市場俗名（沒有就留空） |
 | `en` | 英文名，顯示在副標 |
 | `aka` | 別名，多個用 `\|` 分隔 |
 | `region` | 對應 `regions.csv` 的 `key` |
-| `parents` | 雜交種的親本 `id`，用 `\|` 分隔，例如 `elephantotis\|stemaria` |
+| `parents` | 雜交種的親本 `id`，用 `\|` 分隔，例如 `elephantotis\|stemaria`（親本也可以是品系，例如 `veitchii-auburn-river`） |
+| `base` | 品系的選拔來源 `id`（一個），可以是原生種、雜交種或另一個品系 |
+| `breeder` | 選育者／來源（選填） |
+| `confidence` | 資料可信度：`documented` 有文獻、`vendor` 業者・玩家說法、`unknown` 來源待查（原生種留空） |
+| `refs` | 參考資料網址，多個用 `\|` 分隔，詳細頁會列在「資料來源」 |
 | `origin` / `growth` | 原產地 / 生長習性 |
 | `size` | 尺寸：`S` 小型、`M` 中型、`L` 大型、`XL` 巨型 |
-| `size_note` | 尺寸說明，例如「成株寬約 40–90 cm」 |
-| `difficulty` | 栽培難度 1–5（★） |
+| `size_note` | 尺寸依據，例如「Hennipman & Roos 1982 D = 55 cm」 |
+| `difficulty` | 栽培難度 1–5（★）；摘要只採計台灣與東南亞來源 |
 | `desc` / `note` | 簡介 / 補充說明（選填） |
+| `survey_version` | 特徵依哪一版[調查指引](project_plan/feature_survey_guideline.md)調查，例如 `v1.2`；空白表示尚未依指引調查的草稿 |
 
 **盾葉（臉）**
 
 | 欄位 | 說明 |
 | --- | --- |
 | `shield` | 概述 |
-| `shield_form` | 冠形（文字） |
+| `shield_form` | 冠形：`appressed`、`erect-wedge`、`erect-lobed`、`erect-multilobed`、`spreading-wedge` |
 | `shield_height` | 冠高 1–5（貼伏 → 高聳） |
-| `shield_color` | 顏色（文字） |
-| `shield_vein` | 脈紋 1–5（平滑 → 隆起） |
+| `shield_browning` | 成熟盾葉的顏色變化：`withering` 枯褐、`green` 保持綠色、`darkening` 轉深綠 |
+| `shield_fringe` | 基部領片：`none` 無、`above-stipe` 只在葉柄上方、`encircling` 環繞葉柄 |
+| `shield_vein` | 葉脈是否隆起：`yes` / `no` |
 | `shield_hair` | 絨毛 1–5（光滑 → 密毛） |
 
 **孢子葉（手）**
@@ -57,11 +65,10 @@ python3 -m http.server 8000
 | `fertile` | 概述 |
 | `fertile_posture` | 姿態：`up` 直立、`spread` 斜展、`pendant` 下垂，可多選，用 `\|` 分隔 |
 | `fertile_length` | 長度（文字），例如「30–60 cm」 |
-| `fertile_split` | 分岔 0–5（0 = 不分岔，5 = 多回分岔） |
+| `fertile_split` | 分岔次數範圍，例如 `2–3`、`≤5`；不分裂記 `0` |
 | `fertile_width` | 葉寬 1–5（細 → 寬） |
-| `fertile_color` | 顏色（文字） |
 | `fertile_hair` | 絨毛 1–5（光滑 → 密毛） |
-| `spore` | 孢子囊位置（文字） |
+| `spore` | 孢子囊位置：`tips` 末端裂片、`sinus` 分岔凹處、`medial` 裂片中段、`shell-lobe` 獨立殼狀裂片 |
 
 **栽培**
 
@@ -72,10 +79,12 @@ python3 -m http.server 8000
 | `light` / `light_note` | 光照需求 1–5（☀）/ 說明 |
 | `water` / `water_note` | 澆水量 1–5（💧）/ 說明 |
 | `humidity` | 空氣濕度需求 1–5 |
-| `min_temp` / `max_temp` | 可耐受的最低／最高溫度（°C，數字，估計值） |
+| `min_temp` / `max_temp` | 建議栽培的最低／最高溫度（°C）；「可耐 X 度」這類耐受紀錄只寫進 `temp_note` |
 | `temp_note` | 溫度說明 |
 
 分數欄位留空會顯示「未知」。分數是品種之間的相對比較，不是絕對量測值。
+
+依指引調查過的品種（`survey_version` 有值），每個特徵的摘要值、可信度（高／中／低）與各來源的標記記在 `data/features.csv`，由 `project_plan/survey/survey_species.py` 產生，詳細頁的「特徵來源與可信度」會顯示這些內容。原始引用在 `data/citations.csv`，來源在 `data/sources.csv`。
 
 ### 首頁的特徵篩選與排序
 
@@ -91,6 +100,15 @@ python3 -m http.server 8000
 
 「雜交後代」區塊會根據 `parents` 自動產生，不需另外填寫。
 
+### 品系（cultivar）
+
+品系是「從某個原生種或雜交種選出來的個體或產地型」，例如爪哇的 Nano、DW 交種選出的白霍克、奧銀。「侏儒」是性狀不是分類，用 `size = S` 表示，再用特徵篩選的「小型」找出來。
+
+- `base` 指向選拔來源；來源頁會自動出現「品系」區塊，關係圖以虛線連接、節點為膠囊形。
+- 品系沒填的**栽培欄位**（地區、難度、光照、澆水、濕度、溫度、側芽、休眠）會沿用 `base` 的資料，詳細頁會標示「暫時沿用」。形態欄位（盾葉、孢子葉）不沿用。
+- **孢子苗不另外建檔。** 只有組培（TC）或分株的苗跟原株基因相同；孢子苗是後代，性狀可能跑掉，請在 `photos.csv` 的 `caption` 註明（例如「Nano 孢子苗，約 2 年」）。
+- 同一個交配組合若有多個命名選拔，建一筆雜交種，再把各選拔建成 `base` 指向它的品系（例如 `dw` 底下的白霍克、OMG、滿月）。
+
 ### 照片（photos.csv）
 
 | 欄位 | 說明 |
@@ -105,6 +123,41 @@ python3 -m http.server 8000
 第一張會當作卡片封面；沒有照片的品種會自動顯示佔位圖。建議照片長邊縮到 1600px 以內。
 
 目前的照片都下載自 Wikimedia Commons（皆為 CC 授權或公眾領域）。使用 CC BY / BY-SA 照片時必須保留作者、授權與出處，請勿刪除這三個欄位。
+
+### 參考資料（sources.csv / citations.csv）
+
+網站目前只讀 `plants.csv` 的 `refs` 欄。這兩個檔案記錄更細的出處，供之後做引用（cite）用。新增品種時，請把每個說法（親本、選育者、別名…）各記一列 citation，`refs` 則列出該品種用到的來源網址。特徵欄位的調查方式與判定規則見 [project_plan/feature_survey_guideline.md](project_plan/feature_survey_guideline.md)。
+
+**sources.csv**：一列一個來源
+
+| 欄位 | 說明 |
+| --- | --- |
+| `id` | 來源代號，例如 `haruhana-ginka`、`sf-hybrid-db` |
+| `title` / `publisher` | 頁面標題 / 網站或出版者 |
+| `url` | 原始網址 |
+| `archive_url` | 存檔網址（原網址失效時使用，例如 Wayback Machine） |
+| `type` | `vendor` 商品頁、`article` 文章・新聞、`database` 彙整資料庫、`reference` 學術文獻 |
+| `lang` | 語言，例如 `zh-TW`、`en`、`ja` |
+| `published` / `accessed` | 發布日期（不知道就留空）/ 查閱日期 |
+| `reliability` | `primary` 育種者・命名者自述、`secondary` 業者・媒體、`aggregator` 二手彙整 |
+| `tier` | 來源等級 `T1`–`T4`（定義見調查指引） |
+| `region` | 資料或經驗所在地區，例如 `台灣`、`美國`、`新加坡`；學術文獻填 `學術` |
+| `short` | 顯示用簡稱，例如 `NParks`、`微體溫室` |
+| `note` | 備註，例如「頁面未寫親本」 |
+
+**citations.csv**：一列一個說法
+
+| 欄位 | 說明 |
+| --- | --- |
+| `plant_id` | 對應 `plants.csv` 的 `id` |
+| `source_id` | 對應 `sources.csv` 的 `id` |
+| `field` | 這個來源佐證什麼：特徵欄位直接用 `plants.csv` 的欄位名；其他用 `exists` 名稱存在、`name` 名稱對應、`parents` 親本、`base` 選拔來源、`breeder` 選育者、`origin` 由來、`aka` 別名、`note` 其他 |
+| `value` | 換算後的值，例如 `5`、`pendant`、`3–5`（特徵欄位必填） |
+| `label` | 來源的原始標記（簡短中文），網站顯示「地區 來源：標記」時使用 |
+| `use` | `summary` 計入摘要值、`reference` 只供參考（如原生地棲地）、`excluded` 依規則排除 |
+| `claim` | 用中文摘述來源的說法與換算過程 |
+| `quote` | 原文摘錄（選填，簡短即可） |
+| `page` | 書籍、論文的頁碼或圖號，例如 `p. 94` |
 
 ### 用 Excel 編輯的注意事項
 
