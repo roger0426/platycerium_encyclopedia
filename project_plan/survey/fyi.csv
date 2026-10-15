@@ -1,0 +1,17 @@
+plant_id,found_during,source_url,field,note,date
+mentelosii,elemaria,https://archive.org/details/mobot31753002743844,parents,Hoshizaki & Price 1990（Amer. Fern J. 80: 61、64）：P. × mentelosii 由 Hoshizaki 1975 發表，親本為 P. stemaria × P. superbum，是不同群之間的雜交,2026-10-15
+elephantotis,elemaria,https://archive.org/details/mobot31753002743844,growth,Hoshizaki & Price 1990 p. 64：在加州相同栽培條件下，成熟植株通常每年長出一對孢子葉；側絲直徑平均 0.71 mm；大型老化葉的皮層有不完整的深色細胞層,2026-10-15
+stemaria,elemaria,https://archive.org/details/mobot31753002743844,growth,Hoshizaki & Price 1990 p. 64：在加州相同栽培條件下，成熟植株每年長出 3–5 對孢子葉；側絲直徑平均 0.55 mm,2026-10-15
+grande,elemaria,https://archive.org/details/mobot31753002743844,note,Hoshizaki & Price 1990 pp. 65 起有〈Notes on Platycerium grande〉（學名沿革、菲律賓的稀有狀態），可作 T1 補查,2026-10-15
+coronarium,elemaria,https://archive.org/details/mobot31753002743844,note,Hoshizaki & Price 1990（約 pp. 59–62）討論 P. coronarium 的分類位置與孢子葉片（Fig. 2），並反駁 Hennipman & Roos 1982 的分類,2026-10-15
+horne-surprise,elemaria,https://palmtalk.org/topic/91853-platyceriums-another-black-hole/,min_temp,PalmTalk 論壇（2025-11-13，南加州 Glendale 使用者）：Horn's Surprise 在南加州可以戶外栽培；只是耐受紀錄,2026-10-15
+burirom,elemaria,https://halling.com/Platyceriums/hybrid_index.htm,name,Halling 交種表第 26 列：Ellisii × Elephantotis 標為「No name yet」（已雜交但尚無公認名稱），與本站名稱 Burirom 不同,2026-10-15
+neptune,elemaria,https://halling.com/Platyceriums/hybrid_index.htm,aka,Halling 交種表第 10 列：'Luaentii' = Elephantotis × Stamaria；矩陣中 Elephantotis × Stemaria 欄寫 'Neptune',2026-10-15
+superbum,batch-2026-10-15,https://micro-oasis.com/posts/giant-staghorn-fern/,max_temp,微體溫室〈巨大／巨獸鹿角蕨〉：巨大鹿角蕨「與非猴鹿角蕨類似不建議夏季溫度超過 27 度，部分馴化過的個體可耐受到 33 度」，可作建議最高溫（27）與耐受紀錄（33）,2026-10-15
+grande,batch-2026-10-15,https://micro-oasis.com/posts/giant-staghorn-fern/,max_temp,微體溫室同文：巨獸「原生於菲律賓的原始雨林中，因此氣溫上與台灣相仿在 20~35 度」（棲地描述，只能當 reference）；另寫長大後耐旱力堪比檸檬或二叉，可等介質全乾再澆,2026-10-15
+willinckii,batch-2026-10-15,https://halling.com/Platyceriums/Default.htm,water,"Halling 首頁：P. willinckii「Grows well in medium light, moist moss, and is not prone to rot」，且「does not tolerate cold as well as P. bifurcatium」",2026-10-15
+elephantotis,batch-2026-10-15,https://micro-oasis.com/posts/elephant-ear-staghorn-fern/,min_temp,微體溫室〈象耳鹿角蕨 8 品種〉：照顧原則「保持 15 度以上的環境溫度」、「需水量大…不用等到介質全乾」,2026-10-15
+alcicorne,batch-2026-10-15,https://micro-oasis.com/posts/alcicorne-staghorn-fern/,min_temp,微體溫室〈圓盾鹿角蕨 10 大品種〉：照顧原則「保持 15 度以上的環境溫度」、「可以等到介質全乾再澆水」,2026-10-15
+bifurcatum,batch-2026-10-15,https://plants.ces.ncsu.edu/plants/platycerium-bifurcatum/common-name/staghorn-fern/,light,NC State Extension Plant Toolbox（T2）：Light: Dappled Sunlight / Partial Shade；可在 USDA Zone 10 戶外栽培；濕度太高可能出現黑斑,2026-10-15
+ridleyi-x-coronarium,batch-2026-10-15,https://web.archive.org/web/20160817085803/http://siamexotica.com/ridleyi-Hybrid.html,note,Siam Exotica（泰文）介紹另一株 coronarium × ridleyi，說與「Mt. Kitshakoot」是不同個體；該株孢子不育、播不出苗，也不長側芽,2026-10-15
+horne-surprise-darwin,batch-2026-10-15,https://micro-oasis.com/posts/alcicorne-staghorn-fern/,name,微體溫室表格把「非非達爾文鹿角蕨（非非）」寫成同一列，可能把 'Darwin' 當成非非的通稱；目前資料只記在 horne-surprise-darwin,2026-10-15
