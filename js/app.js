@@ -36,6 +36,7 @@
   let BY_ID = new Map();
   let REGIONS = {};
   let EDIT = false;        // 以 tools/serve.py 啟動時可在網頁上新增／刪除照片
+  let EDIT_DATA = false;   // 同上，可在網頁上編輯 data/*.csv
   const state = { q: "", type: "all", region: "all", scrollY: 0 };
 
   /* ---------------- 工具 ---------------- */
@@ -458,6 +459,7 @@
       </div>
       <div class="result-bar">
         <p class="result-count" id="count"></p>
+        ${EDIT_DATA ? `<button class="back-btn data-edit" data-plant-new>＋ 新增品種</button>` : ""}
         <label class="card-size" title="調整卡片大小，雙擊還原">
           ${icon("book")}
           <input id="card-size" type="range" min="${CARD_MIN}" max="${CARD_MAX}" step="10" aria-label="卡片大小">
@@ -736,6 +738,8 @@
         <a class="back-btn" href="#/">‹ 列表</a>
         <span>/</span><span>${TYPE_LABEL[it.type]}</span>
         <button class="back-btn graph-link" data-graph-reveal="${esc(it.id)}">${icon("graph")}在關係圖中查看</button>
+        ${EDIT_DATA ? `<button class="back-btn data-edit" data-data-edit="${esc(it.id)}">${icon("edit")}編輯資料</button>
+          <button class="back-btn data-edit" data-table-open="citations" data-table-q="${esc(it.id)}" title="這個品種在 citations.csv 的引用">${icon("table")}引用</button>` : ""}
       </nav>
 
       <article class="detail">
@@ -1045,6 +1049,16 @@
     };
   })();
 
+  /* ---------------- 本機伺服器 API（tools/serve.py） ---------------- */
+  // 有 body 用 POST（JSON），沒有就 GET
+  async function api(path, body) {
+    const res = await fetch(path, body === undefined ? { cache: "no-store" }
+      : { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
+    const j = await res.json().catch(() => ({}));
+    if (!res.ok) throw new Error(j.error || `HTTP ${res.status}`);
+    return j;
+  }
+
   /* ---------------- 照片管理（tools/serve.py） ---------------- */
   // 照片在瀏覽器裡先縮到長邊 1600px、轉 JPEG，再交給本機伺服器存到 images/<id>/ 並寫入 photos.csv
   const photoEditor = (() => {
@@ -1053,13 +1067,6 @@
     const list = $("#pd-list"), pendingEl = $("#pd-pending"), msg = $("#pd-msg"), uploadBtn = $("#pd-upload");
     const field = (k) => $(`#pd-${k}`);
     let it = null, pending = [], changed = false, busy = false;
-
-    async function api(path, body) {
-      const res = await fetch(path, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
-      const j = await res.json().catch(() => ({}));
-      if (!res.ok) throw new Error(j.error || `HTTP ${res.status}`);
-      return j;
-    }
     const say = (text, err = false) => { msg.textContent = text; msg.classList.toggle("err", err); };
     const blobToDataURL = (b) => new Promise((ok, fail) => {
       const r = new FileReader(); r.onload = () => ok(r.result); r.onerror = fail; r.readAsDataURL(b);
@@ -1204,6 +1211,353 @@
     if (!b) return;
     e.preventDefault();
     photoEditor.open(b.dataset.photoEdit);
+  });
+
+  /* ---------------- 資料編輯（tools/serve.py） ---------------- */
+  // 直接改 data/*.csv 的一列；存檔後重新讀取資料、重畫畫面。features.csv 由調查腳本產生，不在這裡改
+  // 表單欄位：[欄位, 標籤, 設定]；kind：area 多行、score 1–5、number、multi 複選（| 分隔）、color；opts 為下拉選項
+  const USES = { summary: "計入摘要", reference: "只供參考", excluded: "排除" };
+  const FORMS = {
+    plants: [
+      ["基本資料", [
+        ["id", "代號", { hint: "英文小寫、數字與 -，也是網址；建立後不能改" }],
+        ["type", "類型", { opts: TYPE_LABEL }],
+        ["name", "學名", { hint: "雜交種寫交配式或栽培品種名，品系寫 P. willinckii 'Nano'" }],
+        ["zh", "中文名／俗名"], ["en", "英文名"],
+        ["aka", "別名", { hint: "多個用 | 分隔" }],
+        ["region", "地區", { opts: () => Object.fromEntries(Object.entries(REGIONS).map(([k, r]) => [k, r.label])) }],
+        ["origin", "原產地"],
+        ["parents", "親本", { hint: "雜交種的親本 id，用 | 分隔", list: "dd-plant-ids" }],
+        ["base", "選拔來源", { hint: "品系的來源 id（一個）", list: "dd-plant-ids" }],
+        ["breeder", "選育者"],
+        ["confidence", "資料可信度", { opts: CONFIDENCE }],
+        ["refs", "參考網址", { kind: "area", hint: "多個用 | 分隔" }],
+        ["desc", "簡介", { kind: "area" }],
+        ["note", "補充說明", { kind: "area" }],
+        ["survey_version", "調查指引版本", { hint: "空白 = 尚未依指引調查" }]]],
+      ["尺寸與難度", [
+        ["size", "尺寸", { opts: Object.fromEntries(Object.entries(SIZES).map(([k, v]) => [k, `${k} ${v}`])) }],
+        ["size_note", "尺寸依據"],
+        ["difficulty", "栽培難度", { kind: "score", hint: "1 入門 → 5 挑戰" }]]],
+      ["盾葉（臉）", [
+        ["shield", "概述", { kind: "area" }],
+        ["shield_form", "冠形", { opts: SHIELD_FORMS }],
+        ["shield_height", "冠高", { kind: "score", hint: "1 貼伏 → 5 高聳" }],
+        ["shield_browning", "老化", { opts: SHIELD_BROWNING }],
+        ["shield_fringe", "領片", { opts: SHIELD_FRINGE }],
+        ["shield_vein", "脈紋", { opts: { yes: "隆起", no: "埋入" } }],
+        ["shield_hair", "絨毛", { kind: "score", hint: "1 光滑 → 5 密毛" }]]],
+      ["孢子葉（手）", [
+        ["fertile", "概述", { kind: "area" }],
+        ["fertile_posture", "姿態", { kind: "multi", opts: POSTURES }],
+        ["fertile_length", "長度", { hint: "例如 30–60 cm" }],
+        ["fertile_split", "分岔次數", { hint: "例如 2–3、≤5；不分裂記 0" }],
+        ["fertile_width", "葉寬", { kind: "score", hint: "1 細 → 5 寬" }],
+        ["fertile_hair", "絨毛", { kind: "score", hint: "1 光滑 → 5 密毛" }],
+        ["spore", "孢子囊位置", { opts: SPORES }]]],
+      ["栽培", [
+        ["growth", "生長習性"],
+        ["pups", "側芽", { opts: { yes: "會長（群生型）", no: "不長（單株型）" } }],
+        ["dormancy", "休眠", { opts: { yes: "有", no: "無" } }],
+        ["light", "光照需求", { kind: "score" }], ["light_note", "光照說明"],
+        ["water", "澆水量", { kind: "score" }], ["water_note", "澆水說明"],
+        ["humidity", "空氣濕度", { kind: "score" }],
+        ["min_temp", "建議最低溫 °C", { kind: "number" }], ["max_temp", "建議最高溫 °C", { kind: "number" }],
+        ["temp_note", "溫度說明", { kind: "area", hint: "「可耐 X 度」這類耐受紀錄寫在這裡" }]]]
+    ],
+    regions: [["", [
+      ["key", "代號", { hint: "英文小寫、數字與 -；建立後不能改" }], ["label", "名稱"], ["color", "代表色", { kind: "color" }]]]],
+    sources: [["", [
+      ["id", "代號", { hint: "英文小寫、數字與 -；建立後不能改" }], ["title", "標題"], ["publisher", "網站／出版者"],
+      ["url", "網址"], ["archive_url", "存檔網址"],
+      ["type", "類型", { opts: { vendor: "商品頁", article: "文章・新聞", database: "彙整資料庫", reference: "學術文獻" } }],
+      ["lang", "語言", { hint: "例如 zh-TW、en、ja" }], ["published", "發布日期"], ["accessed", "查閱日期"],
+      ["reliability", "可靠度", { opts: { primary: "育種者・命名者自述", secondary: "業者・媒體", aggregator: "二手彙整" } }],
+      ["tier", "來源等級", { opts: { T1: "T1 學術文獻", T2: "T2 機構與專家", T3: "T3 業者與玩家", T4: "T4" } }],
+      ["region", "地區", { hint: "例如 台灣、美國；學術文獻填 學術" }], ["short", "顯示用簡稱"], ["note", "備註", { kind: "area" }]]]],
+    citations: [["", [
+      ["plant_id", "品種", { list: "dd-plant-ids" }], ["source_id", "來源", { list: "dd-source-ids" }],
+      ["field", "欄位", { hint: "特徵欄位用 plants.csv 欄位名；其他用 exists、name、parents、base、breeder、origin、aka、note" }],
+      ["value", "值", { hint: "換算後的值，特徵欄位必填" }], ["label", "原始標記"],
+      ["use", "用途", { opts: USES }], ["claim", "說法", { kind: "area" }],
+      ["quote", "原文摘錄", { kind: "area" }], ["page", "頁碼"]]]],
+    photos: [["", [
+      ["id", "品種", { list: "dd-plant-ids" }], ["src", "照片路徑", { readonly: true }], ["caption", "說明"],
+      ["credit", "作者"], ["license", "授權", { list: "pd-licenses" }], ["source", "出處網址"],
+      ["variant", "變異株", { hint: "斑葉等非典型個體才填" }]]]]
+  };
+  // 資料表清單每列顯示的摘要
+  const TABLES = {
+    plants: { label: "品種", file: "plants.csv", cols: (r) => [r.id, r.zh, r.name] },
+    regions: { label: "地區", file: "regions.csv", cols: (r) => [r.key, r.label, r.color] },
+    sources: { label: "來源", file: "sources.csv", cols: (r) => [r.id, r.short || r.publisher, r.title] },
+    citations: { label: "引用", file: "citations.csv",
+      cols: (r) => [`${r.plant_id} ← ${r.source_id}`, `${r.field}${r.value ? ` = ${r.value}` : ""}`, r.claim] },
+    photos: { label: "照片", file: "photos.csv", cols: (r) => [r.id, r.src.split("/").pop(), r.caption || r.credit] }
+  };
+  const LIST_MAX = 200;
+
+  // 資料改動後重新讀取 CSV，重畫圖鑑與關係圖；有指定網址就跳過去
+  async function reloadData(hash) {
+    const y = window.scrollY;
+    await loadData();
+    graph.refresh();
+    if (hash && location.hash !== hash) { location.hash = hash; return; } // hashchange 會呼叫 route()
+    route();
+    window.scrollTo(0, y);
+  }
+
+  const dataEditor = (() => {
+    const dlg = document.getElementById("data-dlg");
+    const body = dlg.querySelector("#dd-body"), title = dlg.querySelector("#dd-title");
+    const msg = dlg.querySelector("#dd-msg"), backBtn = dlg.querySelector('[data-dd="back"]');
+    // view：目前畫面；cache：已讀取的資料表；goto：關閉後要前往的網址
+    let view = null, cache = {}, changed = false, dirty = false, goto = null;
+
+    // 表單畫面的訊息顯示在固定於底部的按鈕列，捲到哪都看得到
+    const say = (text, err = false) => {
+      const el = body.querySelector(".dd-actions .pd-msg") || msg;
+      msg.textContent = ""; el.textContent = text; el.classList.toggle("err", err);
+    };
+    const load = async (name) => (cache[name] = await api(`api/data/${name}`));
+
+    function datalists() {
+      const opt = (v, l) => `<option value="${esc(v)}"${l ? ` label="${esc(l)}"` : ""}>`;
+      return `<datalist id="dd-plant-ids">${ITEMS.map((it) => opt(it.id, titleOf(it))).join("")}</datalist>
+        <datalist id="dd-source-ids">${(cache.sources?.rows || []).map((r) => opt(r.id, r.short || r.title)).join("")}</datalist>`;
+    }
+
+    /* ---- 資料表：分頁、搜尋、清單 ---- */
+    async function showTable(name, q = "") {
+      if (dirty && !confirm("表單還沒儲存，確定離開？")) return;
+      dirty = false;
+      say("讀取中…");
+      const t = cache[name] || await load(name);
+      say("");
+      view = { kind: "table", name, q };
+      title.textContent = "資料表";
+      backBtn.hidden = true;
+      body.innerHTML = `
+        <div class="chips dd-tabs" role="group" aria-label="資料表">${Object.entries(TABLES).map(([k, x]) =>
+          `<button type="button" class="chip" aria-pressed="${k === name}" data-dd-table="${k}">${x.label}</button>`).join("")}</div>
+        <div class="dd-bar">
+          <input type="search" id="dd-q" placeholder="搜尋 ${esc(TABLES[name].file)}…" value="${esc(q)}" autocomplete="off">
+          ${t.add ? `<button type="button" class="pd-upload" data-dd-new>＋ 新增</button>` : ""}
+        </div>
+        <p class="hint" id="dd-count"></p>
+        <div class="dd-rows" id="dd-rows"></div>
+        ${name === "photos" ? `<p class="hint">新增、刪除照片請用品種頁的「管理照片」，照片檔才會一併處理。</p>` : ""}`;
+      const input = body.querySelector("#dd-q");
+      input.addEventListener("input", () => { view.q = input.value; renderRows(); });
+      renderRows();
+      input.focus();
+    }
+
+    function renderRows() {
+      const t = cache[view.name], words = view.q.toLowerCase().split(/\s+/).filter(Boolean);
+      const hits = t.rows.map((r, i) => [r, i]).filter(([r]) => {
+        const text = Object.values(r).join(" ").toLowerCase();
+        return words.every((w) => text.includes(w));
+      });
+      body.querySelector("#dd-count").textContent = hits.length > LIST_MAX
+        ? `共 ${hits.length} 筆，只顯示前 ${LIST_MAX} 筆，請用搜尋縮小範圍` : `共 ${hits.length} 筆`;
+      body.querySelector("#dd-rows").innerHTML = hits.slice(0, LIST_MAX).map(([r, i]) => {
+        const [a, b, c] = TABLES[view.name].cols(r).map((x) => esc(x || ""));
+        return `<button type="button" class="dd-row" data-dd-row="${i}"><b>${a}</b><span>${b}</span><small>${c}</small></button>`;
+      }).join("") || `<p class="muted">沒有符合的資料</p>`;
+    }
+
+    /* ---- 表單：一列資料 ---- */
+    // orig 為 null 時是新增；init 是新增時預填的值
+    async function showForm(name, orig, { init = {}, back = view?.kind === "table" ? { ...view } : null } = {}) {
+      const t = cache[name] || await load(name);
+      if (name === "citations" && !cache.sources) await load("sources");
+      dirty = false;
+      view = { kind: "form", name, orig, back };
+      const row = orig || init;
+      const label = TABLES[name].label;
+      title.textContent = orig ? `編輯${label}・${TABLES[name].cols(orig)[0]}` : `新增${label}`;
+      backBtn.hidden = !back;
+
+      // 依 FORMS 分組；CSV 裡有、表單沒列到的欄位放在「其他」，表單有、CSV 沒有的欄位略過
+      const listed = new Set();
+      const groups = FORMS[name].map(([g, fields]) => [g, fields.filter(([k]) => t.header.includes(k) && listed.add(k))]);
+      const rest = t.header.filter((k) => !listed.has(k));
+      if (rest.length) groups.push(["其他", rest.map((k) => [k, k])]);
+
+      const surveyed = name === "plants" && orig?.survey_version;
+      body.innerHTML = `
+        <form class="dd-form" id="dd-form" novalidate>
+          ${surveyed ? `<p class="note">此品種已依調查指引 ${esc(orig.survey_version)} 整理，特徵欄位由 project_plan/survey/survey_species.py 產生；重新執行腳本會覆蓋這裡對特徵欄位的修改，記得同步改腳本或 citations。</p>` : ""}
+          ${groups.map(([g, fields]) => `
+            <fieldset>${g ? `<legend>${esc(g)}</legend>` : ""}
+              <div class="pd-fields">${fields.map(([k, lbl, o = {}]) => fieldHTML(name, k, lbl, o, row[k] ?? "")).join("")}</div>
+            </fieldset>`).join("")}
+          ${datalists()}
+          <div class="pd-actions dd-actions">
+            <p class="pd-msg" role="status"></p>
+            ${orig && t.add ? `<button type="button" class="link-btn danger" data-dd-del>刪除</button>
+              <button type="button" class="link-btn" data-dd-copy>複製成新的一列</button>` : ""}
+            <button type="submit" class="pd-upload">${orig ? "儲存" : "新增"}</button>
+          </div>
+        </form>`;
+      const form = body.querySelector("#dd-form");
+      form.addEventListener("input", () => { dirty = true; });
+      form.addEventListener("submit", (e) => { e.preventDefault(); save(); });
+      // 色票與文字框同步
+      form.querySelectorAll("[data-color-for]").forEach((c) => c.addEventListener("input", () => {
+        form.elements[c.dataset.colorFor].value = c.value;
+      }));
+      say("");
+      form.querySelector("input:not([readonly]), select, textarea")?.focus();
+    }
+
+    function fieldHTML(table, k, lbl, o, v) {
+      const key = cache[table].key;
+      const locked = o.readonly || (key === k && view.orig);
+      const hint = o.hint ? `<small>${esc(o.hint)}</small>` : "";
+      const wide = o.kind === "area" ? " wide" : "";
+      let input;
+      if (o.kind === "multi") {
+        const on = splitList(v);
+        const opts = { ...o.opts, ...Object.fromEntries(on.filter((x) => !(x in o.opts)).map((x) => [x, x])) };
+        input = `<span class="dd-multi" data-multi="${k}">${Object.entries(opts).map(([x, l]) =>
+          `<label><input type="checkbox" value="${esc(x)}" ${on.includes(x) ? "checked" : ""}>${esc(l)}</label>`).join("")}</span>`;
+        return `<div class="dd-field"><span>${esc(lbl)}</span>${input}${hint}</div>`;
+      }
+      if (o.opts || o.kind === "score") {
+        const opts = o.kind === "score" ? { 1: "1", 2: "2", 3: "3", 4: "4", 5: "5" } : typeof o.opts === "function" ? o.opts() : o.opts;
+        // CSV 裡的舊值不在選項中時也保留，避免一打開就被清掉
+        const all = v && !(v in opts) ? { ...opts, [v]: `${v}（不在選項中）` } : opts;
+        input = `<select name="${k}" ${locked ? "disabled" : ""}><option value="">${o.kind === "score" ? "未知" : "（空白）"}</option>${
+          Object.entries(all).map(([x, l]) => `<option value="${esc(x)}" ${x === v ? "selected" : ""}>${esc(l)}</option>`).join("")}</select>`;
+      } else if (o.kind === "area") {
+        input = `<textarea name="${k}" rows="3">${esc(v)}</textarea>`;
+      } else if (o.kind === "color") {
+        input = `<span class="dd-color"><input type="color" data-color-for="${k}" value="${/^#[0-9a-f]{6}$/i.test(v) ? esc(v) : "#6b7d72"}">
+          <input name="${k}" value="${esc(v)}" placeholder="#3f8f6b"></span>`;
+      } else {
+        input = `<input name="${k}" value="${esc(v)}" ${o.kind === "number" ? `inputmode="decimal"` : ""}
+          ${o.list ? `list="${o.list}"` : ""} ${locked ? "readonly" : ""} autocomplete="off">`;
+      }
+      return `<label class="dd-field${wide}"><span>${esc(lbl)}</span>${input}${hint}</label>`;
+    }
+
+    function formValues() {
+      const form = body.querySelector("#dd-form");
+      const row = {};
+      for (const k of cache[view.name].header) {
+        const multi = form.querySelector(`[data-multi="${k}"]`);
+        if (multi) row[k] = [...multi.querySelectorAll("input:checked")].map((c) => c.value).join("|");
+        else if (form.elements[k]) row[k] = form.elements[k].value.trim();
+        else row[k] = view.orig?.[k] ?? "";
+      }
+      if (view.orig && cache[view.name].key) row[cache[view.name].key] = view.orig[cache[view.name].key];
+      return row;
+    }
+
+    async function save() {
+      const { name, orig } = view;
+      const row = formValues();
+      say("儲存中…");
+      try {
+        await api("api/data/save", { table: name, orig, row });
+        changed = true; dirty = false;
+        delete cache[name];
+        if (name === "plants" && !orig) goto = `#/p/${encodeURIComponent(row.id)}`;
+        say(`已寫入 data/${TABLES[name].file}`);
+        // 從資料表進來的回到清單；從品種頁直接編輯的關閉對話框，馬上看到結果
+        if (view.back) { await showTable(view.back.name, view.back.q); say(`已寫入 data/${TABLES[name].file}`); }
+        else dlg.close();
+      } catch (e) { say(`儲存失敗：${e.message}`, true); }
+    }
+
+    async function remove() {
+      const { name, orig } = view;
+      const what = TABLES[name].cols(orig)[0];
+      if (!confirm(`確定從 ${TABLES[name].file} 刪除「${what}」？`)) return;
+      try {
+        await api("api/data/delete", { table: name, orig });
+        changed = true; dirty = false;
+        delete cache[name];
+        if (name === "plants" && location.hash === `#/p/${encodeURIComponent(orig.id)}`) goto = "#/";
+        if (view.back) { await showTable(view.back.name, view.back.q); say("已刪除"); }
+        else dlg.close();
+      } catch (e) { say(e.message, true); }
+    }
+
+    dlg.addEventListener("click", async (e) => {
+      const r = dlg.getBoundingClientRect();
+      if (e.target === dlg && (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom)) return close();
+      const b = e.target.closest("button");
+      if (!b) return;
+      try {
+        if (b.dataset.dd === "close") close();
+        else if (b.dataset.dd === "back" && view.back) showTable(view.back.name, view.back.q);
+        else if (b.dataset.ddTable) showTable(b.dataset.ddTable);
+        else if (b.dataset.ddRow) showForm(view.name, cache[view.name].rows[Number(b.dataset.ddRow)]);
+        else if (b.hasAttribute("data-dd-new")) showForm(view.name, null, { init: newRowDefaults(view.name, view.q) });
+        else if (b.hasAttribute("data-dd-del")) remove();
+        else if (b.hasAttribute("data-dd-copy")) {
+          const init = formValues();
+          if (cache[view.name].key) init[cache[view.name].key] = "";
+          showForm(view.name, null, { init, back: view.back });
+          dirty = true;
+          say("已複製，請填入新的代號後按「新增」");
+        }
+      } catch (err) { say(err.message, true); }
+    });
+
+    // 從資料表新增時預填；引用的搜尋字剛好是品種 id 就帶入（品種頁的「引用」按鈕會這樣打開）
+    function newRowDefaults(name, q) {
+      if (name === "plants") return { type: "species" };
+      if (name === "citations") return { plant_id: BY_ID.has(q.trim()) ? q.trim() : "", use: "summary" };
+      return {};
+    }
+
+    const close = () => {
+      if (dirty && !confirm("表單還沒儲存，確定關閉？")) return;
+      dirty = false;
+      dlg.close();
+    };
+    dlg.addEventListener("cancel", (e) => { e.preventDefault(); close(); }); // Esc
+    dlg.addEventListener("close", () => {
+      body.innerHTML = "";
+      cache = {};
+      if (!changed) return;
+      changed = false;
+      const hash = goto; goto = null;
+      reloadData(hash).catch((err) => alert(`重新讀取資料失敗：${err.message}`));
+    });
+
+    async function open(fn) {
+      say(""); changed = false; dirty = false; goto = null; view = null;
+      body.innerHTML = "";
+      dlg.showModal();
+      try { await fn(); } catch (e) { say(e.message, true); }
+    }
+
+    return {
+      get isOpen() { return dlg.open; },
+      table: (name, q = "") => open(() => showTable(name, q)),
+      // 直接開某品種的表單；從品種頁進來，存檔後留在表單
+      editPlant: (id) => open(async () => {
+        const t = await load("plants");
+        const row = t.rows.find((r) => r.id === id);
+        if (!row) throw new Error(`plants.csv 裡找不到 ${id}`);
+        await showForm("plants", row, { back: null });
+      }),
+      newPlant: () => open(() => showForm("plants", null, { init: { type: "species" }, back: null }))
+    };
+  })();
+
+  document.addEventListener("click", (e) => {
+    const b = e.target.closest("[data-data-edit], [data-table-open], [data-plant-new]");
+    if (!b) return;
+    e.preventDefault();
+    if (b.dataset.dataEdit) dataEditor.editPlant(b.dataset.dataEdit);
+    else if (b.dataset.tableOpen) dataEditor.table(b.dataset.tableOpen, b.dataset.tableQ || "");
+    else dataEditor.newPlant();
   });
 
   /* ---------------- 版面：左關係圖 ／ 右圖鑑，可各自關閉 ---------------- */
@@ -1754,6 +2108,11 @@
         else resume();
       },
       hide() { clearPreview(); sim?.stop(); },
+      // 資料編輯後重建節點與連線（保留既有節點的位置）
+      refresh() {
+        genCache.clear();
+        if (sim) build();
+      },
       preview(id) {
         clearTimeout(previewTimer);
         previewTimer = setTimeout(() => applyPreview(id), id ? 120 : 220);
@@ -1798,7 +2157,7 @@
   /* ---------------- 鍵盤 ---------------- */
   let detailNav = null;
   document.addEventListener("keydown", (e) => {
-    if (photoEditor.isOpen) return; // Esc 交給對話框自己關閉
+    if (photoEditor.isOpen || dataEditor.isOpen) return; // Esc 交給對話框自己關閉
     if (lightbox.isOpen) {
       if (e.key === "Escape") lightbox.close();
       else if (e.key === "ArrowLeft") lightbox.step(-1);
@@ -1858,7 +2217,12 @@
   setPanes({});
   // 靜態主機上沒有這個 API（404），編輯按鈕就不會出現
   const probeEdit = fetch("api/edit", { cache: "no-store" })
-    .then((r) => r.ok && r.json()).then((j) => { EDIT = !!j?.ok; }).catch(() => {});
+    .then((r) => r.ok && r.json()).then((j) => {
+      EDIT = !!j?.ok;
+      // 舊版 serve.py 只有照片 API，沒有 tables 就不顯示資料編輯
+      EDIT_DATA = EDIT && !!j.tables;
+      document.getElementById("data-btn").hidden = !EDIT_DATA;
+    }).catch(() => {});
   Promise.all([loadData(), probeEdit])
     .then(() => {
       if (panes.graph) graph.show();

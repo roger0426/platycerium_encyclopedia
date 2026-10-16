@@ -27,6 +27,8 @@
       <button type="button" data-pane-toggle="content" aria-pressed="true" title="顯示／隱藏圖鑑">
         <svg class="ic" aria-hidden="true"><use href="#i-book"/></svg><span>圖鑑</span></button>
     </div>
+    <button class="theme-btn" id="data-btn" type="button" data-table-open="plants" title="瀏覽與編輯 data/ 裡的 CSV" hidden>
+      <svg class="ic" aria-hidden="true"><use href="#i-table"/></svg><span>資料表</span></button>
     <button class="theme-btn" id="theme-btn" type="button"></button>
   </header>
 
@@ -115,6 +117,18 @@
     </div>
   </dialog>
 
+  <!-- 資料編輯（tools/serve.py 啟動時） -->
+  <dialog class="photo-dlg data-dlg" id="data-dlg" aria-labelledby="dd-title">
+    <div class="pd-head">
+      <button type="button" class="back-btn" data-dd="back" hidden>‹ 返回</button>
+      <h2 id="dd-title">資料表</h2>
+      <button type="button" class="pane-close" data-dd="close" aria-label="關閉">
+        <svg class="ic" aria-hidden="true"><use href="#i-close"/></svg></button>
+    </div>
+    <div id="dd-body"></div>
+    <p class="pd-msg" id="dd-msg" role="status"></p>
+  </dialog>
+
   <!-- 共用圖示 -->
   <svg width="0" height="0" style="position:absolute" aria-hidden="true">
     <symbol id="frond" viewBox="0 0 32 32">
@@ -192,6 +206,14 @@
     <symbol id="i-info" viewBox="0 0 24 24">
       <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
         <circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.01"/>
+      </g>
+    </symbol>
+    <symbol id="i-edit" viewBox="0 0 24 24">
+      <path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M4 20h4L19 9l-4-4L4 16zM13.5 6.5l4 4"/>
+    </symbol>
+    <symbol id="i-table" viewBox="0 0 24 24">
+      <g fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round">
+        <rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9.5h18M3 15h18M9.5 9.5V20"/>
       </g>
     </symbol>
     <symbol id="i-camera" viewBox="0 0 24 24">

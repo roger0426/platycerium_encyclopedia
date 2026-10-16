@@ -738,6 +738,55 @@ body[data-layout="split"] .graph-pane { border-right: 1px solid var(--line); }
 }
 .pd-upload:disabled { opacity: .45; cursor: default; }
 
+/* ---------- 資料編輯（tools/serve.py 啟動時） ---------- */
+.crumbs .data-edit { padding-left: 10px; font-size: .8rem; color: var(--text); }
+.crumbs .data-edit:hover, .result-bar .data-edit:hover { border-color: var(--accent); color: var(--accent); }
+.data-edit .ic { width: 14px; height: 14px; color: var(--accent); }
+.result-bar .data-edit { margin-right: auto; padding: 3px 12px; font-size: .8rem; }
+.data-dlg { width: min(860px, calc(100vw - 32px)); }
+.data-dlg .pd-head .back-btn { font-size: .8rem; }
+.dd-tabs { margin-top: 12px; flex-wrap: wrap; }
+.dd-bar { display: flex; gap: 8px; margin-top: 12px; }
+.dd-bar input {
+  flex: 1; min-width: 0; padding: 6px 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); color: var(--text);
+}
+.dd-bar .pd-upload { flex: none; }
+.dd-rows { display: flex; flex-direction: column; margin-top: 6px; border-top: 1px solid var(--line); }
+.dd-row {
+  display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr) minmax(0, 2fr); gap: 10px; align-items: baseline;
+  padding: 8px 6px; border: 0; border-bottom: 1px solid var(--line); background: none; color: var(--text);
+  text-align: left; font-size: .82rem; cursor: pointer;
+}
+.dd-row:hover, .dd-row:focus-visible { background: var(--surface-2); }
+.dd-row b, .dd-row span, .dd-row small { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.dd-row b { font-weight: 600; }
+.dd-row small { color: var(--muted); }
+@media (max-width: 560px) {
+  .dd-row { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .dd-row small { grid-column: 1 / -1; }
+}
+.dd-form fieldset { margin: 14px 0 0; padding: 0; border: 0; }
+.dd-form legend { padding: 0; font-weight: 600; font-size: .95rem; }
+.dd-form .pd-fields { margin-top: 8px; }
+.dd-field { display: flex; flex-direction: column; gap: 3px; font-size: .78rem; color: var(--muted); }
+.dd-field.wide { grid-column: 1 / -1; }
+.dd-field small { font-size: .7rem; opacity: .85; }
+.dd-field input, .dd-field select, .dd-field textarea {
+  min-width: 0; padding: 6px 10px; border: 1px solid var(--line); border-radius: 8px;
+  background: var(--bg); color: var(--text); font: inherit; font-size: .85rem;
+}
+.dd-field textarea { resize: vertical; line-height: 1.5; }
+.dd-field input[readonly], .dd-field select:disabled { opacity: .6; }
+.dd-field :is(input, select, textarea):focus { outline: 2px solid var(--accent); outline-offset: -1px; }
+.dd-multi { display: flex; gap: 12px; flex-wrap: wrap; padding: 6px 0; color: var(--text); font-size: .85rem; }
+.dd-multi label { display: inline-flex; align-items: center; gap: 4px; }
+.dd-color { display: flex; gap: 6px; }
+.dd-color input[type="color"] { flex: none; width: 40px; padding: 2px; }
+.dd-color input:not([type]) { flex: 1; }
+.dd-actions { position: sticky; bottom: -20px; gap: 12px; align-items: center; margin: 14px -20px -20px; padding: 12px 20px; background: var(--surface); border-top: 1px solid var(--line); }
+.dd-actions .pd-msg { flex: 1; margin: 0; }
+.dd-actions .danger { color: #c0392b; }
+
 .variant-photos { margin-top: 14px; padding-top: 10px; border-top: 1px dashed var(--line); }
 .variant-photos h3 { margin: 0; font-size: .9rem; }
 .variant-photos h3 small { font-weight: 400; color: var(--muted); }

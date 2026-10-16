@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
-"""本機預覽＋照片編輯伺服器。
+"""本機預覽＋照片／資料編輯伺服器。
 
-取代 `python3 -m http.server`，另外提供照片上傳／刪除 API，網頁偵測到後會在卡片與品種頁顯示照片管理按鈕。
+取代 `python3 -m http.server`，另外提供照片上傳／刪除 API 與 CSV 資料編輯 API，
+網頁偵測到後會顯示照片管理、編輯資料與「資料表」按鈕。
 只監聽 127.0.0.1，部署到 GitHub Pages 等靜態主機時沒有這些 API，按鈕自動隱藏。
 
     python3 tools/serve.py          # http://localhost:8000
@@ -24,8 +25,20 @@ PLANTS_CSV = ROOT / "data" / "plants.csv"
 IMAGES = ROOT / "images"
 FIELDS = ["id", "src", "caption", "credit", "license", "source", "variant"]
 MAX_BYTES = 25 * 1024 * 1024
-LOCK = threading.Lock()  # 同時有兩個請求時，避免 photos.csv 被交錯寫壞
+LOCK = threading.Lock()  # 同時有兩個請求時，避免 CSV 被交錯寫壞
 EXTS = {"image/jpeg": ".jpg", "image/png": ".png", "image/webp": ".webp", "image/gif": ".gif"}
+DATA = ROOT / "data"
+# 可在網頁上編輯的資料表：檔名、主鍵欄位（None = 沒有唯一鍵，以整列內容比對）、可否新增／刪除。
+# features.csv 由 project_plan/survey/survey_species.py 產生，手改會被覆蓋，所以不開放。
+# photos.csv 的新增／刪除要連同照片檔一起處理，交給照片管理。
+TABLES = {
+    "plants": {"file": "plants.csv", "key": "id", "add": True},
+    "regions": {"file": "regions.csv", "key": "key", "add": True},
+    "sources": {"file": "sources.csv", "key": "id", "add": True},
+    "citations": {"file": "citations.csv", "key": None, "add": True},
+    "photos": {"file": "photos.csv", "key": "src", "add": False},
+}
+ID_RE = re.compile(r"^[a-z0-9][a-z0-9-]*$")
 
 
 def read_csv(path):
@@ -34,16 +47,21 @@ def read_csv(path):
         return list(reader.fieldnames or []), list(reader)
 
 
-def write_photos(header, rows):
-    # 保留原本的欄位順序與 BOM（Excel 開啟才不會亂碼）；有變異株照片時才補 variant 欄
-    if any(r.get("variant") for r in rows) and "variant" not in header:
-        header = header + ["variant"]
-    tmp = PHOTOS_CSV.with_suffix(".csv.tmp")
+def write_csv(path, header, rows):
+    # 保留原本的欄位順序與 BOM（Excel 開啟才不會亂碼）；先寫暫存檔再取代，寫到一半中斷也不會壞檔
+    tmp = path.with_suffix(".csv.tmp")
     with open(tmp, "w", encoding="utf-8-sig", newline="") as f:
         w = csv.DictWriter(f, fieldnames=header, extrasaction="ignore", lineterminator="\n")
         w.writeheader()
         w.writerows(rows)
-    tmp.replace(PHOTOS_CSV)
+    tmp.replace(path)
+
+
+def write_photos(header, rows):
+    # 有變異株照片時才補 variant 欄
+    if any(r.get("variant") for r in rows) and "variant" not in header:
+        header = header + ["variant"]
+    write_csv(PHOTOS_CSV, header, rows)
 
 
 def plant_ids():
@@ -60,6 +78,109 @@ def image_path(src):
     if IMAGES.resolve() not in p.parents:
         raise ValueError("照片路徑必須在 images/ 底下")
     return p
+
+
+class Conflict(Exception):
+    """CSV 在網頁開啟表單後被其他程式改過。"""
+
+
+def table_of(name):
+    if name not in TABLES:
+        raise ValueError(f"不能編輯 {name}")
+    return TABLES[name]
+
+
+def same_row(a, b, header):
+    return all((a.get(k) or "").strip() == (b.get(k) or "").strip() for k in header)
+
+
+def find_row(rows, header, key, orig):
+    """找出網頁開啟表單時的那一列。有主鍵用主鍵找；內容跟當時不同代表 CSV 在這期間被改過（例如 Excel），拒絕覆蓋。"""
+    if key:
+        i = next((i for i, r in enumerate(rows) if r.get(key) == orig.get(key)), None)
+    else:
+        i = next((i for i, r in enumerate(rows) if same_row(r, orig, header)), None)
+    if i is None:
+        raise Conflict("找不到這一列，可能已被刪除或修改")
+    if not same_row(rows[i], orig, header):
+        raise Conflict("這一列在你開啟表單後被其他程式改過")
+    return i
+
+
+def split_ids(v):
+    return [x.strip() for x in (v or "").split("|") if x.strip()]
+
+
+def validate(name, row, rows, header, index):
+    """檢查必填、唯一鍵與參照；index 是被編輯那一列的位置（新增時為 None）。"""
+    t = TABLES[name]
+    key = t["key"]
+    if key and not row.get(key):
+        raise ValueError(f"{key} 不能空白")
+    if key and any(r.get(key) == row[key] for i, r in enumerate(rows) if i != index):
+        raise ValueError(f"{key}「{row[key]}」已經存在")
+    if index is not None and key and rows[index].get(key) != row[key]:
+        # 改主鍵要連帶修改照片資料夾、親本、引用等，容易漏改，請直接改 CSV
+        raise ValueError(f"{key} 建立後不能在網頁上修改")
+
+    if name == "plants":
+        if not ID_RE.match(row["id"]):
+            raise ValueError("id 只能用英文小寫、數字與 -")
+        if row.get("type") not in ("species", "hybrid", "cultivar"):
+            raise ValueError("type 必須是 species、hybrid 或 cultivar")
+        ids = {r["id"] for r in rows if r.get("id")} | {row["id"]}
+        regions = {r["key"] for r in read_csv(DATA / "regions.csv")[1]}
+        if row.get("region") and row["region"] not in regions:
+            raise ValueError(f"找不到地區 {row['region']}")
+        for k in ("parents", "base"):
+            for x in split_ids(row.get(k)):
+                if x == row["id"]:
+                    raise ValueError(f"{k} 不能指向自己")
+                if x not in ids:
+                    raise ValueError(f"{k} 裡的 {x} 不在 plants.csv")
+        if len(split_ids(row.get("base"))) > 1:
+            raise ValueError("base 只能有一個")
+    elif name == "regions":
+        if not ID_RE.match(row["key"]):
+            raise ValueError("key 只能用英文小寫、數字與 -")
+    elif name == "sources":
+        if not ID_RE.match(row["id"]):
+            raise ValueError("id 只能用英文小寫、數字與 -")
+    elif name == "citations":
+        if row.get("plant_id") not in plant_ids():
+            raise ValueError(f"找不到品種 {row.get('plant_id')}")
+        if row.get("source_id") not in {r["id"] for r in read_csv(DATA / "sources.csv")[1]}:
+            raise ValueError(f"找不到來源 {row.get('source_id')}")
+    elif name == "photos":
+        if row.get("id") not in plant_ids():
+            raise ValueError(f"找不到品種 {row.get('id')}")
+
+
+def references(name, value):
+    """刪除前檢查還有誰用到這個鍵，回傳說明文字的清單。"""
+    refs = []
+    if name == "plants":
+        for r in read_csv(PLANTS_CSV)[1]:
+            if value in split_ids(r.get("parents")):
+                refs.append(f"{r['id']} 的親本")
+            if r.get("base") == value:
+                refs.append(f"{r['id']} 的選拔來源")
+        n = sum(r.get("id") == value for r in read_csv(PHOTOS_CSV)[1])
+        if n:
+            refs.append(f"{n} 張照片")
+        for f, col in (("citations.csv", "plant_id"), ("features.csv", "plant_id")):
+            n = sum(r.get(col) == value for r in read_csv(DATA / f)[1])
+            if n:
+                refs.append(f"{f} 的 {n} 列")
+    elif name == "regions":
+        n = sum(r.get("region") == value for r in read_csv(PLANTS_CSV)[1])
+        if n:
+            refs.append(f"{n} 個品種")
+    elif name == "sources":
+        n = sum(r.get("source_id") == value for r in read_csv(DATA / "citations.csv")[1])
+        if n:
+            refs.append(f"citations.csv 的 {n} 列")
+    return refs
 
 
 class Handler(SimpleHTTPRequestHandler):
@@ -80,7 +201,15 @@ class Handler(SimpleHTTPRequestHandler):
 
     def do_GET(self):
         if self.path == "/api/edit":
-            return self.send_json({"ok": True})
+            return self.send_json({"ok": True, "tables": {k: {"key": t["key"], "add": t["add"]} for k, t in TABLES.items()}})
+        m = re.match(r"^/api/data/(\w+)$", self.path)
+        if m:
+            try:
+                t = table_of(m.group(1))
+                header, rows = read_csv(DATA / t["file"])
+                return self.send_json({"header": header, "rows": rows, "key": t["key"], "add": t["add"]})
+            except ValueError as e:
+                return self.send_json({"error": str(e)}, 404)
         return super().do_GET()
 
     def do_POST(self):
@@ -93,7 +222,8 @@ class Handler(SimpleHTTPRequestHandler):
                 raise ValueError("檔案太大")
             body = json.loads(self.rfile.read(length) or b"{}")
             actions = {"/api/photos/add": self.add, "/api/photos/delete": self.delete,
-                       "/api/photos/cover": self.cover, "/api/fetch": self.fetch}
+                       "/api/photos/cover": self.cover, "/api/fetch": self.fetch,
+                       "/api/data/save": self.save_row, "/api/data/delete": self.delete_row}
             if self.path not in actions:
                 return self.send_json({"error": "not found"}, 404)
             if self.path == "/api/fetch":
@@ -102,6 +232,8 @@ class Handler(SimpleHTTPRequestHandler):
                 actions[self.path](body)
         except ValueError as e:
             self.send_json({"error": str(e)}, 400)
+        except Conflict as e:
+            self.send_json({"error": f"{e}，請重新整理頁面後再改"}, 409)
         except Exception as e:  # noqa: BLE001
             self.send_json({"error": f"{type(e).__name__}: {e}"}, 500)
 
@@ -173,10 +305,51 @@ class Handler(SimpleHTTPRequestHandler):
         self.send_json({"photos": photos_of(rows, row["id"])})
 
 
+    def save_row(self, body):
+        """新增（orig 為 null）或修改一列。只寫入 CSV 既有的欄位，欄位順序不變。"""
+        name = str(body.get("table", ""))
+        t = table_of(name)
+        path = DATA / t["file"]
+        header, rows = read_csv(path)
+        orig = body.get("orig")
+        row = {k: str((body.get("row") or {}).get(k) or "").strip() for k in header}
+        if orig is None:
+            if not t["add"]:
+                raise ValueError(f"{t['file']} 不能在這裡新增")
+            index = None
+        else:
+            index = find_row(rows, header, t["key"], orig)
+            if name == "photos" and row.get("src") != rows[index].get("src"):
+                raise ValueError("照片路徑不能修改")
+        validate(name, row, rows, header, index)
+        if index is None:
+            rows.append(row)
+        else:
+            rows[index] = row
+        write_csv(path, header, rows)
+        self.send_json({"row": row})
+
+    def delete_row(self, body):
+        name = str(body.get("table", ""))
+        t = table_of(name)
+        if not t["add"]:
+            raise ValueError(f"{t['file']} 不能在這裡刪除")
+        path = DATA / t["file"]
+        header, rows = read_csv(path)
+        index = find_row(rows, header, t["key"], body.get("orig") or {})
+        if t["key"]:
+            refs = references(name, rows[index][t["key"]])
+            if refs:
+                raise ValueError("還有資料用到它，請先處理：" + "、".join(refs))
+        rows.pop(index)
+        write_csv(path, header, rows)
+        self.send_json({"ok": True})
+
+
 if __name__ == "__main__":
     port = int(sys.argv[1]) if len(sys.argv) > 1 else 8000
     server = ThreadingHTTPServer(("127.0.0.1", port), Handler)
-    print(f"鹿角蕨圖鑑（可編輯照片）：http://localhost:{port}　Ctrl+C 結束")
+    print(f"鹿角蕨圖鑑（可編輯照片與資料）：http://localhost:{port}　Ctrl+C 結束")
     try:
         server.serve_forever()
     except KeyboardInterrupt:
