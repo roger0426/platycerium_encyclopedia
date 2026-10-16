@@ -548,6 +548,13 @@ paul-vespa,difficulty,1,低,1,台灣 竹意軒（T3）：栽培性很好,T3
 mountain-rabbit,pups,no,低,1,台灣 竹意軒（T3）：大型單芽種,T3
 willinckii-little-will,size,S,低,1,台灣 竹意軒（T3）：侏儒尺寸,T3
 willinckii-smurf,fertile_hair,5,低,1,台灣 阿金的便秘花園（T3）：藍底白厚毛,T3
+willinckii-robin,size,S,低,1,台灣 阿金的便秘花園（T3）：侏儒，成株約手掌大,T3
+willinckii-robin,origin,Dwarf Nook 孢子苗選拔,低,1,台灣 阿金的便秘花園（T3）：Dwarf Nook 孢子苗,T3
+bifurcatum-popcorn,fertile_posture,up,低,1,台灣 阿金的便秘花園（T3）：超挺拔的孢子葉,T3
+bifurcatum-popcorn,origin,Alan's fern 從二叉孢子苗特選,低,1,台灣 阿金的便秘花園（T3）：Alan's fern 孢子苗特選,T3
+flamenco,fertile_posture,pendant,低,1,台灣 晴花鹿苑（T3）：孢子葉層層展開後自然垂墜,T3
+flamenco,pups,no,低,1,台灣 晴花鹿苑（T3）：單芽型，無法萌生側芽,T3
+flamenco,difficulty,1,低,1,台灣 晴花鹿苑（T3）：簡單栽培也能展現美麗姿態,T3
 unicorn,fertile_hair,5,低,1,台灣 阿金的便秘花園（T3）：絨毛層次多、非常潔白,T3
 bifurcatum-white,pups,yes,低,1,台灣 晴花鹿苑（T3）：側芽發展迅速,T3
 bifurcatum-white,max_temp,,,0,台灣 晴花鹿苑（T3）：耐高溫接近 38 度（參考）,
@@ -563,3 +570,56 @@ willinckii-blue-queen,size,S,低,1,台灣 微體溫室（T3）：侏儒爪哇,T3
 willinckii-nook-dwarf,size,S,低,1,台灣 微體溫室（T3）：侏儒 Nook 系列,T3
 willinckii-kaohom,size,S,低,1,台灣 微體溫室（T3）：侏儒 Nook 系列,T3
 willinckii-watchara,size,S,低,1,台灣 微體溫室（T3）：侏儒爪哇 Watchara 系列,T3
+nemo,light,3,低,1,台灣 阿金的便秘花園（T3）：半日照陽台即可培養出極致型態,T3
+nemo,difficulty,1,低,1,台灣 阿金的便秘花園（T3）：適合陽台栽培，成功率高,T3
+kitshakood-x-ridleyi,shield_vein,yes,低,1,台灣 阿金的便秘花園（T3）：營養葉紋路清晰立體,T3
+kitshakood-x-ridleyi,fertile_posture,up,低,1,台灣 阿金的便秘花園（T3）：孢子葉向上延展、上翹,T3
+snow-white-x-suddan,fertile_hair,5,低,1,台灣 阿金的便秘花園（T3）：白毛覆蓋濃密，有白銀般的反光,T3
+snow-white-x-suddan,light,5,低,1,台灣 阿金的便秘花園（T3）：高光環境下白毛更明顯,T3
+bambi,size,S,低,1,台灣 阿金的便秘花園（T3）：侏儒型體態,T3
+bambi,difficulty,1,低,1,台灣 阿金的便秘花園（T3）：新手也能輕鬆上手,T3
+stella-aeterni,fertile_posture,spread,低,1,台灣 阿金的便秘花園（T3）：孢子葉放射狀展開,T3
+stella-aeterni,fertile_hair,3,低,1,台灣 阿金的便秘花園（T3）：葉面白毛細密,T3
+aydan,size,,,0,,
+aydan,fertile_posture,spread,低,1,台灣 阿金的便秘花園（T3）：葉片自然向外舒展,T3
+willinckii-half-moon,light,3,低,1,台灣 阿金的便秘花園（T3）：孢子苗：室內明亮散射光即可穩定生長,T3
+willinckii-half-moon,difficulty,1,低,1,台灣 阿金的便秘花園（T3）：孢子苗：入門款，適合新手,T3
+willinckii-silver-phoenix,fertile_hair,5,低,1,台灣 阿金的便秘花園（T3）：大量細緻的銀白色絨毛,T3
+veitchii-no-shield,size,,,0,,
+veitchii-no-shield,light,3,低,1,台灣 阿金的便秘花園（T3）：散光通風環境,T3
+veitchii-no-shield,difficulty,1,低,1,台灣 阿金的便秘花園（T3）：相對好照顧,T3
+bifurcatum-dwarf,size,S,低,1,台灣 阿金的便秘花園（T3）：侏儒,T3
+bifurcatum-dwarf,fertile_posture,up,低,1,台灣 阿金的便秘花園（T3）：孢子葉集中向上生長,T3
+bifurcatum-dwarf,light,3,低,1,台灣 阿金的便秘花園（T3）：光線需求中等，明亮通風即可,T3
+bifurcatum-dwarf,difficulty,1,低,1,台灣 阿金的便秘花園（T3）：相當容易入門,T3
+veitchii-lemoinei-dwarf,size,S,低,2,台灣 阿金的便秘花園（T3）：侏儒／台灣 微體溫室（T3）：侏儒檸檬，體型不到一般檸檬的 ½,T3
+veitchii-lemoinei-dwarf,fertile_posture,spread,低,1,台灣 阿金的便秘花園（T3）：葉片集中向外展開,T3
+veitchii-lemoinei-dwarf,fertile_hair,3,低,1,台灣 微體溫室（T3）：孢子葉白毛感明顯,T3
+veitchii-lemoinei-dwarf,light,4,低,2,台灣 阿金的便秘花園（T3）：可適應較高光，光線充足下株型更好／台灣 微體溫室（T3）：中弱至中光,T3
+veitchii-lemoinei-dwarf,water,1,低,1,台灣 微體溫室（T3）：各品系：耐旱喜透氣、澆透不積水,T3
+willinckii-yellow-moon-dwarf,size,S,低,2,台灣 阿金的便秘花園（T3）：侏儒型個體／台灣 微體溫室（T3）：侏儒爪哇,T3
+willinckii-yellow-moon-dwarf,origin,從黃月孢子苗篩選,低,1,台灣 阿金的便秘花園（T3）：黃月孢子苗篩選,T3
+willinckii-yellow-moon-dwarf,light,3,低,1,台灣 微體溫室（T3）：中光（夏季遮陰 50%）,T3
+willinckii-yellow-moon-dwarf,water,1,低,1,台灣 微體溫室（T3）：室內或弱光：介質偏乾再澆,T3
+willinckii-yellow-moon-dwarf,difficulty,4,低,1,台灣 微體溫室（T3）：進階／台灣 微體溫室（T3）：中偏難／台灣 微體溫室（T3）：中偏難,T3
+hillii-wave,origin,從 P. hillii 'Pumila' 播孢特選,低,1,台灣 阿金的便秘花園（T3）：Pumila 播孢特選,T3
+hillii-wave,light,3,低,1,台灣 阿金的便秘花園（T3）：半日照、光線不過強,T3
+hillii-wave,difficulty,1,低,1,台灣 阿金的便秘花園（T3）：非常好種,T3
+kitshakood-round-frond,origin,從亞皇中篩選的圓葉個體,低,1,台灣 阿金的便秘花園（T3）：亞皇篩選,T3
+kitshakood-round-frond,light,3,低,1,台灣 阿金的便秘花園（T3）：半日照即可穩定培養,T3
+uncia,size,,,0,,
+uncia,fertile_posture,spread,低,1,台灣 晴花鹿苑（T3）：葉型向外展開,T3
+tide,fertile_posture,spread,低,1,台灣 晴花鹿苑（T3）：葉片放射狀姿態,T3
+tide,fertile_hair,3,低,1,台灣 晴花鹿苑（T3）：墨綠基調上覆滿細緻白色絨毛,T3
+willinckii-ccs,shield_hair,5,低,1,台灣 晴花鹿苑（T3）：臉與手有濃密白皙絨毛,T3
+willinckii-ccs,fertile_hair,5,低,1,台灣 晴花鹿苑（T3）：臉與手有濃密白皙絨毛,T3
+willinckii-makigumo,fertile_hair,5,低,1,台灣 晴花鹿苑（T3）：覆蓋厚實的星狀白毛,T3
+willinckii-makigumo,spore,tips,低,1,台灣 晴花鹿苑（T3）：孢子集中於葉端,T3
+willinckii-white-heaven,fertile_posture,spread,低,1,台灣 晴花鹿苑（T3）：孢子葉如羽翼向兩側展開,T3
+willinckii-yami,difficulty,1,低,1,台灣 晴花鹿苑（T3）：新手友善、易於養護,T3
+sunny-cutie,size,S,低,1,台灣 晴花鹿苑（T3）：迷你爪哇,T3
+sunny-cutie,fertile_posture,pendant,低,1,台灣 晴花鹿苑（T3）：孢子葉如流水般下墜,T3
+wfsq,fertile_posture,spread,低,1,台灣 晴花鹿苑（T3）：孢子葉向兩側伸展,T3
+wfsq,fertile_hair,3,低,1,台灣 晴花鹿苑（T3）：明顯而細緻的白色星狀絨毛,T3
+wfsq,difficulty,1,低,1,台灣 晴花鹿苑（T3）：養護容易，適合台灣多數環境,T3
+willinckii-anapat-1,size,,,0,,

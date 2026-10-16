@@ -134,19 +134,29 @@ SOURCES = [
           ("ajins-moose", "駝鹿鹿角蕨 Platycerium 'Moose'", "駝鹿鹿角蕨-深綠交非洲圓盾"),
           ("ajins-celso", "賽爾索鹿角蕨 P. willinckii 'Celso Tatsuta' TC 2吋盆苗", "賽爾索鹿角蕨-p-willinckii-celso-tatsuta-tc-2吋盆苗"),
           ("ajins-moonlight", "月光鹿角蕨 P. Willinckii Moonlight", "p-willinckii-moonlight"),
+          ("ajins-robin", "羅賓鹿角蕨 Platycerium willinckii 'Robin' (TC) 布丁杯苗 2吋盆", "p-robin"),
+          ("ajins-popcorn", "爆米花鹿角蕨 2吋盆 孢子苗", "ppopcorn"),
+          ("ajins-flamenco", "佛朗明哥鹿角蕨 Platycerium (hillii x coronarium) 'Flamenco' 組培苗(TC) 2吋盆", "philliicoronariumflamenco"),
       ]],
     *[(sid, title, "晴花鹿苑 Haruhana Plants", "https://www.haruhanaplants.com/products/" + slug, "", "vendor", "zh-TW", "", "2026-10-15", "secondary",
        "T3", "台灣", "晴花鹿苑", "")
       for sid, title, slug in [
           ("haruhana-akki", "P. Akki 鹿角蕨", "p-akki"),
+          ("haruhana-flamenco", "佛朗明哥", "phillii-x-coronarium-flamenco"),
           ("haruhana-monkey-north", "北猴鹿角蕨", "pmonkey-north"),
           ("haruhana-lemoinei", "檸檬鹿角蕨 入盆販售", "pveitchii-lemoinei-1"),
           ("haruhana-bif-white", "P. bif sp white 正側芽", "pbif-sp-white-00-1"),
           ("haruhana-willinckii-x-bif", "P. willinckii × P. bifurcatum 正側芽", "pwillinckii-x-bif-96"),
       ]],
+    ("haruhana-fb-flamenco", "P.hillii × coronarium 'Flamenco' 佛朗明哥由深綠 Mio 與千手皇冠交種出來的絕美個體（影片）", "晴花鹿苑 Facebook",
+     "https://www.facebook.com/100083026125755/videos/1758039951590851/", "", "vendor", "zh-TW", "", "2026-10-16", "secondary", "T3", "台灣", "晴花鹿苑", "只讀到網址裡的影片標題，影片內容未看"),
     ("ajins-wandae-dwarf", "侏儒捲葉女王 P. wandae var. dwarf & curling 2.5吋盆", "阿金的便秘花園",
      "https://www.ajinsgarden.com/products/侏儒捲葉女王-p-wandae-var-dwarf-curling-25吋盆", "", "vendor", "zh-TW", "", "2026-10-15", "secondary",
      "T3", "台灣", "阿金的便秘花園", ""),
+    # ---- batch 4 (2026-10-16): the other vendor pages of this batch were entered in sources.csv when the plants were added
+    ("haruhana-yellow-moon-dwarf", "琥珀 正側芽（P.willinckii Kohaku）", "晴花鹿苑 Haruhana Plants",
+     "https://www.haruhanaplants.com/products/pwillinckii-yellow-moon-dwarf-1-1-1-1-1", "", "vendor", "zh-TW", "", "2026-10-16", "secondary",
+     "T3", "台灣", "晴花鹿苑", "網址是 yellow-moon-dwarf，但頁面販售的是命名個體「琥珀 Kohaku」，型態描述不套用到侏儒黃月"),
     ("ncsu-bifurcatum", "Platycerium bifurcatum (Staghorn Fern)", "NC State Extension Gardener Plant Toolbox",
      "https://plants.ces.ncsu.edu/plants/platycerium-bifurcatum/common-name/staghorn-fern/", "", "database", "en", "", "2026-10-15", "secondary",
      "T2", "美國", "NC State Extension", "大學推廣單位；頁面的照護欄位寫的是二叉鹿角蕨這個種，不套用到栽培品種"),
@@ -1332,6 +1342,47 @@ BLOCKS["willinckii-smurf"] = dict(
     desc=[("孢子葉藍底覆厚白毛，分岔微捲；盾葉有高冠。", "ajins-smurf", "藍底白厚毛，高冠表現，分岔微捲手型", "")],
     searched=searched("阿金商品頁", "阿金商品頁"),
 )
+BLOCKS["willinckii-robin"] = dict(
+    cites=[
+        c("ajins-robin", "size", "S", "侏儒，成株約手掌大", "侏儒、成株約手掌大 → S", "這個個體不僅具有侏儒的型態……成株大約只有手掌大"),
+        c("ajins-robin", "origin", "Dwarf Nook 孢子苗選拔", "Dwarf Nook 孢子苗", "T3，origin 只採 T1", "羅賓鹿角蕨是由 Dwarf Nook Sporling 選拔而來"),
+        c("ajins-robin", "base", "willinckii-nook-dwarf", "", "由 Dwarf Nook 孢子苗選拔 → 侏儒 Nook", "羅賓鹿角蕨是由 Dwarf Nook Sporling 選拔而來"),
+    ],
+    extra={"base"},
+    desc=[("侏儒型，葉面脈紋明顯、葉尾呈鋸齒，成株約手掌大。", "ajins-robin", "葉面上的脈紋表現明顯，葉尾鋸齒，成株大約只有手掌大", "")],
+    searched=searched("阿金商品頁", "阿金商品頁（只有屬層級通用照護）"),
+)
+BLOCKS["bifurcatum-popcorn"] = dict(
+    cites=[
+        c("ajins-popcorn", "fertile_posture", "up", "超挺拔的孢子葉", "", "超挺拔的孢子葉和如同爆米花爆開的末端分岔"),
+        c("ajins-popcorn", "origin", "Alan's fern 從二叉孢子苗特選", "Alan's fern 孢子苗特選", "T3，origin 只採 T1",
+          "由台灣知名花圃Alan's fern從二歧鹿角蕨特選出的孢子苗，並由園主Alan命名"),
+        c("ajins-popcorn", "base", "bifurcatum", "", "二歧鹿角蕨中的特選體 → 二叉", "為鹿角蕨科鹿角蕨屬下二歧鹿角蕨中的特選體"),
+        c("ajins-popcorn", "breeder", "Alan's fern", "", "Alan's fern 選出、園主 Alan 命名", "由台灣知名花圃Alan's fern從二歧鹿角蕨特選出的孢子苗，並由園主Alan命名"),
+    ],
+    extra={"base", "breeder"},
+    desc=[("孢子葉非常挺拔，末端分岔像爆米花爆開。", "ajins-popcorn", "型態很明顯特別，超挺拔的孢子葉和如同爆米花爆開的末端分岔", "")],
+    note=[("台灣花圃 Alan's fern 從二叉孢子苗特選，由園主 Alan 命名。", "ajins-popcorn",
+           "由台灣知名花圃Alan's fern從二歧鹿角蕨特選出的孢子苗，並由園主Alan命名", "")],
+    searched=searched("阿金商品頁", "阿金商品頁（只有屬層級通用照護）"),
+)
+BLOCKS["flamenco"] = dict(
+    cites=[
+        c("haruhana-flamenco", "fertile_posture", "pendant", "孢子葉層層展開後自然垂墜", "", "層層展開後自然垂墜，彷彿身穿蓬鬆舞裙"),
+        c("haruhana-flamenco", "pups", "no", "單芽型，無法萌生側芽", "", "作為單芽型鹿角蕨，無法萌生側芽"),
+        c("haruhana-flamenco", "difficulty", 1, "簡單栽培也能展現美麗姿態", "", "對環境的適應性也非常良好，是一款即使簡單栽培也能輕鬆展現美麗姿態的理想品種"),
+        c("ajins-flamenco", "parents", "hillii|coronarium", "深綠 × 皇冠", "", "佛朗明哥鹿角蕨為深綠鹿角蕨與皇冠鹿角蕨的交種個體"),
+        c("haruhana-flamenco", "parents", "hillii|coronarium", "hillii（深綠）× 皇冠", "同頁兩段描述一段寫 hillii、一段寫深綠", "繼承了「hillii 」與「皇冠」兩者的獨特特徵"),
+        c("haruhana-fb-flamenco", "parents", "hillii-mio|coronarium", "深綠 Mio × 千手皇冠", "影片標題；千手皇冠沒有條目，親本欄只寫到種", "P.hillii × coronarium 'Flamenco' 佛朗明哥由深綠mio與千手皇冠交種出來的絕美個體", "", "reference"),
+    ],
+    extra={"parents"},
+    desc=[
+        ("孢子葉深綠、分岔豐富，層層展開後自然垂墜。", "haruhana-flamenco", "此品種擁有深綠色、分岔豐富的孢子葉，層層展開後自然垂墜", ""),
+        ("孢子葉邊緣波浪起伏，展開時像舞者的裙襬，因此得名「佛朗明哥」。", "ajins-flamenco", "孢子葉邊緣波浪起伏，層次柔和，展開時如同舞者裙襬般柔順延伸，因此得名「佛朗明哥」", ""),
+    ],
+    note=[("晴花鹿苑的影片標題寫親本是深綠 Mio 與千手皇冠。", "haruhana-fb-flamenco", "P.hillii × coronarium 'Flamenco' 佛朗明哥由深綠mio與千手皇冠交種出來的絕美個體", "")],
+    searched=searched("阿金、晴花鹿苑商品頁|晴花鹿苑 Facebook 影片標題", "阿金商品頁（只有屬層級通用照護）|晴花鹿苑商品頁"),
+)
 BLOCKS["unicorn"] = dict(
     cites=[c("ajins-unicorn", "fertile_hair", 5, "絨毛層次多、非常潔白", "", "葉面覆蓋著帶有層次的絨毛，顏色非常潔白，甚至帶有一絲淡淡的藍色。")],
     searched=searched("阿金、晴花鹿苑商品頁", "阿金、晴花鹿苑商品頁|We Love Tropical Plants（通用照護表，不採用）"),
@@ -1426,6 +1477,260 @@ for pid, src, lab, claim, quote in [
     add(pid, [c(src, "size", "S", lab, (claim + "；" if claim else "") + "來源稱侏儒、沒有尺寸 → S", quote)])
 add("alcicorne-madagascar-dwarf", [c("jl-alcicorne-dwarf", "size", 40, "高約 40 cm、寬約 30 cm", "整株高寬，不是盾葉或孢子葉尺寸 → excluded",
                                      "They only grow to about 40 cm tall and 30 cm wide", "", "excluded")])
+
+
+# ---------------------------------------------------------------- batch 4 (2026-10-16): plants added from Ajin's Garden / Haruhana pages
+# Each plant has one or two vendor pages (T3). Searches by name (English and Chinese) found no other source for any of them;
+# the 微體溫室 articles only cover 侏儒檸檬 and 侏儒黃月. Title keyword tags (e.g. 「半日照」「新手入門」) are not used, only the prose.
+AJ = "阿金商品頁"
+HR = "晴花鹿苑商品頁"
+WEB = "搜尋：英文品名＋Platycerium|搜尋：中文俗名＋鹿角蕨"
+B4 = "竹意軒|卡呸醬筆記|微體溫室文章總覽（未列）"
+B4C = f"{B4}|阿金商品頁末段（屬層級通用說明，不採用）"
+SMALL = "只寫小型、沒有說侏儒，也沒有尺寸 → 不算侏儒說法"
+
+BLOCKS["nemo"] = dict(
+    cites=[
+        c("ajins-nemo", "light", 3, "半日照陽台即可培養出極致型態", "半日照 → 3", "在半日照的陽台環境中也能逐步培養出極致型態"),
+        c("ajins-nemo", "difficulty", 1, "適合陽台栽培，成功率高", "成功率高 → easy → 1", "適合陽台栽培，成功率高"),
+    ],
+    desc=[("白毛質感與分岔表現佳，業者稱常被視為佩德羅的平價替代。", "ajins-nemo",
+           "在白毛質感與分岔表現上都有相當亮眼的發展潛力 ... 常被玩家視為平替版佩德羅的選擇", "")],
+    searched=searched(f"{AJ}|{WEB}|{B4}", f"{AJ}|{B4C}"),
+)
+BLOCKS["cardinals"] = dict(
+    cites=[],
+    desc=[("承襲奧銀的高尖冠與貓路易士的肌肉紋理。", "ajins-cardinals", "紅雀鹿角蕨承襲了奧銀狂野的高冠，還有貓路易士的肌肉紋理", "")],
+    note=[("阿金的便秘花園另售斑葉組培杯苗 Cardinals 'Variegata'（斑葉紅雀）。", "ajins-cardinals-variegata",
+           "以斑葉個體進行組織培養，可能包含全綠、全黃及斑葉個體。", "")],
+    searched=searched(f"阿金〈紅雀〉〈斑葉紅雀〉商品頁|{WEB}|{B4}", f"阿金〈紅雀〉〈斑葉紅雀〉商品頁（沒有照護資料）|{B4C}"),
+)
+BLOCKS["kitshakood-x-ridleyi"] = dict(
+    cites=[
+        c("ajins-kitshakood-x-ridleyi", "fertile_posture", "up", "孢子葉向上延展、上翹", "", "孢子葉向上延展，線條更為挺拔，上翹姿態帶有明顯張力"),
+        c("ajins-kitshakood-x-ridleyi", "shield_vein", "yes", "營養葉紋路清晰立體", "紋路立體 → 葉脈隆起", "營養葉紋路清晰立體"),
+    ],
+    desc=[("亞皇與亞猴回交的個體，孢子葉上翹、分岔細緻緊湊，營養葉紋路立體。", "ajins-kitshakood-x-ridleyi",
+           "皇猴鹿角蕨為經典亞皇鹿角蕨與亞洲猴腦鹿角蕨回交後的個體 ... 分岔細緻且排列緊湊 ... 營養葉紋路清晰立體", "")],
+    searched=searched(f"{AJ}|{WEB}|{B4}", f"{AJ}（沒有照護資料）|{B4C}"),
+)
+BLOCKS["snow-white-x-suddan"] = dict(
+    cites=[
+        c("ajins-snow-white-x-suddan", "fertile_hair", 5, "白毛覆蓋濃密，有白銀般的反光", "covered with white hair → 5",
+          "白毛覆蓋濃密，帶有金屬反光質感"),
+        c("ajins-snow-white-x-suddan", "light", 5, "高光環境下白毛更明顯", "建議高光 → 5", "在高光環境下栽培，白毛表現會更加明顯，型態也更顯立體與極致"),
+    ],
+    desc=[("寬手延展的葉型，白毛濃密，在光線下有白銀般的反光。", "ajins-snow-white-x-suddan",
+           "呈現出寬手延展的葉型與濃密細緻的白毛質感。葉面白毛在光線下帶有如白銀般的金屬反光", "")],
+    note=[("阿金的便秘花園寫親本是 Snow White 與 Bogor Mr. Suddan，兩者尚未建檔，parents 暫時留空。", "ajins-snow-white-x-suddan",
+           "白雪蘇丹鹿角蕨為 Snow White 與 Bogor Mr.Suddan 的交種特選個體", "")],
+    searched=searched(f"{AJ}|{WEB}|{B4}", f"{AJ}|{B4C}"),
+)
+BLOCKS["bambi"] = dict(
+    cites=[
+        c("ajins-bambi", "size", "S", "侏儒型體態", "來源稱侏儒、沒有尺寸 → S", "以侏儒型體態與緊湊株型深受玩家喜愛"),
+        c("ajins-bambi", "difficulty", 1, "新手也能輕鬆上手", "", "新手也能輕鬆上手"),
+    ],
+    desc=[("侏儒型、株型緊湊，白毛細緻，業者稱為 Tonkla 系列的熱門品種。", "ajins-bambi",
+           "Tonkla 系列中相當受歡迎的熱門品種 ... 以侏儒型體態與緊湊株型深受玩家喜愛。葉面白毛細緻柔和", "")],
+    searched=searched(f"{AJ}|{WEB}|{B4}", f"{AJ}|{B4C}"),
+)
+BLOCKS["stella-aeterni"] = dict(
+    cites=[
+        c("ajins-stella-aeterni", "fertile_posture", "spread", "孢子葉放射狀展開", "spreading → spread", "孢子葉呈放射狀展開，線條穩定而均衡，宛如星芒般向外延伸"),
+        c("ajins-stella-aeterni", "fertile_hair", 3, "葉面白毛細密", "densely set with hairs → 3", "葉面白毛細密，質感柔和"),
+    ],
+    desc=[("孢子葉放射狀展開、結構對稱，白毛細密。", "ajins-stella-aeterni", "以對稱結構與細緻白毛聞名 ... 孢子葉呈放射狀展開 ... 葉面白毛細密", "")],
+    searched=searched(f"{AJ}|{WEB}|{B4}", f"{AJ}（只有標題標籤「好養」「半日照」，不採用）|{B4C}"),
+)
+BLOCKS["aydan"] = dict(
+    cites=[
+        c("ajins-aydan", "size", "S", "小型爪哇系", SMALL, "是一款精緻迷人的小型爪哇系鹿角蕨 ... 整體尺寸維持在相對小巧的範圍", "", "excluded"),
+        c("ajins-aydan", "fertile_posture", "spread", "葉片自然向外舒展", "spreading → spread", "葉片自然向外舒展，分岔細緻而流暢"),
+    ],
+    desc=[("小型的爪哇系，孢子葉纖細、分岔細緻，覆細白毛。", "ajins-aydan",
+           "小型爪哇系鹿角蕨 ... 孢子葉所呈現出的纖細線條與優雅分岔 ... 葉面覆蓋著細緻白毛", "")],
+    note=[("阿金的便秘花園寫「小型爪哇系」，未寫是否為交種，暫以爪哇為 base。", "ajins-aydan", "是一款精緻迷人的小型爪哇系鹿角蕨", "")],
+    searched=searched(f"{AJ}|{WEB}|{B4}", f"{AJ}（沒有照護資料）|{B4C}"),
+)
+BLOCKS["willinckii-omega"] = dict(
+    cites=[],
+    desc=[("白毛細緻，分岔清晰、層次立體。", "ajins-omega", "葉面白毛細緻 隨著生長逐漸展現出分岔清晰且極具層次的立體結構", "")],
+    searched=searched(f"{AJ}|{WEB}|{B4}", f"{AJ}（沒有照護資料）|{B4C}"),
+)
+BLOCKS["willinckii-half-moon"] = dict(
+    cites=[
+        c("ajins-half-moon", "light", 3, "孢子苗：室內明亮散射光即可穩定生長", "bright filtered light → 3；小苗", "在室內明亮散射光環境下即可穩定生長"),
+        c("ajins-half-moon", "difficulty", 1, "孢子苗：入門款，適合新手", "小苗", "入門款定位，適合新手開始養成"),
+    ],
+    desc=[("白毛與分岔表現優異。", "ajins-half-moon", "半月鹿角蕨孢子苗為實生培養的小型植株，白毛跟分叉表現優異", "")],
+    note=[("台灣目前看到的是孢子苗，個體間的葉型與分岔可能有差異。", "ajins-half-moon", "不同個體在葉型、分岔與未來表現上皆可能產生變化", "")],
+    searched=searched(f"{AJ}|{WEB}|{B4}", f"{AJ}|{B4C}"),
+)
+BLOCKS["willinckii-silver-phoenix"] = dict(
+    cites=[c("ajins-silver-phoenix", "fertile_hair", 5, "大量細緻的銀白色絨毛", "大量銀白絨毛 → 5", "銀鳳凰特徵是擁有大量細緻的銀白色絨毛")],
+    desc=[("銀白色絨毛細密、植株對稱，孢子葉略寬厚，生長較快。", "ajins-silver-phoenix",
+           "擁有大量細緻的銀白色絨毛 植株對稱優美，孢子葉也稍微比較寬厚一些 相較於其他鹿角蕨品種，銀鳳凰生長速度較快", "")],
+    note=[("台灣目前看到的是孢子苗。", "ajins-silver-phoenix", "新品 | 銀鳳凰鹿角蕨P.Silver phoenix 孢子苗", "")],
+    searched=searched(f"{AJ}|{WEB}|{B4}", f"{AJ}（只有標題標籤「中光」，不採用）|{B4C}"),
+)
+BLOCKS["veitchii-no-shield"] = dict(
+    cites=[
+        c("ajins-veitchii-no-shield", "light", 3, "散光通風環境", "bright filtered light → 3", "適合在陽台等處以散光通風環境栽種"),
+        c("ajins-veitchii-no-shield", "difficulty", 1, "相對好照顧", "好照顧 → easy → 1", "它屬於相對好照顧的觀葉植物"),
+        c("ajins-veitchii-no-shield", "size", "S", "外觀呈類侏儒形態", "只說外觀像侏儒，不是稱它為侏儒 → 不算侏儒說法",
+          "外觀呈類侏儒形態", "", "excluded"),
+    ],
+    desc=[("沒有營養葉，只長孢子葉，外觀類似侏儒型；孢子葉白皙、微波浪分岔。", "ajins-veitchii-no-shield",
+           "其主要特色是沒有營養葉，只有孢子葉生長 外觀呈類侏儒形態，葉片白皙且帶有微波浪分岔的質感", "")],
+    searched=searched(f"{AJ}|{WEB}|{B4}|微體溫室〈銀鹿〉（未列）", f"{AJ}|{B4C}"),
+)
+BLOCKS["bifurcatum-dwarf"] = dict(
+    cites=[
+        c("ajins-bifurcatum-dwarf", "size", "S", "侏儒", "來源稱侏儒、沒有尺寸 → S", "侏儒二叉鹿角蕨是一款小巧、好養，又有漂亮株型的侏儒鹿角蕨"),
+        c("ajins-bifurcatum-dwarf", "fertile_posture", "up", "孢子葉集中向上生長", "", "孢子葉會集中向上生長"),
+        c("ajins-bifurcatum-dwarf", "light", 3, "光線需求中等，明亮通風即可", "中光、明亮 → 3", "光線需求中等，不需要特別追求高光或特殊環境，在明亮、通風的空間就能穩定培養"),
+        c("ajins-bifurcatum-dwarf", "difficulty", 1, "相當容易入門", "", "對第一次接觸鹿角蕨的新手來說也相當容易入門"),
+    ],
+    desc=[("孢子葉集中向上生長，整株像一束捧花。", "ajins-bifurcatum-dwarf", "孢子葉會集中向上生長 ... 整株就像捧在手中的一束綠色捧花", "")],
+    searched=searched(f"{AJ}|{WEB}|{B4}|微體溫室〈侏儒鹿角蕨〉（未列）", f"{AJ}|{B4C}"),
+)
+BLOCKS["veitchii-lemoinei-dwarf"] = dict(
+    cites=[
+        c("ajins-lemoinei-dwarf", "size", "S", "侏儒", "來源稱侏儒、沒有尺寸 → S", "侏儒檸檬鹿角蕨將檸檬鹿角蕨原本細緻的葉型進一步濃縮在更加迷你的株型中"),
+        c("mo-lemoinei", "size", "S", "侏儒檸檬，體型不到一般檸檬的 ½", "來源稱侏儒、沒有尺寸 → S", "體型是一般檸檬鹿角蕨的 ½ 大小不到"),
+        c("ajins-lemoinei-dwarf", "fertile_posture", "spread", "葉片集中向外展開", "spreading → spread", "葉片集中向外展開"),
+        c("mo-lemoinei", "fertile_hair", 3, "孢子葉白毛感明顯", "明顯有毛 → 3", "孢子葉的白毛感明顯"),
+        c("ajins-lemoinei-dwarf", "light", 5, "可適應較高光，光線充足下株型更好", "高光、光線充足 → 5",
+          "栽培上也能適應較高光的環境，在光線充足、通風良好的條件下培養，更容易展現緊湊漂亮的株型"),
+        c("mo-lemoinei", "light", "2–3", "中弱至中光", "中弱光介於低弱光（1）與中光（3）→ 2；至中光 → 2–3", "檸檬鹿角蕨日照｜中至中強光｜中至中強光｜中弱至中光（第三欄為侏儒檸檬）"),
+        c("mo-lemoinei", "water", 1, "各品系：耐旱喜透氣、澆透不積水", "文章說各品系照顧相似、耐旱 → 1",
+          "檸檬鹿角蕨雖有不同品系之分，然而在照顧上卻有許多相似之處：充足日照、耐旱喜透氣、澆透不積水"),
+    ],
+    desc=[("比檸檬的分岔更細、更密，株型緊湊。", "ajins-lemoinei-dwarf", "相較一般檸檬，它的孢子葉分岔更細、更小也更加密集", ""),
+          ("營養葉淺綠，孢子葉短、覆白毛；可馴化到 6~8 小時日照，是少數能露養的侏儒品種。", "mo-lemoinei",
+           "1. 營養葉呈淺綠 2. 孢子葉手短覆白毛 ... 侏儒檸檬鹿角蕨是少數能挑戰露養的侏儒品種，可馴化逐漸增加日照至 6~8 小時", "")],
+    searched=searched(f"{AJ}|微體溫室〈檸檬鹿角蕨〉|{WEB}", f"{AJ}|微體溫室〈檸檬鹿角蕨〉（沒有侏儒檸檬的難度）"),
+)
+BLOCKS["willinckii-yellow-moon-dwarf"] = dict(
+    cites=[
+        c("ajins-yellow-moon-dwarf", "size", "S", "侏儒型個體", "來源稱侏儒、沒有尺寸 → S", "為經典黃月鹿角蕨孢子苗中篩選出的侏儒型個體"),
+        c("mo-dwarf", "size", "S", "侏儒爪哇", DWC, f"{DWT} ... 侏儒黃月鹿角蕨｜中偏難"),
+        c("ajins-yellow-moon-dwarf", "origin", "從黃月孢子苗篩選", "黃月孢子苗篩選", "沒有 T1、T2，採 T3", "為經典黃月鹿角蕨孢子苗中篩選出的侏儒型個體"),
+        *mo_guide("侏儒黃月", 5, 3),
+        mo_rate("mo-dwarf", "侏儒黃月鹿角蕨", "中偏難", DW),
+        mo_rate("mo-moon", "侏儒黃月鹿角蕨", "中偏難", MOONT),
+        c("mo-moon", "water", 1, "室內或弱光：介質偏乾再澆", "drying between waterings → 1",
+          "栽培於室內或弱光環境的侏儒黃月鹿角蕨，就可以等到介質偏乾時再澆水"),
+    ],
+    desc=[("孢子葉細長，覆白皙絨毛。", "ajins-yellow-moon-dwarf", "孢子葉細長延展 ... 搭配白皙細緻的絨毛", ""),
+          ("孢子葉纖細，葉背帶淡金色；孢子苗變化大，衍生出迦具夜、亞森等收藏家命名個體。", "mo-expensive",
+           "整體孢子葉纖細精緻如藝術品、葉背更帶有特殊的淡金色 ... 由於侏儒黃月孢子苗變化大，更有不少收藏家的命名個體，如：迦具夜、迦納、亞森等", ""),
+          ("微體溫室建議夏季移到室內控溫環境，並避免午後淋雨。", "mo-moon", "尤其侏儒黃月鹿角蕨建議移至室內控溫環境渡夏，也盡量避免午後淋雨", "")],
+    note=[("晴花鹿苑網址為 yellow-moon-dwarf 的頁面販售的是命名個體「琥珀 Kohaku」，不確定是否同一植物，型態描述不採用。", "haruhana-yellow-moon-dwarf",
+           "晴花鹿苑典藏鹿角蕨 P.willinckii Kohaku 琥珀 ... 一直是鹿友間爭相收藏的侏儒奢華逸品", "")],
+    searched=searched(f"{AJ}|微體溫室〈侏儒鹿角蕨〉〈月亮系列〉〈鹿角蕨為什麼那麼貴〉|晴花鹿苑〈琥珀〉（不採用）",
+                      f"{MOS}|微體溫室〈侏儒鹿角蕨〉〈月亮系列〉（幼苗控溫 22~28 度是適溫，不是建議最低／最高溫）"),
+)
+BLOCKS["hillii-wave"] = dict(
+    cites=[
+        c("ajins-hillii-wave", "origin", "從 P. hillii 'Pumila' 播孢特選", "Pumila 播孢特選", "沒有 T1、T2，採 T3",
+          "是由歷史悠久的經典深綠園藝品種(Platycerium hillii 'Pumila')播孢特選而來"),
+        c("ajins-hillii-wave", "light", 3, "半日照、光線不過強", "半日照 → 3", "在半日照且不過強的光線環境下，葉型表現最為優雅柔順"),
+        c("ajins-hillii-wave", "difficulty", 1, "非常好種", "", "生長穩定、適應力佳，非常好種且觀賞性高"),
+    ],
+    desc=[("葉緣明顯波浪起伏，葉尾尖。", "ajins-hillii-wave", "葉緣呈現明顯波浪起伏，搭配尖葉尾線條", "")],
+    note=[("阿金的便秘花園寫由深綠園藝品種 P. hillii 'Pumila' 播孢特選而來。", "ajins-hillii-wave",
+           "是由歷史悠久的經典深綠園藝品種(Platycerium hillii 'Pumila')播孢特選而來", "")],
+    searched=searched(f"{AJ}|{WEB}|{B4}|微體溫室〈深綠鹿角蕨〉（未列）", f"{AJ}|{B4C}"),
+)
+BLOCKS["kitshakood-round-frond"] = dict(
+    cites=[
+        c("ajins-kitshakood-round", "origin", "從亞皇中篩選的圓葉個體", "亞皇篩選", "沒有 T1、T2，採 T3", "為經典亞皇鹿角蕨中所篩選出的圓葉型個體"),
+        c("ajins-kitshakood-round", "light", 3, "半日照即可穩定培養", "半日照 → 3", "半日照環境即可穩定培養"),
+    ],
+    desc=[("營養葉比一般亞皇更圓潤飽滿。", "ajins-kitshakood-round", "相較一般亞皇，其營養葉更加圓潤飽滿", "")],
+    searched=searched(f"{AJ}|{WEB}|{B4}|微體溫室〈亞猴鹿角蕨〉（未列）", f"{AJ}|{B4C}"),
+)
+BLOCKS["uncia"] = dict(
+    cites=[
+        c("haruhana-uncia", "size", "M", "中小型", SMALL, "成株尺寸為中小型", "", "excluded"),
+        c("haruhana-uncia", "fertile_posture", "spread", "葉型向外展開", "spreading → spread", "美麗霸氣的葉型向外展開"),
+    ],
+    desc=[("成株中小型，冠型小巧，孢子葉白皙、末端多岔如小爪；生長慢、芽量少。", "haruhana-uncia",
+           "成株尺寸為中小型，帶著迷人的小巧精緻的冠型。其孢子葉帶著白皙絨毛的質感 ... 末端多岔型態猶如小爪子般 ... 其生長速度緩慢，芽量低少", "")],
+    searched=searched(f"{HR}|{WEB}|{B4}", f"{HR}（沒有照護資料）|{B4}"),
+)
+BLOCKS["tide"] = dict(
+    cites=[
+        c("haruhana-tide", "fertile_posture", "spread", "葉片放射狀姿態", "spreading → spread", "葉片展現出迷人的放射狀姿態"),
+        c("haruhana-tide", "fertile_hair", 3, "墨綠基調上覆滿細緻白色絨毛", "看得出底色 → 3", "於墨綠基調上覆滿細緻的白色絨毛"),
+    ],
+    desc=[("孢子葉放射狀展開、脈絡寬厚清晰，墨綠底上覆細緻白毛，冠型小巧。", "haruhana-tide",
+           "葉片展現出迷人的放射狀姿態，白皙的色澤映襯出寬厚而清晰的脈絡紋理。於墨綠基調上覆滿細緻的白色絨毛 ... 小巧精緻的冠型", "")],
+    searched=searched(f"{HR}|{WEB}|{B4}", f"{HR}（沒有照護資料）|{B4}"),
+)
+BLOCKS["willinckii-ccs"] = dict(
+    cites=[
+        c("haruhana-ccs", "fertile_hair", 5, "臉與手有濃密白皙絨毛", "very densely → 5", "臉與手有著濃密的白皙絨毛質感"),
+        c("haruhana-ccs", "shield_hair", 5, "臉與手有濃密白皙絨毛", "very densely → 5", "臉與手有著濃密的白皙絨毛質感 ... 營養葉的部分也完美的繼承了這樣的特點"),
+    ],
+    desc=[("高冠厚葉，盾葉與孢子葉都有濃密白毛；晴花鹿苑的商品名為「棉花雲」。", "haruhana-ccs",
+           "棉花雲 ... 高冠厚葉的P. willinckii CCS最大的特點就是臉與手有著濃密的白皙絨毛質感", "")],
+    searched=searched(f"{HR}|{WEB}|{B4}", f"{HR}（沒有照護資料）|{B4}"),
+)
+BLOCKS["willinckii-makigumo"] = dict(
+    cites=[c("haruhana-makigumo", "spore", "tips", "孢子集中於葉端", "", "孢子成熟時，特徵明顯地集中於葉端")],
+    desc=[("孢子葉亞成株時末端外捲、成株後內捲，分岔極短微捲，帶厚實星狀白毛。", "haruhana-makigumo",
+           "在亞成階段時，孢子葉末端優雅地向外捲曲；進入成株階段後，葉端則奇妙地內捲 ... 岔型極短微捲，並覆蓋厚實的星狀白毛", "")],
+    note=[("晴花鹿苑首度自行命名的品種。", "haruhana-makigumo", "「卷雲」是晴花鹿苑首度自行命名的鹿角蕨品種。", "")],
+    searched=searched(f"{HR}|{WEB}|{B4}", f"{HR}（沒有照護資料）|{B4}"),
+)
+BLOCKS["willinckii-makigumo"]["cites"].append(
+    c("haruhana-makigumo", "fertile_hair", 5, "覆蓋厚實的星狀白毛", "厚實白毛 → 5", "並覆蓋厚實的星狀白毛"))
+BLOCKS["willinckii-white-heaven"] = dict(
+    cites=[c("haruhana-white-heaven", "fertile_posture", "spread", "孢子葉如羽翼向兩側展開", "spreading → spread", "孢子葉如羽翼般向外兩側展翅")],
+    desc=[("高冠翠綠，孢子葉如羽翼向兩側展開，白毛明顯。", "haruhana-white-heaven",
+           "有著高聳翠綠的美麗冠型，同時孢子葉如羽翼般向外兩側展翅，優雅白皙的絨毛感", "")],
+    searched=searched(f"{HR}|{WEB}|{B4}", f"{HR}（沒有照護資料）|{B4}"),
+)
+BLOCKS["willinckii-white-rose"] = dict(
+    cites=[],
+    desc=[("孢子葉寬厚白皙。", "haruhana-white-rose", "基因穩定表現出迷人寬厚的孢子葉特色 ... 喜歡寬、厚、白的鹿友", "")],
+    note=[("晴花鹿苑販售的是孢子苗，稱基因穩定。", "haruhana-white-rose", "白玫瑰孢子苗，基因穩定表現出迷人寬厚的孢子葉特色", "")],
+    searched=searched(f"{HR}|{WEB}|{B4}", f"{HR}（沒有照護資料）|{B4}"),
+)
+BLOCKS["willinckii-yami"] = dict(
+    cites=[c("haruhana-yami", "difficulty", 1, "新手友善、易於養護", "", "也是一款新手友善易於養護的品項")],
+    desc=[("細緻款的白爪哇，高冠，孢子葉細長飄逸。", "haruhana-yami", "P.willinckii Yami是一款細緻款的白哇 整體的高冠層次豐富，特別是孢子葉的型態細長而優雅", "")],
+    searched=searched(f"{HR}|{WEB}|{B4}", f"{HR}|{B4}"),
+)
+BLOCKS["sunny-cutie"] = dict(
+    cites=[
+        c("haruhana-sunny-cutie", "size", "S", "迷你爪哇", "來源稱迷你（mini）、沒有尺寸 → S", "罕見細緻型的迷你爪哇，整體成株體型嬌小"),
+        c("haruhana-sunny-cutie", "fertile_posture", "pendant", "孢子葉如流水般下墜", "pendulous → pendant", "孢子葉修長優雅，宛如流水悠長的下墜姿態"),
+    ],
+    desc=[("迷你冠型，孢子葉修長下垂，末端捲翹。", "haruhana-sunny-cutie", "擁有縮小版的迷你冠型。此外孢子葉修長優雅，宛如流水悠長的下墜姿態，末端帶有捲翹的型態", "")],
+    searched=searched(f"{HR}|{WEB}|{B4}", f"{HR}（沒有照護資料）|{B4}"),
+)
+BLOCKS["willinckii-anne"] = dict(cites=[], searched=searched(f"{HR}（只有照片與出貨說明）|{WEB}|{B4}", f"{HR}（只有照片）|{B4}"))
+BLOCKS["willinckii-bogie"] = dict(cites=[], searched=searched(f"{HR}（只有照片與出貨說明）|{WEB}|{B4}", f"{HR}（只有照片）|{B4}"))
+BLOCKS["wfsq"] = dict(
+    cites=[
+        c("haruhana-wfsq", "fertile_posture", "spread", "孢子葉向兩側伸展", "spreading → spread", "其孢子葉優雅地向兩側伸展"),
+        c("haruhana-wfsq", "fertile_hair", 3, "明顯而細緻的白色星狀絨毛", "明顯有毛 → 3", "表面覆有明顯而細緻的白色星狀絨毛"),
+        c("haruhana-wfsq", "difficulty", 1, "養護容易，適合台灣多數環境", "", "整體養護容易，非常適合台灣多數的栽培環境"),
+    ],
+    desc=[("孢子葉厚實、向兩側伸展，呈不規則大波浪，末端多重短叉，覆星狀白毛。", "haruhana-wfsq",
+           "其孢子葉優雅地向兩側伸展，葉片質地厚實，表面覆有明顯而細緻的白色星狀絨毛。孢子葉呈現不規則的大波浪狀曲線，末端分岔出多重短叉", "")],
+    searched=searched(f"{HR}|{WEB}|{B4}", f"{HR}|{B4}"),
+)
+BLOCKS["willinckii-anapat-1"] = dict(
+    cites=[c("haruhana-anapat-1", "size", "S", "母本成熟時體型偏小", SMALL, "母本成熟時體型偏小", "", "excluded")],
+    desc=[("母本成熟時體型偏小，孢子葉秀氣精緻。", "haruhana-anapat-1", "母本成熟時體型偏小，擁有秀氣且精緻的孢子葉", "")],
+    note=[("台灣目前看到的是孢子苗。", "haruhana-anapat-1", "經典款 P. willinckii Anapat 1 孢子苗。", "")],
+    searched=searched(f"{HR}|{WEB}|{B4}", f"{HR}（沒有照護資料）|{B4}"),
+)
 
 
 # ---------------------------------------------------------------- build
