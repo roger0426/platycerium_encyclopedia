@@ -346,6 +346,19 @@ body[data-layout="split"] .graph-pane { border-right: 1px solid var(--line); }
   -webkit-overflow-scrolling: touch;
 }
 .chips::-webkit-scrollbar { display: none; }
+/* 類型／地區：收合時只顯示「全部」按鈕並和搜尋列同排；展開時獨自佔一列（排在搜尋列下方） */
+.search-row > .chips { flex: 1 1 100%; order: 1; min-width: 0; margin-top: 2px; }
+.search-row > .chips.collapsed { flex: none; order: 0; margin-top: 0; }
+.search-row > .chips.collapsed .chip { height: 100%; }
+.chips.collapsed .chip[aria-pressed="false"] { display: none; }
+.chips.collapsed .chip[aria-pressed="true"]::after {
+  content: "";
+  width: 6px; height: 6px;
+  margin: -3px 0 0 2px;
+  border: solid currentColor;
+  border-width: 0 1.5px 1.5px 0;
+  transform: rotate(45deg);
+}
 .chip {
   flex: none;
   display: inline-flex;
@@ -363,8 +376,8 @@ body[data-layout="split"] .graph-pane { border-right: 1px solid var(--line); }
 .chip[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
 .chip[aria-pressed="true"] .dot { background: currentColor !important; }
 
-.search-row { display: flex; gap: 8px; }
-.search-row .search { flex: 1; min-width: 0; }
+.search-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.search-row .search { flex: 1 1 180px; min-width: 0; }
 .feat-toggle {
   flex: none; display: inline-flex; align-items: center; gap: 6px;
   padding: 0 14px;

@@ -436,17 +436,17 @@
             <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><path d="M20 20l-4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
             <input id="q" type="search" placeholder="搜尋學名、中文名、別名、產地…" value="${esc(state.q)}" autocomplete="off" enterkeyhint="search">
           </label>
+          <div class="chips${state.type === "all" ? " collapsed" : ""}" role="group" aria-label="類型" data-chips="type">
+            ${chip("type", "all", `所有類型 ${ITEMS.length}`)}
+            ${Object.entries(TYPE_LABEL).map(([k, lbl]) => chip("type", k, `${lbl} ${nOf(k)}`)).join("")}
+          </div>
+          <div class="chips${state.region === "all" ? " collapsed" : ""}" role="group" aria-label="地區" data-chips="region">
+            ${chip("region", "all", "所有地區")}
+            ${Object.entries(REGIONS).map(([k, r]) => chip("region", k, r.label, r.color)).join("")}
+          </div>
           <button class="feat-toggle" id="feat-toggle" aria-expanded="${state.featOpen}" aria-controls="feat-panel">
             ${icon("filter")}<span class="lbl">特徵篩選</span><span class="n" id="feat-n"></span>
           </button>
-        </div>
-        <div class="chips" role="group" aria-label="類型">
-          ${chip("type", "all", `全部 ${ITEMS.length}`)}
-          ${Object.entries(TYPE_LABEL).map(([k, lbl]) => chip("type", k, `${lbl} ${nOf(k)}`)).join("")}
-        </div>
-        <div class="chips" role="group" aria-label="地區">
-          ${chip("region", "all", "所有地區")}
-          ${Object.entries(REGIONS).map(([k, r]) => chip("region", k, r.label, r.color)).join("")}
         </div>
         <div class="feat-panel" id="feat-panel" ${state.featOpen ? "" : "hidden"}>
           ${envHTML()}
@@ -480,12 +480,29 @@
     initCardSize();
 
     app.querySelector("#q").addEventListener("input", (e) => { state.q = e.target.value; updateGrid(); });
+    // 類型／地區選項：選「全部」時收合成單一按鈕，點它展開；選了其他選項則保持展開
+    const chipGroups = app.querySelectorAll(".chips[data-chips]");
+    const collapseIdle = (except) => chipGroups.forEach((g) => {
+      if (g !== except && state[g.dataset.chips] === "all") g.classList.add("collapsed");
+    });
     app.querySelectorAll(".chip[data-group]").forEach((btn) => btn.addEventListener("click", () => {
-      state[btn.dataset.group] = btn.dataset.value;
-      app.querySelectorAll(`.chip[data-group="${btn.dataset.group}"]`).forEach((b) =>
+      const groupEl = btn.closest(".chips"), group = btn.dataset.group;
+      if (groupEl.classList.contains("collapsed")) {
+        collapseIdle(groupEl);
+        groupEl.classList.remove("collapsed");
+        return;
+      }
+      const changed = state[group] !== btn.dataset.value;
+      state[group] = btn.dataset.value;
+      app.querySelectorAll(`.chip[data-group="${group}"]`).forEach((b) =>
         b.setAttribute("aria-pressed", String(b === btn)));
-      updateGrid();
+      if (state[group] === "all") groupEl.classList.add("collapsed");
+      if (changed) updateGrid();
     }));
+    document.addEventListener("click", function onOutside(e) {
+      if (!app.contains(chipGroups[0])) { document.removeEventListener("click", onOutside); return; }
+      if (!e.target.closest(".chips[data-chips]")) collapseIdle();
+    });
 
     app.querySelector("#feat-toggle").addEventListener("click", () => setFeatOpen(!state.featOpen));
 
