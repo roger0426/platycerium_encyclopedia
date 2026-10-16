@@ -35,6 +35,7 @@
   let ITEMS = [];          // 全部品種
   let BY_ID = new Map();
   let REGIONS = {};
+  let EDIT = false;        // 以 tools/serve.py 啟動時可在網頁上新增／刪除照片
   const state = { q: "", type: "all", region: "all", scrollY: 0 };
 
   /* ---------------- 工具 ---------------- */
@@ -75,6 +76,13 @@
     return parseCSV(await res.text());
   }
 
+  const photoOf = (p) => ({ src: p.src, caption: p.caption, credit: p.credit, license: p.license, source: p.source, variant: p.variant || "" });
+  // variant 欄有值（例如「斑葉」）的是變異株照片，另外收，不當封面也不混在主相簿
+  function setPhotos(it, rows) {
+    it.photos = rows.filter((p) => p.src && !p.variant).map(photoOf);
+    it.variantPhotos = rows.filter((p) => p.src && p.variant).map(photoOf);
+  }
+
   async function loadData() {
     const [plants, regions, photos, features] = await Promise.all([
       fetchCSV(DATA_FILES.plants), fetchCSV(DATA_FILES.regions), fetchCSV(DATA_FILES.photos), fetchCSV(DATA_FILES.features)
@@ -89,13 +97,12 @@
 
     REGIONS = Object.fromEntries(regions.map((r) => [r.key, { label: r.label, color: r.color || "#6b7d72" }]));
 
-    // variant 欄有值（例如「斑葉」）的是變異株照片，另外收，不當封面也不混在主相簿
     const photosById = new Map(), variantsById = new Map();
     for (const p of photos) {
       if (!p.id || !p.src) continue;
       const map = p.variant ? variantsById : photosById;
       if (!map.has(p.id)) map.set(p.id, []);
-      map.get(p.id).push({ src: p.src, caption: p.caption, credit: p.credit, license: p.license, source: p.source, variant: p.variant || "" });
+      map.get(p.id).push(photoOf(p));
     }
 
     ITEMS = plants.filter((p) => p.id).map((p) => {
@@ -238,6 +245,9 @@
     if (win) { e.preventDefault(); win.focus(); }
   });
 
+  const photoEditBtn = (it, cls) =>
+    `<button type="button" class="${cls}" data-photo-edit="${esc(it.id)}" title="新增／刪除照片" aria-label="管理 ${esc(titleOf(it))} 的照片">${icon("camera")}${cls === "card-edit" ? "" : "<span>管理照片</span>"}</button>`;
+
   function cardHTML(it, hint = "") {
     const en = enOf(it);
     const href = `#/p/${encodeURIComponent(it.id)}`;
@@ -248,6 +258,7 @@
           <span class="badge ${it.type}">${TYPE_LABEL[it.type]}</span>
           ${hint ? `<span class="sort-hint">${esc(hint)}</span>` : ""}
           ${it.photos.length > 1 ? `<span class="count">${it.photos.length} 張</span>` : ""}
+          ${EDIT ? photoEditBtn(it, "card-edit") : ""}
         </div>
         <div class="card-body">
           <div class="card-title">
@@ -748,9 +759,10 @@
           <div class="gallery-main ${hasPhotos ? "" : "placeholder"}" id="gmain" role="${hasPhotos ? "button" : "img"}" tabindex="${hasPhotos ? 0 : -1}" aria-label="${hasPhotos ? "放大檢視照片" : "尚無照片"}">
             <img id="gimg" src="${esc(coverOf(it))}" alt="${esc(titleOf(it))}">
           </div>
-          <div class="gallery-cap" id="gcap">${hasPhotos ? photoCaption(it.photos[0]) : "尚無照片，可在 data/photos.csv 新增"}</div>
+          <div class="gallery-cap" id="gcap">${hasPhotos ? photoCaption(it.photos[0]) : EDIT ? "尚無照片" : "尚無照片，可在 data/photos.csv 新增"}</div>
           ${thumbs}
           ${variantsHTML}
+          ${EDIT ? photoEditBtn(it, "back-btn gallery-edit") : ""}
         </div>
 
         <div class="detail-body">
@@ -1032,6 +1044,167 @@
       close, step
     };
   })();
+
+  /* ---------------- 照片管理（tools/serve.py） ---------------- */
+  // 照片在瀏覽器裡先縮到長邊 1600px、轉 JPEG，再交給本機伺服器存到 images/<id>/ 並寫入 photos.csv
+  const photoEditor = (() => {
+    const dlg = document.getElementById("photo-dlg");
+    const $ = (s) => dlg.querySelector(s);
+    const list = $("#pd-list"), pendingEl = $("#pd-pending"), msg = $("#pd-msg"), uploadBtn = $("#pd-upload");
+    const field = (k) => $(`#pd-${k}`);
+    let it = null, pending = [], changed = false, busy = false;
+
+    async function api(path, body) {
+      const res = await fetch(path, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
+      const j = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(j.error || `HTTP ${res.status}`);
+      return j;
+    }
+    const say = (text, err = false) => { msg.textContent = text; msg.classList.toggle("err", err); };
+    const blobToDataURL = (b) => new Promise((ok, fail) => {
+      const r = new FileReader(); r.onload = () => ok(r.result); r.onerror = fail; r.readAsDataURL(b);
+    });
+    async function toJPEG(blob) {
+      const bmp = await createImageBitmap(blob);
+      const k = Math.min(1, 1600 / Math.max(bmp.width, bmp.height));
+      const c = document.createElement("canvas");
+      c.width = Math.round(bmp.width * k); c.height = Math.round(bmp.height * k);
+      const ctx = c.getContext("2d");
+      ctx.fillStyle = "#fff"; ctx.fillRect(0, 0, c.width, c.height); // 透明 PNG 轉 JPEG 時底色用白色
+      ctx.drawImage(bmp, 0, 0, c.width, c.height);
+      return blobToDataURL(await new Promise((ok) => c.toBlob(ok, "image/jpeg", 0.88)));
+    }
+
+    function renderList() {
+      const all = [...it.photos, ...it.variantPhotos];
+      list.innerHTML = all.length ? all.map((p, i) => `
+        <figure class="pd-item">
+          <img src="${esc(p.src)}" alt="" loading="lazy">
+          ${i === 0 && !p.variant ? `<span class="pd-cover">封面</span>` : ""}
+          ${p.variant ? `<span class="pd-cover">變異株・${esc(p.variant)}</span>` : ""}
+          <figcaption>${esc(p.caption || p.src.split("/").pop())}${p.credit ? `<br><small>📷 ${esc(p.credit)}</small>` : ""}</figcaption>
+          <div class="pd-btns">
+            ${i > 0 && !p.variant ? `<button type="button" data-pd-cover="${esc(p.src)}">設為封面</button>` : ""}
+            <button type="button" class="danger" data-pd-del="${esc(p.src)}">刪除</button>
+          </div>
+        </figure>`).join("") : `<p class="muted">還沒有照片</p>`;
+    }
+    function renderPending() {
+      pendingEl.innerHTML = pending.map((p, i) => `
+        <figure class="pd-item"><img src="${p.url}" alt="">
+          <div class="pd-btns"><button type="button" data-pd-drop="${i}">移除</button></div></figure>`).join("");
+      uploadBtn.disabled = busy || !pending.length;
+      uploadBtn.textContent = pending.length ? `上傳 ${pending.length} 張` : "上傳";
+    }
+    function addBlobs(blobs) {
+      const imgs = blobs.filter((b) => b.type.startsWith("image/"));
+      if (!imgs.length) return say("沒有找到圖片", true);
+      pending.push(...imgs.map((blob) => ({ blob, url: URL.createObjectURL(blob) })));
+      renderPending();
+      say(`已加入 ${imgs.length} 張，填好下方資料後按「上傳」`);
+    }
+    async function addURL(url) {
+      url = url.trim();
+      if (!/^https?:\/\//i.test(url)) return say("請貼上 http(s) 開頭的圖片網址", true);
+      say("下載中…");
+      try {
+        const j = await api("api/fetch", { url });
+        addBlobs([await (await fetch(`data:${j.type};base64,${j.data}`)).blob()]);
+        $("#pd-url-input").value = "";
+      } catch (e) { say(e.message, true); }
+    }
+    const done = (j) => { setPhotos(it, j.photos); changed = true; renderList(); };
+
+    async function upload() {
+      if (busy || !pending.length) return;
+      busy = true; renderPending();
+      const meta = Object.fromEntries(["caption", "credit", "source", "license", "variant"].map((k) => [k, field(k).value.trim()]));
+      try {
+        while (pending.length) {
+          say(`上傳中…（剩 ${pending.length} 張）`);
+          done(await api("api/photos/add", { id: it.id, data: await toJPEG(pending[0].blob), ...meta }));
+          URL.revokeObjectURL(pending.shift().url);
+          renderPending();
+        }
+        say("已上傳，並寫入 data/photos.csv");
+      } catch (e) { say(`上傳失敗：${e.message}`, true); }
+      busy = false; renderPending();
+    }
+
+    dlg.addEventListener("click", async (e) => {
+      const b = e.target.closest("button");
+      // 點對話框外的背景也關閉
+      const r = dlg.getBoundingClientRect();
+      if (e.target === dlg && (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom)) return dlg.close();
+      if (!b) return;
+      try {
+        if (b.dataset.pd === "close") dlg.close();
+        else if (b.id === "pd-upload") upload();
+        else if (b.dataset.pdDrop) { URL.revokeObjectURL(pending.splice(Number(b.dataset.pdDrop), 1)[0].url); renderPending(); }
+        else if (b.dataset.pdCover) done(await api("api/photos/cover", { src: b.dataset.pdCover }));
+        else if (b.dataset.pdDel && confirm("確定刪除這張照片？照片檔也會一併刪除。")) {
+          done(await api("api/photos/delete", { src: b.dataset.pdDel }));
+          say("已刪除");
+        }
+      } catch (err) { say(err.message, true); }
+    });
+    $("#pd-file").addEventListener("change", (e) => { addBlobs([...e.target.files]); e.target.value = ""; });
+    $("#pd-url").addEventListener("submit", (e) => { e.preventDefault(); addURL($("#pd-url-input").value); });
+
+    // 拖曳：檔案直接收；從其他分頁拖來的圖片只有網址，優先取 <img src>，交給伺服器下載
+    const drop = $("#pd-drop");
+    drop.addEventListener("dragover", (e) => { e.preventDefault(); drop.classList.add("over"); });
+    drop.addEventListener("dragleave", () => drop.classList.remove("over"));
+    drop.addEventListener("drop", (e) => {
+      e.preventDefault(); drop.classList.remove("over");
+      const dt = e.dataTransfer;
+      if (dt.files.length) return addBlobs([...dt.files]);
+      const img = dt.getData("text/html").match(/<img[^>]+src="([^"]+)"/i)?.[1];
+      const url = (img || dt.getData("text/uri-list") || dt.getData("text/plain")).split("\n")[0].replace(/&amp;/g, "&");
+      if (url) addURL(url);
+    });
+    // 貼上：圖片一律收；文字只在沒有聚焦輸入框時當作圖片網址
+    document.addEventListener("paste", (e) => {
+      if (!dlg.open) return;
+      const files = [...e.clipboardData.files];
+      if (files.length) { e.preventDefault(); return addBlobs(files); }
+      const text = e.clipboardData.getData("text/plain");
+      if (!e.target.matches("input, textarea") && /^https?:\/\//i.test(text.trim())) { e.preventDefault(); addURL(text); }
+    });
+
+    // 關閉時才重畫底下的頁面，並保留捲動位置
+    dlg.addEventListener("close", () => {
+      pending.forEach((p) => URL.revokeObjectURL(p.url));
+      pending = [];
+      if (!changed) return;
+      const y = window.scrollY;
+      route();
+      window.scrollTo(0, y);
+    });
+
+    return {
+      get isOpen() { return dlg.open; },
+      open(id) {
+        it = BY_ID.get(id);
+        if (!it) return;
+        changed = false;
+        $("#pd-title").textContent = `照片管理・${titleOf(it)}`;
+        // 作者、授權常常整批相同，保留上次填的
+        for (const k of ["caption", "source", "variant"]) field(k).value = "";
+        say("");
+        renderList(); renderPending();
+        dlg.showModal();
+        drop.focus();
+      }
+    };
+  })();
+
+  document.addEventListener("click", (e) => {
+    const b = e.target.closest("[data-photo-edit]");
+    if (!b) return;
+    e.preventDefault();
+    photoEditor.open(b.dataset.photoEdit);
+  });
 
   /* ---------------- 版面：左關係圖 ／ 右圖鑑，可各自關閉 ---------------- */
   const graphPane = document.getElementById("graph-pane");
@@ -1625,6 +1798,7 @@
   /* ---------------- 鍵盤 ---------------- */
   let detailNav = null;
   document.addEventListener("keydown", (e) => {
+    if (photoEditor.isOpen) return; // Esc 交給對話框自己關閉
     if (lightbox.isOpen) {
       if (e.key === "Escape") lightbox.close();
       else if (e.key === "ArrowLeft") lightbox.step(-1);
@@ -1682,7 +1856,10 @@
 
   /* ---------------- 啟動 ---------------- */
   setPanes({});
-  loadData()
+  // 靜態主機上沒有這個 API（404），編輯按鈕就不會出現
+  const probeEdit = fetch("api/edit", { cache: "no-store" })
+    .then((r) => r.ok && r.json()).then((j) => { EDIT = !!j?.ok; }).catch(() => {});
+  Promise.all([loadData(), probeEdit])
     .then(() => {
       if (panes.graph) graph.show();
       window.addEventListener("hashchange", route);
@@ -1693,7 +1870,7 @@
       const isFile = location.protocol === "file:";
       app.innerHTML = `<div class="empty">
         <p>資料載入失敗：${esc(err.message)}</p>
-        ${isFile ? `<p>瀏覽器不允許直接以檔案（file://）讀取 CSV。<br>請在專案資料夾執行 <code>python3 -m http.server</code>，<br>再開啟 <code>http://localhost:8000</code>。</p>` : ""}
+        ${isFile ? `<p>瀏覽器不允許直接以檔案（file://）讀取 CSV。<br>請在專案資料夾執行 <code>python3 tools/serve.py</code>，<br>再開啟 <code>http://localhost:8000</code>。</p>` : ""}
       </div>`;
     });
 })();

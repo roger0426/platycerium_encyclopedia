@@ -673,6 +673,71 @@ body[data-layout="split"] .graph-pane { border-right: 1px solid var(--line); }
 .thumbs button[aria-current="true"] { border-color: var(--accent); }
 .thumbs img { width: 100%; height: 100%; object-fit: cover; }
 
+.gallery-edit { margin-top: 12px; font-size: .85rem; }
+.gallery-edit .ic { width: 15px; height: 15px; color: var(--accent); }
+
+/* ---------- 照片管理（tools/serve.py 啟動時） ---------- */
+.card-edit {
+  position: absolute; top: 6px; right: 6px; z-index: 2; /* 蓋在整張卡片的連結上方 */
+  display: grid; place-items: center; width: 32px; height: 32px;
+  border: 0; border-radius: 50%; background: rgba(0, 0, 0, .55); color: #fff; cursor: pointer;
+  opacity: .8;
+}
+.card-edit:hover, .card-edit:focus-visible { opacity: 1; background: var(--accent); color: var(--accent-ink); }
+.card-edit .ic { width: 17px; height: 17px; }
+
+.photo-dlg {
+  width: min(720px, calc(100vw - 32px)); max-height: calc(100dvh - 32px);
+  padding: 0 20px 20px; border: 1px solid var(--line); border-radius: var(--radius);
+  background: var(--surface); color: var(--text); box-shadow: var(--shadow-hover);
+}
+.photo-dlg::backdrop { background: rgba(0, 0, 0, .5); }
+.photo-dlg h3 { margin: 18px 0 8px; font-size: .95rem; }
+.pd-head {
+  position: sticky; top: 0; z-index: 1; display: flex; align-items: center; gap: 8px;
+  margin: 0 -20px; padding: 12px 12px 10px 20px; background: var(--surface); border-bottom: 1px solid var(--line);
+}
+.pd-head h2 { margin: 0 auto 0 0; font-size: 1rem; }
+.pd-list, .pd-pending { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; margin-top: 12px; }
+.pd-pending:empty { display: none; }
+.pd-item { position: relative; margin: 0; display: flex; flex-direction: column; gap: 4px; font-size: .75rem; }
+.pd-item img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 8px; background: var(--surface-2); }
+.pd-item figcaption { color: var(--muted); line-height: 1.35; overflow-wrap: anywhere; }
+.pd-cover {
+  position: absolute; top: 6px; left: 6px; padding: 1px 8px; border-radius: 999px;
+  background: var(--accent); color: var(--accent-ink); font-size: .7rem; font-weight: 600;
+}
+.pd-btns { display: flex; gap: 6px; flex-wrap: wrap; }
+.pd-btns button {
+  padding: 2px 10px; border: 1px solid var(--line); border-radius: 999px;
+  background: var(--surface); font-size: .75rem; cursor: pointer;
+}
+.pd-btns button:hover { border-color: var(--accent); color: var(--accent); }
+.pd-btns .danger:hover { border-color: #c0392b; color: #c0392b; }
+.pd-drop {
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  padding: 20px 16px; border: 2px dashed var(--line); border-radius: var(--radius);
+  text-align: center; font-size: .85rem; color: var(--muted);
+}
+.pd-drop p { margin: 0; }
+.pd-drop strong { color: var(--text); }
+.pd-drop.over, .pd-drop:focus-visible { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 8%, transparent); outline: none; }
+.pd-url { display: flex; gap: 8px; margin-top: 10px; }
+.pd-url input, .pd-fields input {
+  flex: 1; min-width: 0; padding: 6px 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg);
+}
+.pd-url input:focus, .pd-fields input:focus { outline: 2px solid var(--accent); outline-offset: -1px; }
+.pd-fields { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; margin-top: 14px; }
+.pd-fields label { display: flex; flex-direction: column; gap: 3px; font-size: .78rem; color: var(--muted); }
+.pd-msg { min-height: 1.4em; margin: 12px 0 0; font-size: .82rem; color: var(--accent); }
+.pd-msg.err { color: #c0392b; }
+.pd-actions { display: flex; justify-content: flex-end; margin-top: 8px; }
+.pd-upload {
+  padding: 7px 20px; border: 0; border-radius: 999px;
+  background: var(--accent); color: var(--accent-ink); font-weight: 600; cursor: pointer;
+}
+.pd-upload:disabled { opacity: .45; cursor: default; }
+
 .variant-photos { margin-top: 14px; padding-top: 10px; border-top: 1px dashed var(--line); }
 .variant-photos h3 { margin: 0; font-size: .9rem; }
 .variant-photos h3 small { font-weight: 400; color: var(--muted); }

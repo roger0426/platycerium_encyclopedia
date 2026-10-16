@@ -7,9 +7,11 @@
 瀏覽器不允許以 `file://` 讀取 CSV，需要開一個本機伺服器：
 
 ```bash
-python3 -m http.server 8000
+python3 tools/serve.py
 # 開啟 http://localhost:8000
 ```
+
+`tools/serve.py` 除了提供網頁，也讓你直接在網頁上新增／刪除照片（見下方「照片」）。只想看不想改，用 `python3 -m http.server 8000` 也可以。
 
 ## 修改資料（CSV）
 
@@ -121,6 +123,13 @@ python3 -m http.server 8000
 | `source` | 原始出處網址，作者名稱會連到這裡 |
 
 第一張會當作卡片封面；沒有照片的品種會自動顯示佔位圖。建議照片長邊縮到 1600px 以內。
+
+**在網頁上管理照片**：以 `python3 tools/serve.py` 啟動時，每張卡片右上角和品種頁照片下方會出現相機按鈕，可以：
+
+- 新增：把照片拖曳進去、在 FB／Google 圖片上按右鍵「複製圖片」後按 ⌘V／Ctrl+V 貼上、選擇檔案，或貼上圖片網址（由本機伺服器代為下載）
+- 刪除（照片檔會一併刪除）、設為封面
+
+照片會自動縮到長邊 1600px、轉成 JPEG，存成 `images/<id>/NN.jpg` 並寫入 `photos.csv`。改完記得 commit。部署到 GitHub Pages 等靜態主機時沒有這個伺服器，按鈕不會出現。
 
 目前的照片都下載自 Wikimedia Commons（皆為 CC 授權或公眾領域）。使用 CC BY / BY-SA 照片時必須保留作者、授權與出處，請勿刪除這三個欄位。
 
