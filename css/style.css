@@ -634,7 +634,14 @@ body[data-layout="split"] .graph-pane { border-right: 1px solid var(--line); }
 .empty { padding: 48px 0; text-align: center; color: var(--muted); }
 
 /* ---------- 詳細頁 ---------- */
-.crumbs { display: flex; align-items: center; gap: 6px; margin: 14px 0; font-size: .85rem; color: var(--muted); }
+/* 麵包屑列：捲動時固定在頂欄（雙開時是面板標題列）下方 */
+.crumbs {
+  position: sticky; top: var(--sticky-top); z-index: 10;
+  display: flex; align-items: center; gap: 6px;
+  margin: 0 calc(var(--gutter) * -1) 4px; padding: 10px var(--gutter);
+  background: var(--bg); border-bottom: 1px solid var(--line);
+  font-size: .85rem; color: var(--muted);
+}
 .crumbs a:hover { color: var(--accent); }
 .crumbs .graph-link { margin-left: auto; padding-left: 10px; font-size: .8rem; color: var(--text); }
 .crumbs .graph-link:hover { border-color: var(--accent); color: var(--accent); }
@@ -1008,8 +1015,14 @@ body[data-layout="split"] .graph-pane { border-right: 1px solid var(--line); }
 .result-bar .cmp-all[hidden] { display: none; }
 
 /* ---------- 比較列（圖鑑底部） ---------- */
-/* 圖鑑底部：比較列固定在視窗底部 */
+/* 圖鑑底部：比較列與回到頂端按鈕一起固定在視窗底部 */
 .pane-foot { position: sticky; bottom: 0; z-index: 30; }
+.to-top {
+  position: absolute; right: max(var(--gutter), env(safe-area-inset-right));
+  bottom: calc(100% + max(16px, env(safe-area-inset-bottom))); /* 比較列隱藏時 .pane-foot 高度為 0 */
+}
+.to-top[hidden] { display: none; }
+.pane-foot:has(.cmp-tray:not([hidden])) .to-top { bottom: calc(100% + 12px); }
 
 .cmp-tray {
   display: flex; align-items: center; gap: 10px;

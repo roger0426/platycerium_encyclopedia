@@ -2269,6 +2269,17 @@
     renderTray();
   }
 
+  // 回到頂端：往下捲超過一個視窗高度才出現
+  const toTop = document.getElementById("to-top");
+  const syncToTop = () => { toTop.hidden = window.scrollY < innerHeight * 0.8; };
+  window.addEventListener("scroll", syncToTop, { passive: true });
+  syncToTop();
+  toTop.addEventListener("click", () => {
+    const calm = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    window.scrollTo({ top: 0, behavior: calm ? "auto" : "smooth" });
+    app.focus({ preventScroll: true });
+  });
+
   // 圖鑑底部的比較列：在比較頁或還沒選任何品種時隱藏
   const tray = document.getElementById("cmp-tray");
   function renderTray() {

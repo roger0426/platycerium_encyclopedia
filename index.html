@@ -68,8 +68,10 @@
           <svg class="ic" aria-hidden="true"><use href="#i-close"/></svg></button>
       </div>
       <main id="app" tabindex="-1"></main>
-      <!-- 圖鑑底部 -->
+      <!-- 圖鑑底部：回到頂端按鈕浮在比較列上方 -->
       <div class="pane-foot">
+        <button type="button" class="fab-btn to-top" id="to-top" aria-label="回到頂端" title="回到頂端" hidden>
+          <svg class="ic" aria-hidden="true"><use href="#i-up"/></svg></button>
         <!-- 比較列：已選的品種，固定在圖鑑底部 -->
         <div class="cmp-tray" id="cmp-tray" role="region" aria-label="比較清單" hidden></div>
       </div>
@@ -238,6 +240,9 @@
     </symbol>
     <symbol id="i-check" viewBox="0 0 24 24">
       <path fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" d="M5 12.5l4.5 4.5L19 7.5"/>
+    </symbol>
+    <symbol id="i-up" viewBox="0 0 24 24">
+      <path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="M12 19V5M6 11l6-6 6 6"/>
     </symbol>
     <symbol id="i-close" viewBox="0 0 24 24">
       <path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" d="M6 6l12 12M18 6L6 18"/>
