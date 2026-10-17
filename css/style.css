@@ -976,3 +976,211 @@ body[data-layout="split"] .graph-pane { border-right: 1px solid var(--line); }
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; scroll-behavior: auto !important; }
 }
+
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* ---------- 比較：卡片與詳細頁的加入按鈕 ---------- */
+.card-cmp {
+  position: absolute; top: 6px; right: 6px; z-index: 2; /* 蓋在整張卡片的連結上方 */
+  display: grid; place-items: center; width: 30px; height: 30px;
+  border: 1.5px solid rgba(255, 255, 255, .85); border-radius: 50%;
+  background: rgba(0, 0, 0, .45); color: #fff; cursor: pointer;
+  opacity: 0; transition: opacity .15s, background .15s;
+}
+.card:hover .card-cmp, .card-cmp:focus-visible, .card-cmp[aria-pressed="true"] { opacity: 1; }
+@media (hover: none) { .card-cmp { opacity: .85; } }
+.card-cmp:hover { background: rgba(0, 0, 0, .65); }
+.card-cmp[aria-pressed="true"] { border-color: var(--accent); background: var(--accent); color: var(--accent-ink); }
+.card-cmp .ic { width: 16px; height: 16px; }
+.card:has(.card-cmp[aria-pressed="true"]) { outline: 2px solid var(--accent); outline-offset: -1px; }
+.card-edit { right: 42px; }
+
+.crumbs .cmp-btn { padding-left: 10px; font-size: .8rem; color: var(--text); }
+.crumbs .cmp-btn .ic { width: 14px; height: 14px; color: var(--accent); }
+.crumbs .cmp-btn:hover { border-color: var(--accent); color: var(--accent); }
+.crumbs .cmp-btn[aria-pressed="true"] { border-color: var(--accent); background: var(--accent); color: var(--accent-ink); }
+.crumbs .cmp-btn[aria-pressed="true"] .ic { color: inherit; }
+@container app (max-width: 480px) { .crumbs .cmp-btn { padding: 4px 8px; } .crumbs .cmp-btn .lbl { display: none; } }
+
+.result-bar .cmp-all { padding: 3px 12px 3px 9px; font-size: .8rem; }
+.result-bar .cmp-all .ic { width: 14px; height: 14px; color: var(--accent); }
+.result-bar .cmp-all:hover { border-color: var(--accent); color: var(--accent); }
+.result-bar .cmp-all[hidden] { display: none; }
+
+/* ---------- 比較列（圖鑑底部） ---------- */
+/* 圖鑑底部：比較列固定在視窗底部 */
+.pane-foot { position: sticky; bottom: 0; z-index: 30; }
+
+.cmp-tray {
+  display: flex; align-items: center; gap: 10px;
+  max-width: var(--maxw); margin: 0 auto;
+  padding: 10px var(--gutter) max(10px, env(safe-area-inset-bottom));
+  border-top: 1px solid var(--line);
+  background: color-mix(in srgb, var(--surface) 92%, transparent);
+  backdrop-filter: saturate(1.4) blur(10px);
+  -webkit-backdrop-filter: saturate(1.4) blur(10px);
+  box-shadow: 0 -6px 20px rgba(30, 40, 30, .08);
+  font-size: .82rem;
+}
+.cmp-tray[hidden] { display: none; }
+.cmp-picks { display: flex; gap: 6px; min-width: 0; flex: 1; overflow-x: auto; scrollbar-width: none; }
+.cmp-pick {
+  display: inline-flex; align-items: center; gap: 6px; flex: none; max-width: 170px;
+  padding: 3px 3px 3px 3px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface);
+}
+.cmp-pick .cmp-open { display: inline-flex; align-items: center; gap: 6px; min-width: 0; border-radius: 999px; color: inherit; text-decoration: none; }
+.cmp-pick .cmp-open:hover .nm { text-decoration: underline; }
+.cmp-pick img { width: 26px; height: 26px; border-radius: 50%; object-fit: cover; }
+.cmp-pick .nm { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 600; }
+.cmp-pick button { display: grid; place-items: center; width: 22px; height: 22px; flex: none; border: 0; border-radius: 50%; color: var(--muted); cursor: pointer; }
+.cmp-pick button:hover { background: var(--surface-2); color: var(--text); }
+.cmp-pick button .ic { width: 12px; height: 12px; }
+.cmp-n { color: var(--muted); white-space: nowrap; }
+.cmp-msg { color: #b5533c; font-size: .78rem; }
+.cmp-msg:empty { display: none; }
+.cmp-tray .done-btn { white-space: nowrap; }
+.cmp-tray .done-btn:disabled { opacity: .5; cursor: default; }
+@container app (max-width: 560px) { .cmp-pick .nm { display: none; } }
+@media (max-width: 560px) { .cmp-pick .nm { display: none; } .cmp-tray .cmp-msg { position: absolute; bottom: 100%; left: var(--gutter); padding: 4px 10px; border-radius: 8px; background: var(--surface); box-shadow: var(--shadow); } }
+
+/* ---------- 比較頁 ---------- */
+.cmp-head h1 { display: flex; align-items: center; gap: 8px; margin: 0 0 10px; font-size: 1.35rem; }
+.cmp-head h1 .ic { width: 22px; height: 22px; color: var(--accent); }
+.cmp-head h1 small { color: var(--muted); font-size: .85rem; font-weight: 400; }
+.cmp-tools { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 18px; }
+.cmp-head .cmp-msg { margin: 6px 0 0; }
+.cmp-add { position: relative; flex: 1 1 260px; max-width: 420px; }
+.cmp-add .search { padding: 0 12px; }
+.cmp-add .search input { padding: 7px 0; }
+.cmp-add .search .ic { color: var(--accent); }
+.cmp-sugg {
+  position: absolute; top: calc(100% + 4px); left: 0; right: 0; z-index: 40;
+  max-height: 360px; overflow-y: auto; padding: 4px;
+  border: 1px solid var(--line); border-radius: 12px; background: var(--surface); box-shadow: var(--shadow-hover);
+}
+.cmp-sugg[hidden] { display: none; }
+.cmp-sugg-h { padding: 6px 8px 4px; font-size: .72rem; color: var(--muted); }
+.cmp-sugg button {
+  display: flex; align-items: center; gap: 10px; width: 100%; padding: 5px 8px;
+  border: 0; border-radius: 8px; text-align: left; cursor: pointer;
+}
+.cmp-sugg button:hover, .cmp-sugg button:focus-visible { background: var(--surface-2); outline: none; }
+.cmp-sugg img { width: 36px; height: 36px; border-radius: 8px; object-fit: cover; flex: none; }
+.cmp-sugg button > span:not(.badge) { display: flex; flex-direction: column; min-width: 0; flex: 1; line-height: 1.3; }
+.cmp-sugg b { font-size: .86rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.cmp-sugg i { font-size: .74rem; color: var(--muted); }
+.cmp-empty .ic { width: 14px; height: 14px; vertical-align: -2px; color: var(--accent); }
+
+/* 表格：外框自己捲動，欄位標頭與第一欄都固定 */
+.cmp-wrap {
+  --lab: 96px; --colw: 156px;
+  margin-top: 14px; overflow: auto; overscroll-behavior-x: contain;
+  max-height: calc(100dvh - var(--sticky-top) - 24px);
+  border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface);
+}
+@container app (min-width: 640px) { .cmp-wrap { --lab: 120px; --colw: 180px; } }
+.cmp {
+  table-layout: fixed; border-collapse: separate; border-spacing: 0;
+  width: max(calc(var(--lab) + var(--n) * var(--colw)), min(100%, calc(var(--lab) + var(--n) * 320px)));
+  font-size: .86rem;
+}
+.cmp th, .cmp td { padding: 9px 12px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; background: var(--surface); }
+.cmp td + td, .cmp th.cmp-col + th.cmp-col { border-left: 1px solid var(--line); }
+.cmp thead th { position: sticky; top: 0; z-index: 2; vertical-align: bottom; border-bottom: 2px solid var(--line); }
+.cmp tbody th[scope="row"] { position: sticky; left: 0; z-index: 1; width: var(--lab); color: var(--muted); font-weight: 600; font-size: .8rem; border-right: 1px solid var(--line); }
+.cmp tbody th[scope="row"] small { display: block; font-weight: 400; font-size: .68rem; line-height: 1.3; }
+.cmp .cmp-corner { left: 0; z-index: 3; width: var(--lab); color: var(--muted); font-size: .75rem; border-right: 1px solid var(--line); }
+
+/* 欄位標頭：照片、名稱、操作 */
+.cmp-col { font-weight: 400; }
+.cmp-photo { display: block; height: 76px; margin: -2px 0 8px; border-radius: 10px; overflow: hidden; background: var(--surface-2); }
+.cmp-photo img { width: 100%; height: 100%; object-fit: cover; }
+@container app (min-width: 640px) { .cmp-photo { height: 96px; } }
+.cmp-name { display: block; font-weight: 700; font-size: .92rem; line-height: 1.35; }
+.cmp-name:hover { color: var(--accent); }
+.cmp-latin { color: var(--muted); font-size: .74rem; font-style: italic; line-height: 1.35; overflow-wrap: anywhere; }
+.cmp-acts { display: flex; gap: 4px; margin-top: 8px; }
+.cmp-acts button {
+  display: grid; place-items: center; min-width: 28px; height: 26px; padding: 0 6px;
+  border: 1px solid var(--line); border-radius: 8px; background: var(--surface); font-size: .78rem; white-space: nowrap; cursor: pointer;
+}
+@container app (max-width: 480px) { .cmp-acts { gap: 3px; } .cmp-acts button { min-width: 24px; padding: 0 4px; } }
+.cmp-acts button:hover:not(:disabled) { border-color: var(--accent); color: var(--accent); }
+.cmp-acts button:disabled { opacity: .35; cursor: default; }
+.cmp-acts button .ic { width: 12px; height: 12px; }
+.cmp-acts [data-cmp-remove] { margin-left: auto; }
+.cmp-base-btn[aria-pressed="true"] { border-color: var(--accent) !important; background: var(--accent) !important; color: var(--accent-ink) !important; }
+.cmp-kin {
+  display: inline-flex; align-items: center; gap: 4px; margin-top: 6px; padding: 2px 8px;
+  border: 1px dashed var(--accent); border-radius: 999px; color: var(--accent); font-size: .74rem; cursor: pointer;
+}
+.cmp-kin .ic { width: 11px; height: 11px; }
+.cmp-kin:hover { background: color-mix(in srgb, var(--accent) 10%, var(--surface)); }
+.cmp .is-base { background: color-mix(in srgb, var(--accent) 7%, var(--surface)); }
+
+/* 群組標題：可收合，文字固定在左側 */
+.cmp .cmp-gh th { padding: 0; background: var(--surface-2); border-bottom: 1px solid var(--line); }
+.cmp-gh button {
+  position: sticky; left: 0; display: inline-flex; align-items: center; gap: 6px;
+  padding: 7px 12px; border: 0; font-weight: 700; font-size: .86rem; cursor: pointer;
+}
+.cmp-gh button .ic { width: 16px; height: 16px; color: var(--accent); }
+.cmp-gh small { color: var(--muted); font-weight: 400; font-size: .74rem; }
+.cmp-gh .chev { display: inline-block; font-size: .7rem; color: var(--muted); transition: transform .15s; }
+.cmp-gh button[aria-expanded="false"] .chev { transform: rotate(-90deg); }
+.cmp tbody.collapsed tr:not(.cmp-gh) { display: none; }
+
+/* 差異：左側強調線；「只顯示差異」時隱藏相同的列（整組都相同就整組隱藏） */
+.cmp tr.diff th[scope="row"] { box-shadow: inset 3px 0 0 var(--accent); color: var(--text); }
+.cmp.only-diff tr.same, .cmp.only-diff tbody.all-same { display: none; }
+
+/* 儲存格內容 */
+.cmp-v { min-width: 0; overflow-wrap: anywhere; }
+.cmp-v .meter .m-lo, .cmp-v .meter .m-hi { display: none; } /* 兩端文字已經寫在列標題下 */
+.cmp-v .m-bar { max-width: 110px; }
+.cmp-v .size-scale .ic { transform: scale(.85); }
+.cmp-v .posture { gap: 4px; }
+.cmp-v .posture > span { font-size: .72rem; }
+.cmp-v .trange .big { font-size: .95rem; font-weight: 600; }
+.cmp-sub { display: block; color: var(--muted); font-size: .72rem; }
+.cmp-link { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
+.cmp-desc { margin: 0; font-size: .8rem; line-height: 1.55; display: -webkit-box; -webkit-line-clamp: 5; -webkit-box-orient: vertical; overflow: hidden; }
+.cmp-meta { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 5px; }
+.cmp-meta:has(> .cmp-conf:only-child) { display: none; }
+.cmp.show-conf .cmp-meta:has(> .cmp-conf:only-child) { display: flex; }
+.cmp-delta { font-size: .7rem; line-height: 1.6; }
+.cmp-delta.up { color: #c0702c; }
+.cmp-delta.down { color: #3a8fd6; }
+.cmp-inh { padding: 0 6px; border: 1px dashed var(--muted); border-radius: 999px; color: var(--muted); font-size: .66rem; cursor: help; }
+.cmp-conf { display: none; padding: 0 6px; border-radius: 999px; border: 1px solid currentColor; font-size: .66rem; font-weight: 600; cursor: help; }
+.cmp.show-conf .cmp-conf { display: inline-block; }
+.cmp-conf.high { color: var(--accent); }
+.cmp-conf.mid { color: #b07a1c; }
+.cmp-conf.low { color: #b5533c; border-style: dashed; }
+
+/* 比較表的浮動提示：外觀同詳細頁快速指標的 .stat-sub */
+.cmp td.has-note { position: relative; padding-right: 26px; cursor: help; outline: none; } /* 右側留給 i 圖示 */
+.cmp td.has-note::after {
+  content: "i"; position: absolute; top: 7px; right: 7px;
+  display: grid; place-items: center; width: 13px; height: 13px;
+  border: 1px solid currentColor; border-radius: 50%; color: var(--muted);
+  font-size: .6rem; font-weight: 700; font-style: italic; line-height: 1; opacity: .55;
+}
+.cmp td.has-note:hover, .cmp td.has-note:focus-visible, .cmp td[aria-describedby] {
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+.cmp td.has-note:hover::after, .cmp td[aria-describedby]::after { color: var(--accent); opacity: 1; }
+.cmp-tip {
+  position: fixed; z-index: 60; left: 0; top: 0;
+  max-height: min(60vh, 420px); overflow: auto;
+  white-space: pre-line;
+  padding: 8px 10px;
+  font-size: .75rem; color: var(--text); line-height: 1.45;
+  background: var(--surface); border: 1px solid var(--line); border-radius: 10px;
+  box-shadow: var(--shadow-hover);
+  opacity: 0; visibility: hidden; transform: translateY(-2px);
+  transition: opacity .15s, transform .15s, visibility .15s;
+  pointer-events: none;
+}
+.cmp-tip.on { opacity: 1; visibility: visible; transform: none; }
+.cmp-tip b { display: block; margin-bottom: 3px; font-size: .78rem; }

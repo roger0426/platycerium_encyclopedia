@@ -222,6 +222,18 @@
   const sizeBadge = (it) => it.size
     ? `<span class="size-badge" title="尺寸：${SIZES[it.size]}">${icon("size")}${it.size}</span>` : "";
 
+  // 尺寸階梯：S M L XL 由小到大，標出目前尺寸
+  const sizeScale = (it) => it.size
+    ? `<span class="size-scale" aria-label="尺寸 ${SIZES[it.size]}">${Object.keys(SIZES).map((k) =>
+        `<span class="${k === it.size ? "on" : ""}">${icon("size")}<b>${k}</b></span>`).join("")}</span>`
+    : "";
+
+  // 孢子葉姿態：直立／斜展／下垂三個圖示，標出符合的
+  const postureIcons = (it) => it.posture.length
+    ? `<span class="posture">${Object.entries(POSTURES).map(([k, lbl]) =>
+        `<span class="${it.posture.includes(k) ? "on" : ""}">${icon("p-" + k)}${lbl}</span>`).join("")}</span>`
+    : "";
+
   const confBadge = (it) => it.confidence
     ? `<span class="conf ${it.confidence}" title="資料可信度">${esc(CONFIDENCE[it.confidence])}</span>` : "";
 
@@ -259,6 +271,7 @@
           <span class="badge ${it.type}">${TYPE_LABEL[it.type]}</span>
           ${hint ? `<span class="sort-hint">${esc(hint)}</span>` : ""}
           ${it.photos.length > 1 ? `<span class="count">${it.photos.length} 張</span>` : ""}
+          ${cmpToggleBtn(it, "card-cmp")}
           ${EDIT ? photoEditBtn(it, "card-edit") : ""}
         </div>
         <div class="card-body">
@@ -380,17 +393,20 @@
 
   /* ---------------- 首頁：列表 ---------------- */
   // skipKey：計算某組選項的數量時，忽略該組本身的條件
+  // 關鍵字搜尋的比對文字（列表搜尋與比較頁的「加入品種」共用）
+  function searchText(it) {
+    const base = baseOf(it);
+    return [it.id, it.name, titleOf(it), it.en, ...it.aka, regionOf(it).label, it.origin, it.breeder,
+      ...it.parents.map((p) => BY_ID.get(p)?.name || p), base?.name, base && titleOf(base)].join(" ").toLowerCase();
+  }
+
   function filtered(skipKey) {
     const q = state.q.trim().toLowerCase();
     return ITEMS.filter((it) => {
       if (state.type !== "all" && it.type !== state.type) return false;
       if (state.region !== "all" && it.region !== state.region) return false;
       if (!matchesFeatures(it, skipKey)) return false;
-      if (!q) return true;
-      const base = baseOf(it);
-      const hay = [it.id, it.name, titleOf(it), it.en, ...it.aka, regionOf(it).label, it.origin, it.breeder,
-        ...it.parents.map((p) => BY_ID.get(p)?.name || p), base?.name, base && titleOf(base)].join(" ").toLowerCase();
-      return hay.includes(q);
+      return !q || searchText(it).includes(q);
     });
   }
 
@@ -459,6 +475,7 @@
       </div>
       <div class="result-bar">
         <p class="result-count" id="count"></p>
+        <button class="back-btn cmp-all" id="cmp-all" data-cmp-all hidden>${icon("compare")}<span></span></button>
         ${EDIT_DATA ? `<button class="back-btn data-edit" data-plant-new>＋ 新增品種</button>` : ""}
         <label class="card-size" title="調整卡片大小，雙擊還原">
           ${icon("book")}
@@ -667,6 +684,10 @@
     const list = visibleList();
     const s = sortDef();
     app.querySelector("#count").textContent = `共 ${list.length} 個品種`;
+    // 篩選結果夠少時，一鍵把整批放進比較
+    const cmpAll = app.querySelector("#cmp-all");
+    cmpAll.hidden = list.length < 2 || list.length > CMP_MAX;
+    cmpAll.querySelector("span").textContent = `比較這 ${list.length} 個`;
 
     const dirBtn = app.querySelector("#sort-dir");
     const [ascLbl, descLbl] = s.dirLabels || ["由低到高", "由高到低"];
@@ -755,6 +776,7 @@
         <a class="back-btn" href="#/">‹ 列表</a>
         <span>/</span><span>${TYPE_LABEL[it.type]}</span>
         <button class="back-btn graph-link" data-graph-reveal="${esc(it.id)}">${icon("graph")}在關係圖中查看</button>
+        ${cmpToggleBtn(it, "back-btn cmp-btn")}
         ${EDIT_DATA ? `<button class="back-btn data-edit" data-data-edit="${esc(it.id)}">${icon("edit")}編輯資料</button>
           <button class="back-btn data-edit" data-table-open="citations" data-table-q="${esc(it.id)}" title="這個品種在 citations.csv 的引用">${icon("table")}引用</button>` : ""}
       </nav>
@@ -869,10 +891,6 @@
         ${sub ? `<div class="stat-sub" role="tooltip">${esc(sub)}</div>` : ""}
       </div>`;
 
-    const sizeScale = it.size
-      ? `<span class="size-scale" aria-label="尺寸 ${SIZES[it.size]}">${Object.keys(SIZES).map((k) =>
-          `<span class="${k === it.size ? "on" : ""}">${icon("size")}<b>${k}</b></span>`).join("")}</span>`
-      : `<span class="muted">未知</span>`;
 
     // 浮動提示：摘要可信度、依據的來源等級（Tx）與各來源標記
     const note = (...parts) => parts.filter(Boolean).join("\n");
@@ -880,7 +898,7 @@
       .map(([n, k]) => featureNote(it, k) && `${n}｜${featureNote(it, k)}`).filter(Boolean).join("\n\n");
 
     const tiles = [
-      tile("size", "尺寸", sizeScale, note(SIZES[it.size], featureNote(it, "size") || it.size_note)),
+      tile("size", "尺寸", sizeScale(it) || `<span class="muted">未知</span>`, note(SIZES[it.size], featureNote(it, "size") || it.size_note)),
       tile("star", "栽培難度", stars(it.difficulty), note(DIFF_LABEL[it.difficulty || 0], featureNote(it, "difficulty"))),
       tile("sun", "光照需求", iconRating(it.light, "sun", "光照"), featureNote(it, "light") || it.light_note),
       tile("drop", "澆水量", iconRating(it.water, "drop", "澆水"), featureNote(it, "water") || it.water_note),
@@ -908,10 +926,7 @@
     const row = (label, html) => html ? `<div><dt>${label}</dt><dd>${html}</dd></div>` : "";
     const text = (v) => (v ? esc(v) : "");
 
-    const posture = it.posture.length
-      ? `<span class="posture">${Object.entries(POSTURES).map(([k, lbl]) =>
-          `<span class="${it.posture.includes(k) ? "on" : ""}">${icon("p-" + k)}${lbl}</span>`).join("")}</span>`
-      : "";
+    const posture = postureIcons(it);
 
     const vocab = (map, v) => text(map[v] || v);
     const vein = { yes: "隆起", no: "埋入" }[it.shield_vein] || "";
@@ -2171,6 +2186,455 @@
     if (!e.relatedTarget?.closest?.(".card[data-id]")) graph.preview(null);
   });
 
+  /* ---------------- 比較 ---------------- */
+  // 已選的品種（有順序）存在 localStorage；比較頁以網址 #/compare/a,b,c 為準，方便分享
+  const CMP_MAX = 6;
+  let onCompare = false;
+  const loadJSON = (key, fallback) => {
+    try { return JSON.parse(localStorage.getItem(key)) ?? fallback; } catch (e) { return fallback; }
+  };
+  const saveJSON = (key, v) => {
+    try { localStorage.setItem(key, JSON.stringify(v)); } catch (e) { /* 無痕模式等 */ }
+  };
+  state.compare = [];
+  state.cmpBase = null;
+  state.cmpQ = "";
+  state.cmpOpts = { diff: false, conf: false, collapsed: [], ...loadJSON("cmp-opts", {}) };
+  if (!Array.isArray(state.cmpOpts.collapsed)) state.cmpOpts.collapsed = [];
+  const inCompare = (id) => state.compare.includes(id);
+  const compareHash = () => `#/compare/${state.compare.map(encodeURIComponent).join(",")}`;
+
+  // 卡片上只有圖示，詳細頁的按鈕另有文字
+  const cmpToggleInner = (on, withLabel) =>
+    icon(on ? "check" : "plus") + (withLabel ? `<span class="lbl">${on ? "已加入比較" : "加入比較"}</span>` : "");
+  function cmpToggleBtn(it, cls) {
+    const on = inCompare(it.id);
+    return `<button type="button" class="${cls}" data-cmp-toggle="${esc(it.id)}" aria-pressed="${on}"
+      aria-label="${on ? "從比較移除" : "加入比較"}：${esc(titleOf(it))}" title="${on ? "從比較移除" : "加入比較"}">${
+      cmpToggleInner(on, !cls.includes("card-cmp"))}</button>`;
+  }
+  // 就地更新按鈕狀態（不重建元素，鍵盤焦點才不會跑掉）
+  function syncCmpToggles() {
+    document.querySelectorAll("[data-cmp-toggle]").forEach((b) => {
+      const it = BY_ID.get(b.dataset.cmpToggle);
+      if (!it) return;
+      const on = inCompare(it.id);
+      if (b.getAttribute("aria-pressed") === String(on)) return;
+      b.setAttribute("aria-pressed", String(on));
+      b.setAttribute("aria-label", `${on ? "從比較移除" : "加入比較"}：${titleOf(it)}`);
+      b.title = on ? "從比較移除" : "加入比較";
+      b.innerHTML = cmpToggleInner(on, !b.classList.contains("card-cmp"));
+    });
+  }
+
+  // 暫時的提示訊息（例如已達上限），比較列與比較頁各有一個顯示位置
+  let cmpMsgTimer = null;
+  function cmpNotice(msg) {
+    clearTimeout(cmpMsgTimer);
+    document.querySelectorAll("[data-cmp-msg]").forEach((el) => { el.textContent = msg; });
+    cmpMsgTimer = setTimeout(() => document.querySelectorAll("[data-cmp-msg]").forEach((el) => { el.textContent = ""; }), 3200);
+  }
+
+  function addCompare(ids) {
+    const fresh = ids.filter((id) => BY_ID.has(id) && !inCompare(id));
+    const room = CMP_MAX - state.compare.length;
+    if (fresh.length > room) cmpNotice(`最多比較 ${CMP_MAX} 個品種，請先移除一些。`);
+    if (!room) return;
+    state.compare.push(...fresh.slice(0, room));
+    compareChanged();
+  }
+  function removeCompare(id) {
+    state.compare = state.compare.filter((x) => x !== id);
+    if (state.cmpBase === id) state.cmpBase = null;
+    compareChanged();
+  }
+  function moveCompare(id, d) {
+    const i = state.compare.indexOf(id), j = i + d;
+    if (i < 0 || j < 0 || j >= state.compare.length) return;
+    [state.compare[i], state.compare[j]] = [state.compare[j], state.compare[i]];
+    compareChanged();
+  }
+  function setCompare(ids) {
+    state.compare = [...new Set(Array.isArray(ids) ? ids : [])].filter((id) => BY_ID.has(id)).slice(0, CMP_MAX);
+    if (!inCompare(state.cmpBase)) state.cmpBase = null;
+  }
+
+  function compareChanged() {
+    saveJSON("compare", state.compare);
+    if (onCompare) {
+      // 不觸發 hashchange，直接重繪比較頁並保留捲動位置
+      history.replaceState(null, "", compareHash());
+      renderCompare({ keepScroll: true });
+    } else syncCmpToggles();
+    renderTray();
+  }
+
+  // 圖鑑底部的比較列：在比較頁或還沒選任何品種時隱藏
+  const tray = document.getElementById("cmp-tray");
+  function renderTray() {
+    state.compare = state.compare.filter((id) => BY_ID.has(id)); // 資料編輯後可能刪掉了某個品種
+    const n = state.compare.length;
+    tray.hidden = onCompare || !n;
+    if (tray.hidden) { tray.innerHTML = ""; return; }
+    tray.innerHTML = `
+      <div class="cmp-picks">${state.compare.map((id) => {
+        const it = BY_ID.get(id);
+        return `<span class="cmp-pick" title="${esc(titleOf(it))}">
+          <a class="cmp-open" href="#/p/${encodeURIComponent(id)}" aria-label="開啟：${esc(titleOf(it))}">
+            <img src="${esc(coverOf(it))}" alt="">
+            <span class="nm">${esc(titleOf(it))}</span>
+          </a>
+          <button type="button" data-cmp-remove="${esc(id)}" aria-label="從比較移除：${esc(titleOf(it))}">${icon("close")}</button>
+        </span>`;
+      }).join("")}</div>
+      <span class="cmp-n">${n}／${CMP_MAX}</span>
+      <span class="cmp-msg" data-cmp-msg role="status"></span>
+      <button type="button" class="link-btn" data-cmp-clear>清除</button>
+      <button type="button" class="done-btn" data-cmp-go ${n < 2 ? "disabled" : ""}>${n < 2 ? "再選一個" : "比較 →"}</button>`;
+  }
+
+  /* ---------- 比較頁：列定義 ---------- */
+  // value：判斷「是否有差異」；num：與基準比較高低；render：顯示；fields：對應 features.csv 的欄位（可信度、沿用）
+  const vocabText = (map) => (it, k) => (it[k] ? esc(map[it[k]] || it[k]) : "");
+  const scoreRow = (key, label, render, sub) => ({ key, label, sub, num: (it) => it[key], render });
+  const meterRow = (key, label, lo, hi) => scoreRow(key, label, (it) => it[key] == null ? "" : meter(it[key], lo, hi, label), `${lo} → ${hi}`);
+  const vocabRow = (key, label, map) => ({ key, label, render: (it) => vocabText(map)(it, key) });
+  const CMP_GROUPS = [
+    { key: "quick", label: "快速指標", rows: [
+      { key: "size", label: "尺寸", num: (it) => SIZE_RANK[it.size], render: sizeScale, hint: (it) => SIZES[it.size], legacy: "size_note" },
+      scoreRow("difficulty", "栽培難度", (it) => it.difficulty == null ? "" :
+        `${stars(it.difficulty)}<small class="cmp-sub">${DIFF_LABEL[it.difficulty]}</small>`, "入門 → 挑戰"),
+      { ...scoreRow("light", "光照需求", (it) => it.light == null ? "" : iconRating(it.light, "sun", "光照")), legacy: "light_note" },
+      { ...scoreRow("water", "澆水量", (it) => it.water == null ? "" : iconRating(it.water, "drop", "澆水")), legacy: "water_note" },
+      scoreRow("humidity", "空氣濕度", (it) => it.humidity == null ? "" : iconRating(it.humidity, "humid", "濕度")),
+      { key: "temp", label: "建議溫度", sub: "0–40°C", fields: ["min_temp", "max_temp"], legacy: "temp_note",
+        value: (it) => `${it.min_temp ?? ""}|${it.max_temp ?? ""}`,
+        render: (it) => it.min_temp == null && it.max_temp == null ? "" : tempRange(it) },
+      { ...vocabRow("pups", "繁殖方式", { yes: "群生型", no: "單株型" }),
+        hint: (it) => ({ yes: "會長側芽，可分株", no: "不長側芽，以孢子繁殖" })[it.pups] },
+      { ...vocabRow("dormancy", "休眠期", { yes: "有", no: "無明顯休眠" }), hint: (it) => it.dormancy === "yes" ? "休眠期需減少澆水" : "" }] },
+    { key: "shield", label: "盾葉", icon: "shield", rows: [
+      vocabRow("shield_form", "冠形", SHIELD_FORMS),
+      meterRow("shield_height", "冠高", "貼伏", "高聳"),
+      vocabRow("shield_browning", "老化", SHIELD_BROWNING),
+      vocabRow("shield_fringe", "領片", SHIELD_FRINGE),
+      vocabRow("shield_vein", "脈紋", { yes: "隆起", no: "埋入" }),
+      meterRow("shield_hair", "絨毛", "光滑", "密毛")] },
+    { key: "fertile", label: "孢子葉", icon: "hand", rows: [
+      { key: "posture", label: "姿態", fields: ["fertile_posture"], value: (it) => it.posture.join("|"), render: postureIcons },
+      { key: "fertile_length", label: "長度", render: (it) => esc(it.fertile_length) },
+      { key: "split", label: "分岔", fields: ["fertile_split"], value: (it) => it.split?.text, num: (it) => it.split?.mid,
+        render: (it) => it.split ? (it.split.text === "0" ? "不分岔" : `${esc(it.split.text)} 次`) : "" },
+      meterRow("fertile_width", "葉寬", "細", "寬"),
+      meterRow("fertile_hair", "絨毛", "光滑", "密毛"),
+      vocabRow("spore", "孢子囊", SPORES)] },
+    { key: "basic", label: "來源與親本", icon: "info", rows: [
+      { key: "type", label: "類型", render: (it) => `<span class="badge ${it.type}">${TYPE_LABEL[it.type]}</span>` },
+      { key: "region", label: "地區", render: regionTag },
+      { key: "origin", label: "原產地", render: (it) => esc(it.origin) },
+      { key: "lineage", label: "親本／來源", fields: [],
+        value: (it) => (it.base ? `base:${it.base}` : it.parents.join("|")),
+        render: (it) => {
+          const link = (id) => BY_ID.has(id)
+            ? `<a class="cmp-link" href="#/p/${encodeURIComponent(id)}">${esc(titleOf(BY_ID.get(id)))}</a>` : esc(id);
+          if (baseOf(it)) return `選自 ${link(it.base)}`;
+          return it.parents.map(link).join(`<span class="muted"> × </span>`);
+        } },
+      { key: "breeder", label: "選育者", fields: [], render: (it) => esc(it.breeder) },
+      { key: "confidence", label: "資料可信度", fields: [], render: confBadge },
+      { key: "desc", label: "簡介", fields: [], hint: (it) => it.desc, // 格子裡只顯示前幾行，完整內容放提示
+        render: (it) => it.desc ? `<p class="cmp-desc">${esc(it.desc)}</p>` : "" }] }
+  ];
+  const rowValue = (row, it) => String((row.value ? row.value(it) : it[row.key]) ?? "");
+
+  function cmpCell(row, it, base) {
+    const html = row.render(it) || `<span class="muted" title="未知">—</span>`;
+    const fields = row.fields || [row.key];
+    const meta = [];
+    // 與基準比較：只標高低，不評好壞（例如光照高不代表比較好）
+    let delta = "";
+    if (base && it !== base && row.num) {
+      const a = row.num(it), b = row.num(base);
+      if (a != null && b != null && a !== b) {
+        delta = `比基準「${titleOf(base)}」${a > b ? "高" : "低"}。`;
+        meta.push(`<span class="cmp-delta ${a > b ? "up" : "down"}" aria-label="${esc(delta)}">${a > b ? "▲" : "▼"}</span>`);
+      }
+    }
+    const inherited = fields.some((k) => it.inherited.has(k));
+    if (inherited) meta.push(`<span class="cmp-inh">沿用</span>`);
+    const f = fields.map((k) => it.features[k]).find((x) => x?.summary && FEATURE_CONF[x.confidence]);
+    if (f) meta.push(`<span class="cmp-conf ${FEATURE_CONF[f.confidence]}">${esc(f.confidence)}</span>`);
+
+    // 浮動提示：和詳細頁快速指標的卡片一樣，顯示可信度、來源等級與各來源的說法
+    const note = cmpNote(row, it, inherited, delta);
+    const cls = [it === base && "is-base", note && "has-note"].filter(Boolean).join(" ");
+    return `<td${cls ? ` class="${cls}"` : ""}${note ? ` tabindex="0" data-note="${esc(note)}" data-note-h="${esc(`${titleOf(it)}・${row.label}`)}"` : ""}>
+      <div class="cmp-v">${html}</div>${meta.length ? `<div class="cmp-meta">${meta.join("")}</div>` : ""}</td>`;
+  }
+
+  function cmpNote(row, it, inherited, delta) {
+    const fields = row.fields || [row.key];
+    // 多個欄位（例如最低溫／最高溫）時，每段前面加上欄位名
+    const notes = fields.map((k) => {
+      const n = featureNote(it, k);
+      return n && fields.length > 1 ? `${FEATURE_LABELS.find(([fk]) => fk === k)?.[1] || k}｜${n}` : n;
+    }).filter(Boolean);
+    return [
+      row.hint?.(it),
+      notes.length ? notes.join("\n\n") : row.legacy && it[row.legacy],
+      inherited && `尚未個別調查，沿用「${titleOf(baseOf(it))}」的資料。`,
+      delta
+    ].filter(Boolean).join("\n\n");
+  }
+
+  // 比較表的浮動提示只有一個，掛在 body 上（position: fixed），才不會被表格的捲動框裁掉
+  const cmpTip = document.createElement("div");
+  cmpTip.className = "cmp-tip";
+  cmpTip.setAttribute("role", "tooltip");
+  cmpTip.id = "cmp-tip";
+  document.body.append(cmpTip);
+  let tipCell = null;
+  function showCmpTip(td) {
+    if (tipCell === td) return;
+    tipCell?.removeAttribute("aria-describedby"); // 直接從一格移到另一格時，上一格的高亮要清掉
+    tipCell = td;
+    cmpTip.innerHTML = `<b>${esc(td.dataset.noteH)}</b>${esc(td.dataset.note)}`;
+    td.setAttribute("aria-describedby", "cmp-tip");
+    cmpTip.classList.add("on");
+    placeCmpTip();
+  }
+  function placeCmpTip() {
+    const td = tipCell;
+    // 預設在格子下方，空間不夠就放上方；左右不超出視窗
+    const r = td.getBoundingClientRect(), gap = 6, pad = 8;
+    const w = Math.min(320, innerWidth - pad * 2);
+    cmpTip.style.width = `${w}px`;
+    const h = cmpTip.offsetHeight;
+    const below = r.bottom + gap + h <= innerHeight - pad || r.top - gap - h < pad;
+    cmpTip.style.left = `${Math.max(pad, Math.min(r.left, innerWidth - w - pad))}px`;
+    cmpTip.style.top = `${below ? r.bottom + gap : r.top - gap - h}px`;
+  }
+  function hideCmpTip() {
+    if (!tipCell) return;
+    tipCell.removeAttribute("aria-describedby");
+    tipCell = null;
+    cmpTip.classList.remove("on");
+  }
+  app.addEventListener("pointerover", (e) => {
+    if (e.pointerType !== "mouse") return; // 觸控改用點按（focus）
+    const td = e.target.closest?.(".cmp td.has-note");
+    if (td) showCmpTip(td);
+    else hideCmpTip();
+  });
+  app.addEventListener("pointerleave", hideCmpTip);
+  app.addEventListener("focusin", (e) => { if (e.target.matches(".cmp td.has-note")) showCmpTip(e.target); });
+  app.addEventListener("focusout", (e) => { if (e.target === tipCell) hideCmpTip(); });
+  // 視窗或表格捲動時跟著格子移動；格子捲出表格可見範圍就收起
+  document.addEventListener("scroll", () => {
+    if (!tipCell) return;
+    const r = tipCell.getBoundingClientRect(), box = tipCell.closest(".cmp-wrap")?.getBoundingClientRect();
+    if (!box || r.bottom < box.top || r.top > box.bottom || r.right < box.left || r.left > box.right) hideCmpTip();
+    else placeCmpTip();
+  }, true);
+  window.addEventListener("resize", hideCmpTip);
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape") hideCmpTip(); });
+
+  function cmpHeadCell(it, i, n) {
+    const href = `#/p/${encodeURIComponent(it.id)}`;
+    const isBase = state.cmpBase === it.id;
+    // 雜交種一鍵加入親本、品系一鍵加入選拔來源
+    const kin = (it.base ? [it.base] : it.parents).filter((id) => BY_ID.has(id) && !inCompare(id));
+    const kinBtn = kin.length && n < CMP_MAX
+      ? `<button type="button" class="cmp-kin" data-cmp-add="${esc(kin.join(","))}">${icon("plus")}${it.base ? "加入選拔來源" : "加入親本"}</button>` : "";
+    return `<th scope="col" class="cmp-col${isBase ? " is-base" : ""}">
+      <a class="cmp-photo" href="${href}" tabindex="-1" aria-hidden="true"><img src="${esc(coverOf(it))}" alt="" loading="lazy"></a>
+      <a class="cmp-name" href="${href}">${esc(titleOf(it))}</a>
+      <div class="cmp-latin">${esc(it.name)}</div>
+      <div class="cmp-acts">
+        <button type="button" data-cmp-move="${esc(it.id)}" data-d="-1" ${i === 0 ? "disabled" : ""} aria-label="往左移" title="往左移">‹</button>
+        <button type="button" class="cmp-base-btn" data-cmp-base="${esc(it.id)}" aria-pressed="${isBase}"
+          title="${isBase ? "取消基準" : "設為基準：其他品種會標出比它高或低"}">基準</button>
+        <button type="button" data-cmp-move="${esc(it.id)}" data-d="1" ${i === n - 1 ? "disabled" : ""} aria-label="往右移" title="往右移">›</button>
+        <button type="button" data-cmp-remove="${esc(it.id)}" aria-label="移除 ${esc(titleOf(it))}" title="移除">${icon("close")}</button>
+      </div>
+      ${kinBtn}
+    </th>`;
+  }
+
+  function renderCompare({ keepScroll = false } = {}) {
+    hideCmpTip();
+    const wrap = app.querySelector(".cmp-wrap");
+    const pos = keepScroll && wrap ? [wrap.scrollLeft, wrap.scrollTop, window.scrollY] : null;
+    const refocus = keepScroll && document.activeElement?.id === "cmp-q";
+
+    const items = state.compare.map((id) => BY_ID.get(id));
+    const n = items.length;
+    const base = BY_ID.get(state.cmpBase);
+    const { diff, conf, collapsed } = state.cmpOpts;
+    document.title = n ? `比較 ${n} 個品種｜鹿角蕨圖鑑` : "比較｜鹿角蕨圖鑑";
+
+    const groups = CMP_GROUPS.map((g) => {
+      let diffN = 0;
+      const rows = g.rows.map((row) => {
+        const differs = n > 1 && new Set(items.map((it) => rowValue(row, it))).size > 1;
+        if (differs) diffN++;
+        return `<tr class="${differs ? "diff" : "same"}">
+          <th scope="row">${esc(row.label)}${row.sub ? `<small>${esc(row.sub)}</small>` : ""}</th>
+          ${items.map((it) => cmpCell(row, it, base)).join("")}
+        </tr>`;
+      }).join("");
+      const open = !collapsed.includes(g.key);
+      return `<tbody class="${open ? "" : "collapsed"}${diffN ? "" : " all-same"}" data-g="${g.key}">
+        <tr class="cmp-gh"><th colspan="${n + 1}" scope="colgroup">
+          <button type="button" data-cmp-group="${g.key}" aria-expanded="${open}">
+            <span class="chev" aria-hidden="true">▾</span>${g.icon ? icon(g.icon) : ""}${esc(g.label)}
+            <small>${n > 1 ? (diffN ? `${diffN} 項不同` : "全部相同") : ""}</small>
+          </button>
+        </th></tr>
+        ${rows}
+      </tbody>`;
+    }).join("");
+
+    const table = n ? `
+      <div class="cmp-wrap">
+        <table class="cmp${diff ? " only-diff" : ""}${conf ? " show-conf" : ""}" style="--n:${n}">
+          <caption class="sr-only">${esc(items.map(titleOf).join("、"))} 的特徵比較</caption>
+          <thead><tr><th class="cmp-corner" scope="col">特徵</th>${items.map((it, i) => cmpHeadCell(it, i, n)).join("")}</tr></thead>
+          ${groups}
+        </table>
+      </div>` : "";
+
+    app.innerHTML = `
+      <nav class="crumbs">
+        <a class="back-btn" href="#/">‹ 列表</a><span>/</span><span>比較</span>
+      </nav>
+      <div class="cmp-head">
+        <h1>${icon("compare")}比較品種 <small>${n}／${CMP_MAX}</small></h1>
+        <div class="cmp-tools">
+          <div class="cmp-add" id="cmp-add">
+            <label class="search">
+              ${icon("plus")}
+              <input id="cmp-q" type="search" autocomplete="off" value="${esc(state.cmpQ)}"
+                placeholder="${n >= CMP_MAX ? `已達 ${CMP_MAX} 個上限` : "加入品種：搜尋名稱、別名…"}" ${n >= CMP_MAX ? "disabled" : ""}
+                role="combobox" aria-expanded="false" aria-controls="cmp-sugg" aria-autocomplete="list">
+            </label>
+            <div class="cmp-sugg" id="cmp-sugg" role="listbox" hidden></div>
+          </div>
+          <label class="switch"><input type="checkbox" data-cmp-opt="diff" ${diff ? "checked" : ""}><span class="sw" aria-hidden="true"></span><span>只顯示差異</span></label>
+          <label class="switch"><input type="checkbox" data-cmp-opt="conf" ${conf ? "checked" : ""}><span class="sw" aria-hidden="true"></span><span>可信度</span></label>
+          ${n ? `<button type="button" class="link-btn" data-cmp-clear>全部清除</button>` : ""}
+        </div>
+        <p class="cmp-msg" data-cmp-msg role="status"></p>
+      </div>
+      ${n < 2 ? `<div class="empty cmp-empty">${n ? "再加入至少一個品種就能開始比較。" : "還沒有選擇品種。"}<br>
+        在列表卡片右上角按 ${icon("plus")}，或在上方搜尋加入。</div>` : ""}
+      ${table}
+      ${n > 1 ? `<p class="hint">「沿用」表示該品系尚未個別調查，暫時沿用選拔來源的栽培資料。評分為品種間的相對比較（1–5）。▲▼ 只表示比基準高或低，不代表好壞。</p>` : ""}`;
+
+    if (pos) {
+      const w = app.querySelector(".cmp-wrap");
+      if (w) { w.scrollLeft = pos[0]; w.scrollTop = pos[1]; }
+      window.scrollTo(0, pos[2]);
+    } else window.scrollTo(0, 0);
+    if (refocus) app.querySelector("#cmp-q")?.focus(); // focusin 會重新顯示建議清單
+  }
+
+  // 加入品種：有輸入就搜尋，沒輸入就列出目前篩選結果
+  function showSuggestions() {
+    const box = app.querySelector("#cmp-sugg"), input = app.querySelector("#cmp-q");
+    if (!box || input.disabled) return;
+    const q = state.cmpQ.trim().toLowerCase();
+    const pool = q ? ITEMS.filter((it) => searchText(it).includes(q)) : visibleList();
+    const list = pool.filter((it) => !inCompare(it.id)).slice(0, 8);
+    box.innerHTML = (q ? "" : `<div class="cmp-sugg-h">${activeFeatCount() || state.q || state.type !== "all" || state.region !== "all" ? "來自目前的篩選結果" : "所有品種"}</div>`) +
+      (list.length ? list.map((it, i) => `<button type="button" role="option" data-cmp-add="${esc(it.id)}" ${i === 0 ? `aria-selected="true"` : ""}>
+          <img src="${esc(coverOf(it))}" alt=""><span><b>${esc(titleOf(it))}</b><i>${esc(it.name)}</i></span>
+          <span class="badge ${it.type}">${TYPE_LABEL[it.type]}</span></button>`).join("")
+        : `<div class="cmp-sugg-h">找不到符合的品種</div>`);
+    box.hidden = false;
+    input.setAttribute("aria-expanded", "true");
+  }
+  function hideSuggestions() {
+    const box = app.querySelector("#cmp-sugg");
+    if (!box) return;
+    box.hidden = true;
+    app.querySelector("#cmp-q")?.setAttribute("aria-expanded", "false");
+  }
+
+  app.addEventListener("input", (e) => {
+    if (e.target.id !== "cmp-q") return;
+    state.cmpQ = e.target.value;
+    showSuggestions();
+  });
+  app.addEventListener("focusin", (e) => { if (e.target.id === "cmp-q") showSuggestions(); });
+  // 點建議項目時焦點留在搜尋框，否則 focusout 會先把清單收起來，點擊就落空
+  app.addEventListener("pointerdown", (e) => { if (e.target.closest("#cmp-sugg")) e.preventDefault(); });
+  app.addEventListener("focusout", (e) => {
+    const add = app.querySelector("#cmp-add");
+    if (add?.contains(e.target) && !add.contains(e.relatedTarget)) hideSuggestions();
+  });
+  app.addEventListener("keydown", (e) => {
+    if (e.target.id !== "cmp-q" && !e.target.closest?.("#cmp-sugg")) return;
+    const opts = [...app.querySelectorAll("#cmp-sugg [data-cmp-add]")];
+    const i = opts.indexOf(document.activeElement);
+    if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+      e.preventDefault();
+      const j = e.key === "ArrowDown" ? Math.min(i + 1, opts.length - 1) : i - 1;
+      (j < 0 ? app.querySelector("#cmp-q") : opts[j])?.focus();
+    } else if (e.key === "Enter" && e.target.id === "cmp-q" && opts[0]) {
+      e.preventDefault();
+      opts[0].click();
+    } else if (e.key === "Escape") {
+      state.cmpQ = "";
+      app.querySelector("#cmp-q").value = "";
+      hideSuggestions();
+    }
+  });
+  app.addEventListener("change", (e) => {
+    const opt = e.target.closest?.("[data-cmp-opt]");
+    if (!opt) return;
+    state.cmpOpts[opt.dataset.cmpOpt] = opt.checked;
+    saveJSON("cmp-opts", state.cmpOpts);
+    app.querySelector(".cmp")?.classList.toggle(opt.dataset.cmpOpt === "diff" ? "only-diff" : "show-conf", opt.checked);
+  });
+
+  // 比較列在 #app 外面，所以在 document 上委派
+  document.addEventListener("click", (e) => {
+    const t = (sel) => e.target.closest(sel);
+    let el;
+    if ((el = t("[data-cmp-toggle]"))) {
+      const id = el.dataset.cmpToggle;
+      inCompare(id) ? removeCompare(id) : addCompare([id]);
+    } else if ((el = t("[data-cmp-add]"))) {
+      const fromSearch = !!el.closest("#cmp-sugg");
+      if (fromSearch) state.cmpQ = "";
+      addCompare(el.dataset.cmpAdd.split(","));
+      if (fromSearch) app.querySelector("#cmp-q")?.focus();
+    } else if ((el = t("[data-cmp-remove]"))) removeCompare(el.dataset.cmpRemove);
+    else if ((el = t("[data-cmp-move]"))) moveCompare(el.dataset.cmpMove, Number(el.dataset.d));
+    else if ((el = t("[data-cmp-base]"))) {
+      state.cmpBase = state.cmpBase === el.dataset.cmpBase ? null : el.dataset.cmpBase;
+      renderCompare({ keepScroll: true });
+    } else if ((el = t("[data-cmp-group]"))) {
+      const key = el.dataset.cmpGroup, tbody = el.closest("tbody");
+      const open = tbody.classList.toggle("collapsed") === false;
+      el.setAttribute("aria-expanded", String(open));
+      const set = new Set(state.cmpOpts.collapsed);
+      open ? set.delete(key) : set.add(key);
+      state.cmpOpts.collapsed = [...set];
+      saveJSON("cmp-opts", state.cmpOpts);
+    } else if (t("[data-cmp-clear]")) {
+      state.compare = [];
+      state.cmpBase = null;
+      compareChanged();
+    } else if (t("[data-cmp-go]")) location.hash = compareHash();
+    else if (t("[data-cmp-all]")) {
+      setCompare(visibleList().map((it) => it.id));
+      saveJSON("compare", state.compare);
+      location.hash = compareHash();
+    }
+  });
+
   /* ---------------- 鍵盤 ---------------- */
   let detailNav = null;
   document.addEventListener("keydown", (e) => {
@@ -2192,9 +2656,21 @@
   let scrollToContent = false; // 手機上下排列時，點關係圖節點後捲到圖鑑
   function route() {
     if (lightbox.isOpen) lightbox.close();
+    hideCmpTip();
     const m = location.hash.match(/^#\/p\/(.+)$/);
+    const cmp = location.hash.match(/^#\/compare(?:\/(.*))?$/);
     if (onList) state.scrollY = window.scrollY; // 離開列表時記住捲動位置
-    if (m) {
+    onCompare = !!cmp;
+    if (cmp) {
+      // 網址是比較清單的依據（可分享），同步回 localStorage
+      onList = false;
+      detailNav = null;
+      setCompare((cmp[1] || "").split(",").map((s) => decodeURIComponent(s)).filter(Boolean));
+      saveJSON("compare", state.compare);
+      if (location.hash !== compareHash()) history.replaceState(null, "", compareHash());
+      renderCompare();
+      graph.select(null);
+    } else if (m) {
       onList = false;
       const id = decodeURIComponent(m[1]);
       renderDetail(id);
@@ -2205,6 +2681,7 @@
       renderList();
       graph.select(null);
     }
+    renderTray();
     if (scrollToContent) {
       scrollToContent = false;
       if (stacked() && panes.graph) requestAnimationFrame(() =>
@@ -2243,6 +2720,7 @@
   Promise.all([loadData(), probeEdit])
     .then(() => {
       if (panes.graph) graph.show();
+      setCompare(loadJSON("compare", []));
       window.addEventListener("hashchange", route);
       route();
     })
