@@ -1714,6 +1714,7 @@
     let nodes = [], links = [], byId = new Map(), up = new Map(), down = new Map();
     let selected = null, hovering = null, warming = false;
     let userMoved = false; // 使用者自己縮放／拖曳過就不再自動全覽
+    let overview = null;   // 點空白處全覽時記下 { at: 全覽視角, back: 全覽前的視角 }
     let showIsolated = true, pinFocus = true; // pinFocus：品種頁期間持續淡化無關的品種
     let onScreen = true; // 手機上下排列時，關係圖可能被捲出畫面
     let unsettled = false; // 固定期間拖曳過節點，恢復模擬時要重新平衡
@@ -2001,9 +2002,23 @@
       const x1 = Math.min(...list.map((n) => n.x - n.w / 2)), x2 = Math.max(...list.map((n) => n.x + n.w / 2));
       const y1 = Math.min(...list.map((n) => n.y - NODE_H / 2)), y2 = Math.max(...list.map((n) => n.y + NODE_H / 2));
       const k = Math.max(.2, Math.min(maxK, (w - pad * 2) / (x2 - x1 || 1), (h - pad * 2) / (y2 - y1 || 1)));
-      go(d3.zoomIdentity.translate(w / 2, h / 2).scale(k).translate(-(x1 + x2) / 2, -(y1 + y2) / 2), dur);
+      const t = d3.zoomIdentity.translate(w / 2, h / 2).scale(k).translate(-(x1 + x2) / 2, -(y1 + y2) / 2);
+      go(t, dur);
+      return t;
     }
     const fit = (dur = 0) => fitTo(nodes, { dur });
+
+    // 以指定品種為中心，縮放到剛好看得到它的整個血緣（祖先＋後代）
+    function fitAround(id, { dur = 500, pad = 60, maxK = 1.3 } = {}) {
+      const n = byId.get(id);
+      const [w, h] = size();
+      if (!n || !w) return;
+      const list = [...lineage(id)].map((x) => byId.get(x)).filter(Boolean);
+      const rx = Math.max(...list.map((m) => Math.abs(m.x - n.x) + m.w / 2));
+      const ry = Math.max(...list.map((m) => Math.abs(m.y - n.y) + NODE_H / 2));
+      const k = Math.max(.2, Math.min(maxK, (w / 2 - pad) / rx, (h / 2 - pad) / ry));
+      go(d3.zoomIdentity.translate(w / 2, h / 2).scale(k).translate(-n.x, -n.y), dur);
+    }
 
     // 把指定品種平移到畫面正中央（縮放維持不變，太小時放大到 0.9）
     function center(id, dur = 650) {
@@ -2056,6 +2071,14 @@
           scrollToContent = true;
           if (location.hash === hash) route(); else location.hash = hash;
         })
+        // 點兩下：以該品種為中心，縮放到看得到整個血緣
+        .on("dblclick", (e) => {
+          const g = e.target.closest(".g-node");
+          if (!g) return;
+          userMoved = true;
+          overview = null;
+          fitAround(d3.select(g).datum().id);
+        })
         .on("pointerover", (e) => {
           const g = e.target.closest(".g-node");
           if (e.pointerType !== "mouse" || !g) return;
@@ -2071,6 +2094,22 @@
           focus(null);
           hideTip();
         });
+      // 點空白處：縮放到全覽；停在全覽時再點一次，回到全覽前的視角。
+      // 拖曳平移後 d3-zoom 會吃掉那次 click，不會誤觸
+      svg.on("click.overview", (e) => {
+        if (e.target.closest(".g-node")) return;
+        const cur = d3.zoomTransform(svg.node());
+        const same = (a, b) => Math.abs(a.k - b.k) < 1e-3 && Math.abs(a.x - b.x) < .5 && Math.abs(a.y - b.y) < .5;
+        if (overview && same(cur, overview.at)) {
+          userMoved = true;
+          go(overview.back, 500);
+          overview = null;
+          return;
+        }
+        userMoved = false;
+        const at = fitTo(nodes, { dur: 500 });
+        overview = at ? { at, back: cur } : null;
+      });
       // 滑鼠第一次進到關係圖時，先在背景載入各品種的封面照，懸浮框才不會等圖
       svg.on("pointerenter.preload", () => {
         svg.on("pointerenter.preload", null);
