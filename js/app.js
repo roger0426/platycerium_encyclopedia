@@ -37,6 +37,10 @@
   let REGIONS = {};
   let EDIT = false;        // 以 tools/serve.py 啟動時可在網頁上新增／刪除照片
   let EDIT_DATA = false;   // 同上，可在網頁上編輯 data/*.csv
+  // 沒填授權的照片（尚未取得同意）只在本機顯示，照片檔不進 git，見 .gitignore
+  const LOCAL = ["localhost", "127.0.0.1", "::1", "[::1]"].includes(location.hostname);
+  const showPhoto = (p) => p.src && (p.license || LOCAL);
+  const REPO_URL = "https://github.com/roger0426/platycerium_encyclopedia";
   const state = { q: "", type: "all", region: "all", scrollY: 0 };
 
   /* ---------------- 工具 ---------------- */
@@ -80,8 +84,8 @@
   const photoOf = (p) => ({ src: p.src, caption: p.caption, credit: p.credit, license: p.license, source: p.source, variant: p.variant || "" });
   // variant 欄有值（例如「斑葉」）的是變異株照片，另外收，不當封面也不混在主相簿
   function setPhotos(it, rows) {
-    it.photos = rows.filter((p) => p.src && !p.variant).map(photoOf);
-    it.variantPhotos = rows.filter((p) => p.src && p.variant).map(photoOf);
+    it.photos = rows.filter((p) => showPhoto(p) && !p.variant).map(photoOf);
+    it.variantPhotos = rows.filter((p) => showPhoto(p) && p.variant).map(photoOf);
   }
 
   async function loadData() {
@@ -100,7 +104,7 @@
 
     const photosById = new Map(), variantsById = new Map();
     for (const p of photos) {
-      if (!p.id || !p.src) continue;
+      if (!p.id || !showPhoto(p)) continue;
       const map = p.variant ? variantsById : photosById;
       if (!map.has(p.id)) map.set(p.id, []);
       map.get(p.id).push(photoOf(p));
@@ -491,7 +495,8 @@
       <div class="active-filters" id="active-filters"></div>
       <div class="grid" id="grid"></div>
       <footer class="footer">資料僅供參考，栽培條件會因個體與環境而異。點選卡片可查看詳細資訊、親本與雜交後代。<br>
-        照片來自 <a href="https://commons.wikimedia.org/" target="_blank" rel="noopener">Wikimedia Commons</a>，作者與授權標示於各照片下方。</footer>`;
+        照片來自 <a href="https://commons.wikimedia.org/" target="_blank" rel="noopener">Wikimedia Commons</a>、<a href="https://www.inaturalist.org/" target="_blank" rel="noopener">iNaturalist</a> 等處，著作權屬於原作者，作者、授權與出處標示於各照片下方；部分照片經縮小尺寸。<br>
+        本站為非商業的個人圖鑑。若您是照片或資料的權利人、不同意在此刊登，請至 <a href="${REPO_URL}/issues" target="_blank" rel="noopener">GitHub Issues</a> 告知，確認後會儘速移除。</footer>`;
 
     updateGrid();
     initCardSize();

@@ -122,6 +122,7 @@ python3 tools/serve.py
 | `credit` | 作者 |
 | `license` | 授權，例如 `CC BY-SA 4.0` |
 | `source` | 原始出處網址，作者名稱會連到這裡 |
+| `variant` | 變異株標記，例如 `斑葉`；有填的照片會另外列在「變異株照片」，不當封面也不混進主相簿。已有品系條目的（如 Jade Girl）請直接把 `id` 指到該品系 |
 
 第一張會當作卡片封面；沒有照片的品種會自動顯示佔位圖。建議照片長邊縮到 1600px 以內。
 
@@ -132,7 +133,9 @@ python3 tools/serve.py
 
 照片會自動縮到長邊 1600px、轉成 JPEG，存成 `images/<id>/NN.jpg` 並寫入 `photos.csv`。改完記得 commit。部署到 GitHub Pages 等靜態主機時沒有這個伺服器，按鈕不會出現。
 
-目前的照片都下載自 Wikimedia Commons（皆為 CC 授權或公眾領域）。使用 CC BY / BY-SA 照片時必須保留作者、授權與出處，請勿刪除這三個欄位。
+使用 CC BY / BY-SA 照片時必須保留作者、授權與出處，請勿刪除這三個欄位。
+
+**`license` 空白的照片不會公開。** 從業者、Instagram、Facebook 等處下載的照片，著作權屬於原作者，附上出處不等於取得授權。這些照片的 `license` 留空：網站只在本機（`localhost`）顯示，照片檔列在 `.gitignore`，不會被 commit。取得作者同意後，`license` 填「經授權使用」（同時留存對方的同意紀錄），再把該照片從 `.gitignore` 移除並 commit。新增照片時，沒有授權的也要記得加進 `.gitignore`。
 
 ### 參考資料（sources.csv / citations.csv）
 
