@@ -1703,6 +1703,9 @@
     const FONT = getComputedStyle(document.body).fontFamily;
     const NODE_H = 34, LEVEL_GAP = 130;
     const calm = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    // 觸控裝置（手機、平板）不漂浮：算到穩定就停，省電、不發熱
+    const still = calm || matchMedia("(pointer: coarse)").matches;
+    const idleAlpha = still ? 0 : .02;
     const box = document.getElementById("cy");
     const msg = document.getElementById("graph-msg");
     const isoBtn = graphPane.querySelector("[data-graph-iso]");
@@ -1712,9 +1715,24 @@
     let selected = null, hovering = null, warming = false;
     let userMoved = false; // 使用者自己縮放／拖曳過就不再自動全覽
     let showIsolated = true, pinFocus = true; // pinFocus：品種頁期間持續淡化無關的品種
+    let onScreen = true; // 手機上下排列時，關係圖可能被捲出畫面
+    let unsettled = false; // 固定期間拖曳過節點，恢復模擬時要重新平衡
     // 品種頁開著時節點固定不動（不漂浮、不重新模擬），離開品種頁才恢復
     const frozen = () => calm || !!selected;
-    const resume = () => { if (sim && !frozen() && !graphPane.hidden && !document.hidden) sim.restart(); };
+    const resume = () => {
+      if (!sim || frozen() || graphPane.hidden || document.hidden || !onScreen) return;
+      if (unsettled) { unsettled = false; settle(); }
+      sim.restart();
+    };
+    // 觸控裝置：先維持低溫幾秒，讓彈簧與斥力把節點推回定位，再降溫到停下
+    // （直接降到 0 的話，節點還沒彈回模擬就先停了）
+    let coolTimer = 0;
+    function settle() {
+      if (!still || calm) return;
+      clearTimeout(coolTimer);
+      sim.alphaTarget(.02).alpha(Math.max(sim.alpha(), .1));
+      coolTimer = setTimeout(() => sim.alphaTarget(0), 4000);
+    }
     try {
       showIsolated = localStorage.getItem("graph-isolated") !== "0";
       pinFocus = localStorage.getItem("graph-focus") !== "0";
@@ -1808,7 +1826,7 @@
 
     // 漂移力：每個節點以不同相位緩慢晃動，振幅只有幾 px
     function wander() {
-      if (warming || calm) return;
+      if (warming || still) return;
       const t = performance.now() / 1000;
       for (const n of nodes) {
         if (n.fx != null) continue;
@@ -1880,7 +1898,8 @@
       } else {
         sim.alpha(.6);
       }
-      if (frozen()) sim.stop(); else sim.restart();
+      sim.stop();
+      resume(); // 面板隱藏、捲出畫面或在背景時不重新啟動
       mark();
     }
 
@@ -1894,9 +1913,9 @@
           hideTip();
         })
         // 固定時只移動被拖曳的節點，其他節點不受牽動
-        .on("drag", (e, d) => { d.fx = e.x; d.fy = e.y; if (frozen()) { d.x = e.x; d.y = e.y; draw(); } })
+        .on("drag", (e, d) => { d.fx = e.x; d.fy = e.y; if (frozen()) { d.x = e.x; d.y = e.y; unsettled = true; draw(); } })
         .on("end", (e, d) => {
-          if (!e.active) sim.alphaTarget(calm ? 0 : .02);
+          if (!e.active) { if (still && !calm) settle(); else sim.alphaTarget(idleAlpha); }
           d.fx = null; d.fy = null; // 放開後由彈簧拉回
           dragging = false;
           if (calm && !selected) sim.alpha(.3).restart();
@@ -2023,7 +2042,7 @@
         .force("y", d3.forceY())
         .force("collide", d3.forceCollide().strength(.9))
         .force("wander", wander)
-        .alphaTarget(calm ? 0 : .02) // 不完全停下，維持輕微漂浮
+        .alphaTarget(idleAlpha) // 電腦上不完全停下，維持輕微漂浮
         .on("tick", draw);
       if (calm) sim.stop();
 
@@ -2066,6 +2085,10 @@
       document.addEventListener("visibilitychange", () => {
         if (document.hidden || graphPane.hidden) sim.stop(); else resume();
       });
+      new IntersectionObserver(([e]) => {
+        onScreen = e.isIntersecting;
+        if (onScreen) resume(); else sim.stop();
+      }).observe(box);
 
       graphPane.querySelector("#graph-legend").innerHTML = `
         <span><i class="lg-sp"></i>原生種</span><span><i class="lg-hy"></i>雜交種</span><span><i class="lg-cv"></i>品系</span>
