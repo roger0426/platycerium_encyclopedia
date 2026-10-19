@@ -98,6 +98,7 @@ main {
   padding: 4px 10px; border: 1px solid var(--line); border-radius: 999px;
   background: var(--surface); color: var(--text); font-size: .78rem; cursor: pointer;
 }
+.theme-btn[hidden] { display: none; }
 .theme-btn:hover { border-color: var(--accent); }
 .theme-btn .ic { width: 15px; height: 15px; }
 @media (max-width: 420px) { .brand-sub { display: none; } }
@@ -763,7 +764,8 @@ body[data-layout="split"] .graph-pane { border-right: 1px solid var(--line); }
 .crumbs .data-edit:hover, .result-bar .data-edit:hover { border-color: var(--accent); color: var(--accent); }
 .data-edit .ic { width: 14px; height: 14px; color: var(--accent); }
 .result-bar .data-edit { margin-right: auto; padding: 3px 12px; font-size: .8rem; }
-.data-dlg { width: min(860px, calc(100vw - 32px)); }
+/* 固定高度、內容超出就捲動：切換筆數不同的分頁時視窗才不會跳 */
+.data-dlg { width: min(860px, calc(100vw - 32px)); height: min(760px, calc(100dvh - 32px)); overflow-y: auto; }
 .data-dlg .pd-head .back-btn { font-size: .8rem; }
 .dd-tabs { margin-top: 12px; flex-wrap: wrap; }
 .dd-bar { display: flex; gap: 8px; margin-top: 12px; }
