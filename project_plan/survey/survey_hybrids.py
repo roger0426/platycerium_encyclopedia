@@ -1,4 +1,4 @@
-"""Feature survey of hybrids and cultivars, guideline v1.3 — one block per plant.
+"""Feature survey of hybrids and cultivars, guideline v1.3 (v1.4 batches at the end) — one block per plant.
 
 Rules shared with survey_species.py live in survey_common.py (summary values, confidence, text columns).
 Guideline §1.6: hybrids and cultivars are never inferred from their parents; every statement below describes the plant itself.
@@ -162,6 +162,83 @@ SOURCES = [
      "T2", "美國", "NC State Extension", "大學推廣單位；頁面的照護欄位寫的是二叉鹿角蕨這個種，不套用到栽培品種"),
     ("cistus-netherlands", "*RETAIL - Platycerium bifurcatum 'Netherlands'", "Cistus Nursery", "https://cistus.com/products/retail-platycerium-bifurcatum-netherlands",
      "", "vendor", "en", "", "2026-10-15", "secondary", "T3", "美國", "Cistus Nursery", "奧勒岡州苗圃"),
+    # ---- FSQ line (2026-10-18): Wanna's monthly catalogs (I Love Ferns Nursery, bloggang) are the breeder's own listings
+    *[(f"wanna-cat-{ym}", title, "I Love Ferns Nursery（Wanna Pinjipaitoon，泰國尖竹汶）",
+       f"https://www.bloggang.com/m/viewdiary.php?id=ladyslipper&month={ym[5:]}-{ym[:4]}&date=01&group=25&gblog={g}", "", "vendor", "en",
+       f"{ym}-01", "2026-10-18", "primary", "T3", "泰國", "I Love Ferns（Wanna）", "育種者自家的月型錄；品名後的 (FSQ) 標示出自 Foongsiqi 孢子苗系")
+      for ym, g, title in [
+          ("2020-03", 176, "จำหน่ายเฟินชายผ้าสีดาและเฟินอื่นๆประจำเดือนมีนาคม/March 2020"),
+          ("2020-09", 179, "จำหน่ายเฟินชายผ้าสีดาและเฟินอื่นๆประจำเดือนกันยายน/September /2020"),
+          ("2020-11", 181, "จำหน่ายเฟินชายผ้าสีดาและเฟินอื่นๆประจำเดือนพฤศจิกายน/November /2020"),
+          ("2021-02", 184, "จำหน่ายเฟินชายผ้าสีดาและเฟินอื่นๆประจำเดือนกุมภาพันธ์/February 2021"),
+          ("2021-03", 185, "จำหน่ายเฟินชายผ้าสีดาและเฟินอื่นๆประจำเดือนมีนาคม / March 2021"),
+          ("2021-10", 191, "จำหน่ายเฟินชายผ้าสีดา เดือนตุลาคม2564/October Catalog 2021"),
+          ("2022-11", 204, "November Catalog Platycerium ferns for sale"),
+          ("2022-12", 205, "December Catalog Platycerium ferns for sale"),
+          ("2023-02", 207, "จำหน่ายเฟินชายผ้าสีดา Platycerium Catalog for February 2023"),
+          ("2023-03", 208, "March Catalog iloveferns Nursery by Wanna"),
+          ("2023-11", 216, "Platycerium ferns November Catalog 2023"),
+          ("2023-12", 217, "December Catalog 2023 by iloveferns Nursery"),
+          ("2025-02", 228, "จำหน่ายเฟินชายผ้าสีดา Platycerium ferns for sale February 2025"),
+          ("2025-03", 229, "Platycerium Ferns for Sale for March 2025"),
+          ("2026-04", 237, "จำหน่ายเฟินชายผ้าสีดาเดือนเมษายน2569 / Platycerium ferns for sale April 2026"),
+          ("2026-07", 239, "จำหน่ายเฟินชายผ้าสีดาเดือนกรกฏาคม2569(Platycerium ferns for sale July 2026)"),
+          ("2026-08", 240, "จำหน่ายเฟินชายผ้าสีดาเดือนสิงหาคม 2569 / Platycerium ferns Catalog for August 2026"),
+      ]],
+    ("wanna-yt-kusuma", "Platycerium FSQ No. 16 (Kusuma)", "YouTube；Thaigardenstore & iloveferns By Wanna",
+     "https://www.youtube.com/watch?v=q2Gp1Hc0Hrg", "", "vendor", "en", "", "2026-10-18", "primary", "T3", "泰國", "I Love Ferns（Wanna）",
+     "YouTube 影片；與 Wanna 型錄同一單位"),
+    ("wps-foong-si-qi", "Platycerium 'Foong Si Qi'（WPS-P-000048）", "World Platycerium Society Registry",
+     "https://www.worldplatycerium.org/registry/WPS-P-000048", "", "database", "en", "", "2026-10-18", "aggregator", "T4", "國際",
+     "World Platycerium Society", "登錄狀態 Research in progress；引用黃仕傑《鹿角蕨日記簿：栽培與觀賞》（2025）與晴花鹿苑；把 FSQ 列為別名"),
+    ("wps-sazanami", "Platycerium 'Sazanami'（WPS-P-000040）", "World Platycerium Society Registry",
+     "https://www.worldplatycerium.org/registry/WPS-P-000040", "", "database", "en", "", "2026-10-18", "aggregator", "T4", "國際",
+     "World Platycerium Society", "登錄狀態 Accepted record；選育資料由晴花鹿苑第一手提供"),
+    ("haruhana-usa-sazanami", "P. Sazanami", "Haruhana USA（晴花鹿苑美國站）", "https://haruhana-usa.com/products/p-sazanami", "", "vendor", "en",
+     "", "2026-10-18", "secondary", "T3", "台灣", "晴花鹿苑", "與晴花鹿苑台灣站同一單位"),
+    # ---- PlatyWiki 品種清單的獨立查證 (2026-10-18)：PlatyWiki 本身不引用，只當線索
+    ("siam-sale-newhybrids", "Sale Platycerium New Hybrids 1", "Siam Exotica Plants（泰國）",
+     "http://www.siamexotica.com/Sale-Platycerium-NewHybrids-1.html",
+     "https://web.archive.org/web/20090605080222/http://www.siamexotica.com:80/Sale-Platycerium-NewHybrids-1.html", "vendor", "en", "",
+     "2026-10-18", "secondary", "T3", "泰國", "Siam Exotica", "交種價目表；Halling 說 Durval Nunes 是 Siam Exotica 列出的"),
+    ("platyceriumferns-durval", "Introducing A Extreamy Rare New Cultivar", "Platycerium ferns（platyceriumferns.com）",
+     "http://www.platyceriumferns.com/2007/10/introducing-extreamy-rare-new-cultivar.html", "", "blog", "en", "2007-10", "2026-10-18",
+     "primary", "T3", "美國", "platyceriumferns.com", "販售鹿角蕨的玩家部落格；Siam Exotica 的價目表把它列為 Durval Nunes 的來源"),
+    ("basements-totoro", "Platycerium Willinckii Dwarf 'Totoro' Sporelings", "The Basements",
+     "https://www.thebasements.com/products/platycerium-willinckii-dwarf-totoro-sporelings", "", "vendor", "en", "2025-12-17", "2026-10-18",
+     "secondary", "T3", "美國", "The Basements", "照護欄的溫度 65–85 °F 是生長適溫，不當建議最低／最高溫"),
+    ("naturefix-totoro", "P.willinckii Totoro sporeling", "naturefix", "https://naturefix.official.ec/items/110401384", "", "vendor", "ja",
+     "", "2026-10-18", "secondary", "T3", "日本", "naturefix", "已售完"),
+    ("yahoo-frontier-totoro", "【Frontier Plants】【現品】ビカクシダ・ウィリンキー・トトロ 胞子苗 豆豆龍 P.willinckii Totoro sporeling Yellow Moon Dwarf",
+     "Yahoo!オークション（出品者 Frontier Plants）", "https://page.auctions.yahoo.co.jp/jp/auction/b1246371030", "", "vendor", "ja", "2026-09-29",
+     "2026-10-18", "secondary", "T3", "日本", "Frontier Plants", "已結標的拍賣頁"),
+    ("yahoo-hhr-totoro", "HHR Garden由来 P. willinckii 'Totoro' sporeling", "Yahoo!オークション（出品者在愛知縣）",
+     "https://page.auctions.yahoo.co.jp/jp/auction/u1244834332", "", "vendor", "ja", "2026-09-16", "2026-10-18", "secondary", "T3", "日本",
+     "日本拍賣（HHR Garden 苗）", "已結標的拍賣頁；個人轉售"),
+    ("yahoo-vandaka-grace", "P. willinckii 'Grace' spore grown (select)", "Yahoo!オークション（出品者 vandaka plants）",
+     "https://page.auctions.yahoo.co.jp/jp/auction/w1245886822", "", "vendor", "ja", "2026-09-25", "2026-10-18", "secondary", "T3", "日本",
+     "vandaka plants", "已結標的拍賣頁；落札價 1,901,000 日圓"),
+    ("yahoo-grace-2024", "特A1，P.Willinckii Grace sporeling HHR 黄さんの直筆サイン入り", "Yahoo!オークション（出品者在千葉縣）",
+     "https://page.auctions.yahoo.co.jp/jp/auction/t1158136168", "", "vendor", "ja", "2024-10-23", "2026-10-18", "secondary", "T3", "日本",
+     "日本拍賣（HHR 苗）", "已結標的拍賣頁；個人轉售"),
+    # ---- v1.4 B1 (2026-10-19): vendor pages found by name searches
+    ("joshsfrogs-lemoinei", "Platycerium veitchii 'Lemoinei' - French Staghorn Fern", "Josh's Frogs",
+     "https://joshsfrogs.com/sp/platycerium-veitchii-lemoinei-french-staghorn-fern-plant588", "", "vendor", "en", "", "2026-10-19",
+     "secondary", "T3", "美國", "Josh's Frogs", "ReptiFiles 商店頁的文字與此頁相同，視為同一來源"),
+    ("foliage-factory-netherlands", "Platycerium bifurcatum 'Netherlands'", "Foliage Factory",
+     "https://www.foliage-factory.com/platycerium-bifurcatum-netherlands", "", "vendor", "en", "", "2026-10-19",
+     "secondary", "T3", "德國", "Foliage Factory", "從德國與荷蘭出貨的歐洲網店"),
+    ("theplantco-netherlands", "Platycerium bifurcatum 'Netherlands' (Elkhorn Fern, Staghorn Fern)", "The Plant Company",
+     "https://theplantcompany.co.nz/shop/product/ferns/platycerium-bifurcatum-netherlands", "", "vendor", "en", "", "2026-10-19",
+     "secondary", "T3", "紐西蘭", "The Plant Company", ""),
+    ("vegetal-high-finger", "Platycerium High Finger", "Vegetal Design",
+     "https://vegetaldesignqc.com/en/products/platycerium-high-finger", "", "vendor", "en", "", "2026-10-19",
+     "secondary", "T3", "加拿大", "Vegetal Design", "照護欄（低至中光、15–30 °C）像該店通用的照護表，不採用"),
+    ("vegetal-pegasus", "Platycerium Pegasus", "Vegetal Design", "https://vegetaldesignqc.com/en/products/platycerium-pegasus", "", "vendor", "en", "",
+     "2026-10-19", "secondary", "T3", "加拿大", "Vegetal Design", "照護欄是該店通用的照護表，不採用"),
+    ("paraiso-polar-bear", "Mounted Platycerium Omo 'Polar Bear'", "Paraíso Plant Studio",
+     "https://paraisoplant.studio/collections/all/products/mounted-platycerium-omo-polar-bear", "", "vendor", "en", "", "2026-10-19",
+     "secondary", "T3", "美國", "Paraíso Plant Studio", "加州舊金山灣區的植物店；照護欄是蕨類通用文字，不採用"),
 ]
 
 # Wayback snapshots taken after the sources were cited (guideline §6 工具); id -> archive_url
@@ -222,15 +299,17 @@ ARCHIVE = {
 # text: overrides of generated text columns (shield, fertile, growth, ...); the facts must already be cited above
 # extra: non-feature fields the block cites (rows matched by plant + source + field)
 # searched: what was searched for fields left without a summary (guideline §6); "*" is the default
+# version / date: guideline version and survey date of the block (default v1.3 / 2026-10-15); v1.4 batches set both
+#   (batches_v1.4.md); relaxed statements (guideline v1.4) carry a "~" value prefix, e.g. c(src, "size", "~S", "小型", ...)
 HP = "hoshizaki-price1990"
 BLOCKS = {}
 
 BLOCKS["elemaria"] = dict(
     cites=[
         # morphology — T1: the protologue (Hoshizaki & Price 1990)
-        (HP, "size", 70, "盾葉可達 70 × 30 cm、孢子葉可達 63 × 53 cm",
-         "只給上限（to …），依「up to 屬極端值」不採計；無範圍可算 D", "Base fronds to 70 x 30 cm ... Foliage fronds ... to 63 x 53 cm", "pp. 63–64", "excluded"),
-        (HP, "fertile_length", "≤63 cm", "可達 63 cm", "只給上限，依「up to 屬極端值」不採計", "the fronds slightly asymmetrical, ± deltoid, to 63 x 53 cm", "p. 64", "excluded"),
+        (HP, "size", "~70", "盾葉可達 70 × 30 cm、孢子葉可達 63 × 53 cm",
+         "只給上限（to …），無範圍可算嚴格 D；v1.4 記為寬鬆 D = 70", "Base fronds to 70 x 30 cm ... Foliage fronds ... to 63 x 53 cm", "pp. 63–64", "summary"),
+        (HP, "fertile_length", "~≤63 cm", "可達 63 cm", "只給上限 → v1.4 寬鬆說法", "the fronds slightly asymmetrical, ± deltoid, to 63 x 53 cm", "p. 64", "summary"),
         (HP, "shield_vein", "yes", "主脈略隆起", "somewhat prominent → yes（隆起）",
          "Base fronds to 70 x 30 cm, upper part extended and foliaceous, with somewhat prominent main veins", "p. 63", "summary"),
         (HP, "shield_fringe", "above-stipe", "芽點上方有盾葉組織的皺褶",
@@ -743,7 +822,7 @@ BLOCKS["foong-si-qi"] = dict(
         c(FSQ, "light", "3–5", "成株中光至中強光", "中光 3、中強光 5 → 3–5", "上板成株 ... 1. 中光至中強光"),
         c(FSQ, "water", 1, "本身耐旱，乾濕容忍力強", "耐旱 → 1", "捲捲鹿角蕨和深綠鹿角蕨一樣對於環境乾溼度容忍力強 ... 雖然捲捲鹿角蕨本身耐旱"),
         c(FSQ, "min_temp", 5, "低於 5 度可能寒害", "受害溫度，不是建議值 → reference", "若低於 5 度則有可能發生寒害", "", "reference"),
-        c(FSQ, "size", 80, "成熟植株直徑 60–100 cm", "株徑中點 80；不是盾葉或孢子葉尺寸 → excluded", "成熟植株直徑可達 60~100 公分", "", "excluded"),
+        c(FSQ, "size", "~80", "成熟植株直徑 60–100 cm", "株徑中點 80；不是盾葉或孢子葉尺寸 → 寬鬆說法（v1.4）", "成熟植株直徑可達 60~100 公分"),
         c(FSQ, "fertile_length", "50–80 cm", "3 年以上成株手長 50–80 cm", "", "3 年以上完全成熟體的捲捲鹿角蕨孢子葉手長可達 50~80 公分"),
         c(FSQ, "pups", "yes", "多芽型", "", "捲捲鹿屬於多芽型鹿角蕨"),
         c("rff-foongsiqi", "light", 3, "需要明亮濾光，避免直曬", "bright filtered → 3", "Bright filtered light essential; avoid direct sun which causes scorching"),
@@ -760,9 +839,15 @@ BLOCKS["foong-si-qi"] = dict(
         ("孢子苗可能失去捲葉性狀，側芽則能保留母株特徵。", FSQ, "相對側芽是從母株上無性繁殖出的個體，基因上幾乎 100% 完美遺傳捲捲鹿角蕨的特徵", ""),
     ],
     note=[
-        ("微體溫室寫它由泰國的培育家馮詩琪選育。", FSQ, "一般大家所熟知的是由泰國知名鹿角蕨培育家-馮詩琪所精心選育出來", ""),
-        ("Jungle Leaves 則寫它以馬來西亞育種家 SS Foong 的女兒 Si Qi 命名。", "jl-foong-siqi-qq",
+        ("Jungle Leaves 寫它以馬來西亞育種家 SS Foong 的女兒 Si Qi 命名。", "jl-foong-siqi-qq",
          "This staghorn fern is named after Si Qi, the daughter of the Malaysian Platycerium breeder SS Foong.", ""),
+        ("Rainforest Flora 則寫馬來西亞的 Mr. Foong 2014-04-20 在 Facebook 發表，以孫女命名。", "rff-foongsiqi",
+         "first introduced this cultivar on Facebook on April 20, 2014 ... named this beautiful plant after his granddaughter", ""),
+        ("微體溫室寫它由泰國的培育家馮詩琪選育，與其他來源不同。", FSQ, "一般大家所熟知的是由泰國知名鹿角蕨培育家-馮詩琪所精心選育出來", ""),
+        ("「FSQ」在育種者 Wanna 的型錄裡指本品種的孢子苗系，和無性繁殖的「Foongsiqi Original」分開列（見 FSQ 條目）。", "wanna-cat-2022-11",
+         "No.13 P. Foongsiqi Original ... No.20 P. Ivory (FSQ)", ""),
+        ("晴花鹿苑則把 FSQ 當成本品種的別名，市面上標 FSQ 的植株可能是原品種也可能是孢子苗。", "haruhana-usa-sazanami",
+         "derived from hand-selected Platycerium 'Foong Siqi' (FSQ) sporelings", ""),
     ],
     searched=searched("微體溫室〈捲捲鹿〉|Rainforest Flora 商品頁|Jungle Leaves 商品頁",
                       f"{MOS}|微體溫室〈捲捲鹿〉|Rainforest Flora 商品頁|Jungle Leaves 商品頁"),
@@ -1413,7 +1498,7 @@ BLOCKS["bifurcatum-netherlands"] = dict(
         c("cistus-netherlands", "light", 3, "明亮但避開直射", "bright, out of direct sun → 3", "Bright light is best but out of direct sun."),
         c("cistus-netherlands", "water", "1–3", "澆透後待乾；比其他型更耐頻繁澆水", "drying between waterings 1，但較耐頻繁澆水 → 1–3",
           "Best watered well and allowed to dry out before watering again, however, the 'Netherlands' form is more tolerant of more frequent watering."),
-        c("cistus-netherlands", "fertile_length", "≤91 cm", "孢子葉可達 3 呎", "up to → 極端值，排除", "fertile fronds to up to 3 ft long", "", "excluded"),
+        c("cistus-netherlands", "fertile_length", "~≤91 cm", "孢子葉可達 3 呎", "只給上限 → 寬鬆說法（v1.4）", "fertile fronds to up to 3 ft long"),
     ],
     desc=[("NC State Extension 說它是常見的栽培品種，葉灰綠、分裂。", "ncsu-bifurcatum", "'Netherlands' popular cultivar with grayish-green and lobed fronds", ""),
           ("孢子葉淡灰綠，生長旺盛。", "cistus-netherlands", "Epiphytic fern with pale, gray-green, fertile fronds ... A vigorous grower", "")],
@@ -1475,8 +1560,8 @@ for pid, src, lab, claim, quote in [
     ("willinckii-watchara", "mo-expensive", "侏儒爪哇 Watchara 系列", "", "Watchara 系列的侏儒爪哇鹿角蕨品種是近期的新興之作"),
 ]:
     add(pid, [c(src, "size", "S", lab, (claim + "；" if claim else "") + "來源稱侏儒、沒有尺寸 → S", quote)])
-add("alcicorne-madagascar-dwarf", [c("jl-alcicorne-dwarf", "size", 40, "高約 40 cm、寬約 30 cm", "整株高寬，不是盾葉或孢子葉尺寸 → excluded",
-                                     "They only grow to about 40 cm tall and 30 cm wide", "", "excluded")])
+add("alcicorne-madagascar-dwarf", [c("jl-alcicorne-dwarf", "size", "~40", "高約 40 cm、寬約 30 cm", "整株高寬 → v1.4 寬鬆 D（已有侏儒說法，不計入摘要）",
+                                     "They only grow to about 40 cm tall and 30 cm wide")])
 
 
 # ---------------------------------------------------------------- batch 4 (2026-10-16): plants added from Ajin's Garden / Haruhana pages
@@ -1545,7 +1630,7 @@ BLOCKS["stella-aeterni"] = dict(
 )
 BLOCKS["aydan"] = dict(
     cites=[
-        c("ajins-aydan", "size", "S", "小型爪哇系", SMALL, "是一款精緻迷人的小型爪哇系鹿角蕨 ... 整體尺寸維持在相對小巧的範圍", "", "excluded"),
+        c("ajins-aydan", "size", "~S", "小型爪哇系", SMALL + "；v1.4 記為寬鬆 S", "是一款精緻迷人的小型爪哇系鹿角蕨 ... 整體尺寸維持在相對小巧的範圍"),
         c("ajins-aydan", "fertile_posture", "spread", "葉片自然向外舒展", "spreading → spread", "葉片自然向外舒展，分岔細緻而流暢"),
     ],
     desc=[("小型的爪哇系，孢子葉纖細、分岔細緻，覆細白毛。", "ajins-aydan",
@@ -1578,8 +1663,8 @@ BLOCKS["veitchii-no-shield"] = dict(
     cites=[
         c("ajins-veitchii-no-shield", "light", 3, "散光通風環境", "bright filtered light → 3", "適合在陽台等處以散光通風環境栽種"),
         c("ajins-veitchii-no-shield", "difficulty", 1, "相對好照顧", "好照顧 → easy → 1", "它屬於相對好照顧的觀葉植物"),
-        c("ajins-veitchii-no-shield", "size", "S", "外觀呈類侏儒形態", "只說外觀像侏儒，不是稱它為侏儒 → 不算侏儒說法",
-          "外觀呈類侏儒形態", "", "excluded"),
+        c("ajins-veitchii-no-shield", "size", "~S", "外觀呈類侏儒形態", "只說外觀像侏儒，不是稱它為侏儒 → 不算侏儒說法；當小型描述記為寬鬆 S（v1.4）",
+          "外觀呈類侏儒形態"),
     ],
     desc=[("沒有營養葉，只長孢子葉，外觀類似侏儒型；孢子葉白皙、微波浪分岔。", "ajins-veitchii-no-shield",
            "其主要特色是沒有營養葉，只有孢子葉生長 外觀呈類侏儒形態，葉片白皙且帶有微波浪分岔的質感", "")],
@@ -1654,7 +1739,7 @@ BLOCKS["kitshakood-round-frond"] = dict(
 )
 BLOCKS["uncia"] = dict(
     cites=[
-        c("haruhana-uncia", "size", "M", "中小型", SMALL, "成株尺寸為中小型", "", "excluded"),
+        c("haruhana-uncia", "size", "~M", "中小型", SMALL + "；v1.4 記為寬鬆 M", "成株尺寸為中小型"),
         c("haruhana-uncia", "fertile_posture", "spread", "葉型向外展開", "spreading → spread", "美麗霸氣的葉型向外展開"),
     ],
     desc=[("成株中小型，冠型小巧，孢子葉白皙、末端多岔如小爪；生長慢、芽量少。", "haruhana-uncia",
@@ -1726,15 +1811,771 @@ BLOCKS["wfsq"] = dict(
     searched=searched(f"{HR}|{WEB}|{B4}", f"{HR}|{B4}"),
 )
 BLOCKS["willinckii-anapat-1"] = dict(
-    cites=[c("haruhana-anapat-1", "size", "S", "母本成熟時體型偏小", SMALL, "母本成熟時體型偏小", "", "excluded")],
+    cites=[c("haruhana-anapat-1", "size", "~S", "母本成熟時體型偏小", SMALL + "；v1.4 記為寬鬆 S", "母本成熟時體型偏小")],
     desc=[("母本成熟時體型偏小，孢子葉秀氣精緻。", "haruhana-anapat-1", "母本成熟時體型偏小，擁有秀氣且精緻的孢子葉", "")],
     note=[("台灣目前看到的是孢子苗。", "haruhana-anapat-1", "經典款 P. willinckii Anapat 1 孢子苗。", "")],
     searched=searched(f"{HR}|{WEB}|{B4}", f"{HR}（沒有照護資料）|{B4}"),
 )
 
 
+# ---------------------------------------------------------------- FSQ line (2026-10-18): Wanna's Foongsiqi sporelings and their named selections
+# Plants are listed when Wanna's own catalog sells them under the name and the staghornfern.org database (Wayback) lists them as
+# Foongsiqi F2 by Wanna. Names found in only one of the two are left out (see species_list.md). Searches by name found no other page.
+def wc(ym):
+    return f"wanna-cat-{ym}"
+
+WS = "I Love Ferns（Wanna）2020–2026 月型錄|staghornfern.org 交種資料庫（Wayback）|搜尋：英文品名＋Platycerium|晴花鹿苑、阿金、Haruhana USA 站內搜尋|World Platycerium Society 登錄"
+WSC = f"{WS}（型錄只有品名與價格，沒有照護資料）"
+BLOCKS["fsq"] = dict(
+    cites=[c(wc("2020-11"), "origin", "Wanna 以 Foongsiqi 播孢的孢子苗", "FSQ Sporelings (Foongsiqi spore plant)", "T3，origin 只採 T1",
+             "No.20 P. FSQ Sporelings (Foongsiqi spore plant)")],
+    desc=[
+        ("Foongsiqi（捲捲鹿）的孢子苗系，由泰國 I Love Ferns 的 Wanna 播孢培育，型錄寫作「FSQ (Foongsiqi Sporelings)」。", wc("2023-02"),
+         "No.16 P. FSQ (Foongsiqi Sporelings) lot#3", ""),
+        ("第一批 Foongsiqi 孢子苗約在 2008 年播出（2023 年底的型錄稱 15 年前）。", wc("2023-12"),
+         "(from the first batch of Foongsiqi sporeling 15 years ago)", ""),
+        ("孢子苗是有性繁殖的後代，可能和親本長得不同；", FSQ, "孢子苗則是由孢子囊播孢培育的有性繁殖個體，雖然捲捲鹿的遺傳穩定性高，但還是有機率孢子苗（小孩）與親本（父母）長的不同", ""),
+        ("Wanna 從中選出多個個體另外命名，型錄在品名後標 (FSQ)。", wc("2023-02"), "Kin-Norn is Cultivar from spore propagation of Foongsiqi", ""),
+    ],
+    note=[
+        ("Wanna 的型錄把無性繁殖的「Foongsiqi Original（No TC）」和 FSQ 孢子苗分開販售。", wc("2020-09"), "No.16 P. Foongsiqi Original (No TC)", ""),
+        ("微體溫室把 FSQ 和銀華都稱為捲捲鹿的孢子苗特選個體。", FSQ, "如 FSQ、銀華鹿角蕨等皆是捲捲鹿的孢子苗特選個體", ""),
+        ("晴花鹿苑則把 FSQ 當成 Foong Si Qi 本身的別名。", "haruhana-usa-sazanami", "hand-selected Platycerium 'Foong Siqi' (FSQ) sporelings", ""),
+    ],
+    searched=searched(WS, WSC),
+)
+BLOCKS["little-sis"] = dict(
+    cites=[],
+    desc=[("型態像母本 Foongsiqi，但葉面有毛而呈淺灰綠色；孢子囊斑厚，使葉尖略捲。", wc("2020-03"),
+           "This specimen has form looks alike its mother (Foongsiqi) but color leaves are light green-grey because have hairs and spore patches are thick make their tips are a bit curly.", "")],
+    searched=searched(WS, WSC),
+)
+BLOCKS["wannasiqi"] = dict(
+    cites=[],
+    note=[("Wanna 稱它出自約 15 年前第一批 Foongsiqi 孢子苗。", wc("2023-12"), "No.47 P. Wannasiqi (FSQ) Sporeling (from the first batch of Foongsiqi sporeling 15 years ago)", "")],
+    searched=searched(WS, WSC),
+)
+BLOCKS["kusuma"] = dict(
+    cites=[],
+    note=[("Wanna 的影片標題寫作「FSQ No. 16 (Kusuma)」。", "wanna-yt-kusuma", "Platycerium FSQ No. 16 (Kusuma)", "")],
+    searched=searched(WS, WSC),
+)
+BLOCKS["ivory"] = dict(
+    cites=[],
+    note=[("Wanna 的型錄寫作 Ivory (FSQ#19)。", wc("2023-11"), "No.17 P. Ivory(FSQ#19) Sporelings", "")],
+    searched=searched(WS, WSC),
+)
+BLOCKS["kin-naree"] = dict(
+    cites=[],
+    note=[("Wanna 以它和爪哇 Schofield Tatsuta 雜交出 Tinkerbell。", wc("2026-08"), "No.17 P. Tinkerbell # 08 Original (Kinnaree(FSQ) x willinckii Schofield)", "")],
+    searched=searched(WS, WSC),
+)
+BLOCKS["kin-norn"] = dict(
+    cites=[],
+    note=[("Wanna 的型錄註明它是從 Foongsiqi 孢子苗選出的品種。", wc("2023-02"), "Kin-Norn is Cultivar from spore propagation of Foongsiqi", "")],
+    searched=searched(WS, WSC),
+)
+for pid in ("green-moon", "cotton-moon", "fsq-dwarf", "oliver-siqi", "thipsiqi"):
+    BLOCKS[pid] = dict(cites=[], searched=searched(WS, WSC))
+HUS = "haruhana-usa-sazanami"
+BLOCKS["sazanami"] = dict(
+    cites=[
+        c(HUS, "size", "S", "dwarf selection", "來源稱侏儒、沒有尺寸 → S", "is a dwarf selection derived from hand-selected Platycerium 'Foong Siqi' (FSQ) sporelings"),
+        c(HUS, "origin", "晴花鹿苑（台灣）由 Foong Si Qi 孢子苗選出", "Haruhana garden in Taiwan", "T3，origin 只採 T1",
+          "derived from hand-selected Platycerium 'Foong Siqi' (FSQ) sporelings at Haruhana garden in Taiwan"),
+    ],
+    desc=[("株型緊湊，孢子葉深裂、呈波浪狀，像水面的漣漪。", HUS, "prized for its compact habit and wavy, deeply notched fertile fronds that mimic gentle water crests", "")],
+    note=[("名字由日本收藏家所取，意思是漣漪。", HUS, "Named Sazanami (\"Ripples\") by a Japanese collector", ""),
+          ("母本是晴花鹿苑園區自家的 Foong Si Qi（晴花鹿苑稱 FSQ）。", HUS, "hand-selected Platycerium 'Foong Siqi' (FSQ) sporelings at Haruhana garden in Taiwan", "")],
+    searched=searched(f"Haruhana USA 商品頁|World Platycerium Society 登錄|{WEB}", "Haruhana USA 商品頁（沒有照護資料）"),
+)
+# ---------------------------------------------------------------- PlatyWiki 品種清單的獨立查證 (2026-10-18)
+# PlatyWiki 是公開編輯的二手彙整，不引用；它列的品種另找原始來源。'Tiara'、'天堂鳥'、'霧氷'、'異變銀' 找不到兩個單位，暫不收錄（見 species_list.md §六）。
+PWS = "搜尋：英文品名＋Platycerium|ビカク図鑑（T4，只看出典）|staghornfern.org 交種資料庫（Wayback）|Halling|Siam Exotica（Wayback）|aucfan／Yahoo!オークション 拍賣紀錄|晴花鹿苑、阿金、微體溫室全站|World Platycerium Society 登錄"
+BLOCKS["durval-nunes"] = dict(
+    cites=[
+        c("platyceriumferns-durval", "shield_vein", "yes", "像非猴一樣有鬆餅狀質感", "waffle → yes",
+          "Like P.madagascariense it has the waffle like texture and grasping shields."),
+        c("platyceriumferns-durval", "pups", "yes", "可用孢子和側芽繁殖", "propagated by pups → yes",
+          "I know that this cultivar can be propagated by spore and pups."),
+        c("siam-sale-newhybrids", "parents", "madagascariense", "非猴 × ?", "第二個親本不明", "P.\"Durval Nunes\" (P.madagascariense x ?)"),
+        c("platyceriumferns-durval", "parents", "madagascariense", "非猴 × 另一種", "第二個親本不明",
+          "P.'Durval Nunes' is a cross with P.madagascariense and another platycerium fern."),
+        c("exotica-madagascariense", "parents", "madagascariense", "非猴 × 不明（傳說是四叉）", "第二個親本不明；四叉一說作者自己標為傳聞",
+          "spontaneous hybrids involving an unknown second parent, such as Durval Nunes (although allegedly another cross x P. quadridichotum)"),
+        c(HH, "parents", "madagascariense|quadridichotomum", "非猴 × 四叉（依照片推測）", "Halling 看 Siam Exotica 的照片推測，只供參考",
+          "From the photo they give, this author believes it is a cross of P. madagascariense and P quadridichotomum", "", "reference"),
+        c("sf-hybrid-db", "parents", "madagascariense|stemaria", "非猴 × 三角", "T4 只當線索；沒有找到這個說法的原始來源",
+          "P. Durval Nunes | Madagascariense | Stemaria | —", "", "reference"),
+    ],
+    extra={"parents"},
+    desc=[
+        ("非猴與另一種鹿角蕨的交種，第二個親本不明。", "siam-sale-newhybrids", "P.\"Durval Nunes\" (P.madagascariense x ?)", ""),
+        ("和非猴一樣有鬆餅狀的凹凸質感，盾葉會抱住附著物；可用孢子或側芽繁殖。", "platyceriumferns-durval",
+         "Like P.madagascariense it has the waffle like texture and grasping shields. ... this cultivar can be propagated by spore and pups.", ""),
+    ],
+    note=[
+        ("Exotica Esoterica 稱它是第二親本不明的自然雜交，另有一說是與四叉的雜交。", "exotica-madagascariense",
+         "spontaneous hybrids involving an unknown second parent, such as Durval Nunes (although allegedly another cross x P. quadridichotum)", ""),
+        ("Halling 依 Siam Exotica 的照片推測是非猴 × 四叉，也就是和 Charles Alford 的非猴 × 四叉相同。", HH,
+         "From the photo they give, this author believes it is a cross of P. madagascariense and P quadridichotomum which would be the same as Charles Alords hybrid.", ""),
+    ],
+    searched=searched(PWS, f"{PWS}（只有 platyceriumferns.com 提到繁殖方式，沒有照護資料）"),
+)
+BLOCKS["willinckii-totoro"] = dict(
+    cites=[
+        c("basements-totoro", "size", "S", "dwarf form", "來源稱侏儒、沒有尺寸 → S",
+          "'Totoro' is a dwarf form selected from Platycerium Willinckii sporelings"),
+        c("naturefix-totoro", "size", "S", "ウィリンキードワーフ", "來源稱侏儒、沒有尺寸 → S", "人気のウィリンキードワーフ Totoroの胞子培養株となります。"),
+        c("yahoo-frontier-totoro", "size", "S", "矮性、ドワーフの性質", "來源稱侏儒、沒有尺寸 → S",
+          "イエロームーンの胞子苗の中から矮性、ドワーフの性質がある個体の中から選ばれました。"),
+        c("yahoo-frontier-totoro", "origin", "從黃月孢子苗選出的侏儒個體", "黃月孢子苗選拔", "沒有 T1、T2，採 T3",
+          "ビカクシダ・ウィリンキー・トトロはビカクシダ・ウィリンキー・イエロームーンの選抜品種。"),
+        c("basements-totoro", "light", 3, "明亮散射光或輕微遮光的日照", "bright indirect → 3",
+          "Light : Bright indirect light or lightly filtered sunlight; avoid harsh direct light"),
+        c("basements-totoro", "humidity", 5, "濕度 70–90%", "high humidity → 5", "Humidity : 70–90%"),
+        c("basements-totoro", "difficulty", 3, "Difficulty Level 3", "美國來源，只供參考", "Difficulty Level : 3", "", "reference"),
+        c("yahoo-frontier-totoro", "base", "willinckii-yellow-moon-dwarf", "", "黃月孢子苗中的矮性個體，屬黃月侏儒系 → 侏儒黃月",
+          "数あるイエロームーンドワーフの品種の中でも有名で人気のある品種。"),
+        c("yahoo-frontier-totoro", "aka", "", "トトロ、豆豆龍", "拍賣標題的日文名與中文名", "ビカクシダ・ウィリンキー・トトロ 胞子苗 豆豆龍"),
+    ],
+    extra={"base", "aka"},
+    desc=[
+        ("從黃月孢子苗中挑出有矮性的個體選拔而成，是黃月侏儒系中有名的品種。", "yahoo-frontier-totoro",
+         "イエロームーンの胞子苗の中から矮性、ドワーフの性質がある個体の中から選ばれました。数あるイエロームーンドワーフの品種の中でも有名で人気のある品種。", ""),
+        ("株型緊湊圓胖，盾葉圓；孢子葉短而柔軟，葉尖略捲。", "basements-totoro",
+         "identified by its compact size, round shield fronds, and soft, plush fertile fronds that curl slightly at the tips", ""),
+        ("孢子葉分岔多，葉尖纖細。", "yahoo-frontier-totoro", "分岐数も多く繊細な葉先でとても魅力的な品種です。", ""),
+    ],
+    note=[
+        ("日本拍賣有標示從台灣 HHR Garden 正規輸入的孢子苗。", "yahoo-hhr-totoro", "台湾のHHR Gardenより正規輸入した、Totoroの胞子苗です。", ""),
+        ("The Basements 提醒孢子苗要長大後才會顯出 Totoro 的型態。", "basements-totoro",
+         "Sporelings at this stage may not yet fully express the mature form", ""),
+    ],
+    searched=searched(PWS, f"{PWS}（只有 The Basements 有照護資料）"),
+)
+BLOCKS["willinckii-grace"] = dict(
+    cites=[
+        c("yahoo-vandaka-grace", "size", "S", "強度の高い矮性、スーパードワーフ種", "來源稱侏儒、沒有尺寸 → S",
+          "強度の高い矮性と白さに加え、葉先が内巻きにカールする次世代のスーパードワーフ種です。"),
+        c("yahoo-vandaka-grace", "origin", "侏儒 Nook 的選拔", "willinckii dwarf Nook 選拔", "沒有 T1、T2，採 T3",
+          "willinckii dwarf Nookからの選抜品種です。"),
+        c("yahoo-vandaka-grace", "base", "willinckii-nook-dwarf", "", "dwarf Nook 的選拔 → 侏儒 Nook", "willinckii dwarf Nookからの選抜品種です。"),
+    ],
+    extra={"base"},
+    desc=[
+        ("侏儒 Nook 的選拔，矮性強、株色白，葉尖向內捲，明顯捲超過一圈。", "yahoo-vandaka-grace",
+         "willinckii dwarf Nookからの選抜品種です。強度の高い矮性と白さに加え、葉先が内巻きにカールする ... こちらは1回転以上明確に巻きます", ""),
+        ("在 LED 燈下也能正常展開，不容易走樣。", "yahoo-vandaka-grace", "LED光でも素直に展開し形崩れしにくいのも特徴かと。", ""),
+    ],
+    note=[
+        ("2024 年日本拍賣的孢子苗標示是 HHR 所有的 Grace 母株播的孢子。", "yahoo-grace-2024",
+         "HHRが所有するP.willinckii Graceの胞子培養株になります。", ""),
+        ("2026 年 vandaka plants 在日本拍賣的選拔孢子苗以 190 萬日圓結標。", "yahoo-vandaka-grace", "現在 1,901,000 円 （税0円） ... 102 件 ... 終了", ""),
+    ],
+    searched=searched(PWS, f"{PWS}（拍賣頁沒有照護資料）"),
+)
+
+
+# ---------------------------------------------------------------- v1.4 B1 (2026-10-19): 銀鹿、二叉、深綠的品系 (batches_v1.4.md)
+# Cited pages re-read for relaxed statements ("~" values, guideline v1.4), then up to 5 new lookups per plant.
+# English searches by name found nothing for the Asian selections; Japanese searches returned no cultivar pages.
+B1 = "2026-10-19"
+B1S = "v1.4 重讀已引用頁面"
+
+
+def v14(pid, cites=(), desc=(), note=(), star="", care="", date=B1):
+    add(pid, cites, desc, note, star, care)
+    BLOCKS[pid].update(version="v1.4", date=date)
+
+
+HAR, HAKKI = "haruhana-raijin", "haruhana-akki"
+MONKEY = "奧銀與爪哇的交種。兼具親本兩者特色：高冠、白絨毛以及下墜的孢子葉"
+NETH = "搜尋：Platycerium bifurcatum 'Netherlands' staghorn compact fronds upright|Foliage Factory、The Plant Company、Cornell Farms 商品頁（Cornell 只有種的通用描述，不採用）"
+NOEN = "搜尋：英文品名＋Platycerium staghorn（沒有該品系的頁面）"
+NOJA = "搜尋：ビカクシダ＋品名（沒有該品系的頁面）"
+v14("veitchii-auburn-river",
+    [c("mo-silver", "size", "~150", "整株高度超過 150 公分", "整株高度、只給下限 → 寬鬆 D = 150", "整體植株高度超過 150 公分以上，是相當壯麗的銀白品系之一"),
+     c("mo-silver", "shield_height", "~3", "營養葉尖冠明顯，如珊瑚向外展開", "高冠 → 寬鬆 3", "澳銀鹿角蕨屬於營養葉尖冠明顯的銀鹿鹿角蕨品系，如珊瑚般向外展開"),
+     c("ajins-auburn-river", "shield_height", "~3", "極細長的高冠", "高冠 → 寬鬆 3", "特色就是擁有極細長的高冠"),
+     c(KP, "shield_hair", "~5", "臉手全銀", "整片銀白 → 寬鬆 5", "澳銀 奧本河銀葉009 | P. veitchii\"Auburn River\" 臉手全銀！很美"),
+     c(KP, "fertile_hair", "~5", "臉手全銀", "整片銀白 → 寬鬆 5", "澳銀 奧本河銀葉009 | P. veitchii\"Auburn River\" 臉手全銀！很美")],
+    desc=[("整株高度可超過 150 公分。", "mo-silver", "整體植株高度超過 150 公分以上", "")],
+    star=f"{B1S}（微體溫室〈銀鹿〉、阿金、卡呸醬）|{NOEN}")
+v14("veitchii-ar-1",
+    [c(ZYX, "shield_height", "~3", "細尖的高冠", "高冠 → 寬鬆 3", "自選個體，奧銀鹿角蕨之孢子苗，具有細尖的高冠，相當迷人。")],
+    star=f"{B1S}（竹意軒）")
+v14("veitchii-akki",
+    [c(HAKKI, "shield_height", "~3", "高而強烈的尖冠", "高冠 → 寬鬆 3", "因此讓Akki有著高而強烈的尖冠"),
+     c(HAKKI, "fertile_hair", "~3", "孢子葉白而細緻", "白 → 有白毛，寬鬆 3", "孢子葉白而細緻，且挺拔的向上昂揚"),
+     c(HAKKI, "fertile_posture", "~up", "孢子葉挺拔向上昂揚", "挺拔向上 → 寬鬆 up", "孢子葉白而細緻，且挺拔的向上昂揚"),
+     c(ZYX, "shield_height", "~3", "成熟時冠高", "冠高 → 寬鬆 3", "成熟表現冠高，型態狂暴粗曠"),
+     c(ZYX, "fertile_posture", "~up", "光線充足時也會向上生長", "光線充足時向上 → 寬鬆 up", "光線充足時也會向上生長"),
+     c("ajins-akki", "shield_height", "~3", "承襲澳銀細尖高冠", "高冠 → 寬鬆 3", "承襲了澳銀細尖高冠，且遺傳兩者的白毛與細緻。"),
+     c("ajins-akki", "fertile_hair", "~3", "有白毛", "有白毛 → 寬鬆 3", "承襲了澳銀細尖高冠，且遺傳兩者的白毛與細緻。")],
+    desc=[("晴花鹿苑寫它的尖冠高而強烈，孢子葉白、細緻，挺拔向上。", HAKKI, "因此讓Akki有著高而強烈的尖冠，孢子葉白而細緻，且挺拔的向上昂揚。", "")],
+    star=f"{B1S}（竹意軒、晴花鹿苑、阿金）|{NOEN}")
+v14("veitchii-lemoinei",
+    [c("mo-lemoinei", "size", "~60", "孢子葉長可超過 60 公分", "孢子葉長只給下限 → 寬鬆 D = 60", "覆滿白絨毛的孢子葉手長可超過 60 公分"),
+     c("joshsfrogs-lemoinei", "size", "~61", "成株高可達 24 吋", "整株高度上限 24 in ≈ 61 cm → 寬鬆 D", "Height at Maturity: Up to 24 inches"),
+     c("mo-lemoinei", "fertile_length", "~≥60 cm", "孢子葉長可超過 60 公分", "只給下限 → 寬鬆說法", "覆滿白絨毛的孢子葉手長可超過 60 公分"),
+     c("mo-lemoinei", "shield_height", "~3", "尖冠高可達 30~45 公分", "高冠、上限 45 cm（< 80）→ 寬鬆 3", "營養葉的特化尖冠高度可達 30~45 公分"),
+     c("ajins-lemon", "shield_height", "~3", "成熟營養葉有尖高冠", "高冠 → 寬鬆 3", "成熟的營養葉具尖高冠表現"),
+     c("haruhana-lemoinei", "shield_height", "~3", "可愛的小冠", "有冠（直立）→ 寬鬆 3", "可愛的小冠與厚實白皙的挺立孢子葉"),
+     c("mo-lemoinei", "fertile_posture", "~up", "日照充足時孢子葉聳立向上", "聳立向上 → 寬鬆 up；陽光柔和時會垂墜（寫入 desc）", "在日照充足下孢子葉會聳立向上生長"),
+     c("haruhana-lemoinei", "fertile_posture", "~up", "挺立的孢子葉", "挺立 → 寬鬆 up", "可愛的小冠與厚實白皙的挺立孢子葉"),
+     c("joshsfrogs-lemoinei", "light", 3, "Partial Shade", "partial shade → 3", "Lighting: Partial Shade"),
+     c("joshsfrogs-lemoinei", "water", 1, "澆水後待乾；耐旱、怕積水", "drying between waterings、drought tolerant → 1",
+       "Water regularly but allow the soil to dry out between watering ... Drought tolerant but sensitive to overly saturated soil"),
+     c("joshsfrogs-lemoinei", "humidity", "3–5", "Moderate – Humid", "moderate 3、humid 5 → 3–5", "Humidity: Moderate (30-70%) - Humid (70-100%)"),
+     c("joshsfrogs-lemoinei", "min_temp", 18.3, "65 °F 以上", "建議值；65 °F = 18.3 °C", "Temperature Requirement (°F): Above 65°"),
+     c("joshsfrogs-lemoinei", "difficulty", 1, "照顧容易", "美國來源 → reference", "is easy to maintain with minimal care", "", "reference")],
+    desc=[("Josh's Frogs 說孢子葉呈暗淡的藍綠色，成熟後呈鹿角狀。", "joshsfrogs-lemoinei",
+           "One of the most unique looking ferns that take on an 'antler' shape as it matures ... Fronds form a dull blue-green color", "")],
+    star=f"{B1S}（微體溫室〈檸檬〉、阿金、晴花鹿苑）|搜尋：Platycerium veitchii Lemoinei staghorn fern description fronds|Josh's Frogs、ReptiFiles（同文）商品頁|Rainforest Flora（不採用）",
+    care="Josh's Frogs 商品頁")
+v14("bifurcatum-mt-lewis",
+    [c("halling-mtlewis", "shield_height", "~3", "盾葉向外長，像傘一樣替孢子葉遮陰", "向外展開 → 寬鬆 3",
+       "the shield fronds grow outward forming a shade umbrella for fertile fronds."),
+     c(ZYX, "fertile_width", "~3", "孢子苗具寬葉片", "孢子苗，不是成熟植株 → excluded", "貓路易士鹿角蕨孢子苗，具寬葉片。", "", "excluded")],
+    star=f"{B1S}（Halling、竹意軒）|搜尋：Platycerium bifurcatum 'Mt Lewis' staghorn fern fronds size|搜尋：\"Mt Lewis\" platycerium venosum fronds veins grower"
+         "|搜尋：Mount Lewis staghorn care|{NOJA}（皆只有種的描述或 Hoshizaki & Yansura 2021 摘要）")
+v14("bifurcatum-mt-lewis-thin", star=f"{B1S}（竹意軒只寫「細緻孢子葉片」；品名的 Thin 不當描述）")
+v14("bifurcatum-little-kitty", star=f"{B1S}（卡呸醬只有「小型品種、長手」）|搜尋：Platycerium 'Little Kitty' staghorn（沒有該品系的頁面）")
+v14("bifurcatum-netherlands",
+    [c("cistus-netherlands", "size", "~91", "孢子葉可達 3 呎", "孢子葉長上限 3 ft ≈ 91 cm → 寬鬆 D", "fertile fronds to up to 3 ft long"),
+     c("theplantco-netherlands", "size", "~75", "株高與寬約 60–90 公分", "整株高寬，中點 75 → 寬鬆 D",
+       "typically grows to around 60 to 90 centimetres tall and wide depending on growing conditions and mounting style."),
+     c("foliage-factory-netherlands", "size", "~100", "栽培尺寸約高 100、寬 90 公分", "整株高寬，取較大者 100 → 寬鬆 D", "Cultivated size guide Height: 100 cm • Spread: 90 cm"),
+     c("foliage-factory-netherlands", "shield_form", "~appressed", "圓形盾葉重疊包覆根部", "圓形、包覆根部 → 貼伏",
+       "Rounded fronds overlap around the roots and build the fern's protective nest."),
+     c("foliage-factory-netherlands", "shield_height", "~1", "圓形盾葉重疊包覆根部", "包覆附著物 → 寬鬆 1",
+       "Rounded fronds overlap around the roots and build the fern's protective nest."),
+     c("foliage-factory-netherlands", "fertile_posture", "~spread", "分岔的孢子葉從基部向外拱出", "向外展開 → 寬鬆 spread",
+       "Longer grey-green fronds divide into forked lobes and arch away from the base."),
+     c("foliage-factory-netherlands", "fertile_hair", "~3", "細毛讓孢子葉呈柔和的灰色", "有毛、灰色 → 寬鬆 3",
+       "Fine natural hairs give the longer fronds their soft grey cast."),
+     c("foliage-factory-netherlands", "pups", "~yes", "成株會長側芽、擴成一叢", "會長側芽、成叢 → 寬鬆 yes",
+       "Mature plants can produce rooted pups and expand into a broader clump."),
+     c("foliage-factory-netherlands", "light", 3, "明亮的散射光", "bright filtered light → 3", "Give the fern bright, filtered light."),
+     c("foliage-factory-netherlands", "water", 1, "介質乾到五到七成再澆透", "drying between waterings → 1",
+       "Water when ~50–70% dry ... When it is nearly dry, water thoroughly and let the excess drain away."),
+     c("foliage-factory-netherlands", "humidity", 3, "濕度 50–60%", "moderate humidity → 3", "Aim for 50–60% humidity."),
+     c("foliage-factory-netherlands", "min_temp", 10, "避免長時間低於 10 °C", "建議值", "Avoid prolonged temperatures below 10 °C."),
+     c("theplantco-netherlands", "light", 3, "明亮的散射光", "bright indirect light → 3", "grows best in bright indirect light with good airflow and moderate humidity."),
+     c("theplantco-netherlands", "water", 3, "介質稍乾就澆透，不要一直濕", "乾濕交替 → 3",
+       "Water thoroughly when the growing medium begins to dry slightly, but avoid keeping roots constantly wet."),
+     c("theplantco-netherlands", "humidity", 3, "中等濕度，乾燥時偶爾噴霧", "moderate humidity、occasional misting → 3",
+       "grows best in bright indirect light with good airflow and moderate humidity ... Mist the foliage occasionally during dry weather")],
+    desc=[("Foliage Factory 說它通常被當成比一般型更緊湊、室內較整齊的選拔，成熟後盤基變厚、孢子葉伸得更遠。", "foliage-factory-netherlands",
+           "It is generally sold as a more compact selection that stays tidier indoors than many standard forms. ... As 'Netherlands' matures, the base becomes thicker and the antler-like fronds reach farther from the centre.", "")],
+    star=f"{B1S}（Cistus、NC State）|{NETH}", care=NETH)
+v14("bifurcatum-white",
+    [c("haruhana-bif-white", "fertile_hair", "~3", "白皙的葉片", "白皙 → 有白毛，寬鬆 3", "在白皙的葉片上有清晰的葉脈紋理")],
+    star=f"{B1S}（晴花鹿苑、卡呸醬）|搜尋：Platycerium bifurcatum white Japan cultivar（沒有該品系的頁面）")
+v14("bifurcatum-popcorn", star=f"{B1S}（阿金只有「超挺拔的孢子葉」，已記）")
+v14("hillii-mio", star=f"{B1S}（微體溫室〈深綠〉、卡呸醬「碎手」：沒有能換算的說法）|搜尋：Platycerium hillii 'Mio' staghorn（沒有該品系的頁面）")
+v14("hillii-wide", star=f"{B1S}（卡呸醬只有名稱）")
+v14("hillii-rimklong",
+    [c(ZYX, "fertile_hair", "~5", "白毛濃密", "白毛濃密 → 寬鬆 5", "Rimklong為深綠鹿角蕨的個體，特色是孢子葉具綴化感，另外白毛也濃密。")],
+    star=f"{B1S}（竹意軒）|搜尋：Platycerium hillii Rimklong（沒有該品系的頁面）")
+v14("pewchan", star=f"{B1S}（微體溫室〈40 種〉只有表格分類）|搜尋：Platycerium 'Pewchan' staghorn（沒有該品系的頁面）")
+v14("white-shine", star=f"{B1S}（微體溫室〈40 種〉、卡呸醬只有名稱）|搜尋：Platycerium 'White Shine' staghorn（沒有該品系的頁面）")
+for pid, extra in [("white-monkey", "是該系列較後續發表的個體"), ("wild-monkey", "此個體的冠部較為高聳")]:
+    v14(pid,
+        [c(ZYX, "shield_height", "~3", "高冠", "高冠 → 寬鬆 3", f"{MONKEY}，{extra}。"),
+         c(ZYX, "fertile_hair", "~3", "白絨毛", "有白絨毛 → 寬鬆 3", f"{MONKEY}，{extra}。"),
+         c(ZYX, "fertile_posture", "~pendant", "下墜的孢子葉", "下垂 → 寬鬆 pendant", f"{MONKEY}，{extra}。")],
+        star=f"{B1S}（竹意軒）|搜尋：Platycerium \"Wild Monkey\" OR \"White Monkey\" staghorn（沒有該品系的頁面）")
+v14("salmon", star=f"{B1S}（卡呸醬「寬葉深裂，孢子葉末端趨細」：寬葉與末端細互相矛盾，不換算裂片寬度）")
+v14("veitchii-wild",
+    [c("mo-silver", "shield_height", "~3", "營養葉尖冠細長、集中向上", "高冠 → 寬鬆 3", "然而營養葉尖冠更細長且集中向上"),
+     c("haruhana-veitchii-wild", "shield_height", "~3", "細尖高冠", "高冠 → 寬鬆 3", "其特殊的細尖高冠一直以來辨識度極強，以及挺立昂揚的孢子手"),
+     c("haruhana-veitchii-wild", "fertile_posture", "~up", "挺立昂揚的孢子葉", "挺立 → 寬鬆 up", "以及挺立昂揚的孢子手")],
+    desc=[("晴花鹿苑說它生長緩慢，但耐受性強、不怕日曬。", "haruhana-veitchii-wild", "雖然成長緩慢，但對於環境的耐受性極強，也是少數能無懼太陽的強悍品種。", "")],
+    star=f"{B1S}（微體溫室〈銀鹿〉、晴花鹿苑）")
+v14("veitchii-high-finger",
+    [c("vegetal-high-finger", "fertile_width", "~1", "孢子葉很長、細而直，像手指或矛", "細長 → 寬鬆 1",
+       "fertile fronds that very long, thin and straight, resembling \"fingers\" or vertical spears, hence the name High Finger"),
+     c("vegetal-high-finger", "fertile_posture", "~up", "孢子葉直立如矛", "直立 → 寬鬆 up",
+       "fertile fronds that very long, thin and straight, resembling \"fingers\" or vertical spears"),
+     c("jl-rydeen", "shield_height", "~3", "High Finger 的盾葉先端直立", "Rydeen 商品頁描述 High Finger 本身的盾葉先端直立 → 寬鬆 3",
+       "combined with the upright tips of the bracts of 'High Finger'.")],
+    desc=[("孢子葉很長、細而直，像直立的手指，品名由此而來；生長慢。", "vegetal-high-finger",
+           "fertile fronds that very long, thin and straight, resembling \"fingers\" or vertical spears, hence the name High Finger ... Growth: Slow.", "")],
+    star=f"{B1S}（晴花鹿苑頁仍不採用）|搜尋：Platycerium veitchii 'High Finger' staghorn description|Vegetal Design 商品頁|Jungle Leaves〈Rydeen〉|{NOJA}",
+    care="Vegetal Design 商品頁（通用照護表，不採用）")
+v14("veitchii-nyx",
+    [c("mo-silver", "shield_height", "~3", "營養葉渾圓、冠成束", "有冠 → 寬鬆 3", "營養葉型態渾圓且冠成束"),
+     c("ajins-nyx", "shield_hair", "~5", "特別銀白的銀鹿", "整株特別銀白（含盾葉）→ 寬鬆 5", "夜銀顧名思義是一顆特別銀白的銀鹿")],
+    star=f"{B1S}（微體溫室〈銀鹿〉、阿金）")
+v14("hillii-dragon",
+    [c("mo-hillii", "fertile_width", "~3", "保有深綠寬大孢子葉的特徵", "寬大 → 寬鬆 3", "保有深綠鹿角蕨寬大孢子葉的特徵")],
+    star=f"{B1S}（微體溫室〈深綠〉）|搜尋：Platycerium hillii 'Dragon' staghorn fern fronds description（沒有該品系的頁面）")
+v14("hillii-dwarf",
+    [c("mo-hillii", "fertile_width", "~1", "孢子葉分岔成小巧的指狀", "指狀 → 狹長，寬鬆 1", "孢子葉呈分叉為小巧可愛的指狀，成熟後具絨毛感"),
+     c("mo-hillii", "fertile_hair", "~3", "成熟後有絨毛感", "有毛 → 寬鬆 3", "孢子葉呈分叉為小巧可愛的指狀，成熟後具絨毛感"),
+     c("ajins-hillii-dwarf", "fertile_width", "~1", "分岔細緻，像一根根小手指", "細長 → 寬鬆 1", "隨著成熟分岔會逐漸變得細緻，宛如一根根小手指般立體生長"),
+     c("ajins-hillii-dwarf", "fertile_hair", "~3", "細緻白毛", "有白毛 → 寬鬆 3", "搭配深綠葉色與細緻白毛")],
+    star=f"{B1S}（微體溫室〈深綠〉、阿金）")
+v14("hillii-raijin",
+    [c(HAR, "fertile_width", "~3", "寬厚大葉", "寬葉 → 寬鬆 3", "繼承深綠寬厚大葉的特色外，葉形帶有的圓潤的分岔"),
+     c(HAR, "fertile_hair", "~3", "帶絨毛感", "有毛 → 寬鬆 3", "深色的孢子葉刻有明顯的葉脈紋理並帶著絨毛感"),
+     c(HAR, "fertile_posture", "~spread", "向上放射展開", "放射展開 → 寬鬆 spread", "向上放射展開溫潤的葉形"),
+     c("ajins-raijin", "fertile_width", "~3", "寬大的孢子葉", "寬葉 → 寬鬆 3", "寬大的孢子葉帶圓潤分岔")],
+    star=f"{B1S}（晴花鹿苑、阿金）|搜尋：Platycerium hillii 'Raijin' staghorn|{NOJA}")
+v14("veitchii-no-shield",
+    [c("ajins-veitchii-no-shield", "fertile_hair", "~3", "葉片白皙", "白皙 → 有白毛，寬鬆 3", "葉片白皙且帶有微波浪分岔的質感")],
+    star=f"{B1S}（阿金）")
+v14("bifurcatum-dwarf", star=f"{B1S}（阿金：沒有新說法）")
+v14("veitchii-lemoinei-dwarf",
+    [c("ajins-lemoinei-dwarf", "fertile_width", "~1", "孢子葉分岔更細、更小", "細 → 寬鬆 1", "相較一般檸檬，它的孢子葉分岔更細、更小也更加密集")],
+    star=f"{B1S}（阿金、微體溫室〈檸檬〉）")
+v14("hillii-wave", star=f"{B1S}（阿金只寫波浪葉緣、尖葉尾，沒有能換算的說法）")
+
+# ---------------------------------------------------------------- v1.4 B2 (2026-10-19): 澳洲群內的交種
+# New lookups (English names) found nothing beyond the pages already cited. We Love Tropical Plants' prose reads as generated copy
+# and is not used (guideline §2 T4), as before for its care table.
+B2S = "v1.4 重讀已引用頁面"
+WLTP = "We Love Tropical Plants（描述疑似生成文字，不採用）"
+v14("veitchii-x-willinckii",
+    [c("ajins-veitchii-x-willinckii", "shield_height", "~3", "成熟時冠如花朵綻放", "有冠、展開 → 寬鬆 3", "當植株成熟時，冠有如花朵般綻放"),
+     c("ajins-veitchii-x-willinckii", "fertile_posture", "~pendant", "拉長的手如彩帶般飄逸", "彩帶般飄垂 → 寬鬆 pendant", "遠眺時看拉長的手有如彩帶般的飄逸")],
+    star=f"{B2S}（阿金、卡呸醬、Halling 交種表）")
+v14("hillii-x-bifurcatum",
+    [c(HH, "fertile_width", "~3", "孢子葉寬，像深綠", "寬葉 → 寬鬆 3", "The fertile fronds are wide like P. hillii"),
+     c(HH, "size", "~L", "可能比一般鹿角蕨大", "作者寫 may be → 推測 → excluded", "The P. diversifolium may be a larger than average platycerium.", "", "excluded")],
+    star=f"{B2S}（Halling）|搜尋：Platycerium 'Diversifolium' staghorn fern hillii bifurcatum hybrid description（沒有該交種的頁面）")
+v14("dw", star="搜尋：Platycerium 'DW' diversifolium x willinckii（v1.4 再查仍沒有描述）")
+v14("monkey-north",
+    [c("haruhana-monkey-north", "shield_height", "~3", "有奧銀的高冠", "高冠 → 寬鬆 3", "爪哇交奧銀 有著奧銀的高冠基因"),
+     c(ZYX, "shield_height", "~3", "高冠", "高冠 → 寬鬆 3", "奧銀與爪哇交種的經典個體。兼具親本兩者特色：高冠、白絨毛以及下墜的孢子葉。"),
+     c(ZYX, "fertile_hair", "~3", "白絨毛", "有白絨毛 → 寬鬆 3", "奧銀與爪哇交種的經典個體。兼具親本兩者特色：高冠、白絨毛以及下墜的孢子葉。"),
+     c(ZYX, "fertile_posture", "~pendant", "下墜的孢子葉", "下垂 → 寬鬆 pendant", "奧銀與爪哇交種的經典個體。兼具親本兩者特色：高冠、白絨毛以及下墜的孢子葉。")],
+    star=f"{B2S}（晴花鹿苑、竹意軒）")
+v14("hela",
+    [c(ZYX, "shield_height", "~5", "成熟時冠部極度高聳", "冠很高 → 寬鬆 5", "成熟時冠部極度高聳，孢子葉呈下垂貌，爪哇與銀鹿檸檬交種個體。"),
+     c(ZYX, "fertile_posture", "~pendant", "孢子葉下垂", "下垂 → 寬鬆 pendant", "成熟時冠部極度高聳，孢子葉呈下垂貌")],
+    star=f"{B2S}（竹意軒）")
+v14("snow-moon",
+    [c("mo-moon", "fertile_hair", 5, "厚實白毛，葉色銀白", "厚白毛、銀白 → 5（同 v1.3 對「厚實白毛」的換算）",
+       "兩者同樣擁有厚實白毛 ... 雪月鹿角蕨｜中等｜$400~$1,200｜葉色呈銀白 絨毛感厚實")],
+    star=f"{B2S}（微體溫室〈月亮系列〉）")
+v14("rydeen",
+    [c("jl-rydeen", "shield_height", "~3", "盾葉先端直立", "直立 → 寬鬆 3", "combined with the upright tips of the bracts of 'High Finger'."),
+     c("jl-rydeen", "fertile_width", "~1", "孢子葉分岔細", "細 → 寬鬆 1", "'Rydeen' has the drooping, almost bent, finely branched fronds of 'Mt. Lewis'")],
+    star=f"{B2S}（Jungle Leaves）|搜尋：Platycerium 'Rydeen' OR 'Tornado' OR 'Kiyohime' staghorn fern hybrid")
+v14("electrofilia",
+    [c("ajins-veitchii-x-bifurcatum", "fertile_hair", "~3", "白毛也是必須的", "有白毛 → 寬鬆 3", "除了改善銀鹿生長速度慢的情況，白毛也是必須的！")],
+    star=f"{B2S}（阿金、Halling）|搜尋：Platycerium 'Electrofilia' OR electrifolia staghorn（沒有該交種的頁面）")
+v14("majus",
+    [c(HH, "size", "~L", "相當大型", "大型 → 寬鬆 L", "It is a fairly large growing staghorn with a growth habit similar to P. veitchii")],
+    star=f"{B2S}（Halling）|搜尋：Platycerium 'Majus' staghorn fern（沒有該交種的頁面）")
+v14("hillii-x-willinckii",
+    [c("halling-yanid", "shield_form", "~appressed", "盾葉圓、不高，向內長成球狀", "圓形、不高、包覆 → 貼伏",
+       "the shield fronds are rounded and not tall and deeply lobed. ... the plant shield fronds form a ball like Platycerium hillii"),
+     c("halling-yanid", "shield_height", "~1", "盾葉不高，長成球狀", "不長高 → 寬鬆 1",
+       "the shield fronds are rounded and not tall and deeply lobed. ... the plant shield fronds form a ball like Platycerium hillii")],
+    star=f"{B2S}（Halling Yanid.htm）")
+v14("bifurcatum-x-willinckii",
+    [c("haruhana-willinckii-x-bif", "shield_height", "~3", "優美的冠型", "有冠 → 寬鬆 3", "它具有優美的冠型與多岔白皙質感的孢子葉"),
+     c("haruhana-willinckii-x-bif", "fertile_hair", "~3", "多岔、白皙質感的孢子葉", "白皙 → 寬鬆 3", "它具有優美的冠型與多岔白皙質感的孢子葉")],
+    star=f"{B2S}（晴花鹿苑）")
+v14("elsa",
+    [c("haruhana-elsa", "size", "~S", "孢子葉緊湊、短", "緊湊 → 寬鬆 S", "緊湊且短而挺立的孢子葉"),
+     c("haruhana-elsa", "fertile_hair", "~3", "白皙迷人的絨毛", "有白絨毛 → 寬鬆 3", "同時有著白皙迷人的絨毛"),
+     c(ZYX, "fertile_hair", "~5", "絨毛表現極佳", "絨毛極佳 → 濃密，寬鬆 5", "葉片絨毛表現極佳，成熟時分岔性好")],
+    star=f"{B2S}（晴花鹿苑、竹意軒）|搜尋：Platycerium 'Elsa' OR 'Hakuna Matata' staghorn fern fronds（沒有該品種的頁面）")
+v14("doi-tung",
+    [c(ZYX, "fertile_posture", "~up", "光線足夠時葉片往上長", "向上 → 寬鬆 up", "光線足夠時，葉片會往上生長，短且具氣勢。")],
+    star=f"{B2S}（竹意軒）")
+v14("hakuna-matata",
+    [c("ajins-hakuna-matata", "size", "~M", "中小型", "中小型 → 寬鬆 M", "於中小型鹿有著厚實白毛表現，手短且多岔")],
+    star=f"{B2S}（阿金、晴花鹿苑）|{WLTP}")
+v14("kiyohime",
+    [c("haruhana-kiyohime", "shield_height", "~3", "成株有如皇冠般的冠型", "有冠 → 寬鬆 3", "成株後展現出如皇冠般的美麗冠型")],
+    star=f"{B2S}（晴花鹿苑）")
+v14("tornado",
+    [c("haruhana-tornado", "fertile_width", "~3", "寬大的孢子葉", "寬葉 → 寬鬆 3", "同時有著寬大的孢子葉"),
+     c("haruhana-tornado", "shield_height", "~1", "營養葉上板後快速包覆水苔", "包覆附著物 → 寬鬆 1", "從小側芽就容易有著美麗的營養葉，上板後能快速包覆水苔。")],
+    star=f"{B2S}（晴花鹿苑）")
+v14("et",
+    [c("haruhana-et", "shield_height", "~3", "優雅秀氣的冠型", "有冠 → 寬鬆 3", "展現優雅秀氣的冠型"),
+     c("haruhana-et", "fertile_width", "~3", "寬大飽滿的孢子葉，分岔圓潤短小", "寬、圓 → 寬鬆 3", "搭配寬大飽滿的孢子葉 ... 葉端分叉密集且圓潤短小")],
+    star=f"{B2S}（晴花鹿苑，播孢母本的描述）")
+v14("trident", star=f"{B2S}（阿金只寫末端分岔像三叉戟）")
+v14("wolverine",
+    [c("sapphirechild-wolverine", "shield_height", "~3", "預期盾葉會長出高的指狀裂片", "依親本預期，不是觀察 → excluded",
+       "As these grow up, we can expect awesome tall 'fingers' on the shield fronds from the veitchii parent", "", "excluded")],
+    star=f"{B2S}（阿金、SapphireChild）|{WLTP}")
+v14("south-pole-star", star=f"{B2S}（阿金只有品名）")
+v14("unicorn",
+    [c("ajins-unicorn", "fertile_width", "~3", "孢子葉短而圓胖", "圓 → 寬鬆 3", "孢子葉的型態短而圓胖，呈「手」狀")],
+    star=f"{B2S}（阿金；晴花鹿苑頁是孢子苗，不採用）|{WLTP}")
+v14("nemo", star=f"{B2S}（阿金只寫白毛與分岔「有發展潛力」）")
+v14("cardinals",
+    [c("ajins-cardinals", "shield_height", "~3", "承襲奧銀狂野的高冠", "高冠 → 寬鬆 3", "紅雀鹿角蕨 承襲了奧銀狂野的高冠")],
+    star=f"{B2S}（阿金）")
+v14("uncia",
+    [c("haruhana-uncia", "shield_height", "~3", "小巧精緻的冠型", "有冠 → 寬鬆 3", "帶著迷人的小巧精緻的冠型"),
+     c("haruhana-uncia", "fertile_hair", "~3", "孢子葉帶白皙絨毛", "有白絨毛 → 寬鬆 3", "其孢子葉帶著白皙絨毛的質感")],
+    star=f"{B2S}（晴花鹿苑）")
+
+# ---------------------------------------------------------------- v1.4 B3 (2026-10-19): 爪哇品系（一）
+# New lookups (English names) only returned Orchideeën Shop's generic dwarf-willinckii copy; nothing new is cited from them.
+B3S = "v1.4 重讀已引用頁面"
+B3W = "搜尋：英文品名＋Platycerium willinckii staghorn（只有 Orchideeën Shop 的泛用文字，不採用）"
+DWQ = lambda zh, rate, d: f"{DWT} ... {zh}鹿角蕨｜{rate}｜{d}"
+v14("willinckii-nano",
+    [c("mo-dwarf", "fertile_hair", "~3", "孢子葉呈暗銀", "暗銀 → 有毛，寬鬆 3", DWQ("Nano", "中等", "1. 孢子葉呈暗銀 2. 孢子葉分叉細長")),
+     c("mo-dwarf", "fertile_width", "~1", "孢子葉分岔細長", "細長 → 寬鬆 1", DWQ("Nano", "中等", "1. 孢子葉呈暗銀 2. 孢子葉分叉細長"))],
+    star=f"{B3S}（微體溫室〈侏儒鹿角蕨〉）|{B3W}")
+v14("willinckii-jade-girl", star=f"{B3S}（Jungle Leaves、微體溫室：盾葉「open basket」是種的通用句，不採用）")
+v14("willinckii-little-will", star=f"{B3S}（竹意軒只有侏儒、可露養）")
+v14("willinckii-jenny",
+    [c("mo-dwarf", "fertile_posture", "~up", "孢子葉上翹微捲", "上翹 → 寬鬆 up", DWQ("珍妮", "難", "1. 孢子葉呈上翹微捲 2. 整體孢子葉呈扇形")),
+     c("ajins-jenny", "fertile_hair", "~3", "孢子葉精緻白皙", "白皙 → 寬鬆 3", "以其精緻白皙、有細緻且多層次分岔的孢子葉"),
+     c("bw-golden-boy", "pups", "~yes", "植株有很多側芽", "側芽多 → 寬鬆 yes", "該株鹿角蕨是現在消費者喜愛的「侏儒爪哇」品種之一，植株有很多側芽而抬升價值。")],
+    star=f"{B3S}（微體溫室、阿金、商業周刊）|{B3W}")
+v14("willinckii-bacteria", star=f"{B3S}（阿金、Jungle Leaves：盾葉句是種的通用句）")
+v14("willinckii-smurf",
+    [c("ajins-smurf", "shield_height", "~3", "高冠表現", "高冠 → 寬鬆 3", "藍底白厚毛，高冠表現，分岔微捲手型")],
+    star=f"{B3S}（阿金）")
+v14("willinckii-spur",
+    [c("mo-dwarf", "fertile_width", "~1", "孢子葉尖端分岔如刺", "如刺 → 狹長，寬鬆 1", DWQ("骨刺", "難", "1. 孢子葉尖端分叉如刺 2. 孢子葉脈白紋明顯"))],
+    star=f"{B3S}（微體溫室〈侏儒鹿角蕨〉〈為什麼那麼貴〉）")
+v14("willinckii-masayu", star=f"{B3W}")
+v14("willinckii-celso-tatsuta",
+    [c("ajins-celso", "fertile_hair", "~3", "亮眼的白毛", "有白毛 → 寬鬆 3", "爪哇中夢幻逸品，擁有亮眼的分岔與白毛")],
+    star=f"{B3S}（阿金、微體溫室）|{B3W}（Dwarf Tatsuta 不確定是同一植物）")
+v14("willinckii-hp100",
+    [c(KP, "fertile_width", "~3", "寬葉深淺裂", "寬葉 → 寬鬆 3", "短手爪哇 011 | HP100 寬葉深淺裂")],
+    star=f"{B3S}（卡呸醬）")
+for pid, q, rows in [
+    ("willinckii-wild-cat", "爪哇鹿角蕨的個體，孢子葉白且形態張揚，具有一定的辨識度。", [("fertile_hair", "~3", "孢子葉白", "白 → 寬鬆 3")]),
+    ("willinckii-mr-tin", "爪哇鹿角蕨個體，具白皙且細緻的流線孢子葉。", [("fertile_hair", "~3", "孢子葉白皙", "白皙 → 寬鬆 3")]),
+    ("willinckii-a-plus", "爪哇鹿角蕨的個體，白皙且排列密集，體型中型。",
+     [("size", "~M", "體型中型", "中型 → 寬鬆 M"), ("fertile_hair", "~3", "白皙", "白皙 → 寬鬆 3")]),
+]:
+    v14(pid, [c(ZYX, f, v, lab, cl, q) for f, v, lab, cl in rows], star=f"{B3S}（竹意軒）")
+v14("willinckii-cold-moon", star=f"{B3S}（竹意軒「孢子葉細緻、營養葉寬胖」，沒有能換算的說法）")
+v14("willinckii-albo-anubis", star=f"{B3S}（竹意軒只寫「葉片極其細緻」）")
+v14("willinckii-yellow-moon",
+    [c("mo-moon", "fertile_hair", "~3", "孢子葉微黃白皙", "白皙 → 寬鬆 3", "微黃白皙的鹿手搭上誘人微翹的指尖")],
+    star=f"{B3S}（微體溫室〈月亮系列〉；Orchideeën Shop 頁是侏儒黃月，不採用）|{B3W}")
+v14("willinckii-kaguya", star=f"{B3S}（微體溫室只描述侏儒黃月系列整體，不套用）")
+v14("willinckii-moonlight",
+    [c("ajins-moonlight", "shield_height", "~3", "高冠在日照充足時更挺立", "高冠 → 寬鬆 3", "日照充足的話，葉面會更顯皎白 高冠也會更加挺立"),
+     c("ajins-moonlight", "fertile_posture", "~pendant", "流線型飄曳的手", "飄曳 → 寬鬆 pendant", "柔美的孢子葉如月光灑下來 ... 流線型飄曳的手手"),
+     c("haruhana-moonlight", "shield_height", "~3", "營養葉有美麗高冠", "高冠 → 寬鬆 3", "而營養葉則展現眾人追求的美麗高冠"),
+     c("mo-moon", "fertile_posture", "~pendant", "帶狀孢子葉如月光傾瀉而下", "傾瀉而下 → 寬鬆 pendant", "帶狀柔美的孢子葉如月光傾瀉而下"),
+     c("mo-moon", "fertile_hair", "~5", "葉色呈銀白", "銀白 → 寬鬆 5", f"{MOONT} ... 月光鹿角蕨｜中偏易｜$250~$600｜葉色呈銀白 層次感明顯")],
+    star=f"{B3S}（阿金、晴花鹿苑、微體溫室〈月亮系列〉）|{B3W}")
+v14("willinckii-blue-queen",
+    [c("mo-dwarf", "fertile_hair", "~5", "孢子葉呈銀白", "銀白 → 寬鬆 5", DWQ("侏儒藍皇后", "中偏難", "1. 孢子葉呈銀白 2. 孢子葉末端內捲"))],
+    star=f"{B3S}（微體溫室〈侏儒鹿角蕨〉）|{B3W}")
+v14("willinckii-golden-boy",
+    [c("mo-dwarf", "fertile_width", "~1", "孢子葉分岔細長", "細長 → 寬鬆 1", DWQ("金童", "難", "1. 孢子葉呈銀黃 2. 孢子葉序緊密叢生 3. 孢子葉分叉細長"))],
+    star=f"{B3S}（微體溫室、商業周刊）|{B3W}")
+v14("willinckii-pearl-queen",
+    [c("haruhana-pearl-queen", "shield_height", "~3", "多層次的迷人高冠", "高冠 → 寬鬆 3", "美麗多層次的迷人高冠"),
+     c("haruhana-pearl-queen", "fertile_hair", "~3", "白皙厚實的葉面", "白皙 → 寬鬆 3", "白皙厚實的葉面如珍珠般閃爍迷人")],
+    star=f"{B3S}（晴花鹿苑）|{B3W}|We Love Tropical Plants（描述疑似生成文字，不採用）")
+v14("willinckii-leonids",
+    [c("haruhana-leonids", "shield_height", "~3", "母本有霸氣的高冠", "高冠 → 寬鬆 3", "母本有著霸氣的高冠與細緻秀長的孢子葉"),
+     c("haruhana-leonids", "fertile_width", "~1", "母本孢子葉細緻秀長", "細長 → 寬鬆 1", "母本有著霸氣的高冠與細緻秀長的孢子葉")],
+    star=f"{B3S}（晴花鹿苑，母本的描述）|{B3W}")
+v14("willinckii-white-swan",
+    [c("haruhana-white-swan", "shield_height", "~3", "長岔高冠", "高冠 → 寬鬆 3", "整品植株有著霸氣且左右相襯的長岔高冠"),
+     c("haruhana-white-swan", "fertile_hair", "~5", "白厚", "白而厚 → 寬鬆 5", "白皙對稱的弧度，如同白天鵝優雅的展翅之姿。 白厚與優雅的姿態令人摒息。")],
+    star=f"{B3S}（晴花鹿苑）")
+v14("willinckii-pedro",
+    [c("haruhana-pedro", "shield_height", "~3", "對稱優雅的高冠", "高冠 → 寬鬆 3", "以對稱優雅的高冠與層次分明、白皙迷人的孢子葉聞名"),
+     c("haruhana-pedro", "fertile_hair", "~3", "白皙的孢子葉", "白皙 → 寬鬆 3", "這株又白又美的神獸級鹿角蕨，以對稱優雅的高冠與層次分明、白皙迷人的孢子葉聞名")],
+    star=f"{B3S}（晴花鹿苑）|{B3W}")
+
+# ---------------------------------------------------------------- v1.4 B4 (2026-10-19): 爪哇品系（二）
+B4S = "v1.4 重讀已引用頁面"
+B4W = "搜尋：英文品名＋Platycerium willinckii staghorn（沒有該品系的頁面）"
+v14("willinckii-anapat-9",
+    [c("haruhana-anapat-9", "shield_height", "~3", "經典的冠型", "有冠 → 寬鬆 3", "知名系列Anapat #9 有著鹿角蕨經典的冠型與下墜型的孢子葉"),
+     c("haruhana-anapat-9", "fertile_hair", "~3", "明顯白皙感", "白皙 → 寬鬆 3", "在末端有著無數的岔型與此同時帶著明顯白皙感")],
+    star=f"{B4S}（晴花鹿苑）|{B4W}")
+v14("willinckii-sri-pueak",
+    [c("haruhana-sri-pueak", "fertile_hair", "~3", "成株葉色白皙柔亮", "白皙 → 寬鬆 3", "成株後葉面厚實飽滿、葉色白皙柔亮")],
+    star=f"{B4S}（晴花鹿苑）|{B4W}")
+for pid in ("willinckii-nook-dwarf", "willinckii-kaohom", "willinckii-watchara"):
+    v14(pid, star=f"{B4S}（微體溫室只描述系列與價格）|{B4W}")
+v14("gabriel",
+    [c("haruhana-gabriel", "fertile_hair", "~3", "葉面肥厚且白皙", "白皙 → 寬鬆 3", "最終極型態出來整體猶如天使之翼的向兩邊展開，葉面非常肥厚且白皙"),
+     c("mo-dwarf", "fertile_hair", "~5", "孢子葉厚呈銀白", "銀白 → 寬鬆 5", DWQ("加百列", "中偏難", "1. 孢子葉厚呈銀白 2. 孢子葉幅寬大 3. 整體孢子葉向外展開")),
+     c("mo-dwarf", "fertile_width", "~3", "孢子葉幅寬大", "寬葉 → 寬鬆 3", DWQ("加百列", "中偏難", "1. 孢子葉厚呈銀白 2. 孢子葉幅寬大 3. 整體孢子葉向外展開"))],
+    star=f"{B4S}（晴花鹿苑、微體溫室）|{B4W}")
+v14("willinckii-robin", star=f"{B4S}（阿金：葉面脈紋是孢子葉的，不換算盾葉葉脈）")
+v14("fishbone",
+    [c("mo-dwarf", "fertile_hair", "~3", "孢子葉暗綠覆白毛", "看得出底色、有白毛 → 寬鬆 3", DWQ("魚骨／寶石甲蟲", "難", "1. 孢子葉呈暗綠覆白毛 2. 孢子葉脈菱格紋明顯"))],
+    star=f"{B4S}（微體溫室；The Basements 的描述疑似生成文字，不採用）")
+v14("aydan",
+    [c("ajins-aydan", "fertile_width", "~1", "孢子葉纖細、分岔細緻", "細 → 寬鬆 1", "孢子葉所呈現出的纖細線條與優雅分岔 ... 分岔細緻而流暢"),
+     c("ajins-aydan", "fertile_hair", "~3", "葉面覆細緻白毛，柔和的銀白質感", "有白毛 → 寬鬆 3", "葉面覆蓋著細緻白毛，在光線下呈現柔和的銀白質感")],
+    star=f"{B4S}（阿金）")
+v14("willinckii-omega",
+    [c("ajins-omega", "fertile_hair", "~3", "葉面白毛細緻", "有白毛 → 寬鬆 3", "整體型態成熟穩定，葉面白毛細緻")],
+    star=f"{B4S}（阿金）")
+v14("willinckii-half-moon", star=f"{B4S}（阿金頁描述的是孢子苗，不採用型態）")
+v14("willinckii-silver-phoenix",
+    [c("ajins-silver-phoenix", "fertile_width", "~3", "孢子葉稍寬厚", "寬 → 寬鬆 3", "植株對稱優美，孢子葉也稍微比較寬厚一些")],
+    star=f"{B4S}（阿金）")
+v14("willinckii-yellow-moon-dwarf",
+    [c("ajins-yellow-moon-dwarf", "fertile_width", "~1", "孢子葉細長", "細長 → 寬鬆 1", "孢子葉細長延展"),
+     c("ajins-yellow-moon-dwarf", "fertile_hair", "~3", "白皙細緻的絨毛", "有白絨毛 → 寬鬆 3", "搭配白皙細緻的絨毛"),
+     c("mo-dwarf", "fertile_width", "~1", "孢子葉分岔細長", "細長 → 寬鬆 1", DWQ("侏儒黃月", "中偏難", "1. 孢子葉呈黃暈向外 2. 孢子葉分叉細長")),
+     c("mo-dwarf", "fertile_posture", "~spread", "孢子葉黃暈向外", "向外 → 寬鬆 spread", DWQ("侏儒黃月", "中偏難", "1. 孢子葉呈黃暈向外 2. 孢子葉分叉細長"))],
+    star=f"{B4S}（阿金、微體溫室）")
+v14("willinckii-ccs",
+    [c("haruhana-ccs", "shield_height", "~3", "高冠厚葉", "高冠 → 寬鬆 3", "高冠厚葉的P. willinckii CCS最大的特點就是臉與手有著濃密的白皙絨毛質感")],
+    star=f"{B4S}（晴花鹿苑）|{B4W}")
+v14("willinckii-makigumo", star=f"{B4S}（晴花鹿苑：葉端捲曲、岔型極短，沒有能換算的新說法）|{B4W}")
+v14("willinckii-white-heaven",
+    [c("haruhana-white-heaven", "shield_height", "~3", "高聳翠綠的冠型", "高冠 → 寬鬆 3", "有著高聳翠綠的美麗冠型"),
+     c("haruhana-white-heaven", "fertile_hair", "~3", "白皙的絨毛感", "有白絨毛 → 寬鬆 3", "優雅白皙的絨毛感讓整體葉色更富質感")],
+    star=f"{B4S}（晴花鹿苑）|{B4W}")
+v14("willinckii-white-rose", star=f"{B4S}（晴花鹿苑頁描述的是孢子苗，不採用型態）")
+v14("willinckii-yami",
+    [c("haruhana-yami", "shield_height", "~3", "高冠層次豐富", "高冠 → 寬鬆 3", "整體的高冠層次豐富，特別是孢子葉的型態細長而優雅"),
+     c("haruhana-yami", "fertile_width", "~1", "孢子葉細長", "細長 → 寬鬆 1", "特別是孢子葉的型態細長而優雅"),
+     c("haruhana-yami", "fertile_posture", "~pendant", "孢子葉如秀髮般柔美悠長、飄逸", "飄垂 → 寬鬆 pendant", "有如少女的秀髮般柔美悠長，自然高雅的弧度，亂中有序的飄逸綻放"),
+     c("haruhana-yami", "fertile_hair", "~3", "細緻款的白哇", "白 → 寬鬆 3", "P.willinckii Yami是一款細緻款的白哇")],
+    star=f"{B4S}（晴花鹿苑）|{B4W}")
+v14("sunny-cutie",
+    [c("haruhana-sunny-cutie", "shield_height", "~3", "縮小版的迷你冠型", "有冠 → 寬鬆 3", "擁有縮小版的迷你冠型"),
+     c("haruhana-sunny-cutie", "fertile_width", "~1", "孢子葉修長", "細長 → 寬鬆 1", "此外孢子葉修長優雅，宛如流水悠長的下墜姿態")],
+    star=f"{B4S}（晴花鹿苑）")
+v14("willinckii-anne", star=f"{B4S}（晴花鹿苑頁沒有描述）")
+v14("willinckii-bogie", star=f"{B4S}（晴花鹿苑頁沒有描述）")
+v14("willinckii-anapat-1",
+    [c("haruhana-anapat-1", "shield_height", "~3", "母本有經典的冠型", "有冠 → 寬鬆 3", "同時具備經典的冠型與獨特風格")],
+    star=f"{B4S}（晴花鹿苑，母本的描述）|{B4W}")
+v14("willinckii-totoro",
+    [c("yahoo-frontier-totoro", "fertile_width", "~1", "分岔多、葉先纖細", "纖細 → 寬鬆 1", "分岐数も多く繊細な葉先でとても魅力的な品種です。")],
+    star=f"{B4S}（Frontier Plants、naturefix、The Basements、HHR 拍賣頁）")
+v14("willinckii-grace",
+    [c("yahoo-vandaka-grace", "fertile_hair", "~3", "株色白", "白 → 寬鬆 3", "強度の高い矮性と白さに加え、葉先が内巻きにカールする次世代のスーパードワーフ種です。")],
+    star=f"{B4S}（vandaka plants、日本拍賣）")
+
+# ---------------------------------------------------------------- v1.4 B5 (2026-10-19): DW 系與親本不明的命名個體
+B5S = "v1.4 重讀已引用頁面"
+B5W = "搜尋：英文品名＋Platycerium staghorn（沒有該品種的頁面）"
+v14("white-hawk", star=f"{B5S}（微體溫室〈40 種〉只有表格分類）|{B5W}")
+v14("omg",
+    [c("ajins-omg", "fertile_width", "~3", "孢子葉短而闊", "闊 → 寬鬆 3", "孢子葉短而闊，成多叉形態")],
+    star=f"{B5S}（阿金、微體溫室）")
+v14("pegasus",
+    [c("mo-pegasus", "shield_height", "~3", "有爪哇的典型高冠", "高冠 → 寬鬆 3", "外觀上分別擁有： 爪哇鹿角蕨 的典型高冠"),
+     c("mo-pegasus", "fertile_posture", "~spread|pendant", "成株孢子葉向上長後折下", "向外再折下 → 寬鬆 spread|pendant", "上板成株 孢子葉向上長後折下 營養葉尖冠開始明顯"),
+     c("mo-pegasus", "shield_browning", "~withering", "高溫下營養葉會乾枯", "盾葉乾枯 → 寬鬆 withering", "此外高溫下營養葉有像 圓盾鹿角蕨 乾枯的狀況，是屬於正常現象喔！"),
+     c("vegetal-pegasus", "fertile_posture", "~spread", "孢子葉大、深裂有齒，像展開的翅膀", "展開 → 寬鬆 spread",
+       "fertile fronds large, deeply lobed and toothed, resembling outstretched wings, hence the name Pegasus")],
+    desc=[("Vegetal Design 說孢子葉大、深裂而有齒，像展開的翅膀。", "vegetal-pegasus",
+           "fertile fronds large, deeply lobed and toothed, resembling outstretched wings, hence the name Pegasus", "")],
+    star=f"{B5S}（微體溫室〈飛馬〉）|搜尋：Platycerium 'Pegasus' staghorn fern hybrid fronds|Vegetal Design 商品頁",
+    care="Vegetal Design 商品頁（通用照護表，不採用）")
+v14("white-lover",
+    [c("ajins-polar-bear", "fertile_width", "~3", "成熟後葉片寬白", "寬 → 寬鬆 3", "隨著植株成熟，葉片會逐漸展現寬白狂野的型態")],
+    star=f"{B5S}（阿金）|搜尋：Platycerium 'OMO' OR 'White Lover' OR 'Polar Bear' staghorn fern description")
+v14("full-moon",
+    [c(ZYX, "fertile_hair", "~1", "孢子葉有獨特的蠟質感", "蠟質 → 寬鬆 1", "DW交種，月亮系列的鹿角蕨，孢子葉有獨特的蠟質感，相當有辨識度。")],
+    star=f"{B5S}（竹意軒）")
+v14("blue-moon",
+    [c(ZYX, "fertile_width", "~3", "葉胖寬", "寬 → 寬鬆 3", "DW交種中的月亮系列，葉胖寬，成熟時葉片具藍綠色之質感。"),
+     c("mo-moon", "fertile_width", "~3", "孢子葉比黃月寬", "寬 → 寬鬆 3", "相較黃月鹿角蕨的手更寬，而且葉尾末端的細小分叉多"),
+     c("mo-moon", "fertile_hair", "~5", "銀白帶藍的孢子葉", "銀白 → 寬鬆 5", "藍月鹿角蕨最大的特色是銀白帶藍的孢子葉")],
+    star=f"{B5S}（竹意軒、微體溫室〈月亮系列〉）|{B5W}")
+v14("honey-moon", star=f"{B5S}（竹意軒「基部寬、漸窄、蘋果綠」，沒有能換算的說法）")
+v14("blue-monkey", star=f"{B5S}（竹意軒「藍綠色、葉脈明顯」指孢子葉，沒有能換算的說法）")
+v14("paul-vespa",
+    [c(ZYX, "fertile_hair", "~3", "葉片白皙", "白皙 → 寬鬆 3", "DW交種系列下的品種，葉片白皙且對稱性佳，栽培性也很好。")],
+    star=f"{B5S}（竹意軒）")
+v14("new-moon",
+    [c("mo-moon", "fertile_hair", "~5", "葉色呈銀白", "銀白 → 寬鬆 5", f"{MOONT} ... 新月鹿角蕨｜中偏易｜$250~$600｜葉色呈銀白 末端分叉修長"),
+     c("mo-moon", "fertile_width", "~1", "末端分岔修長", "細長 → 寬鬆 1", f"{MOONT} ... 新月鹿角蕨｜中偏易｜$250~$600｜葉色呈銀白 末端分叉修長")],
+    star=f"{B5S}（微體溫室〈月亮系列〉）")
+v14("polar-bear",
+    [c("ajins-polar-bear", "size", "~S", "精選出來的緊湊型個體", "緊湊 → 寬鬆 S", "北極熊更是精選出來緊湊型的個體"),
+     c("paraiso-polar-bear", "fertile_hair", "~5", "孢子葉明顯偏白", "很白 → 寬鬆 5", "Each staghorn looks a little different but the Omo 'Polar Bear' has distinctively white fronds.")],
+    star=f"{B5S}（阿金、微體溫室）|搜尋：Platycerium 'OMO' OR 'Polar Bear' staghorn fern description|Paraíso Plant Studio 商品頁|We Love Tropical Plants（不採用）",
+    care="Paraíso Plant Studio 商品頁（蕨類通用照護文字，不採用）")
+v14("jynx",
+    [c(ZYX, "size", "~M", "整體體型適中", "中等體型 → 寬鬆 M", "葉片胖寬，整體體型適中，可愛的品種。"),
+     c(ZYX, "fertile_width", "~3", "葉片胖寬", "寬 → 寬鬆 3", "葉片胖寬，整體體型適中，可愛的品種。")],
+    star=f"{B5S}（竹意軒）")
+v14("mountain-rabbit",
+    [c(ZYX, "size", "~L", "大型", "大型 → 寬鬆 L", "大型單芽種，營養葉高聳，孢子葉僅有一對孢子囊群斑塊，氣勢雄偉。"),
+     c(ZYX, "shield_height", "~3", "營養葉高聳", "高冠 → 寬鬆 3", "大型單芽種，營養葉高聳")],
+    star=f"{B5S}（竹意軒）")
+v14("white-hill",
+    [c(ZYX, "fertile_posture", "~pendant", "孢子葉如瀑布般下墜", "下垂 → 寬鬆 pendant", "孢子葉呈瀑布狀的下墜，排列密集，並且具有濃密的白色絨毛。"),
+     c(ZYX, "fertile_hair", "~5", "濃密的白色絨毛", "白毛濃密 → 寬鬆 5", "孢子葉呈瀑布狀的下墜，排列密集，並且具有濃密的白色絨毛。")],
+    star=f"{B5S}（竹意軒）")
+v14("white-wing",
+    [c(ZYX, "fertile_hair", "~3", "孢子葉白皙", "白皙 → 寬鬆 3", "孢子葉白皙，葉脈紋路明顯，成熟時葉尾具密集分岔。")],
+    star=f"{B5S}（竹意軒）")
+v14("mew", star=f"{B5W}（v1.4 再查）")
+v14("geisha",
+    [c("rff-geisha", "fertile_width", "~3", "孢子葉寬", "寬 → 寬鬆 3", "Its fertile fronds are broad and do not grow excessively long")],
+    star=f"{B5S}（Rainforest Flora、阿金）")
+v14("snow-white-x-suddan",
+    [c("ajins-snow-white-x-suddan", "fertile_width", "~3", "寬手延展的葉型", "寬 → 寬鬆 3", "呈現出寬手延展的葉型與濃密細緻的白毛質感")],
+    star=f"{B5S}（阿金）")
+v14("bambi",
+    [c("ajins-bambi", "fertile_hair", "~3", "葉面白毛細緻柔和", "有白毛 → 寬鬆 3", "葉面白毛細緻柔和，孢子葉分岔自然")],
+    star=f"{B5S}（阿金）")
+v14("stella-aeterni", star=f"{B5S}（阿金：沒有新說法）")
+v14("tide",
+    [c("haruhana-tide", "shield_height", "~3", "小巧精緻的冠型", "有冠 → 寬鬆 3", "卻在其中蘊藏著小巧精緻的冠型")],
+    star=f"{B5S}（晴花鹿苑）")
+
+# ---------------------------------------------------------------- v1.4 B6 (2026-10-19): FSQ（捲捲鹿）系
+# Wanna's catalogs give names and prices only; no named FSQ selection has a description beyond what v1.3 cited.
+B6S = "v1.4 重讀已引用頁面"
+v14("foong-si-qi",
+    [c(FSQ, "size", "~M", "與亞猴同屬中等體型", "中型 → 寬鬆 M", "成熟植株直徑可達 60~100 公分，與 亞猴鹿角蕨 同屬中等體型的 鹿角蕨品種 之一"),
+     c(FSQ, "fertile_hair", "~3", "葉面如檸檬鹿角蕨覆白毛", "有白毛 → 寬鬆 3", "最大特色是 360 度捲曲的孢子葉末端，葉面如 檸檬鹿角蕨 覆白毛且葉脈清晰"),
+     c(FSQ, "shield_height", "~1", "成株營養葉包覆介質生長", "包覆附著物 → 寬鬆 1", "上板成株 營養葉包覆介質生長 1~2 年後手開始捲曲")],
+    star=f"{B6S}（微體溫室〈捲捲鹿〉、Rainforest Flora、Jungle Leaves、Wanna 型錄）")
+v14("ss-foong", star=f"{B6S}（阿金、竹意軒只寫分岔多）")
+v14("fsq", star=f"{B6S}（Wanna 型錄、微體溫室：孢子苗系，沒有型態描述）")
+v14("ginka", star=f"{B6S}（晴花鹿苑、阿金：沒有新說法）|We Love Tropical Plants（不採用）")
+v14("white-gizmo",
+    [c("haruhana-white-gizmo", "fertile_width", "~3", "喜歡寬葉者必備", "寬葉 → 寬鬆 3", "其色澤白皙迷人，帶著明顯的葉脈紋理。 喜歡寬葉、白皙的收藏家必備的經典品種。"),
+     c("haruhana-white-gizmo", "fertile_hair", "~3", "色澤白皙", "白皙 → 寬鬆 3", "其色澤白皙迷人，帶著明顯的葉脈紋理。")],
+    star=f"{B6S}（晴花鹿苑）")
+v14("little-sis",
+    [c(wc("2020-03"), "fertile_hair", "~3", "葉面有毛而呈淺灰綠", "有毛、看得出底色 → 寬鬆 3",
+       "color leaves are light green-grey because have hairs and spore patches are thick make their tips are a bit curly")],
+    star=f"{B6S}（Wanna 型錄）")
+for pid in ("wannasiqi", "kin-norn", "kin-naree", "ivory", "green-moon", "cotton-moon", "kusuma", "fsq-dwarf", "oliver-siqi", "thipsiqi"):
+    v14(pid, star=f"{B6S}（Wanna 2020–2026 型錄只有品名與價格）")
+v14("sazanami", star=f"{B6S}（Haruhana USA：沒有新說法）")
+v14("wfsq", star=f"{B6S}（晴花鹿苑：沒有新說法）")
+
+# ---------------------------------------------------------------- v1.4 B7 (2026-10-19): 非洲、馬達加斯加、象耳、安地斯群的交種與品系
+B7S = "v1.4 重讀已引用頁面"
+B7W = "搜尋：英文品名＋Platycerium staghorn（只有 Orchideeën Shop、RHS 的泛用文字）"
+ALCT10 = "圓盾鹿角蕨品種｜圓盾鹿角蕨來源｜圓盾鹿角蕨型態"
+v14("elemaria", star=f"{B7S}（Hoshizaki & Price 1990 的「可達」尺寸改記寬鬆說法）")
+v14("alcicorne-x-ellisii", star="v1.4 再查：搜尋英文品名（沒有描述）")
+v14("horne-surprise", star=f"{B7S}（Halling、微體溫室：沒有新說法）")
+v14("erawan", star=f"{B7S}（微體溫室〈象耳〉、Halling 交種表）|{B7W}")
+v14("budsaba", star="v1.4 再查：搜尋英文品名（沒有描述）")
+v14("neptune", star=f"{B7S}（微體溫室〈象耳〉）|{B7W}")
+v14("antis", star=f"{B7S}（微體溫室〈象耳〉）|{B7W}")
+v14("saikeaw", star="v1.4 再查：搜尋英文品名（沒有描述）")
+v14("siamense",
+    [c(HH, "fertile_width", "~3", "孢子葉寬", "寬 → 寬鬆 3", "Grows massive shield fronds like the P. elephantotis and wide fertile fronds, only deeply branched like the P. willinckii."),
+     c(HH, "shield_height", "~5", "盾葉巨大，像象耳", "巨大冠型 → 寬鬆 5", "Grows massive shield fronds like the P. elephantotis"),
+     c("ajins-elephantotis-x-willinckii", "fertile_width", "~3", "有象耳的大寬手", "寬 → 寬鬆 3", "有象耳的大寬手，也有爪哇的分岔")],
+    star=f"{B7S}（Halling、阿金、Siam Exotica 存檔）")
+v14("moose",
+    [c("ajins-moose", "fertile_hair", "~1", "葉面油亮厚實", "油亮 → 寬鬆 1", "葉面油亮厚實，整體質感沉穩且富有光澤"),
+     c("ajins-moose", "fertile_posture", "~spread", "新葉分岔密集，展開呈扇形", "展開 → 寬鬆 spread", "新葉成長時分岔密集，展開呈現扇形層次"),
+     c("mo-alcicorne", "fertile_posture", "~spread", "孢子葉分岔多，如駝鹿角展開", "展開 → 寬鬆 spread", f"{ALCT10} ... 駝鹿鹿角蕨｜非圓X深綠｜孢子葉分叉多 如駝鹿角展開")],
+    star=f"{B7S}（阿金、微體溫室〈圓盾〉）|{B7W}")
+v14("burirom", star=f"{B7S}（微體溫室〈象耳〉只寫末端大波浪）|{B7W}")
+v14("alcicorne-x-elephantotis",
+    [c("ajins-alcicorne-africa-x-elephantotis", "shield_height", "~3", "營養葉呈冠型", "有冠 → 寬鬆 3", "非洲圓盾交象耳鹿角蕨營養葉呈冠型"),
+     c("ajins-alcicorne-africa-x-elephantotis", "fertile_width", "~3", "孢子葉像象耳一樣寬大", "寬 → 寬鬆 3", "孢子葉和象耳一樣是較寬大的型態，在末端會分岔"),
+     c("mo-alcicorne", "shield_height", "~3", "非圓象：營養葉冠明顯", "有冠 → 寬鬆 3", f"{ALCT10} ... 非圓象鹿角蕨｜非圓X象耳｜孢子葉寬大 營養葉冠明顯"),
+     c("mo-alcicorne", "fertile_width", "~3", "非圓象、馬圓象：孢子葉寬大", "寬 → 寬鬆 3",
+       f"{ALCT10} ... 非圓象鹿角蕨｜非圓X象耳｜孢子葉寬大 營養葉冠明顯 ... 馬圓象鹿角蕨｜馬圓X象耳｜孢子葉寬大 末端波浪狀")],
+    star=f"{B7S}（阿金、微體溫室〈圓盾〉〈象耳〉）")
+v14("andinum-x-stemaria", star=f"{B7S}（卡呸醬只寫「大手」）")
+v14("callard",
+    [c("halling-callard", "fertile_width", "~3", "孢子葉寬、分岔", "寬 → 寬鬆 3", "the quadridichotomum trait is obvious in the fertile fronds with the wide frond and the forking"),
+     c("halling-callard", "shield_height", "~3", "盾葉高而窄", "直立、高 → 寬鬆 3", "The andinum is also apparent in the fertile fronds plus the tall narrow shield frond"),
+     c(KP, "shield_height", "~3", "高冠", "高冠 → 寬鬆 3", "安地斯ｘ四叉006 | andinumｘquadridichotomum 高冠、長手深岔")],
+    star=f"{B7S}（Halling Callard.htm、卡呸醬）")
+v14("roy-vail",
+    [c(HH, "shield_height", "~3", "盾葉高而窄", "直立、高 → 寬鬆 3", "The shield fronds are waffled like the P. madagascariense , but tall and narrow like the P. andinum ."),
+     c(HH, "fertile_width", "~3", "孢子葉寬、會分岔", "寬 → 寬鬆 3", "The fertile fronds are wide and forked like the P. madagascariense yet longer like the P. andinum.")],
+    star=f"{B7S}（Halling）")
+v14("dawboy",
+    [c("halling-dawboy", "size", "~S", "植株小，像非猴", "小型 → 寬鬆 S", "The plant is small like P. madagascariense ."),
+     c("halling-dawboy", "fertile_width", "~3", "孢子葉深綠、寬", "寬 → 寬鬆 3", "The P. dawboy is characterized by having the dark green, wide fertile fronds with spore patched on the tips.")],
+    star=f"{B7S}（Halling、阿金）|{B7W}")
+v14("larry-weed",
+    [c(HH, "fertile_width", "~3", "孢子葉較寬", "寬 → 寬鬆 3", "The fertile frond is wider, waxy like with pronounced veins.")],
+    star=f"{B7S}（Halling）")
+v14("alcicorne-africa",
+    [c("halling-dawboy", "fertile_width", "~1", "孢子葉比馬達加斯加型窄", "窄 → 寬鬆 1",
+       "Whereas the P. alcicorne from East Africa is yellow green, waxy, hairless and narrow compared to the Madagascar variety.")],
+    star=f"{B7S}（Halling、微體溫室〈圓盾〉、Jungle Leaves）")
+v14("alcicorne-madagascar",
+    [c("halling-dawboy", "fertile_width", "~3", "孢子葉寬、深綠", "寬 → 寬鬆 3", "The fertile fronds of the P. alcicorne from Madagascar is characteristically; wide, and dark green.")],
+    star=f"{B7S}（Halling、微體溫室〈圓盾〉、Jungle Leaves）")
+v14("alcicorne-gorgon", star=f"{B7S}（竹意軒只寫葉緣波浪狀）")
+v14("elephantotis-mammoth", star=f"{B7S}（微體溫室〈象耳〉只寫葉脈浮凸、長橢圓）")
+v14("alcicorne-madagascar-dwarf",
+    [c("haruhana-alcicorne-dwarf", "shield_form", "~appressed", "盾狀營養葉包覆水苔，溫和圓潤", "圓形、包覆附著物 → 貼伏", "繼承馬圓可愛的盾狀營養葉，包覆水苔後有著溫和圓潤的造型。"),
+     c("haruhana-alcicorne-dwarf", "shield_height", "~1", "營養葉包覆水苔", "包覆附著物 → 寬鬆 1", "繼承馬圓可愛的盾狀營養葉，包覆水苔後有著溫和圓潤的造型。"),
+     c("haruhana-alcicorne-dwarf", "fertile_hair", "~3", "層次豐富的 Q 毛孢子葉", "有毛 → 寬鬆 3", "成株低調的營養葉搭配著層次豐富的Q毛孢子葉")],
+    star=f"{B7S}（晴花鹿苑、阿金、Jungle Leaves、微體溫室）")
+v14("horne-surprise-darwin", star=f"{B7S}（阿金只有品名；Orchideeën Shop 是泛用文字）")
+v14("durval-nunes",
+    [c("platyceriumferns-durval", "shield_height", "~1", "盾葉抱住附著物", "包覆附著物 → 寬鬆 1", "Like P.madagascariense it has the waffle like texture and grasping shields.")],
+    star=f"{B7S}（platyceriumferns.com、Exotica Esoterica、Halling）")
+
+# ---------------------------------------------------------------- v1.4 B8 (2026-10-19): 亞猴、皇冠群與巨型群
+B8S = "v1.4 重讀已引用頁面"
+B8W = "搜尋：英文品名＋Platycerium staghorn（只有種的描述）"
+SAMEAJ = "阿金〈美猴王〉與〈圓葉亞猴〉兩頁文字相同，無法確認描述的是哪個品種，不採用"
+CRT = "皇冠鹿角蕨品種｜皇冠鹿角蕨體型｜皇冠鹿角蕨孢子葉型態"
+v14("ridleyi-x-coronarium", star=f"{B8S}（Halling；Ploy-ratana 2014 只取得書目）|{B8W}")
+v14("coronarium-x-bifurcatum",
+    [c("ajins-bifurcatum-x-coronarium", "shield_height", "~3", "有皇冠高聳雄偉的營養葉", "高冠 → 寬鬆 3", "同時擁有皇冠高聳雄偉的營養葉，以及二叉迷人的分岔。")],
+    star=f"{B8S}（阿金、卡呸醬）")
+v14("flamenco",
+    [c("ajins-flamenco", "shield_height", "~3", "有高冠的結構感", "高冠 → 寬鬆 3", "成熟後株型立體，葉片線條流暢，兼具高冠的結構感與深綠系統的穩定表現")],
+    star=f"{B8S}（阿金、晴花鹿苑）")
+v14("ridleyi-wide",
+    [c("mo-ridley", "fertile_width", "~3", "孢子葉幅寬大", "寬 → 寬鬆 3", f"{RID} ... 寬葉亞猴鹿角蕨（摩天輪）｜中等｜1. 孢子葉幅寬大 2. 營養葉脈紋呈幅射向外"),
+     c(KP, "fertile_width", "~3", "圓葉捲邊", "圓葉 → 寬鬆 3", "寬葉亞猴 寬葉亞洲猴腦019 | Platycerium ridleyi 圓葉捲邊")],
+    star=f"{B8S}（微體溫室〈亞猴〉、卡呸醬）")
+v14("ridleyi-jade-peony", star=B8W)
+v14("ridleyi-dwarf-silver",
+    [c("mo-ridley", "fertile_hair", "~3", "孢子葉末端銀白", "末端銀白 → 有白毛，寬鬆 3", f"{RID} ... 侏儒銀葉鹿角蕨｜中偏易｜1. 孢子葉末端銀白 2. 幼苗期營養葉脈紋明顯 3. 整體型態嬌小")],
+    star=f"{B8S}（微體溫室〈亞猴〉）")
+v14("ridleyi-pakarang", star=B8W)
+v14("ridleyi-monkey-king", star=f"{B8S}（{SAMEAJ}）|{B8W}|We Love Tropical Plants（不採用）")
+v14("ridleyi-round", star=f"{B8S}（{SAMEAJ}；阿金頁是孢子苗）|We Love Tropical Plants（不採用）")
+v14("ridleyi-thin", star=f"{B8S}（阿金、微體溫室：「葉柄細長」不是裂片寬度）")
+v14("coronarium-thin",
+    [c("mo-crown", "size", "~L", "大型種", "大型 → 寬鬆 L", f"{CRT} ... 細葉皇冠鹿角蕨｜大型種｜細葉 末端微捲"),
+     c("mo-crown", "fertile_width", "~1", "細葉", "細葉（內文描述）→ 寬鬆 1", f"{CRT} ... 細葉皇冠鹿角蕨｜大型種｜細葉 末端微捲"),
+     c("ajins-coronarium-thin", "fertile_width", "~1", "孢子葉較為細長", "細長 → 寬鬆 1", "細葉皇冠的孢子葉較為細長優雅，相當具有特色")],
+    star=f"{B8S}（微體溫室〈皇冠〉、阿金：皇冠種的描述不套用）")
+v14("kitshakood-thin-dwarf", star=f"{B8S}（阿金只有學名標示）")
+v14("kitshakood-x-ridleyi", star=f"{B8S}（阿金：沒有新說法）")
+v14("kitshakood-round-frond", star=f"{B8S}（阿金只寫營養葉較圓）")
+v14("superbum-x-wandae", star=B8W)
+v14("charles-alford", star=f"{B8S}（Halling：幼株盾葉貼伏是幼葉，不採用）|{B8W}")
+v14("joe-young", star=B8W)
+v14("grande-x-elephantotis",
+    [c("mo-elephant", "size", "~XL", "整體最為巨大", "巨大 → 寬鬆 XL", f"{EL} ... 巨獸象耳鹿角蕨（巨象）｜中偏易｜整體最為巨大 葉型呈長橢圓")],
+    star=f"{B8S}（微體溫室〈象耳〉）")
+v14("holttumii-x-wandae", star=f"{B8S}（卡呸醬只寫孢子葉型態）")
+v14("holttumii-x-elephantotis", star=f"{B8S}（卡呸醬「大臉大手」、Siam Exotica 存檔）")
+v14("wandae-x-veitchii", star=f"{B8S}（阿金：沒有能換算的說法）")
+v14("wallichii-x-willinckii",
+    [c("ajins-wallichii-x-willinckii", "fertile_width", "~3", "蝴蝶般寬大分岔的孢子葉", "寬 → 寬鬆 3", "擁有蝴蝶般寬大分岔的孢子葉，葉紋深邃，整體有如扇形開展一般"),
+     c("ajins-wallichii-x-willinckii", "fertile_posture", "~spread", "整體如扇形開展", "展開 → 寬鬆 spread", "整體有如扇形開展一般，也擁有爪哇的飄逸姿態"),
+     c(KP, "shield_height", "~3", "高冠", "高冠 → 寬鬆 3", "蝴蝶ｘ爪哇013 | P. Wallickii x Willinckii TC 高冠、寬葉淺裂"),
+     c(KP, "fertile_width", "~3", "寬葉淺裂", "寬葉 → 寬鬆 3", "蝴蝶ｘ爪哇013 | P. Wallickii x Willinckii TC 高冠、寬葉淺裂")],
+    star=f"{B8S}（阿金、卡呸醬）")
+v14("mentelosii", star=f"{B8S}（Hoshizaki 1975、Halling：沒有缺欄可補的新說法）")
+v14("wandae-dwarf", star=f"{B8S}（阿金只寫「小而捲」）")
 # ---------------------------------------------------------------- build
-CARE = {"light", "water", "humidity", "min_temp", "max_temp", "difficulty", "dormancy"}
+CARE ={"light", "water", "humidity", "min_temp", "max_temp", "difficulty", "dormancy"}
 C = []  # (plant, source, field, value, label, use, claim, quote, page)
 for pid, b in BLOCKS.items():
     for src, field, value, label, claim, quote, page, use in b["cites"]:
@@ -1798,7 +2639,8 @@ for pid in PLANTS:
         if f == "size_note" or summary[pid].get(f):
             continue
         partial = any(r[5] != "summary" for r in by.get((pid, f), []))
-        log.append([pid, f, VERSION, ACCESSED, sd.get(f) or sd["care" if f in CARE else "*"], "partial" if partial else "not_found"])
+        log.append([pid, f, BLOCKS[pid].get("version", VERSION), BLOCKS[pid].get("date", ACCESSED), sd.get(f) or sd["care" if f in CARE else "*"],
+                    "partial" if partial else "not_found"])
 LP = os.path.join(ROOT, "project_plan/survey/search_log.csv")
 _, lrows = rw(LP) if os.path.exists(LP) else (LH, [])
 write(LP, LH, replace_rows(lrows, log, lambda r: r[0] in BLOCKS))
@@ -1824,7 +2666,7 @@ for r in prows:
     r["refs"] = "|".join(used)
     r["desc"] = "".join(s for s, *_ in b.get("desc", []))
     r["note"] = "".join(s for s, *_ in b.get("note", []))
-    r["survey_version"] = VERSION
+    r["survey_version"] = b.get("version", VERSION)
 write(os.path.join(ROOT, "data/plants.csv"), ph, [[r.get(k, "") for k in ph] for r in prows])
 
 for pid in PLANTS:

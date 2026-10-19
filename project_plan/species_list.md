@@ -159,11 +159,66 @@
 - staghornfern.org 資料庫裡的 'Monkey King' 是 Banna 的 veitchii wild × willinckii 交種，和台灣稱「美猴王」的亞猴品系是不同植物。
 - 「Yellow Moon」在 staghornfern.org 同時被列為 willinckii 選拔和 Riverflow × Honey Moon 的交種，兩說衝突。
 
+## 五、FSQ 系（2026-10-18）
+
+**FSQ 和 Foong Si Qi 是兩回事。** Foong Si Qi（馮詩淇、捲捲鹿）是馬來西亞 S. S. Foong 培育、以無性繁殖（側芽、組培 QQ）延續的原品種。FSQ 是泰國 I Love Ferns 的 Wanna Pinjipaitoon 用 Foong Si Qi 孢子播出的孢子苗系，第一批約在 2008 年。Wanna 的月型錄（2020–2026）把「Foongsiqi Original（No TC）」和品名後標「(FSQ)」的孢子苗選拔分開列；微體溫室和 staghornfern.org（Foongsiqi F2）也這樣分。晴花鹿苑和 World Platycerium Society 則把 FSQ 當成 Foong Si Qi 的別名，兩種用法都在流通。
+
+**資料結構：** 新增 `fsq` 一筆（`base = foong-si-qi`），Wanna 的選拔改掛在 `fsq` 底下（`base = fsq`），包括原有的銀華、White Gizmo。晴花鹿苑從自家 Foong Si Qi 孢子苗選出的 Sazanami 不屬於 Wanna 的 FSQ 系，直接掛在 `foong-si-qi` 底下。
+
+**收錄標準（放寬）：** 育種者 Wanna 自家型錄有販售，且 staghornfern.org 資料庫列為 Wanna 的 Foongsiqi F2。staghornfern.org 只算輔助，所以多數品種實際上只有一個單位的來源；照業者頁面收錄的第四批前例處理，`confidence = vendor`。
+
+**已加入（13 筆）：** FSQ、Wannasiqi、Little Sis、Kin-Norn、Kin-Naree、Ivory（FSQ#19）、Green Moon、Cotton Moon、Kusuma（FSQ No. 16）、FSQ Dwarf、Oliver Siqi、Thipsiqi、Sazanami 漣
+
+**順手修正：** 捲捲鹿補上選育者 S. S. Foong（馬來西亞）與別名，note 改列各來源的說法（女兒／孫女兩說；微體溫室寫泰國的馮詩琪，與其他來源不同）。捲捲鹿的照片來自晴花鹿苑孢子苗商品頁，但拍的是成熟母株，保留並加註說明。
+
+**暫不收錄：**
+
+| 名稱 | 原因 |
+| --- | --- |
+| Moby Dick、Ginza、Milky Way／X-Way、Snow Angel、Butterfly Moon、Green Emerald、Kuangsiqi | 只有 staghornfern.org 列為 Wanna 的 Foongsiqi F2，型錄沒找到 |
+| GGG、Frozen Cloud（Ginka F2）、Andromeda（Milky Way F2） | 同上，FSQ 的第三代 |
+| Delarocha、Kailas、Salinger、Flames（Vandaka）；Serapf、Diamond、Gucci、Snow Wave（選育者不明） | 只有 staghornfern.org，而且不是 Wanna 的 |
+| Griffin、Laila、Klin Chan | 只有 Wanna 型錄標 (FSQ)，staghornfern.org 沒有 |
+| WFSQ（已收錄） | staghornfern.org 有名稱相近的 FWSQ（Foongsiqi F2），晴花鹿苑頁面沒寫親本，對應不確定，`base` 暫不填 |
+| Winner、White Pigeon、Beary、Cyclone、X-626 Sitich、Amado（Foongsiqi × Rydeen 或 Mt. Lewis） | 是 Foongsiqi 的交種，不是 FSQ 孢子苗系；另批處理 |
+| Tinkerbell、Green Belt（FSQ × willinckii Schofield Tatsuta） | FSQ 選拔的交種；另批處理 |
+
+## 六、PlatyWiki 收錄的品種（2026-10-18）
+
+[PlatyWiki 鹿角蕨百科](https://platywiki.org/wiki/首頁)是玩家公開編輯的 wiki，共 49 個內容頁，2024-11 之後沒有更新，也沒有標示內容授權。它的內容多半轉述業者與玩家的說法，性質屬於二手彙整（T4），**不作為引用來源**。這裡只借用它的品種清單當線索：每個品種都要另外找業者、育種者或文獻的原始來源，依收錄標準（至少兩個不同單位）確認之後，才加入 `data/plants.csv`。
+
+**已在 `plants.csv`，不需要處理：** 爆米花 Popcorn；侏儒爪哇 Nano、OMG、玉女 Jade Girl、珍妮 Jenny、細菌 Bacteria、迦具夜 Kaguya、金童 Golden Boy、侏儒黃月；爪哇 Dwarf Nook、加百列 Gabriel、骨刺 Spur、黃月；銀鹿 Akki；Roy Vail、捲捲鹿 Foong Si Qi、FSQ、銀華 Ginka
+
+**Survey 結果（`survey_hybrids.py` 的「PlatyWiki 品種清單的獨立查證」區塊）：**
+
+查找範圍：英文品名搜尋、Halling、Siam Exotica（Wayback）、staghornfern.org 交種資料庫、ビカク図鑑（只看出典）、晴花鹿苑／阿金／微體溫室全站、Wanna 型錄、World Platycerium Society 登錄、The Basements 與 Platy & Co 商品目錄、aucfan／Yahoo!オークション 拍賣紀錄。台灣業者與文章都沒有這 7 個品種。
+
+| 狀態 | PlatyWiki 頁名 | 結果 | 來源 |
+| --- | --- | --- | --- |
+| ✅ | 鹿角蕨 cv. 'Durval Nunes' | 建檔 `durval-nunes`。親本只確定一邊是非猴；第二個親本有四叉（Exotica Esoterica 傳聞、Halling 看照片推測）與三角（staghornfern.org，只當線索）兩說。PlatyWiki 的巴西育種者說法沒有找到其他來源，未採用 | Siam Exotica 2009 價目表、platyceriumferns.com 2007、Exotica Esoterica、Halling |
+| ✅ | 侏儒爪哇鹿角蕨 cv. '龍貓' | 建檔 `willinckii-totoro`，`base` 為侏儒黃月（黃月孢子苗中的矮性選拔）；日本拍賣有從台灣 HHR Garden 進口的孢子苗。日本業者標中文名「豆豆龍」，列為別名 | The Basements、naturefix、Frontier Plants（Yahoo!オークション） |
+| ✅ | 爪哇鹿角蕨 cv. 'Grace' | 建檔 `willinckii-grace`，`base` 為侏儒 Nook。PlatyWiki 寫的「CNX 育成、黃鳥哥以女兒命名」沒有找到其他來源，未採用 | vandaka plants 與另一位賣家的 Yahoo!オークション 拍賣頁 |
+| ⬜ | 爪哇鹿角蕨 cv. 'Tiara' | 暫不收錄：只有 Platy & Co 的部落格提到，沒有型態或來歷 | Platy & Co |
+| ⬜ | 侏儒爪哇鹿角蕨 cv. '天堂鳥' | 暫不收錄：只有 PlatyWiki 引的 Facebook 貼文，搜尋不到其他來源。圓葉亞猴的別名「天堂鳥」先不動 | — |
+| ⬜ | 侏儒鹿角蕨 cv. '霧氷' | 暫不收錄：只有 PlatyWiki 引的 Instagram。日本拍賣有 Frontier Plants 賣「FSQ × Silver Mutate × veitchii High Shield」，和 PlatyWiki 寫的親本相近，但沒有用這個品名 | — |
+| ⬜ | 爪哇鹿角蕨 cv. '異變銀' | 暫不收錄：日本拍賣只以親本或來源的身分出現（pupu plants 的 Linea「Sliver Mutate Dwarf」、Frontier Plants 的交種），staghornfern.org 列為 willinckii 選拔「Slivery Mutate」；沒有販售或描述它本身的頁面 | — |
+
+**和現有資料衝突、需要確認：**
+
+| 品種 | PlatyWiki 的寫法 | `plants.csv` 現況 |
+| --- | --- | --- |
+| Pedro（佩德羅） | 銀鹿 cv. 'Pedro'（P. veitchii），另有育種者頁 Pedro Russo | `willinckii-pedro`，歸在 willinckii。World Platycerium Society 登錄為「Species not yet determined」、巴西 |
+| Celso（賽爾索） | 銀鹿 cv. 'Celso'（P. veitchii），另有育種者頁 Mr. Celso | 已確認是 `willinckii-celso-tatsuta`，別名補上 Celso、賽爾索；原生種歸屬（veitchii 或 willinckii）待查 |
+
+**育種者線索：** PlatyWiki 有 Durval Nunes Viveiros、Mr. Celso、Pedro Russo、Roy Lynn Vail 四個人物頁，可以用來找巴西 veitchii 系品種的原始資料。
+
 ## 參考來源
 
 - Halling — Hybrid Cross Index：https://halling.com/Platyceriums/hybrid_index.htm
 - staghornfern.org — Platycerium Cultivars：https://staghornfern.org/guides/platycerium-cultivars/
 - staghornfern.org — Hybrid Cultivar Database（已下架，存檔）：https://web.archive.org/web/20260422174320/https://staghornfern.org/database/hybrid-cultivar-database/
+- ビカク図鑑（T4，只作線索）：https://bikaku.norimaro.com
+- PlatyWiki 鹿角蕨百科（T4，只作線索）：https://platywiki.org/wiki/首頁
 - 第二輪蒐集的來源見 `data/sources.csv`
 - POWO — Platycerium × elemaria：https://powo.science.kew.org/taxon/17531060-1
 - ISHS — P. × kitshakoodiense：https://ishs.org/ishs-article/1025_11/

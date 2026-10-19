@@ -323,10 +323,10 @@ wandae,humidity,5,高,2,美國 UF/IFAS（T2）：高濕度／美國 Halling（T2
 wandae,min_temp,15,高,3,美國 UF/IFAS（T2）：最低 60 °F／美國 Halling（T2）：喜 60–100 °F／美國 Halling（T2）：短時間可耐低溫，40 °F 以下受害（參考）／台灣 劉純安 2019（台大）（T1）：20/15 °C 正常、15/13 °C 寒害（小苗）,T1|T2
 wandae,max_temp,34,中,2,美國 Halling（T2）：喜 60–100 °F／台灣 劉純安 2019（台大）（T1）：30/25 °C 正常、35/30 °C 傷害光系統（小苗）,T1|T2
 wandae,difficulty,1,低,1,美國 Halling（T2）：第 2 級（相當容易）（參考）／台灣 微體溫室（T3）：新手／美國 UF/IFAS（T2）：難（參考）,T3
-elemaria,size,,,0,,
+elemaria,size,M,低,1,學術 Hoshizaki & Price 1990（T1）：盾葉可達 70 × 30 cm、孢子葉可達 63 × 53 cm（寬鬆）,T1
 elemaria,shield_vein,yes,高,1,學術 Hoshizaki & Price 1990（T1）：主脈略隆起,T1
 elemaria,shield_fringe,above-stipe,高,1,學術 Hoshizaki & Price 1990（T1）：芽點上方有盾葉組織的皺褶,T1
-elemaria,fertile_length,,,0,,
+elemaria,fertile_length,≤63 cm,低,1,學術 Hoshizaki & Price 1990（T1）：可達 63 cm（寬鬆）,T1
 elemaria,fertile_split,0,高,1,學術 Hoshizaki & Price 1990（T1）：不分岔（先端不規則鈍裂）,T1
 elemaria,fertile_width,5,高,1,學術 Hoshizaki & Price 1990（T1）：不分裂,T1
 elemaria,fertile_hair,1,中,1,美國 Halling（T2）：深綠色、上表面蠟質（下表面未知）,T2
@@ -356,20 +356,39 @@ horne-surprise,fertile_posture,spread|pendant,中,1,美國 Halling（T2）：從
 horne-surprise,fertile_split,2–3,中,1,美國 Halling（T2）：一次主要分岔，先端再分岔一兩次,T2
 horne-surprise,light,3,低,1,台灣 微體溫室（T3）：中光（夏季遮陰 50%）,T3
 horne-surprise,difficulty,1,低,1,台灣 微體溫室（T3）：新手,T3
+dawboy,size,S,低,1,美國 Halling（T2）：植株小，像非猴（寬鬆）,T2
 dawboy,shield_vein,yes,中,1,美國 Halling（T2）：盾葉有非猴的鬆餅狀網紋,T2
 dawboy,fertile_posture,up,中,1,美國 Halling（T2）：孢子葉較長、較直立,T2
+dawboy,fertile_width,3,低,1,美國 Halling（T2）：孢子葉深綠、寬（寬鬆）,T2
 dawboy,spore,tips,中,1,美國 Halling（T2）：孢子囊群在葉先端,T2
 dawboy,humidity,,,0,美國 Halling（T2）：南加州戶外、濕度約 30% 仍可栽培（觀察）（參考）,
 larry-weed,shield_vein,yes,中,1,美國 Halling（T2）：盾葉有非猴典型的深溝紋,T2
+larry-weed,fertile_width,3,低,1,美國 Halling（T2）：孢子葉較寬（寬鬆）,T2
 larry-weed,fertile_hair,1,中,1,美國 Halling（T2）：孢子葉較寬、蠟質、葉脈明顯,T2
+callard,shield_height,3,低,2,美國 Halling（T2）：盾葉高而窄（寬鬆）／台灣 卡呸醬（T3）：高冠（寬鬆）,T2|T3
+callard,fertile_width,3,低,1,美國 Halling（T2）：孢子葉寬、分岔（寬鬆）,T2
 callard,dormancy,yes,低,1,台灣 卡呸醬（T3）：冬季休眠,T3
+roy-vail,shield_height,3,低,1,美國 Halling（T2）：盾葉高而窄（寬鬆）,T2
 roy-vail,shield_vein,yes,中,1,美國 Halling（T2）：盾葉有非猴的鬆餅狀網紋,T2
+roy-vail,fertile_width,3,低,1,美國 Halling（T2）：孢子葉寬、會分岔（寬鬆）,T2
+hillii-x-willinckii,shield_form,appressed,低,1,美國 Halling（T2）：盾葉圓、不高，向內長成球狀（寬鬆）,T2
+hillii-x-willinckii,shield_height,1,低,1,美國 Halling（T2）：盾葉不高，長成球狀（寬鬆）,T2
 hillii-x-willinckii,fertile_posture,pendant,中,1,美國 Halling（T2）：孢子葉從芽點側向長出後下垂,T2
 hillii-x-willinckii,min_temp,,,0,美國 Halling（T2）：Woodside 冬季常短暫低於冰點，大型植株仍存活（參考）,
+siamense,shield_height,5,低,1,美國 Halling（T2）：盾葉巨大，像象耳（寬鬆）,T2
+siamense,fertile_width,3,低,2,美國 Halling（T2）：孢子葉寬（寬鬆）／台灣 阿金的便秘花園（T3）：有象耳的大寬手（寬鬆）,T2|T3
 siamense,pups,,,0,,
+majus,size,L,低,1,美國 Halling（T2）：相當大型（寬鬆）,T2
 majus,fertile_posture,up,中,1,美國 Halling（T2）：孢子葉強烈直立,T2
+hillii-x-bifurcatum,size,,,0,,
+hillii-x-bifurcatum,fertile_width,3,低,1,美國 Halling（T2）：孢子葉寬，像深綠（寬鬆）,T2
 hillii-x-bifurcatum,pups,yes,低,1,泰國 Siam Exotica（T3）：以二叉 × 深綠示範分株,T3
+electrofilia,fertile_hair,3,低,1,台灣 阿金的便秘花園（T3）：白毛也是必須的（寬鬆）,T3
+veitchii-x-willinckii,shield_height,3,低,1,台灣 阿金的便秘花園（T3）：成熟時冠如花朵綻放（寬鬆）,T3
+veitchii-x-willinckii,fertile_posture,pendant,低,1,台灣 阿金的便秘花園（T3）：拉長的手如彩帶般飄逸（寬鬆）,T3
 veitchii-x-willinckii,difficulty,1,低,1,台灣 阿金的便秘花園（T3）：生長快又好養,T3
+bifurcatum-mt-lewis,shield_height,3,低,1,美國 Halling（T2）：盾葉向外長，像傘一樣替孢子葉遮陰（寬鬆）,T2
+bifurcatum-mt-lewis,fertile_width,,,0,,
 bifurcatum-mt-lewis,origin,澳洲 Mount Lewis,高,1,學術 Hoshizaki & Yansura 2021（T1）：澳洲 Mount Lewis,T1
 bifurcatum-mt-lewis,light,,,0,美國 Halling（T2）：原生地與銀鹿並排生長在全日照下（影片）（參考）,
 erawan,shield_vein,yes,低,1,台灣 微體溫室（T3）：營養葉有凹紋,T3
@@ -379,11 +398,19 @@ neptune,difficulty,2,低,1,台灣 微體溫室（T3）：中偏易,T3
 antis,fertile_hair,3,低,1,台灣 微體溫室（T3）：表面白毛明顯,T3
 antis,difficulty,2,低,1,台灣 微體溫室（T3）：中偏易,T3
 burirom,difficulty,2,低,1,台灣 微體溫室（T3）：中偏易,T3
+alcicorne-x-elephantotis,shield_height,3,低,2,台灣 阿金的便秘花園（T3）：營養葉呈冠型（寬鬆）／台灣 微體溫室（T3）：非圓象：營養葉冠明顯（寬鬆）,T3
+alcicorne-x-elephantotis,fertile_width,3,低,2,台灣 阿金的便秘花園（T3）：孢子葉像象耳一樣寬大（寬鬆）／台灣 微體溫室（T3）：非圓象、馬圓象：孢子葉寬大（寬鬆）,T3
 alcicorne-x-elephantotis,light,3,低,1,台灣 阿金的便秘花園（T3）：訓養後可接受半日照,T3
 alcicorne-x-elephantotis,difficulty,1,高,2,台灣 微體溫室（T3）：容易／台灣 阿金的便秘花園（T3）：適合新手,T3
+grande-x-elephantotis,size,XL,低,1,台灣 微體溫室（T3）：整體最為巨大（寬鬆）,T3
 grande-x-elephantotis,difficulty,2,低,1,台灣 微體溫室（T3）：中偏易,T3
+moose,fertile_posture,spread,低,2,台灣 阿金的便秘花園（T3）：新葉分岔密集，展開呈扇形（寬鬆）／台灣 微體溫室（T3）：孢子葉分岔多，如駝鹿角展開（寬鬆）,T3
+moose,fertile_hair,1,低,1,台灣 阿金的便秘花園（T3）：葉面油亮厚實（寬鬆）,T3
 moose,light,1,低,1,台灣 微體溫室（T3）：低弱光（夏季遮陰 70%）,T3
 moose,difficulty,1,低,1,台灣 微體溫室（T3）：新手,T3
+pegasus,shield_height,3,低,1,台灣 微體溫室（T3）：有爪哇的典型高冠（寬鬆）,T3
+pegasus,shield_browning,withering,低,1,台灣 微體溫室（T3）：高溫下營養葉會乾枯（寬鬆）,T3
+pegasus,fertile_posture,spread|pendant,低,2,台灣 微體溫室（T3）：成株孢子葉向上長後折下（寬鬆）／加拿大 Vegetal Design（T3）：孢子葉大、深裂有齒，像展開的翅膀（寬鬆）,T3
 pegasus,light,4,低,1,台灣 微體溫室（T3）：中強光（夏季遮陰 30%）／台灣 微體溫室（T3）：半日照至全日照,T3
 pegasus,water,1,低,1,台灣 微體溫室（T3）：較耐旱，水苔接近全乾再澆透,T3
 pegasus,difficulty,2,低,1,台灣 微體溫室（T3）：中階／台灣 微體溫室（T3）：相當推薦新手,T3
@@ -393,39 +420,56 @@ white-hawk,light,5,低,1,台灣 微體溫室（T3）：中強光（夏季遮陰 
 white-hawk,difficulty,3,低,1,台灣 微體溫室（T3）：中階,T3
 white-shine,light,5,低,1,台灣 微體溫室（T3）：中強光（夏季遮陰 30%）,T3
 white-shine,difficulty,3,低,1,台灣 微體溫室（T3）：中階,T3
+monkey-north,shield_height,3,低,2,台灣 晴花鹿苑（T3）：有奧銀的高冠（寬鬆）／台灣 竹意軒（T3）：高冠（寬鬆）,T3
+monkey-north,fertile_posture,pendant,低,1,台灣 竹意軒（T3）：下墜的孢子葉（寬鬆）,T3
+monkey-north,fertile_hair,3,低,1,台灣 竹意軒（T3）：白絨毛（寬鬆）,T3
 monkey-north,light,5,低,1,台灣 微體溫室（T3）：中強光（夏季遮陰 30%）,T3
 monkey-north,difficulty,5,低,1,台灣 微體溫室（T3）：進階,T3
 ss-foong,light,3,低,1,台灣 微體溫室（T3）：中光（夏季遮陰 50%）,T3
 ss-foong,difficulty,3,低,1,台灣 微體溫室（T3）：中階,T3
-polar-bear,fertile_hair,5,低,1,台灣 阿金的便秘花園（T3）：雪白絨毛非常濃密,T3
+polar-bear,size,S,低,1,台灣 阿金的便秘花園（T3）：精選出來的緊湊型個體（寬鬆）,T3
+polar-bear,fertile_hair,5,低,2,台灣 阿金的便秘花園（T3）：雪白絨毛非常濃密／美國 Paraíso Plant Studio（T3）：孢子葉明顯偏白（寬鬆）,T3
 polar-bear,light,5,低,1,台灣 微體溫室（T3）：中強光（夏季遮陰 30%）,T3
 polar-bear,difficulty,3,低,1,台灣 微體溫室（T3）：中階,T3
+white-lover,fertile_width,3,低,1,台灣 阿金的便秘花園（T3）：成熟後葉片寬白（寬鬆）,T3
 white-lover,fertile_hair,5,低,1,台灣 阿金的便秘花園（T3）：孢子葉面厚厚一層白色絨毛，極致銀白,T3
-foong-si-qi,size,,,0,,
+foong-si-qi,size,M,低,1,台灣 微體溫室（T3）：成熟植株直徑 60–100 cm（寬鬆）／台灣 微體溫室（T3）：與亞猴同屬中等體型（寬鬆）,T3
+foong-si-qi,shield_height,1,低,1,台灣 微體溫室（T3）：成株營養葉包覆介質生長（寬鬆）,T3
 foong-si-qi,fertile_length,50–80 cm,低,1,台灣 微體溫室（T3）：3 年以上成株手長 50–80 cm,T3
+foong-si-qi,fertile_hair,3,低,1,台灣 微體溫室（T3）：葉面如檸檬鹿角蕨覆白毛（寬鬆）,T3
 foong-si-qi,spore,tips,低,1,美國 Rainforest Flora（T3）：孢子長在孢子葉先端,T3
 foong-si-qi,pups,yes,低,1,台灣 微體溫室（T3）：多芽型,T3
 foong-si-qi,light,3,中,2,台灣 微體溫室（T3）：中光（夏季遮陰 50%）／台灣 微體溫室（T3）：成株中光至中強光／美國 Rainforest Flora（T3）：需要明亮濾光，避免直曬,T3
 foong-si-qi,water,1,高,2,台灣 微體溫室（T3）：本身耐旱，乾濕容忍力強／美國 Rainforest Flora（T3）：澆透後讓介質乾約 80%,T3
 foong-si-qi,min_temp,13,低,1,台灣 微體溫室（T3）：低於 5 度可能寒害（參考）／美國 Rainforest Flora（T3）：保持 55 °F 以上,T3
 foong-si-qi,difficulty,2,低,1,台灣 微體溫室（T3）：中階／台灣 微體溫室（T3）：相對好照顧／美國 Rainforest Flora（T3）：適合中階栽培者（參考）／德國 Jungle Leaves（T3）：不難照顧（組培 QQ）（參考）,T3
+geisha,fertile_width,3,低,1,美國 Rainforest Flora（T3）：孢子葉寬（寬鬆）,T3
 geisha,fertile_hair,5,低,1,台灣 阿金的便秘花園（T3）：厚實的白毛,T3
 geisha,pups,yes,低,1,美國 Rainforest Flora（T3）：多芽（叢生）,T3
 geisha,light,3,低,1,美國 Rainforest Flora（T3）：需要明亮濾光，避免直曬,T3
 geisha,water,1,低,1,美國 Rainforest Flora（T3）：澆透後讓介質乾約 60–80%,T3
 geisha,min_temp,13,低,1,美國 Rainforest Flora（T3）：保持 55 °F 以上,T3
 geisha,difficulty,,,0,美國 Rainforest Flora（T3）：容易栽培（參考）,
+willinckii-moonlight,shield_height,3,低,2,台灣 阿金的便秘花園（T3）：高冠在日照充足時更挺立（寬鬆）／台灣 晴花鹿苑（T3）：營養葉有美麗高冠（寬鬆）,T3
+willinckii-moonlight,fertile_posture,pendant,低,2,台灣 阿金的便秘花園（T3）：流線型飄曳的手（寬鬆）／台灣 微體溫室（T3）：帶狀孢子葉如月光傾瀉而下（寬鬆）,T3
+willinckii-moonlight,fertile_hair,5,低,1,台灣 微體溫室（T3）：葉色呈銀白（寬鬆）,T3
 willinckii-moonlight,light,3,低,1,台灣 微體溫室（T3）：中光（夏季遮陰 50%）,T3
 willinckii-moonlight,water,1,低,1,台灣 微體溫室（T3）：月亮系列：耐旱喜透氣,T3
 willinckii-moonlight,difficulty,3,低,1,台灣 微體溫室（T3）：進階／台灣 微體溫室（T3）：中偏易,T3
+new-moon,fertile_width,1,低,1,台灣 微體溫室（T3）：末端分岔修長（寬鬆）,T3
+new-moon,fertile_hair,5,低,1,台灣 微體溫室（T3）：葉色呈銀白（寬鬆）,T3
 new-moon,water,1,低,1,台灣 微體溫室（T3）：月亮系列：耐旱喜透氣,T3
 new-moon,difficulty,2,低,1,台灣 微體溫室（T3）：中偏易,T3
+willinckii-yellow-moon,fertile_hair,3,低,1,台灣 微體溫室（T3）：孢子葉微黃白皙（寬鬆）,T3
 willinckii-yellow-moon,light,3,低,1,台灣 微體溫室（T3）：不直曬，4~8 小時半日照、明亮散射光,T3
 willinckii-yellow-moon,water,1,低,1,台灣 微體溫室（T3）：月亮系列：耐旱喜透氣,T3
 willinckii-yellow-moon,difficulty,3,低,1,台灣 微體溫室（T3）：中等,T3
+blue-moon,fertile_width,3,低,2,台灣 竹意軒（T3）：葉胖寬（寬鬆）／台灣 微體溫室（T3）：孢子葉比黃月寬（寬鬆）,T3
+blue-moon,fertile_hair,5,低,1,台灣 微體溫室（T3）：銀白帶藍的孢子葉（寬鬆）,T3
 blue-moon,water,1,低,1,台灣 微體溫室（T3）：月亮系列：耐旱喜透氣,T3
 blue-moon,difficulty,3,低,1,台灣 微體溫室（T3）：中等,T3
 snow-moon,fertile_posture,spread|pendant,低,1,台灣 微體溫室（T3）：孢子葉向外延伸再下垂,T3
+snow-moon,fertile_hair,5,低,1,台灣 微體溫室（T3）：厚實白毛，葉色銀白,T3
 snow-moon,water,1,低,1,台灣 微體溫室（T3）：月亮系列：耐旱喜透氣,T3
 snow-moon,difficulty,3,低,1,台灣 微體溫室（T3）：中等,T3
 willinckii-jade-girl,size,S,低,1,台灣 微體溫室（T3）：侏儒爪哇,T3
@@ -435,6 +479,7 @@ willinckii-jade-girl,pups,yes,低,1,德國 Jungle Leaves（T3）：數年後長�
 willinckii-jade-girl,light,3,低,1,台灣 微體溫室（T3）：中光（夏季遮陰 50%）／台灣 微體溫室（T3）：半遮陰陽台（明亮散射光）,T3
 willinckii-jade-girl,difficulty,4,低,1,台灣 微體溫室（T3）：進階／台灣 微體溫室（T3）：中等／德國 Jungle Leaves（T3）：生長慢但不難照顧（參考）,T3
 omg,size,S,低,1,台灣 微體溫室（T3）：侏儒爪哇,T3
+omg,fertile_width,3,低,1,台灣 阿金的便秘花園（T3）：孢子葉短而闊（寬鬆）,T3
 omg,light,3,低,1,台灣 微體溫室（T3）：中光（夏季遮陰 50%）／台灣 微體溫室（T3）：半遮陰陽台（明亮散射光）,T3
 omg,difficulty,4,中,2,台灣 微體溫室（T3）：進階／台灣 微體溫室（T3）：中等／台灣 阿金的便秘花園（T3）：比較進階的侏儒鹿角蕨,T3
 willinckii-bacteria,size,S,低,1,台灣 微體溫室（T3）：侏儒爪哇,T3
@@ -444,21 +489,32 @@ willinckii-bacteria,pups,yes,低,1,德國 Jungle Leaves（T3）：數年後長�
 willinckii-bacteria,light,1,低,1,台灣 微體溫室（T3）：低弱光（夏季遮陰 70%）,T3
 willinckii-bacteria,difficulty,3,低,2,台灣 微體溫室（T3）：進階／台灣 微體溫室（T3）：中偏難／德國 Jungle Leaves（T3）：生長慢但不難照顧（參考）／台灣 阿金的便秘花園（T3）：好照顧，侏儒系中適合入門,T3
 willinckii-golden-boy,size,S,低,1,台灣 微體溫室（T3）：侏儒爪哇,T3
+willinckii-golden-boy,fertile_width,1,低,1,台灣 微體溫室（T3）：孢子葉分岔細長（寬鬆）,T3
 willinckii-golden-boy,light,1,低,1,台灣 微體溫室（T3）：低弱光（夏季遮陰 70%）,T3
 willinckii-golden-boy,difficulty,5,低,1,台灣 微體溫室（T3）：進階／台灣 微體溫室（T3）：難,T3
 willinckii-jenny,size,S,低,1,台灣 微體溫室（T3）：侏儒爪哇,T3
+willinckii-jenny,fertile_posture,up,低,1,台灣 微體溫室（T3）：孢子葉上翹微捲（寬鬆）,T3
+willinckii-jenny,fertile_hair,3,低,1,台灣 阿金的便秘花園（T3）：孢子葉精緻白皙（寬鬆）,T3
+willinckii-jenny,pups,yes,低,1,台灣 商業周刊（T3）：植株有很多側芽（寬鬆）,T3
 willinckii-jenny,light,1,低,1,台灣 微體溫室（T3）：低弱光（夏季遮陰 70%）,T3
 willinckii-jenny,difficulty,5,低,1,台灣 微體溫室（T3）：進階／台灣 微體溫室（T3）：難,T3
 willinckii-nano,size,S,低,1,台灣 微體溫室（T3）：侏儒爪哇,T3
+willinckii-nano,fertile_width,1,低,1,台灣 微體溫室（T3）：孢子葉分岔細長（寬鬆）,T3
+willinckii-nano,fertile_hair,3,低,1,台灣 微體溫室（T3）：孢子葉呈暗銀（寬鬆）,T3
 willinckii-nano,difficulty,3,低,1,台灣 微體溫室（T3）：中等,T3
 willinckii-spur,size,S,低,1,台灣 微體溫室（T3）：侏儒爪哇,T3
+willinckii-spur,fertile_width,1,低,1,台灣 微體溫室（T3）：孢子葉尖端分岔如刺（寬鬆）,T3
 willinckii-spur,difficulty,5,低,1,台灣 微體溫室（T3）：難,T3
 fishbone,size,S,低,1,台灣 微體溫室（T3）：侏儒爪哇,T3
+fishbone,fertile_hair,3,低,1,台灣 微體溫室（T3）：孢子葉暗綠覆白毛（寬鬆）,T3
 fishbone,difficulty,5,低,1,台灣 微體溫室（T3）：難,T3
 gabriel,size,S,低,1,台灣 微體溫室（T3）：侏儒爪哇,T3
 gabriel,fertile_posture,spread,低,1,台灣 晴花鹿苑（T3）：如天使之翼向兩邊展開,T3
+gabriel,fertile_width,3,低,1,台灣 微體溫室（T3）：孢子葉幅寬大（寬鬆）,T3
+gabriel,fertile_hair,4,低,2,台灣 晴花鹿苑（T3）：葉面肥厚且白皙（寬鬆）／台灣 微體溫室（T3）：孢子葉厚呈銀白（寬鬆）,T3
 gabriel,origin,Dwarf Nook 選拔的孢子苗,低,1,台灣 晴花鹿苑（T3）：Dwarf Nook 孢子苗,T3
 gabriel,difficulty,4,低,1,台灣 微體溫室（T3）：中偏難,T3
+willinckii-celso-tatsuta,fertile_hair,3,低,1,台灣 阿金的便秘花園（T3）：亮眼的白毛（寬鬆）,T3
 willinckii-celso-tatsuta,light,5,低,1,台灣 微體溫室（T3）：中強光（夏季遮陰 30%）,T3
 willinckii-celso-tatsuta,difficulty,5,低,1,台灣 微體溫室（T3）：進階,T3
 ginka,fertile_posture,spread,低,1,台灣 晴花鹿苑（T3）：孢子葉向兩側展開,T3
@@ -468,33 +524,72 @@ ginka,light,5,低,1,台灣 微體溫室（T3）：中強光（夏季遮陰 30%�
 ginka,max_temp,,,0,台灣 晴花鹿苑（T3）：耐溫將近可達 35 度（參考）,
 ginka,difficulty,3,低,2,台灣 微體溫室（T3）：進階／台灣 晴花鹿苑（T3）：整體養護簡易,T3
 white-gizmo,fertile_posture,spread,低,1,台灣 晴花鹿苑（T3）：孢子葉如緞帶向兩側對稱展開,T3
+white-gizmo,fertile_width,3,低,1,台灣 晴花鹿苑（T3）：喜歡寬葉者必備（寬鬆）,T3
+white-gizmo,fertile_hair,3,低,1,台灣 晴花鹿苑（T3）：色澤白皙（寬鬆）,T3
 white-gizmo,origin,由 FSQ 孢子苗特選,低,1,台灣 晴花鹿苑（T3）：FSQ 孢子苗,T3
+kiyohime,shield_height,3,低,1,台灣 晴花鹿苑（T3）：成株有如皇冠般的冠型（寬鬆）,T3
 kiyohime,fertile_posture,up,低,1,台灣 晴花鹿苑（T3）：孢子葉筆直挺立,T3
 kiyohime,difficulty,1,低,1,台灣 晴花鹿苑（T3）：種植門檻低，適合入門者,T3
+elsa,size,S,低,1,台灣 晴花鹿苑（T3）：孢子葉緊湊、短（寬鬆）,T3
 elsa,fertile_posture,up,低,1,台灣 晴花鹿苑（T3）：孢子葉短而挺立,T3
+elsa,fertile_hair,4,低,2,台灣 晴花鹿苑（T3）：白皙迷人的絨毛（寬鬆）／台灣 竹意軒（T3）：絨毛表現極佳（寬鬆）,T3
 elsa,difficulty,1,低,1,台灣 晴花鹿苑（T3）：簡單容易，新手也能養,T3
+hakuna-matata,size,M,低,1,台灣 阿金的便秘花園（T3）：中小型（寬鬆）,T3
 hakuna-matata,fertile_hair,5,低,1,台灣 阿金的便秘花園（T3）：成株有厚實的白毛,T3
 hakuna-matata,difficulty,1,低,1,台灣 晴花鹿苑（T3）：養殖難度低,T3
+willinckii-pearl-queen,shield_height,3,低,1,台灣 晴花鹿苑（T3）：多層次的迷人高冠（寬鬆）,T3
+willinckii-pearl-queen,fertile_hair,3,低,1,台灣 晴花鹿苑（T3）：白皙厚實的葉面（寬鬆）,T3
 willinckii-pearl-queen,difficulty,1,低,1,台灣 晴花鹿苑（T3）：養護與種植容易,T3
+willinckii-white-swan,shield_height,3,低,1,台灣 晴花鹿苑（T3）：長岔高冠（寬鬆）,T3
 willinckii-white-swan,fertile_posture,pendant,低,1,台灣 晴花鹿苑（T3）：孢子葉向下垂擺,T3
+willinckii-white-swan,fertile_hair,5,低,1,台灣 晴花鹿苑（T3）：白厚（寬鬆）,T3
+willinckii-anapat-9,shield_height,3,低,1,台灣 晴花鹿苑（T3）：經典的冠型（寬鬆）,T3
 willinckii-anapat-9,fertile_posture,pendant,低,1,台灣 晴花鹿苑（T3）：下墜型的孢子葉,T3
+willinckii-anapat-9,fertile_hair,3,低,1,台灣 晴花鹿苑（T3）：明顯白皙感（寬鬆）,T3
+et,shield_height,3,低,1,台灣 晴花鹿苑（T3）：優雅秀氣的冠型（寬鬆）,T3
 et,fertile_posture,pendant,低,1,台灣 晴花鹿苑（T3）：整體集中向前並自然下垂,T3
+et,fertile_width,3,低,1,台灣 晴花鹿苑（T3）：寬大飽滿的孢子葉，分岔圓潤短小（寬鬆）,T3
 et,fertile_hair,5,低,1,台灣 晴花鹿苑（T3）：覆蓋如白雪般的細緻絨毛,T3
+tornado,shield_height,1,低,1,台灣 晴花鹿苑（T3）：營養葉上板後快速包覆水苔（寬鬆）,T3
+tornado,fertile_width,3,低,1,台灣 晴花鹿苑（T3）：寬大的孢子葉（寬鬆）,T3
+willinckii-leonids,shield_height,3,低,1,台灣 晴花鹿苑（T3）：母本有霸氣的高冠（寬鬆）,T3
+willinckii-leonids,fertile_width,1,低,1,台灣 晴花鹿苑（T3）：母本孢子葉細緻秀長（寬鬆）,T3
+willinckii-pedro,shield_height,3,低,1,台灣 晴花鹿苑（T3）：對稱優雅的高冠（寬鬆）,T3
+willinckii-pedro,fertile_hair,3,低,1,台灣 晴花鹿苑（T3）：白皙的孢子葉（寬鬆）,T3
+hillii-raijin,fertile_posture,spread,低,1,台灣 晴花鹿苑（T3）：向上放射展開（寬鬆）,T3
+hillii-raijin,fertile_width,3,低,2,台灣 晴花鹿苑（T3）：寬厚大葉（寬鬆）／台灣 阿金的便秘花園（T3）：寬大的孢子葉（寬鬆）,T3
+hillii-raijin,fertile_hair,3,低,1,台灣 晴花鹿苑（T3）：帶絨毛感（寬鬆）,T3
+rydeen,shield_height,3,低,1,德國 Jungle Leaves（T3）：盾葉先端直立（寬鬆）,T3
 rydeen,fertile_posture,pendant,低,1,德國 Jungle Leaves（T3）：孢子葉下垂、近乎彎折，分岔細,T3
+rydeen,fertile_width,1,低,1,德國 Jungle Leaves（T3）：孢子葉分岔細（寬鬆）,T3
+veitchii-auburn-river,size,XL,低,1,台灣 微體溫室（T3）：整株高度超過 150 公分（寬鬆）,T3
+veitchii-auburn-river,shield_height,3,低,2,台灣 微體溫室（T3）：營養葉尖冠明顯，如珊瑚向外展開（寬鬆）／台灣 阿金的便秘花園（T3）：極細長的高冠（寬鬆）,T3
+veitchii-auburn-river,shield_hair,5,低,1,台灣 卡呸醬（T3）：臉手全銀（寬鬆）,T3
+veitchii-auburn-river,fertile_hair,5,低,1,台灣 卡呸醬（T3）：臉手全銀（寬鬆）,T3
 veitchii-auburn-river,light,4,低,1,台灣 微體溫室（T3）：中至中強光／台灣 微體溫室（T3）：中強光（夏季遮陰 30%）／台灣 阿金的便秘花園（T3）：原生地能適應高日曬（參考）,T3
 veitchii-auburn-river,water,1,低,1,台灣 微體溫室（T3）：銀鹿各品系：耐旱喜透氣,T3
 veitchii-auburn-river,difficulty,5,低,1,台灣 微體溫室（T3）：進階,T3
-veitchii-wild,fertile_posture,up,低,1,台灣 微體溫室（T3）：孢子葉與營養葉皆聳立直上,T3
+veitchii-wild,shield_height,3,低,2,台灣 微體溫室（T3）：營養葉尖冠細長、集中向上（寬鬆）／台灣 晴花鹿苑（T3）：細尖高冠（寬鬆）,T3
+veitchii-wild,fertile_posture,up,低,2,台灣 微體溫室（T3）：孢子葉與營養葉皆聳立直上／台灣 晴花鹿苑（T3）：挺立昂揚的孢子葉（寬鬆）,T3
 veitchii-wild,light,4,低,1,台灣 微體溫室（T3）：中至中強光,T3
 veitchii-wild,water,1,低,1,台灣 微體溫室（T3）：銀鹿各品系：耐旱喜透氣,T3
+veitchii-nyx,shield_height,3,低,1,台灣 微體溫室（T3）：營養葉渾圓、冠成束（寬鬆）,T3
+veitchii-nyx,shield_hair,5,低,1,台灣 阿金的便秘花園（T3）：特別銀白的銀鹿（寬鬆）,T3
 veitchii-nyx,fertile_posture,up,低,1,台灣 阿金的便秘花園（T3）：孢子葉非常立葉,T3
 veitchii-nyx,fertile_hair,5,低,1,台灣 微體溫室（T3）：孢子葉覆滿細小銀白絨毛,T3
 veitchii-nyx,light,2,低,1,台灣 微體溫室（T3）：中弱至中光,T3
 veitchii-nyx,water,1,低,1,台灣 微體溫室（T3）：銀鹿各品系：耐旱喜透氣,T3
+veitchii-lemoinei,size,M,低,2,台灣 微體溫室（T3）：孢子葉長可超過 60 公分（寬鬆）／美國 Josh's Frogs（T3）：成株高可達 24 吋（寬鬆）,T3
+veitchii-lemoinei,shield_height,3,低,3,台灣 微體溫室（T3）：尖冠高可達 30~45 公分（寬鬆）／台灣 阿金的便秘花園（T3）：成熟營養葉有尖高冠（寬鬆）／台灣 晴花鹿苑（T3）：可愛的小冠（寬鬆）,T3
+veitchii-lemoinei,fertile_posture,up,低,2,台灣 微體溫室（T3）：日照充足時孢子葉聳立向上（寬鬆）／台灣 晴花鹿苑（T3）：挺立的孢子葉（寬鬆）,T3
+veitchii-lemoinei,fertile_length,≥60 cm,低,1,台灣 微體溫室（T3）：孢子葉長可超過 60 公分（寬鬆）,T3
 veitchii-lemoinei,fertile_hair,5,低,1,台灣 微體溫室（T3）：孢子葉覆滿白絨毛,T3
-veitchii-lemoinei,light,5,中,2,台灣 微體溫室（T3）：中強光（夏季遮陰 30%）／台灣 微體溫室（T3）：中至中強光；夏季遮陰 30~50%／台灣 阿金的便秘花園（T3）：喜愛日照強,T3
-veitchii-lemoinei,water,1,高,2,台灣 微體溫室（T3）：相對耐旱／台灣 阿金的便秘花園（T3）：喜愛乾旱,T3
-veitchii-lemoinei,difficulty,1,高,3,台灣 微體溫室（T3）：新手／台灣 微體溫室（T3）：適合新手入門／台灣 晴花鹿苑（T3）：新手入門熱門首選，適應度極高／台灣 阿金的便秘花園（T3）：好照顧,T3
+veitchii-lemoinei,light,4,中,3,台灣 微體溫室（T3）：中強光（夏季遮陰 30%）／台灣 微體溫室（T3）：中至中強光；夏季遮陰 30~50%／台灣 阿金的便秘花園（T3）：喜愛日照強／美國 Josh's Frogs（T3）：Partial Shade,T3
+veitchii-lemoinei,water,1,高,3,台灣 微體溫室（T3）：相對耐旱／台灣 阿金的便秘花園（T3）：喜愛乾旱／美國 Josh's Frogs（T3）：澆水後待乾；耐旱、怕積水,T3
+veitchii-lemoinei,humidity,4,低,1,美國 Josh's Frogs（T3）：Moderate – Humid,T3
+veitchii-lemoinei,min_temp,18,低,1,美國 Josh's Frogs（T3）：65 °F 以上,T3
+veitchii-lemoinei,difficulty,1,高,3,台灣 微體溫室（T3）：新手／台灣 微體溫室（T3）：適合新手入門／台灣 晴花鹿苑（T3）：新手入門熱門首選，適應度極高／台灣 阿金的便秘花園（T3）：好照顧／美國 Josh's Frogs（T3）：照顧容易（參考）,T3
+hillii-dragon,fertile_width,3,低,1,台灣 微體溫室（T3）：保有深綠寬大孢子葉的特徵（寬鬆）,T3
 hillii-dragon,light,4,低,1,台灣 微體溫室（T3）：可遮陰 30%~50%,T3
 hillii-dragon,water,3,低,1,台灣 微體溫室（T3）：成株乾濕週期澆水,T3
 hillii-dragon,difficulty,1,低,1,台灣 微體溫室（T3）：對環境不挑，適合新手,T3
@@ -502,6 +597,8 @@ hillii-mio,light,1,低,1,台灣 微體溫室（T3）：可提高遮光到 70%，
 hillii-mio,water,3,低,1,台灣 微體溫室（T3）：成株乾濕週期澆水,T3
 hillii-dwarf,size,S,低,1,台灣 微體溫室（T3）：侏儒，一般深綠的 ⅓ 到 ¼,T3
 hillii-dwarf,fertile_posture,up,低,1,台灣 阿金的便秘花園（T3）：整體型態自然上翹,T3
+hillii-dwarf,fertile_width,1,低,2,台灣 微體溫室（T3）：孢子葉分岔成小巧的指狀（寬鬆）／台灣 阿金的便秘花園（T3）：分岔細緻，像一根根小手指（寬鬆）,T3
+hillii-dwarf,fertile_hair,3,低,2,台灣 微體溫室（T3）：成熟後有絨毛感（寬鬆）／台灣 阿金的便秘花園（T3）：細緻白毛（寬鬆）,T3
 hillii-dwarf,light,1,低,1,台灣 微體溫室（T3）：可提高遮光到 70%,T3
 hillii-dwarf,water,3,低,1,台灣 微體溫室（T3）：成株乾濕週期澆水,T3
 hillii-dwarf,max_temp,33,低,1,台灣 微體溫室（T3）：小苗：避免超過 33 度,T3
@@ -510,6 +607,7 @@ ridleyi-thin,pups,no,低,1,台灣 阿金的便秘花園（T3）：單芽型,T3
 ridleyi-thin,light,3,高,2,台灣 微體溫室（T3）：亞猴各品系：明亮散射光／台灣 阿金的便秘花園（T3）：置於明亮散光處，避開高溫,T3
 ridleyi-thin,water,3,低,1,台灣 阿金的便秘花園（T3）：給水乾濕循環，不要常保過濕,T3
 ridleyi-thin,difficulty,3,低,1,台灣 微體溫室（T3）：中等,T3
+ridleyi-wide,fertile_width,3,低,2,台灣 微體溫室（T3）：孢子葉幅寬大（寬鬆）／台灣 卡呸醬（T3）：圓葉捲邊（寬鬆）,T3
 ridleyi-wide,light,3,低,1,台灣 微體溫室（T3）：亞猴各品系：明亮散射光,T3
 ridleyi-wide,water,1,低,1,台灣 卡呸醬（T3）：水苔盡量乾燥,T3
 ridleyi-wide,humidity,5,低,1,台灣 卡呸醬（T3）：喜空氣濕度,T3
@@ -517,19 +615,25 @@ ridleyi-wide,difficulty,3,低,1,台灣 微體溫室（T3）：中等,T3
 ridleyi-round,light,3,低,1,台灣 微體溫室（T3）：亞猴各品系：明亮散射光,T3
 ridleyi-round,difficulty,3,低,1,台灣 微體溫室（T3）：中等,T3
 ridleyi-dwarf-silver,size,S,低,1,台灣 微體溫室（T3）：侏儒銀葉亞猴,T3
+ridleyi-dwarf-silver,fertile_hair,3,低,1,台灣 微體溫室（T3）：孢子葉末端銀白（寬鬆）,T3
 ridleyi-dwarf-silver,light,3,低,1,台灣 微體溫室（T3）：亞猴各品系：明亮散射光,T3
 ridleyi-dwarf-silver,difficulty,2,低,1,台灣 微體溫室（T3）：中偏易,T3
 ridleyi-monkey-king,light,3,低,1,台灣 微體溫室（T3）：亞猴各品系：明亮散射光,T3
 ridleyi-monkey-king,difficulty,3,低,1,台灣 微體溫室（T3）：中等,T3
 alcicorne-africa,shield_hair,1,低,1,台灣 微體溫室（T3）：營養葉翠綠、光滑帶蠟質,T3
+alcicorne-africa,fertile_width,1,低,1,美國 Halling（T2）：孢子葉比馬達加斯加型窄（寬鬆）,T2
 alcicorne-africa,fertile_hair,1,中,2,美國 Halling（T2）：東非型孢子葉黃綠、蠟質、無毛、較窄／德國 Jungle Leaves（T3）：非洲型孢子葉毛稀疏,T2|T3
 alcicorne-africa,water,1,低,1,台灣 微體溫室（T3）：圓盾各品種：耐旱，可等介質全乾再澆,T3
 alcicorne-africa,min_temp,15,低,1,台灣 微體溫室（T3）：保持 15 度以上,T3
+alcicorne-madagascar,fertile_width,3,低,1,美國 Halling（T2）：孢子葉寬、深綠（寬鬆）,T2
 alcicorne-madagascar,fertile_hair,3,低,2,德國 Jungle Leaves（T3）：馬達加斯加型孢子葉通常覆白毛／台灣 微體溫室（T3）：孢子葉較深色，仔細看才見星狀白毛,T3
 alcicorne-madagascar,water,1,低,1,台灣 微體溫室（T3）：圓盾各品種：耐旱，可等介質全乾再澆,T3
 alcicorne-madagascar,min_temp,15,低,1,台灣 微體溫室（T3）：保持 15 度以上,T3
-alcicorne-madagascar-dwarf,size,S,低,1,台灣 阿金的便秘花園（T3）：侏儒鹿角蕨,T3
+alcicorne-madagascar-dwarf,size,S,低,2,台灣 阿金的便秘花園（T3）：侏儒鹿角蕨／德國 Jungle Leaves（T3）：高約 40 cm、寬約 30 cm（寬鬆）,T3
+alcicorne-madagascar-dwarf,shield_form,appressed,低,1,台灣 晴花鹿苑（T3）：盾狀營養葉包覆水苔，溫和圓潤（寬鬆）,T3
+alcicorne-madagascar-dwarf,shield_height,1,低,1,台灣 晴花鹿苑（T3）：營養葉包覆水苔（寬鬆）,T3
 alcicorne-madagascar-dwarf,fertile_posture,up,低,1,德國 Jungle Leaves（T3）：孢子葉直立、很窄,T3
+alcicorne-madagascar-dwarf,fertile_hair,3,低,1,台灣 晴花鹿苑（T3）：層次豐富的 Q 毛孢子葉（寬鬆）,T3
 alcicorne-madagascar-dwarf,light,3,低,1,台灣 阿金的便秘花園（T3）：明亮散射光與適當通風,T3
 alcicorne-madagascar-dwarf,water,1,低,1,台灣 微體溫室（T3）：圓盾各品種：耐旱，可等介質全乾再澆,T3
 alcicorne-madagascar-dwarf,min_temp,15,低,1,台灣 微體溫室（T3）：保持 15 度以上,T3
@@ -538,54 +642,116 @@ horne-surprise-darwin,shield_vein,yes,低,1,台灣 微體溫室（T3）：成熟
 elephantotis-mammoth,water,5,低,1,台灣 微體溫室（T3）：需水量大，水苔不沾手即可再澆,T3
 elephantotis-mammoth,min_temp,15,低,1,台灣 微體溫室（T3）：保持 15 度以上,T3
 elephantotis-mammoth,difficulty,1,低,1,台灣 微體溫室（T3）：容易,T3
+coronarium-thin,size,L,低,1,台灣 微體溫室（T3）：大型種（寬鬆）,T3
+coronarium-thin,fertile_width,1,低,2,台灣 微體溫室（T3）：細葉（寬鬆）／台灣 阿金的便秘花園（T3）：孢子葉較為細長（寬鬆）,T3
 holttumii-x-elephantotis,pups,yes,低,1,泰國 Siam Exotica（T3）：能從根端長出新芽,T3
 holttumii-x-elephantotis,water,1,低,1,台灣 卡呸醬（T3）：怕水,T3
 holttumii-x-elephantotis,difficulty,4,低,1,台灣 卡呸醬（T3）：難顧，但比亞猴、非猴好顧,T3
+wallichii-x-willinckii,shield_height,3,低,1,台灣 卡呸醬（T3）：高冠（寬鬆）,T3
+wallichii-x-willinckii,fertile_posture,spread,低,1,台灣 阿金的便秘花園（T3）：整體如扇形開展（寬鬆）,T3
+wallichii-x-willinckii,fertile_width,3,低,2,台灣 阿金的便秘花園（T3）：蝴蝶般寬大分岔的孢子葉（寬鬆）／台灣 卡呸醬（T3）：寬葉淺裂（寬鬆）,T3
+coronarium-x-bifurcatum,shield_height,3,低,1,台灣 阿金的便秘花園（T3）：有皇冠高聳雄偉的營養葉（寬鬆）,T3
 wandae-x-veitchii,light,5,低,1,台灣 阿金的便秘花園（T3）：可強曬，適合屋頂,T3
+willinckii-hp100,fertile_width,3,低,1,台灣 卡呸醬（T3）：寬葉深淺裂（寬鬆）,T3
 bifurcatum-little-kitty,size,S,低,1,台灣 卡呸醬（T3）：thin & dwarf，小型品種,T3
+veitchii-akki,shield_height,3,低,3,台灣 晴花鹿苑（T3）：高而強烈的尖冠（寬鬆）／台灣 竹意軒（T3）：成熟時冠高（寬鬆）／台灣 阿金的便秘花園（T3）：承襲澳銀細尖高冠（寬鬆）,T3
+veitchii-akki,fertile_posture,up,低,2,台灣 晴花鹿苑（T3）：孢子葉挺拔向上昂揚（寬鬆）／台灣 竹意軒（T3）：光線充足時也會向上生長（寬鬆）,T3
+veitchii-akki,fertile_hair,3,低,2,台灣 晴花鹿苑（T3）：孢子葉白而細緻（寬鬆）／台灣 阿金的便秘花園（T3）：有白毛（寬鬆）,T3
 veitchii-akki,difficulty,1,高,2,台灣 晴花鹿苑（T3）：易於養護，新手喜愛／台灣 竹意軒（T3）：栽培性佳,T3
+veitchii-ar-1,shield_height,3,低,1,台灣 竹意軒（T3）：細尖的高冠（寬鬆）,T3
+hela,shield_height,5,低,1,台灣 竹意軒（T3）：成熟時冠部極度高聳（寬鬆）,T3
+hela,fertile_posture,pendant,低,1,台灣 竹意軒（T3）：孢子葉下垂（寬鬆）,T3
+white-monkey,shield_height,3,低,1,台灣 竹意軒（T3）：高冠（寬鬆）,T3
+white-monkey,fertile_posture,pendant,低,1,台灣 竹意軒（T3）：下墜的孢子葉（寬鬆）,T3
+white-monkey,fertile_hair,3,低,1,台灣 竹意軒（T3）：白絨毛（寬鬆）,T3
+wild-monkey,shield_height,3,低,1,台灣 竹意軒（T3）：高冠（寬鬆）,T3
+wild-monkey,fertile_posture,pendant,低,1,台灣 竹意軒（T3）：下墜的孢子葉（寬鬆）,T3
+wild-monkey,fertile_hair,3,低,1,台灣 竹意軒（T3）：白絨毛（寬鬆）,T3
+willinckii-wild-cat,fertile_hair,3,低,1,台灣 竹意軒（T3）：孢子葉白（寬鬆）,T3
+full-moon,fertile_hair,1,低,1,台灣 竹意軒（T3）：孢子葉有獨特的蠟質感（寬鬆）,T3
+jynx,size,M,低,1,台灣 竹意軒（T3）：整體體型適中（寬鬆）,T3
+jynx,fertile_width,3,低,1,台灣 竹意軒（T3）：葉片胖寬（寬鬆）,T3
+hillii-rimklong,fertile_hair,5,低,1,台灣 竹意軒（T3）：白毛濃密（寬鬆）,T3
+white-hill,fertile_posture,pendant,低,1,台灣 竹意軒（T3）：孢子葉如瀑布般下墜（寬鬆）,T3
+white-hill,fertile_hair,5,低,1,台灣 竹意軒（T3）：濃密的白色絨毛（寬鬆）,T3
+willinckii-a-plus,size,M,低,1,台灣 竹意軒（T3）：體型中型（寬鬆）,T3
+willinckii-a-plus,fertile_hair,3,低,1,台灣 竹意軒（T3）：白皙（寬鬆）,T3
+doi-tung,fertile_posture,up,低,1,台灣 竹意軒（T3）：光線足夠時葉片往上長（寬鬆）,T3
+white-wing,fertile_hair,3,低,1,台灣 竹意軒（T3）：孢子葉白皙（寬鬆）,T3
+willinckii-mr-tin,fertile_hair,3,低,1,台灣 竹意軒（T3）：孢子葉白皙（寬鬆）,T3
+paul-vespa,fertile_hair,3,低,1,台灣 竹意軒（T3）：葉片白皙（寬鬆）,T3
 paul-vespa,difficulty,1,低,1,台灣 竹意軒（T3）：栽培性很好,T3
+mountain-rabbit,size,L,低,1,台灣 竹意軒（T3）：大型（寬鬆）,T3
+mountain-rabbit,shield_height,3,低,1,台灣 竹意軒（T3）：營養葉高聳（寬鬆）,T3
 mountain-rabbit,pups,no,低,1,台灣 竹意軒（T3）：大型單芽種,T3
 willinckii-little-will,size,S,低,1,台灣 竹意軒（T3）：侏儒尺寸,T3
+willinckii-smurf,shield_height,3,低,1,台灣 阿金的便秘花園（T3）：高冠表現（寬鬆）,T3
 willinckii-smurf,fertile_hair,5,低,1,台灣 阿金的便秘花園（T3）：藍底白厚毛,T3
 willinckii-robin,size,S,低,1,台灣 阿金的便秘花園（T3）：侏儒，成株約手掌大,T3
 willinckii-robin,origin,Dwarf Nook 孢子苗選拔,低,1,台灣 阿金的便秘花園（T3）：Dwarf Nook 孢子苗,T3
 bifurcatum-popcorn,fertile_posture,up,低,1,台灣 阿金的便秘花園（T3）：超挺拔的孢子葉,T3
 bifurcatum-popcorn,origin,Alan's fern 從二叉孢子苗特選,低,1,台灣 阿金的便秘花園（T3）：Alan's fern 孢子苗特選,T3
+flamenco,shield_height,3,低,1,台灣 阿金的便秘花園（T3）：有高冠的結構感（寬鬆）,T3
 flamenco,fertile_posture,pendant,低,1,台灣 晴花鹿苑（T3）：孢子葉層層展開後自然垂墜,T3
 flamenco,pups,no,低,1,台灣 晴花鹿苑（T3）：單芽型，無法萌生側芽,T3
 flamenco,difficulty,1,低,1,台灣 晴花鹿苑（T3）：簡單栽培也能展現美麗姿態,T3
+unicorn,fertile_width,3,低,1,台灣 阿金的便秘花園（T3）：孢子葉短而圓胖（寬鬆）,T3
 unicorn,fertile_hair,5,低,1,台灣 阿金的便秘花園（T3）：絨毛層次多、非常潔白,T3
+bifurcatum-white,fertile_hair,3,低,1,台灣 晴花鹿苑（T3）：白皙的葉片（寬鬆）,T3
 bifurcatum-white,pups,yes,低,1,台灣 晴花鹿苑（T3）：側芽發展迅速,T3
 bifurcatum-white,max_temp,,,0,台灣 晴花鹿苑（T3）：耐高溫接近 38 度（參考）,
 bifurcatum-white,difficulty,1,低,1,台灣 晴花鹿苑（T3）：養護簡單,T3
+bifurcatum-x-willinckii,shield_height,3,低,1,台灣 晴花鹿苑（T3）：優美的冠型（寬鬆）,T3
 bifurcatum-x-willinckii,fertile_posture,up,低,1,台灣 晴花鹿苑（T3）：孢子葉向上昂揚,T3
+bifurcatum-x-willinckii,fertile_hair,3,低,1,台灣 晴花鹿苑（T3）：多岔、白皙質感的孢子葉（寬鬆）,T3
 wandae-dwarf,size,S,低,1,台灣 阿金的便秘花園（T3）：侏儒、捲葉的小女王,T3
-bifurcatum-netherlands,fertile_length,,,0,,
-bifurcatum-netherlands,light,3,低,1,美國 Cistus Nursery（T3）：明亮但避開直射,T3
-bifurcatum-netherlands,water,2,低,1,美國 Cistus Nursery（T3）：澆透後待乾；比其他型更耐頻繁澆水,T3
+bifurcatum-netherlands,size,L,低,3,美國 Cistus Nursery（T3）：孢子葉可達 3 呎（寬鬆）／紐西蘭 The Plant Company（T3）：株高與寬約 60–90 公分（寬鬆）／德國 Foliage Factory（T3）：栽培尺寸約高 100、寬 90 公分（寬鬆）,T3
+bifurcatum-netherlands,shield_form,appressed,低,1,德國 Foliage Factory（T3）：圓形盾葉重疊包覆根部（寬鬆）,T3
+bifurcatum-netherlands,shield_height,1,低,1,德國 Foliage Factory（T3）：圓形盾葉重疊包覆根部（寬鬆）,T3
+bifurcatum-netherlands,fertile_posture,spread,低,1,德國 Foliage Factory（T3）：分岔的孢子葉從基部向外拱出（寬鬆）,T3
+bifurcatum-netherlands,fertile_length,≤91 cm,低,1,美國 Cistus Nursery（T3）：孢子葉可達 3 呎（寬鬆）,T3
+bifurcatum-netherlands,fertile_hair,3,低,1,德國 Foliage Factory（T3）：細毛讓孢子葉呈柔和的灰色（寬鬆）,T3
+bifurcatum-netherlands,pups,yes,低,1,德國 Foliage Factory（T3）：成株會長側芽、擴成一叢（寬鬆）,T3
+bifurcatum-netherlands,light,3,高,3,美國 Cistus Nursery（T3）：明亮但避開直射／德國 Foliage Factory（T3）：明亮的散射光／紐西蘭 The Plant Company（T3）：明亮的散射光,T3
+bifurcatum-netherlands,water,2,中,3,美國 Cistus Nursery（T3）：澆透後待乾；比其他型更耐頻繁澆水／德國 Foliage Factory（T3）：介質乾到五到七成再澆透／紐西蘭 The Plant Company（T3）：介質稍乾就澆透，不要一直濕,T3
+bifurcatum-netherlands,humidity,3,高,2,德國 Foliage Factory（T3）：濕度 50–60%／紐西蘭 The Plant Company（T3）：中等濕度，乾燥時偶爾噴霧,T3
+bifurcatum-netherlands,min_temp,10,低,1,德國 Foliage Factory（T3）：避免長時間低於 10 °C,T3
+veitchii-high-finger,shield_height,3,低,1,德國 Jungle Leaves（T3）：High Finger 的盾葉先端直立（寬鬆）,T3
+veitchii-high-finger,fertile_posture,up,低,1,加拿大 Vegetal Design（T3）：孢子葉直立如矛（寬鬆）,T3
+veitchii-high-finger,fertile_width,1,低,1,加拿大 Vegetal Design（T3）：孢子葉很長、細而直，像手指或矛（寬鬆）,T3
 kitshakood-thin-dwarf,size,S,低,1,台灣 阿金的便秘花園（T3）：thin leaf and dwarf,T3
 willinckii-kaguya,size,S,低,1,台灣 微體溫室（T3）：侏儒黃月的命名個體,T3
 willinckii-blue-queen,size,S,低,1,台灣 微體溫室（T3）：侏儒爪哇,T3
+willinckii-blue-queen,fertile_hair,5,低,1,台灣 微體溫室（T3）：孢子葉呈銀白（寬鬆）,T3
+willinckii-sri-pueak,fertile_hair,3,低,1,台灣 晴花鹿苑（T3）：成株葉色白皙柔亮（寬鬆）,T3
 willinckii-nook-dwarf,size,S,低,1,台灣 微體溫室（T3）：侏儒 Nook 系列,T3
 willinckii-kaohom,size,S,低,1,台灣 微體溫室（T3）：侏儒 Nook 系列,T3
 willinckii-watchara,size,S,低,1,台灣 微體溫室（T3）：侏儒爪哇 Watchara 系列,T3
+wolverine,shield_height,,,0,,
 nemo,light,3,低,1,台灣 阿金的便秘花園（T3）：半日照陽台即可培養出極致型態,T3
 nemo,difficulty,1,低,1,台灣 阿金的便秘花園（T3）：適合陽台栽培，成功率高,T3
+cardinals,shield_height,3,低,1,台灣 阿金的便秘花園（T3）：承襲奧銀狂野的高冠（寬鬆）,T3
 kitshakood-x-ridleyi,shield_vein,yes,低,1,台灣 阿金的便秘花園（T3）：營養葉紋路清晰立體,T3
 kitshakood-x-ridleyi,fertile_posture,up,低,1,台灣 阿金的便秘花園（T3）：孢子葉向上延展、上翹,T3
+snow-white-x-suddan,fertile_width,3,低,1,台灣 阿金的便秘花園（T3）：寬手延展的葉型（寬鬆）,T3
 snow-white-x-suddan,fertile_hair,5,低,1,台灣 阿金的便秘花園（T3）：白毛覆蓋濃密，有白銀般的反光,T3
 snow-white-x-suddan,light,5,低,1,台灣 阿金的便秘花園（T3）：高光環境下白毛更明顯,T3
 bambi,size,S,低,1,台灣 阿金的便秘花園（T3）：侏儒型體態,T3
+bambi,fertile_hair,3,低,1,台灣 阿金的便秘花園（T3）：葉面白毛細緻柔和（寬鬆）,T3
 bambi,difficulty,1,低,1,台灣 阿金的便秘花園（T3）：新手也能輕鬆上手,T3
 stella-aeterni,fertile_posture,spread,低,1,台灣 阿金的便秘花園（T3）：孢子葉放射狀展開,T3
 stella-aeterni,fertile_hair,3,低,1,台灣 阿金的便秘花園（T3）：葉面白毛細密,T3
-aydan,size,,,0,,
+aydan,size,S,低,1,台灣 阿金的便秘花園（T3）：小型爪哇系（寬鬆）,T3
 aydan,fertile_posture,spread,低,1,台灣 阿金的便秘花園（T3）：葉片自然向外舒展,T3
+aydan,fertile_width,1,低,1,台灣 阿金的便秘花園（T3）：孢子葉纖細、分岔細緻（寬鬆）,T3
+aydan,fertile_hair,3,低,1,台灣 阿金的便秘花園（T3）：葉面覆細緻白毛，柔和的銀白質感（寬鬆）,T3
+willinckii-omega,fertile_hair,3,低,1,台灣 阿金的便秘花園（T3）：葉面白毛細緻（寬鬆）,T3
 willinckii-half-moon,light,3,低,1,台灣 阿金的便秘花園（T3）：孢子苗：室內明亮散射光即可穩定生長,T3
 willinckii-half-moon,difficulty,1,低,1,台灣 阿金的便秘花園（T3）：孢子苗：入門款，適合新手,T3
+willinckii-silver-phoenix,fertile_width,3,低,1,台灣 阿金的便秘花園（T3）：孢子葉稍寬厚（寬鬆）,T3
 willinckii-silver-phoenix,fertile_hair,5,低,1,台灣 阿金的便秘花園（T3）：大量細緻的銀白色絨毛,T3
-veitchii-no-shield,size,,,0,,
+veitchii-no-shield,size,S,低,1,台灣 阿金的便秘花園（T3）：外觀呈類侏儒形態（寬鬆）,T3
+veitchii-no-shield,fertile_hair,3,低,1,台灣 阿金的便秘花園（T3）：葉片白皙（寬鬆）,T3
 veitchii-no-shield,light,3,低,1,台灣 阿金的便秘花園（T3）：散光通風環境,T3
 veitchii-no-shield,difficulty,1,低,1,台灣 阿金的便秘花園（T3）：相對好照顧,T3
 bifurcatum-dwarf,size,S,低,1,台灣 阿金的便秘花園（T3）：侏儒,T3
@@ -594,10 +760,14 @@ bifurcatum-dwarf,light,3,低,1,台灣 阿金的便秘花園（T3）：光線需�
 bifurcatum-dwarf,difficulty,1,低,1,台灣 阿金的便秘花園（T3）：相當容易入門,T3
 veitchii-lemoinei-dwarf,size,S,低,2,台灣 阿金的便秘花園（T3）：侏儒／台灣 微體溫室（T3）：侏儒檸檬，體型不到一般檸檬的 ½,T3
 veitchii-lemoinei-dwarf,fertile_posture,spread,低,1,台灣 阿金的便秘花園（T3）：葉片集中向外展開,T3
+veitchii-lemoinei-dwarf,fertile_width,1,低,1,台灣 阿金的便秘花園（T3）：孢子葉分岔更細、更小（寬鬆）,T3
 veitchii-lemoinei-dwarf,fertile_hair,3,低,1,台灣 微體溫室（T3）：孢子葉白毛感明顯,T3
 veitchii-lemoinei-dwarf,light,4,低,2,台灣 阿金的便秘花園（T3）：可適應較高光，光線充足下株型更好／台灣 微體溫室（T3）：中弱至中光,T3
 veitchii-lemoinei-dwarf,water,1,低,1,台灣 微體溫室（T3）：各品系：耐旱喜透氣、澆透不積水,T3
 willinckii-yellow-moon-dwarf,size,S,低,2,台灣 阿金的便秘花園（T3）：侏儒型個體／台灣 微體溫室（T3）：侏儒爪哇,T3
+willinckii-yellow-moon-dwarf,fertile_posture,spread,低,1,台灣 微體溫室（T3）：孢子葉黃暈向外（寬鬆）,T3
+willinckii-yellow-moon-dwarf,fertile_width,1,低,2,台灣 阿金的便秘花園（T3）：孢子葉細長（寬鬆）／台灣 微體溫室（T3）：孢子葉分岔細長（寬鬆）,T3
+willinckii-yellow-moon-dwarf,fertile_hair,3,低,1,台灣 阿金的便秘花園（T3）：白皙細緻的絨毛（寬鬆）,T3
 willinckii-yellow-moon-dwarf,origin,從黃月孢子苗篩選,低,1,台灣 阿金的便秘花園（T3）：黃月孢子苗篩選,T3
 willinckii-yellow-moon-dwarf,light,3,低,1,台灣 微體溫室（T3）：中光（夏季遮陰 50%）,T3
 willinckii-yellow-moon-dwarf,water,1,低,1,台灣 微體溫室（T3）：室內或弱光：介質偏乾再澆,T3
@@ -607,19 +777,48 @@ hillii-wave,light,3,低,1,台灣 阿金的便秘花園（T3）：半日照、光
 hillii-wave,difficulty,1,低,1,台灣 阿金的便秘花園（T3）：非常好種,T3
 kitshakood-round-frond,origin,從亞皇中篩選的圓葉個體,低,1,台灣 阿金的便秘花園（T3）：亞皇篩選,T3
 kitshakood-round-frond,light,3,低,1,台灣 阿金的便秘花園（T3）：半日照即可穩定培養,T3
-uncia,size,,,0,,
+uncia,size,M,低,1,台灣 晴花鹿苑（T3）：中小型（寬鬆）,T3
+uncia,shield_height,3,低,1,台灣 晴花鹿苑（T3）：小巧精緻的冠型（寬鬆）,T3
 uncia,fertile_posture,spread,低,1,台灣 晴花鹿苑（T3）：葉型向外展開,T3
+uncia,fertile_hair,3,低,1,台灣 晴花鹿苑（T3）：孢子葉帶白皙絨毛（寬鬆）,T3
+tide,shield_height,3,低,1,台灣 晴花鹿苑（T3）：小巧精緻的冠型（寬鬆）,T3
 tide,fertile_posture,spread,低,1,台灣 晴花鹿苑（T3）：葉片放射狀姿態,T3
 tide,fertile_hair,3,低,1,台灣 晴花鹿苑（T3）：墨綠基調上覆滿細緻白色絨毛,T3
+willinckii-ccs,shield_height,3,低,1,台灣 晴花鹿苑（T3）：高冠厚葉（寬鬆）,T3
 willinckii-ccs,shield_hair,5,低,1,台灣 晴花鹿苑（T3）：臉與手有濃密白皙絨毛,T3
 willinckii-ccs,fertile_hair,5,低,1,台灣 晴花鹿苑（T3）：臉與手有濃密白皙絨毛,T3
 willinckii-makigumo,fertile_hair,5,低,1,台灣 晴花鹿苑（T3）：覆蓋厚實的星狀白毛,T3
 willinckii-makigumo,spore,tips,低,1,台灣 晴花鹿苑（T3）：孢子集中於葉端,T3
+willinckii-white-heaven,shield_height,3,低,1,台灣 晴花鹿苑（T3）：高聳翠綠的冠型（寬鬆）,T3
 willinckii-white-heaven,fertile_posture,spread,低,1,台灣 晴花鹿苑（T3）：孢子葉如羽翼向兩側展開,T3
+willinckii-white-heaven,fertile_hair,3,低,1,台灣 晴花鹿苑（T3）：白皙的絨毛感（寬鬆）,T3
+willinckii-yami,shield_height,3,低,1,台灣 晴花鹿苑（T3）：高冠層次豐富（寬鬆）,T3
+willinckii-yami,fertile_posture,pendant,低,1,台灣 晴花鹿苑（T3）：孢子葉如秀髮般柔美悠長、飄逸（寬鬆）,T3
+willinckii-yami,fertile_width,1,低,1,台灣 晴花鹿苑（T3）：孢子葉細長（寬鬆）,T3
+willinckii-yami,fertile_hair,3,低,1,台灣 晴花鹿苑（T3）：細緻款的白哇（寬鬆）,T3
 willinckii-yami,difficulty,1,低,1,台灣 晴花鹿苑（T3）：新手友善、易於養護,T3
 sunny-cutie,size,S,低,1,台灣 晴花鹿苑（T3）：迷你爪哇,T3
+sunny-cutie,shield_height,3,低,1,台灣 晴花鹿苑（T3）：縮小版的迷你冠型（寬鬆）,T3
 sunny-cutie,fertile_posture,pendant,低,1,台灣 晴花鹿苑（T3）：孢子葉如流水般下墜,T3
+sunny-cutie,fertile_width,1,低,1,台灣 晴花鹿苑（T3）：孢子葉修長（寬鬆）,T3
 wfsq,fertile_posture,spread,低,1,台灣 晴花鹿苑（T3）：孢子葉向兩側伸展,T3
 wfsq,fertile_hair,3,低,1,台灣 晴花鹿苑（T3）：明顯而細緻的白色星狀絨毛,T3
 wfsq,difficulty,1,低,1,台灣 晴花鹿苑（T3）：養護容易，適合台灣多數環境,T3
-willinckii-anapat-1,size,,,0,,
+willinckii-anapat-1,size,S,低,1,台灣 晴花鹿苑（T3）：母本成熟時體型偏小（寬鬆）,T3
+willinckii-anapat-1,shield_height,3,低,1,台灣 晴花鹿苑（T3）：母本有經典的冠型（寬鬆）,T3
+fsq,origin,Wanna 以 Foongsiqi 播孢的孢子苗,低,1,泰國 I Love Ferns（Wanna）（T3）：FSQ Sporelings (Foongsiqi spore plant),T3
+little-sis,fertile_hair,3,低,1,泰國 I Love Ferns（Wanna）（T3）：葉面有毛而呈淺灰綠（寬鬆）,T3
+sazanami,size,S,低,1,台灣 晴花鹿苑（T3）：dwarf selection,T3
+sazanami,origin,晴花鹿苑（台灣）由 Foong Si Qi 孢子苗選出,低,1,台灣 晴花鹿苑（T3）：Haruhana garden in Taiwan,T3
+durval-nunes,shield_height,1,低,1,美國 platyceriumferns.com（T3）：盾葉抱住附著物（寬鬆）,T3
+durval-nunes,shield_vein,yes,低,1,美國 platyceriumferns.com（T3）：像非猴一樣有鬆餅狀質感,T3
+durval-nunes,pups,yes,低,1,美國 platyceriumferns.com（T3）：可用孢子和側芽繁殖,T3
+willinckii-totoro,size,S,低,3,美國 The Basements（T3）：dwarf form／日本 naturefix（T3）：ウィリンキードワーフ／日本 Frontier Plants（T3）：矮性、ドワーフの性質,T3
+willinckii-totoro,fertile_width,1,低,1,日本 Frontier Plants（T3）：分岔多、葉先纖細（寬鬆）,T3
+willinckii-totoro,origin,從黃月孢子苗選出的侏儒個體,低,1,日本 Frontier Plants（T3）：黃月孢子苗選拔,T3
+willinckii-totoro,light,3,低,1,美國 The Basements（T3）：明亮散射光或輕微遮光的日照,T3
+willinckii-totoro,humidity,5,低,1,美國 The Basements（T3）：濕度 70–90%,T3
+willinckii-totoro,difficulty,,,0,美國 The Basements（T3）：Difficulty Level 3（參考）,
+willinckii-grace,size,S,低,1,日本 vandaka plants（T3）：強度の高い矮性、スーパードワーフ種,T3
+willinckii-grace,fertile_hair,3,低,1,日本 vandaka plants（T3）：株色白（寬鬆）,T3
+willinckii-grace,origin,侏儒 Nook 的選拔,低,1,日本 vandaka plants（T3）：willinckii dwarf Nook 選拔,T3
