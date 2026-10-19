@@ -85,7 +85,7 @@ def summarize(field, rows, meta):
         single = len(orgs) < 2
         if field == "dormancy":
             vals = [r[3] for r in use]
-            top = max(set(vals), key=vals.count)
+            top = max(vals, key=vals.count)  # a tie goes to the first statement (set order would vary between runs)
             if len(set(vals)) > 1 and vals.count(top) * 2 == len(vals):
                 return "", ""
             return top, "低" if single or len(set(vals)) > 1 else "高"
@@ -101,11 +101,32 @@ def summarize(field, rows, meta):
     use, t3_only = basis(use, meta)
     if not use:
         return "", ""
-    val, conf = morph(field, use, meta, "T1" in {meta[r[1]]["tier"] for r in use})
-    return val, ("低" if t3_only and val else conf)
+    # v1.4: relaxed statements (value prefixed "~") count only when the tier group has no strict statement; confidence 低
+    use, relaxed = relaxed_or_strict(use)
+    val, conf = morph(field, use, meta, "T1" in {meta[r[1]]["tier"] for r in use}, relaxed)
+    return val, ("低" if (t3_only or relaxed) and val else conf)
 
 
-def morph(field, use, meta, has_t1):
+RELAXED = "~"  # value prefix of a relaxed morphology statement (v1.4)
+SIZE_CLASSES = ["S", "M", "L", "XL"]
+
+
+def relaxed_or_strict(rows):
+    """Strict rows if there are any, else the relaxed rows with the "~" stripped from their values; and whether relaxed."""
+    strict = [r for r in rows if not r[3].startswith(RELAXED)]
+    if strict:
+        return strict, False
+    return [r[:3] + (r[3][len(RELAXED):],) + tuple(r[4:]) for r in rows], True
+
+
+def morph(field, use, meta, has_t1, relaxed=False):
+    if field == "size" and relaxed:
+        # whole-plant size or "up to" values give D; size words (小型, 大型 …) give a class only when no number is given
+        ds = [num(r[3]) for r in use if r[3] not in SIZE_CLASSES]
+        if ds:
+            return size_class(sum(ds) / len(ds)), "低"
+        ks = [SIZE_CLASSES.index(r[3]) for r in use]
+        return SIZE_CLASSES[min(set(ks), key=lambda k: (-ks.count(k), k))], "低"  # majority; a tie goes to the smaller class
     if field == "size":
         ds = [num(r[3]) for r in use if r[3] != DWARF]
         classes = {size_class(d) for d in ds}
@@ -127,7 +148,7 @@ def morph(field, use, meta, has_t1):
     if t1v:
         # first T1 statement (the monograph) decides; any disagreeing statement lowers confidence
         return t1v[0], "高" if all(x == t1v[0] for x in vals) else "低"
-    top = max(set(vals), key=vals.count)
+    top = max(vals, key=vals.count)  # a tie goes to the first statement (set order would vary between runs)
     return top, "中" if len(set(vals)) == 1 else "低"
 
 
@@ -149,16 +170,16 @@ def feature_rows(plants, by, meta):
             n = len({meta[r[1]]["org"] for r in rows if r[5] == "summary"})
             tiers = "|".join(sorted({meta[r[1]]["tier"] for r in rows if r[5] == "summary" and r[3] != ""}))
             detail.append([sp, f, val, conf, n, disp, tiers])
-        sizes = [r for r in by.get((sp, "size"), []) if r[5] == "summary"]
+        sizes, relaxed = relaxed_or_strict([r for r in by.get((sp, "size"), []) if r[5] == "summary"])
         summary[sp]["size_note"] = "；".join(
-            f"{meta[r[1]]['short']}（{meta[r[1]]['tier']}）" + (f"：{r[4]}" if r[3] == DWARF else f" D = {num(r[3]):g} cm") for r in sizes)
+            f"{meta[r[1]]['short']}（{meta[r[1]]['tier']}）" + (f"：{r[4]}" if relaxed or r[3] == DWARF else f" D = {num(r[3]):g} cm") for r in sizes)
     return summary, detail
 
 
 def src_label(r, meta):
     """「台灣 微體溫室（T3）：中光」— the tier is shown with every source statement (v1.3)."""
     m = meta[r[1]]
-    return f"{m['region']} {m['short']}（{m['tier']}）：{r[4]}".strip() + ("（參考）" if r[5] == "reference" else "")
+    return f"{m['region']} {m['short']}（{m['tier']}）：{r[4]}".strip() + ("（參考）" if r[5] == "reference" else "（寬鬆）" if r[3].startswith(RELAXED) else "")
 
 
 # ---------------------------------------------------------------- csv io
