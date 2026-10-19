@@ -1807,8 +1807,8 @@
       const t = performance.now() / 1000;
       for (const n of nodes) {
         if (n.fx != null) continue;
-        n.vx += Math.sin(t * 0.7 + n.phase) * 0.014;
-        n.vy += Math.cos(t * 0.55 + n.phase * 1.7) * 0.014;
+        n.vx += Math.sin(t * 0.35 + n.phase) * 0.007;
+        n.vy += Math.cos(t * 0.275 + n.phase * 1.7) * 0.007;
       }
     }
 
