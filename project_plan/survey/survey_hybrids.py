@@ -239,6 +239,28 @@ SOURCES = [
     ("paraiso-polar-bear", "Mounted Platycerium Omo 'Polar Bear'", "Paraíso Plant Studio",
      "https://paraisoplant.studio/collections/all/products/mounted-platycerium-omo-polar-bear", "", "vendor", "en", "", "2026-10-19",
      "secondary", "T3", "美國", "Paraíso Plant Studio", "加州舊金山灣區的植物店；照護欄是蕨類通用文字，不採用"),
+    # ---- Banna series (2026-10-20): Thai nursery "Banna" numbered hybrids, Taiwan / Japan vendor and grower pages
+    ("lwhp-banna-a", "P. Banna #A 鹿角蕨", "風和日麗 Live with House Plants",
+     "https://live-with-house-plants.tw/p-banna-a-%E9%B9%BF%E8%A7%92%E8%95%A8/", "", "vendor", "zh-TW", "", "2026-10-20",
+     "secondary", "T3", "台灣", "風和日麗", "花蓮的植物店；「照顧祕訣」各條是該店通用文字，只採用逐種的「特別留意」段"),
+    ("leo-banna-a", "《LEO雨林植物》 P. Banna #A 鹿角蕨", "LEO雨林植物（iOPEN Mall）",
+     "https://mall.iopenmall.tw/029209/index.php?action=product_detail&prod_no=P2920904303577", "", "vendor", "zh-TW", "", "2026-10-20",
+     "secondary", "T3", "台灣", "LEO雨林植物", "「照顧方式」與 #B 頁逐字相同，視為店家通用文字，不採用"),
+    ("leo-banna-b", "P. Banna #B 鹿角蕨", "LEO雨林植物（iOPEN Mall）",
+     "https://mall.iopenmall.tw/029209/index.php?action=product_detail&prod_no=P2920904303568", "", "vendor", "zh-TW", "", "2026-10-20",
+     "secondary", "T3", "台灣", "LEO雨林植物", "與 leo-banna-a 同一店家，不算獨立來源；「照顧方式」是店家通用文字，不採用"),
+    ("calmplants-banna-a", "ビカクシダ バンナA (P. Banna#A)", "calmplants のビカクシダブログ（Ameblo）",
+     "https://ameblo.jp/calmplants/entry-12813647913.html", "", "blog", "ja", "", "2026-10-20",
+     "secondary", "T3", "日本", "calmplants 部落格", "日本的栽培者兼賣家；親本寫「だそう」（聽說）"),
+    ("calmplants-banna-a-2", "その後のビカクシダ バンナA (P. Banna#A) ①", "calmplants のビカクシダブログ（Ameblo）",
+     "https://ameblo.jp/calmplants/entry-12822950216.html", "", "blog", "ja", "", "2026-10-20",
+     "secondary", "T3", "日本", "calmplants 部落格", "與 calmplants-banna-a 同一作者"),
+    ("greensnap-banna-b", "P. Banna #B 成長記録 2024.12.18", "GreenSnap（kame_plants）",
+     "https://greensnap.jp/greenBlog/13440627", "", "blog", "ja", "2021-03-28", "2026-10-20",
+     "secondary", "T3", "日本", "GreenSnap（kame_plants）", "玩家的栽培紀錄（2021–2024）；和 #A 的比較是看親株照片的推測，只寫進 note"),
+    ("orchids-shop-banna-a", "Platycerium Banna # A P. andinum", "Orchids-shop（Orchideeën Shop）",
+     "https://orchids-shop.com/products/platycerium-banna-a-p-andinum", "", "vendor", "en", "", "2026-10-20",
+     "secondary", "T3", "荷蘭", "Orchids-shop", "把 Banna #A 寫成安地斯鹿角蕨的選拔，與其他來源都不同，疑似誤植，不採用"),
 ]
 
 # Wayback snapshots taken after the sources were cited (guideline §6 工具); id -> archive_url
@@ -2574,6 +2596,74 @@ v14("wallichii-x-willinckii",
     star=f"{B8S}（阿金、卡呸醬）")
 v14("mentelosii", star=f"{B8S}（Hoshizaki 1975、Halling：沒有缺欄可補的新說法）")
 v14("wandae-dwarf", star=f"{B8S}（阿金只寫「小而捲」）")
+# ---------------------------------------------------------------- Banna series (2026-10-20): 泰國 Banna 園子的編號交種
+# 只收 #A、#B：兩者都有直接描述的來源與親本說法。#G（只有一家美國賣家寫 veitchii × bifurcatum）、#J（只知道收錄在《ビカクシダ2》）
+# 資料不足，記在 species_list.md。We Love Tropical Plants 的 #A 頁照護段是通用文字（"Like most staghorn ferns"），且該店沒有地區資料，不引用。
+BNS = ("搜尋：Platycerium Banna hybrid|搜尋：鹿角蕨 Banna 品種|搜尋：ビカクシダ バンナ 交配 親|搜尋：\"Banna #B\"～\"#E\" platycerium"
+       "|風和日麗、LEO雨林植物、calmplants、GreenSnap、We Love Tropical Plants、Orchids-shop、Seed Studio 商品頁|ビカク図鑑、egcworks 品種一覽（都沒有收錄）")
+BLOCKS["banna-a"] = dict(
+    cites=[
+        c("lwhp-banna-a", "pups", "yes", "多芽型", "", "屬多芽型鹿角蕨"),
+        c("lwhp-banna-a", "fertile_hair", "~3", "表面有薄薄的一層白毛", "有白毛 → 寬鬆 3", "表面有薄薄的一層白毛"),
+        c("lwhp-banna-a", "size", "~S", "成株比二叉明顯小", "偏小、沒有說侏儒 → 寬鬆 S", "成株相較二叉也明顯較小"),
+        c("lwhp-banna-a", "difficulty", 1, "適應力極強，適合新手入門", "新手、入門 → 1", "P. Banna #A 適應力極強，好照顧，適合新手入門"),
+        c("lwhp-banna-a", "humidity", 5, "營養葉薄，需要高濕度", "high humidity → 5", "營養葉薄，需要高濕度，但太濕狀況下，容易葉傷。"),
+        c("lwhp-banna-a", "light", 3, "不適合太強的日照，適合半日照遮陰處", "半日照 → 3", "孢子葉薄，不適合太強的日照，適合半日照遮陰處。"),
+        c("lwhp-banna-a", "parents", "bifurcatum|willinckii", "日本普鹿交種 × 爪哇", "二叉這一方是園藝品系 'Japanese hybrid'",
+          "P. Banna #A 鹿角蕨（P. Bifurcatum Japanese hybrid x P. Willinckii 日本普鹿交種爪哇）"),
+        c("leo-banna-a", "parents", "bifurcatum|willinckii", "爪哇 × 二叉 'Japanese hybrid'", "與風和日麗的寫法正反相反", "P. willinckii x bif. cv. Japanese hybrid"),
+        c("leo-banna-a", "origin", "泰國 Banna 園子", "泰國 Banna 的園子", "交種沒有 T1、T2，採 T3", "泰國Banna的園子代標性作品之一，葉白分岔極美。"),
+        c("leo-banna-a", "fertile_hair", "~3", "葉白", "有白毛 → 寬鬆 3", "葉白分岔極美"),
+        c("leo-banna-a", "light", 3, "陽光不直曬，散光", "店家通用照護文字，與 #B 頁逐字相同 → 不採用", "陽光不直曬，散光及通風良好的環境", "", "excluded"),
+        c("calmplants-banna-a", "parents", "bifurcatum|willinckii", "爪哇與二叉的交配種（聽說）", "原文為傳聞語氣", "バンナ＃Aは、ウィリンキーとビフルカツムの交配種だそう。"),
+        c("calmplants-banna-a", "size", "~S", "比較緊湊（聽說）", "compact → 寬鬆 S", "バンナ＃Aは環境にもよりますが、比較的コンパクトに育つらしいです。"),
+        c("calmplants-banna-a", "fertile_width", "~1", "孢子葉比 #B 細", "細 → 寬鬆 1", "＃Bよりも＃Aの方が胞子葉が細くて多分岐で、色も白いので人気でがあるそう。"),
+        c("calmplants-banna-a", "fertile_hair", "~3", "星狀毛細緻", "有白毛 → 寬鬆 3", "バンナ＃Aの星状毛は細かくて上品に見えます。"),
+        c("orchids-shop-banna-a", "parents", "andinum", "安地斯鹿角蕨的選拔", "與其他來源都不同，疑似誤植 → 不採用",
+          "De Platycerium Banna #A is a special variation of Platycerium andinum", "", "excluded"),
+        c("orchids-shop-banna-a", "fertile_length", "~100 cm", "孢子葉可超過 1 m、下垂", "描述的是安地斯鹿角蕨，疑似誤植 → 不採用",
+          "De Banna #A is known for its elongated, gracefully drooping fertile leaves that can reach over a meter.", "", "excluded"),
+    ],
+    extra={"parents"},
+    desc=[
+        ("泰國 Banna 園子的代表作之一，葉色偏白、分岔多。", "leo-banna-a", "泰國Banna的園子代標性作品之一，葉白分岔極美。", ""),
+        ("多芽型，孢子葉比二叉明顯短、分岔多，表面有薄薄一層白毛；成株比二叉明顯小，生長快。", "lwhp-banna-a",
+         "屬多芽型鹿角蕨，表面有薄薄的一層白毛，手相較二叉明顯較短且分岔多，成株相較二叉也明顯較小，同樣生長快速", ""),
+        ("星狀毛細緻，孢子葉壽命長，植株看起來茂密。", "calmplants-banna-a",
+         "バンナ＃Aの星状毛は細かくて上品に見えます。... 胞子葉が長持ちするので、葉が沢山茂って見た目がとっても華やか。", ""),
+    ],
+    note=[
+        ("親本一般寫作二叉的園藝品系 'Japanese hybrid' × 爪哇，各來源的正反交方向不一致。", "lwhp-banna-a",
+         "P. Bifurcatum Japanese hybrid x P. Willinckii 日本普鹿交種爪哇", ""),
+        ("同系列還有 #B、#G、#J；日本玩家說 #A 以外的編號較少流通，#A 因孢子葉較細、分岔多、顏色白而比 #B 受歡迎。", "calmplants-banna-a",
+         "そう、バンナ＃Bもあります。なんならバンナ＃Jもあります。ハチ的には＃A以外はあまり出回っていない印象でしたが、最近は＃Gも見かけるようになりました。", ""),
+        ("#J 收錄在日本的《ビカクシダ2》一書。", "calmplants-banna-a-2", "今話題の「ビカクシダ2」には、バンナ＃Jが掲載されています。", ""),
+        ("荷蘭 Orchids-shop 把它寫成安地斯鹿角蕨的選拔，與其他來源都不同，疑似誤植。", "orchids-shop-banna-a",
+         "De Platycerium Banna #A is a special variation of Platycerium andinum", ""),
+    ],
+    searched=searched(BNS, f"{BNS}（LEO雨林植物的照顧方式是店家通用文字）"),
+    version="v1.4", date="2026-10-20",
+)
+BLOCKS["banna-b"] = dict(
+    cites=[
+        c("leo-banna-b", "origin", "泰國 Banna 園子", "泰國 Banna 園子的交種", "交種沒有 T1、T2，採 T3", "泰國Banna園子的交種，白皙細手"),
+        c("leo-banna-b", "fertile_width", "~1", "細手", "細 → 寬鬆 1", "泰國Banna園子的交種，白皙細手"),
+        c("leo-banna-b", "fertile_hair", "~3", "白皙", "有白毛 → 寬鬆 3", "泰國Banna園子的交種，白皙細手"),
+        c("leo-banna-b", "light", 3, "陽光不直曬，散光", "店家通用照護文字，與 #A 頁逐字相同 → 不採用", "陽光不直曬，散光及通風良好的環境", "", "excluded"),
+        c("greensnap-banna-b", "parents", "bifurcatum|willinckii", "二叉 'japanese hybrid' × 爪哇", "", "P. Banna #B ( P. bifurcatum 'japanese hybrid'x P. willinckii )"),
+        c("greensnap-banna-b", "fertile_posture", "~pendant", "孢子葉應該會下垂", "栽培者自己植株的觀察；下垂 → 寬鬆 pendant",
+          "下2本の胞子葉のように垂れるはずが、ライトが近すぎたせいか上の3本は短くなってしまいました"),
+    ],
+    extra={"parents"},
+    desc=[("泰國 Banna 園子的交種，孢子葉細、偏白。", "leo-banna-b", "泰國Banna園子的交種，白皙細手", "")],
+    note=[
+        ("日本玩家比對親株照片，推測 #B 比 #A 整株大、孢子葉較粗、分岔較少，但沒有確定。", "greensnap-banna-b",
+         "#Aと親株の写真を比較すると、#Bの方が全体的に大きい・胞子葉太め・分岐少なめ？？", ""),
+        ("同一位玩家說只找得到 #A 與 #B 的親株照片。", "greensnap-banna-b", "親株の写真探しましたがAとBしか見つけられませんでした", ""),
+    ],
+    searched=searched(BNS, f"{BNS}（LEO雨林植物的照顧方式是店家通用文字；GreenSnap 只有栽培紀錄）"),
+    version="v1.4", date="2026-10-20",
+)
 # ---------------------------------------------------------------- build
 CARE ={"light", "water", "humidity", "min_temp", "max_temp", "difficulty", "dormancy"}
 C = []  # (plant, source, field, value, label, use, claim, quote, page)

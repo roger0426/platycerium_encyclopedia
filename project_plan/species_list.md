@@ -212,6 +212,23 @@
 
 **育種者線索：** PlatyWiki 有 Durval Nunes Viveiros、Mr. Celso、Pedro Russo、Roy Lynn Vail 四個人物頁，可以用來找巴西 veitchii 系品種的原始資料。
 
+## 七、Banna 系（2026-10-20）
+
+「Banna」是泰國一家鹿角蕨園子的名稱，系列品種以字母編號（#A、#B…），與雲南西雙版納（版納）無關。清邁有一個名為「Ferns Banna Platycerium」的 Instagram／YouTube 帳號，可能就是這家園子，但沒有找到能證實的資料。日本玩家說只找得到 #A、#B 的親株照片，其他編號多半很少流通。
+
+**Survey 結果（`survey_hybrids.py` 的「Banna series」區塊）：**
+
+查找範圍：中、英、日文品名搜尋（「鹿角蕨 Banna」「Platycerium Banna hybrid」「ビカクシダ バンナ」，以及 #B～#E 各編號）、台灣與日本的商品頁與部落格、ビカク図鑑與 egcworks 品種一覽（都沒有收錄）。
+
+| 狀態 | 品種 | 結果 | 來源 |
+| --- | --- | --- | --- |
+| ✅ | P. 'Banna #A' | 建檔 `banna-a`。親本二叉 'Japanese hybrid' × 爪哇，各來源的正反交方向不一致。荷蘭 Orchids-shop 寫成安地斯的選拔，疑似誤植，未採用 | 風和日麗、LEO雨林植物、calmplants 部落格 |
+| ✅ | P. 'Banna #B' | 建檔 `banna-b`，親本與 #A 相同 | LEO雨林植物、GreenSnap（kame_plants） |
+| ⬜ | P. 'Banna #G' | 暫不收錄：只有美國 Seed Studio 一家寫親本為 veitchii × bifurcatum、有銀白色與直立姿態 | Seed Studio |
+| ⬜ | P. 'Banna #J' | 暫不收錄：只知道收錄在日本的《ビカクシダ2》，以及 vandaka plants 的介紹短片，沒有找到文字描述 | calmplants 部落格、vandaka plants（YouTube） |
+
+**待查：** 園子本身的資料（園主、所在地、是否就是清邁的 Ferns Banna Platycerium）；《ビカクシダ2》書中 #J 的說明；Banna 也販售爪哇的孢子苗精選株（松竹園「ウィリンキー スポアリング バンナ セレクト」），尚未處理。
+
 ## 參考來源
 
 - Halling — Hybrid Cross Index：https://halling.com/Platyceriums/hybrid_index.htm

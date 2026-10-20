@@ -822,3 +822,17 @@ willinckii-totoro,difficulty,,,0,美國 The Basements（T3）：Difficulty Level
 willinckii-grace,size,S,低,1,日本 vandaka plants（T3）：強度の高い矮性、スーパードワーフ種,T3
 willinckii-grace,fertile_hair,3,低,1,日本 vandaka plants（T3）：株色白（寬鬆）,T3
 willinckii-grace,origin,侏儒 Nook 的選拔,低,1,日本 vandaka plants（T3）：willinckii dwarf Nook 選拔,T3
+banna-a,size,S,低,2,台灣 風和日麗（T3）：成株比二叉明顯小（寬鬆）／日本 calmplants 部落格（T3）：比較緊湊（聽說）（寬鬆）,T3
+banna-a,fertile_length,,,0,,
+banna-a,fertile_width,1,低,1,日本 calmplants 部落格（T3）：孢子葉比 #B 細（寬鬆）,T3
+banna-a,fertile_hair,3,低,3,台灣 風和日麗（T3）：表面有薄薄的一層白毛（寬鬆）／台灣 LEO雨林植物（T3）：葉白（寬鬆）／日本 calmplants 部落格（T3）：星狀毛細緻（寬鬆）,T3
+banna-a,pups,yes,低,1,台灣 風和日麗（T3）：多芽型,T3
+banna-a,origin,泰國 Banna 園子,低,1,台灣 LEO雨林植物（T3）：泰國 Banna 的園子,T3
+banna-a,light,3,低,1,台灣 風和日麗（T3）：不適合太強的日照，適合半日照遮陰處,T3
+banna-a,humidity,5,低,1,台灣 風和日麗（T3）：營養葉薄，需要高濕度,T3
+banna-a,difficulty,1,低,1,台灣 風和日麗（T3）：適應力極強，適合新手入門,T3
+banna-b,fertile_posture,pendant,低,1,日本 GreenSnap（kame_plants）（T3）：孢子葉應該會下垂（寬鬆）,T3
+banna-b,fertile_width,1,低,1,台灣 LEO雨林植物（T3）：細手（寬鬆）,T3
+banna-b,fertile_hair,3,低,1,台灣 LEO雨林植物（T3）：白皙（寬鬆）,T3
+banna-b,origin,泰國 Banna 園子,低,1,台灣 LEO雨林植物（T3）：泰國 Banna 園子的交種,T3
+banna-b,light,,,0,,
