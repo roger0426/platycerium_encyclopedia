@@ -1,0 +1,18 @@
+﻿plant_id,field,value,reason,date
+veitchii-auburn-river,size,M,手動調整尺寸（commit ebcd1d6），未記錄理由,2026-10-19
+ridleyi-monkey-king,size,M,手動調整尺寸（commit ebcd1d6），未記錄理由,2026-10-19
+ginka,size,M,手動調整尺寸（commit ebcd1d6），未記錄理由,2026-10-19
+white-gizmo,size,M,手動調整尺寸（commit ebcd1d6），未記錄理由,2026-10-19
+veitchii-auburn-river,size_note,,手動清空，配合刪除「整株高度可超過 150 公分」（commit ebcd1d6）,2026-10-19
+veitchii-auburn-river,desc,在澳洲奧本河國家公園發現，營養葉尖冠明顯、如珊瑚向外展開，孢子葉末端分岔通常比一般銀鹿多。營養葉有極細長的高冠。,手動刪除「整株高度可超過 150 公分」一句（commit ebcd1d6）,2026-10-19
+willinckii-celso-tatsuta,size,M,手動填寫尺寸（cfcc1d7 之前，沒有對應引用），未記錄理由,2026-10-19
+veitchii-akki,size,M,手動填寫尺寸（cfcc1d7 之前，沒有對應引用），未記錄理由,2026-10-19
+ridleyi-pakarang,size,M,手動填寫尺寸（cfcc1d7 之前，沒有對應引用），未記錄理由,2026-10-19
+bifurcatum-white,size,L,手動填寫尺寸（cfcc1d7 之前，沒有對應引用），未記錄理由,2026-10-19
+alcicorne-africa,size,M,手動填寫尺寸（cfcc1d7 之前，沒有對應引用），未記錄理由,2026-10-19
+alcicorne-madagascar,size,M,手動填寫尺寸（cfcc1d7 之前，沒有對應引用），未記錄理由,2026-10-19
+pegasus,size,L,手動填寫尺寸（cfcc1d7 之前，沒有對應引用），未記錄理由,2026-10-19
+paul-vespa,size,L,手動填寫尺寸（cfcc1d7 之前，沒有對應引用），未記錄理由,2026-10-19
+pewchan,size,M,手動填寫尺寸（cfcc1d7 之前，沒有對應引用），未記錄理由,2026-10-19
+salmon,size,M,手動填寫尺寸（cfcc1d7 之前，沒有對應引用），未記錄理由,2026-10-19
+willinckii-sri-pueak,size,S,手動填寫尺寸（cfcc1d7 之前，沒有對應引用），未記錄理由,2026-10-19

@@ -12,12 +12,12 @@ Each round adds one block to BLOCKS (and its new sources to SOURCES). For every 
                                        (name, parents, base, breeder, aka, region, confidence … are left as they are)
 and adds or updates its sources in data/sources.csv. Rows of every other plant are left untouched, and rows are
 replaced in place, so the order of running survey_species.py and this script does not matter.
-usage: python3 project_plan/survey/survey_hybrids.py .
+usage: python3 project_plan/survey/survey_hybrids.py . [--adopt | --force]  (manual edits: see survey_common.flush)
 """
 import os, sys
 from collections import defaultdict
 
-from survey_common import FIELDS, VERSION, CH, SH, FH, LH, rw, write, replace_rows, source_meta, feature_rows, plant_text
+from survey_common import flush, FIELDS, VERSION, CH, SH, FH, LH, rw, write, replace_rows, source_meta, feature_rows, plant_text
 
 ROOT = sys.argv[1]
 HB = "https://halling.com/Platyceriums/"
@@ -2762,3 +2762,4 @@ write(os.path.join(ROOT, "data/plants.csv"), ph, [[r.get(k, "") for k in ph] for
 for pid in PLANTS:
     print(pid, {f: v for f, v in summary[pid].items() if v})
 print("citations", len(C), {u: sum(1 for x in C if x[5] == u) for u in ("summary", "reference", "excluded")}, "search_log", len(log))
+flush(sys.argv[2:])

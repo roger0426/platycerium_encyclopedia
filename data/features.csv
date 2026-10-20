@@ -414,8 +414,10 @@ pegasus,fertile_posture,spread|pendant,低,2,台灣 微體溫室（T3）：成�
 pegasus,light,4,低,1,台灣 微體溫室（T3）：中強光（夏季遮陰 30%）／台灣 微體溫室（T3）：半日照至全日照,T3
 pegasus,water,1,低,1,台灣 微體溫室（T3）：較耐旱，水苔接近全乾再澆透,T3
 pegasus,difficulty,2,低,1,台灣 微體溫室（T3）：中階／台灣 微體溫室（T3）：相當推薦新手,T3
+pegasus,size,L,人工調整,0,人工調整（調查摘要 無）：手動填寫尺寸（cfcc1d7 之前，沒有對應引用），未記錄理由,
 pewchan,light,5,低,1,台灣 微體溫室（T3）：中強光（夏季遮陰 30%）,T3
 pewchan,difficulty,3,低,1,台灣 微體溫室（T3）：中階,T3
+pewchan,size,M,人工調整,0,人工調整（調查摘要 無）：手動填寫尺寸（cfcc1d7 之前，沒有對應引用），未記錄理由,
 white-hawk,light,5,低,1,台灣 微體溫室（T3）：中強光（夏季遮陰 30%）,T3
 white-hawk,difficulty,3,低,1,台灣 微體溫室（T3）：中階,T3
 white-shine,light,5,低,1,台灣 微體溫室（T3）：中強光（夏季遮陰 30%）,T3
@@ -517,16 +519,19 @@ gabriel,difficulty,4,低,1,台灣 微體溫室（T3）：中偏難,T3
 willinckii-celso-tatsuta,fertile_hair,3,低,1,台灣 阿金的便秘花園（T3）：亮眼的白毛（寬鬆）,T3
 willinckii-celso-tatsuta,light,5,低,1,台灣 微體溫室（T3）：中強光（夏季遮陰 30%）,T3
 willinckii-celso-tatsuta,difficulty,5,低,1,台灣 微體溫室（T3）：進階,T3
+willinckii-celso-tatsuta,size,M,人工調整,0,人工調整（調查摘要 無）：手動填寫尺寸（cfcc1d7 之前，沒有對應引用），未記錄理由,
 ginka,fertile_posture,spread,低,1,台灣 晴花鹿苑（T3）：孢子葉向兩側展開,T3
 ginka,fertile_hair,5,低,1,台灣 晴花鹿苑（T3）：顯眼白皙的星狀毛,T3
 ginka,origin,泰國 Wanna 園區，由 FSQ 播孢苗特選,低,1,台灣 晴花鹿苑（T3）：泰國 Wanna,T3
 ginka,light,5,低,1,台灣 微體溫室（T3）：中強光（夏季遮陰 30%）,T3
 ginka,max_temp,,,0,台灣 晴花鹿苑（T3）：耐溫將近可達 35 度（參考）,
 ginka,difficulty,3,低,2,台灣 微體溫室（T3）：進階／台灣 晴花鹿苑（T3）：整體養護簡易,T3
+ginka,size,M,人工調整,0,人工調整（調查摘要 無）：手動調整尺寸（commit ebcd1d6），未記錄理由,
 white-gizmo,fertile_posture,spread,低,1,台灣 晴花鹿苑（T3）：孢子葉如緞帶向兩側對稱展開,T3
 white-gizmo,fertile_width,3,低,1,台灣 晴花鹿苑（T3）：喜歡寬葉者必備（寬鬆）,T3
 white-gizmo,fertile_hair,3,低,1,台灣 晴花鹿苑（T3）：色澤白皙（寬鬆）,T3
 white-gizmo,origin,由 FSQ 孢子苗特選,低,1,台灣 晴花鹿苑（T3）：FSQ 孢子苗,T3
+white-gizmo,size,M,人工調整,0,人工調整（調查摘要 無）：手動調整尺寸（commit ebcd1d6），未記錄理由,
 kiyohime,shield_height,3,低,1,台灣 晴花鹿苑（T3）：成株有如皇冠般的冠型（寬鬆）,T3
 kiyohime,fertile_posture,up,低,1,台灣 晴花鹿苑（T3）：孢子葉筆直挺立,T3
 kiyohime,difficulty,1,低,1,台灣 晴花鹿苑（T3）：種植門檻低，適合入門者,T3
@@ -562,7 +567,7 @@ hillii-raijin,fertile_hair,3,低,1,台灣 晴花鹿苑（T3）：帶絨毛感（
 rydeen,shield_height,3,低,1,德國 Jungle Leaves（T3）：盾葉先端直立（寬鬆）,T3
 rydeen,fertile_posture,pendant,低,1,德國 Jungle Leaves（T3）：孢子葉下垂、近乎彎折，分岔細,T3
 rydeen,fertile_width,1,低,1,德國 Jungle Leaves（T3）：孢子葉分岔細（寬鬆）,T3
-veitchii-auburn-river,size,XL,低,1,台灣 微體溫室（T3）：整株高度超過 150 公分（寬鬆）,T3
+veitchii-auburn-river,size,M,人工調整,1,人工調整（調查摘要 XL）：手動調整尺寸（commit ebcd1d6），未記錄理由／台灣 微體溫室（T3）：整株高度超過 150 公分（寬鬆）,
 veitchii-auburn-river,shield_height,3,低,2,台灣 微體溫室（T3）：營養葉尖冠明顯，如珊瑚向外展開（寬鬆）／台灣 阿金的便秘花園（T3）：極細長的高冠（寬鬆）,T3
 veitchii-auburn-river,shield_hair,5,低,1,台灣 卡呸醬（T3）：臉手全銀（寬鬆）,T3
 veitchii-auburn-river,fertile_hair,5,低,1,台灣 卡呸醬（T3）：臉手全銀（寬鬆）,T3
@@ -620,15 +625,18 @@ ridleyi-dwarf-silver,light,3,低,1,台灣 微體溫室（T3）：亞猴各品系
 ridleyi-dwarf-silver,difficulty,2,低,1,台灣 微體溫室（T3）：中偏易,T3
 ridleyi-monkey-king,light,3,低,1,台灣 微體溫室（T3）：亞猴各品系：明亮散射光,T3
 ridleyi-monkey-king,difficulty,3,低,1,台灣 微體溫室（T3）：中等,T3
+ridleyi-monkey-king,size,M,人工調整,0,人工調整（調查摘要 無）：手動調整尺寸（commit ebcd1d6），未記錄理由,
 alcicorne-africa,shield_hair,1,低,1,台灣 微體溫室（T3）：營養葉翠綠、光滑帶蠟質,T3
 alcicorne-africa,fertile_width,1,低,1,美國 Halling（T2）：孢子葉比馬達加斯加型窄（寬鬆）,T2
 alcicorne-africa,fertile_hair,1,中,2,美國 Halling（T2）：東非型孢子葉黃綠、蠟質、無毛、較窄／德國 Jungle Leaves（T3）：非洲型孢子葉毛稀疏,T2|T3
 alcicorne-africa,water,1,低,1,台灣 微體溫室（T3）：圓盾各品種：耐旱，可等介質全乾再澆,T3
 alcicorne-africa,min_temp,15,低,1,台灣 微體溫室（T3）：保持 15 度以上,T3
+alcicorne-africa,size,M,人工調整,0,人工調整（調查摘要 無）：手動填寫尺寸（cfcc1d7 之前，沒有對應引用），未記錄理由,
 alcicorne-madagascar,fertile_width,3,低,1,美國 Halling（T2）：孢子葉寬、深綠（寬鬆）,T2
 alcicorne-madagascar,fertile_hair,3,低,2,德國 Jungle Leaves（T3）：馬達加斯加型孢子葉通常覆白毛／台灣 微體溫室（T3）：孢子葉較深色，仔細看才見星狀白毛,T3
 alcicorne-madagascar,water,1,低,1,台灣 微體溫室（T3）：圓盾各品種：耐旱，可等介質全乾再澆,T3
 alcicorne-madagascar,min_temp,15,低,1,台灣 微體溫室（T3）：保持 15 度以上,T3
+alcicorne-madagascar,size,M,人工調整,0,人工調整（調查摘要 無）：手動填寫尺寸（cfcc1d7 之前，沒有對應引用），未記錄理由,
 alcicorne-madagascar-dwarf,size,S,低,2,台灣 阿金的便秘花園（T3）：侏儒鹿角蕨／德國 Jungle Leaves（T3）：高約 40 cm、寬約 30 cm（寬鬆）,T3
 alcicorne-madagascar-dwarf,shield_form,appressed,低,1,台灣 晴花鹿苑（T3）：盾狀營養葉包覆水苔，溫和圓潤（寬鬆）,T3
 alcicorne-madagascar-dwarf,shield_height,1,低,1,台灣 晴花鹿苑（T3）：營養葉包覆水苔（寬鬆）,T3
@@ -658,6 +666,7 @@ veitchii-akki,shield_height,3,低,3,台灣 晴花鹿苑（T3）：高而強烈�
 veitchii-akki,fertile_posture,up,低,2,台灣 晴花鹿苑（T3）：孢子葉挺拔向上昂揚（寬鬆）／台灣 竹意軒（T3）：光線充足時也會向上生長（寬鬆）,T3
 veitchii-akki,fertile_hair,3,低,2,台灣 晴花鹿苑（T3）：孢子葉白而細緻（寬鬆）／台灣 阿金的便秘花園（T3）：有白毛（寬鬆）,T3
 veitchii-akki,difficulty,1,高,2,台灣 晴花鹿苑（T3）：易於養護，新手喜愛／台灣 竹意軒（T3）：栽培性佳,T3
+veitchii-akki,size,M,人工調整,0,人工調整（調查摘要 無）：手動填寫尺寸（cfcc1d7 之前，沒有對應引用），未記錄理由,
 veitchii-ar-1,shield_height,3,低,1,台灣 竹意軒（T3）：細尖的高冠（寬鬆）,T3
 hela,shield_height,5,低,1,台灣 竹意軒（T3）：成熟時冠部極度高聳（寬鬆）,T3
 hela,fertile_posture,pendant,低,1,台灣 竹意軒（T3）：孢子葉下垂（寬鬆）,T3
@@ -681,6 +690,7 @@ white-wing,fertile_hair,3,低,1,台灣 竹意軒（T3）：孢子葉白皙（寬
 willinckii-mr-tin,fertile_hair,3,低,1,台灣 竹意軒（T3）：孢子葉白皙（寬鬆）,T3
 paul-vespa,fertile_hair,3,低,1,台灣 竹意軒（T3）：葉片白皙（寬鬆）,T3
 paul-vespa,difficulty,1,低,1,台灣 竹意軒（T3）：栽培性很好,T3
+paul-vespa,size,L,人工調整,0,人工調整（調查摘要 無）：手動填寫尺寸（cfcc1d7 之前，沒有對應引用），未記錄理由,
 mountain-rabbit,size,L,低,1,台灣 竹意軒（T3）：大型（寬鬆）,T3
 mountain-rabbit,shield_height,3,低,1,台灣 竹意軒（T3）：營養葉高聳（寬鬆）,T3
 mountain-rabbit,pups,no,低,1,台灣 竹意軒（T3）：大型單芽種,T3
@@ -701,6 +711,7 @@ bifurcatum-white,fertile_hair,3,低,1,台灣 晴花鹿苑（T3）：白皙的葉
 bifurcatum-white,pups,yes,低,1,台灣 晴花鹿苑（T3）：側芽發展迅速,T3
 bifurcatum-white,max_temp,,,0,台灣 晴花鹿苑（T3）：耐高溫接近 38 度（參考）,
 bifurcatum-white,difficulty,1,低,1,台灣 晴花鹿苑（T3）：養護簡單,T3
+bifurcatum-white,size,L,人工調整,0,人工調整（調查摘要 無）：手動填寫尺寸（cfcc1d7 之前，沒有對應引用），未記錄理由,
 bifurcatum-x-willinckii,shield_height,3,低,1,台灣 晴花鹿苑（T3）：優美的冠型（寬鬆）,T3
 bifurcatum-x-willinckii,fertile_posture,up,低,1,台灣 晴花鹿苑（T3）：孢子葉向上昂揚,T3
 bifurcatum-x-willinckii,fertile_hair,3,低,1,台灣 晴花鹿苑（T3）：多岔、白皙質感的孢子葉（寬鬆）,T3
@@ -724,6 +735,7 @@ willinckii-kaguya,size,S,低,1,台灣 微體溫室（T3）：侏儒黃月的命�
 willinckii-blue-queen,size,S,低,1,台灣 微體溫室（T3）：侏儒爪哇,T3
 willinckii-blue-queen,fertile_hair,5,低,1,台灣 微體溫室（T3）：孢子葉呈銀白（寬鬆）,T3
 willinckii-sri-pueak,fertile_hair,3,低,1,台灣 晴花鹿苑（T3）：成株葉色白皙柔亮（寬鬆）,T3
+willinckii-sri-pueak,size,S,人工調整,0,人工調整（調查摘要 無）：手動填寫尺寸（cfcc1d7 之前，沒有對應引用），未記錄理由,
 willinckii-nook-dwarf,size,S,低,1,台灣 微體溫室（T3）：侏儒 Nook 系列,T3
 willinckii-kaohom,size,S,低,1,台灣 微體溫室（T3）：侏儒 Nook 系列,T3
 willinckii-watchara,size,S,低,1,台灣 微體溫室（T3）：侏儒爪哇 Watchara 系列,T3
@@ -836,3 +848,5 @@ banna-b,fertile_width,1,低,1,台灣 LEO雨林植物（T3）：細手（寬鬆�
 banna-b,fertile_hair,3,低,1,台灣 LEO雨林植物（T3）：白皙（寬鬆）,T3
 banna-b,origin,泰國 Banna 園子,低,1,台灣 LEO雨林植物（T3）：泰國 Banna 園子的交種,T3
 banna-b,light,,,0,,
+ridleyi-pakarang,size,M,人工調整,0,人工調整（調查摘要 無）：手動填寫尺寸（cfcc1d7 之前，沒有對應引用），未記錄理由,
+salmon,size,M,人工調整,0,人工調整（調查摘要 無）：手動填寫尺寸（cfcc1d7 之前，沒有對應引用），未記錄理由,

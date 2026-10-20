@@ -189,6 +189,13 @@ python3 tools/serve.py
 
 寫入時保留原本的欄位順序與 BOM，只改動那一列。`features.csv` 由 `project_plan/survey/survey_species.py` 產生，不開放在網頁上改；已依指引調查的品種（`survey_version` 有值），重新執行調查腳本會覆蓋 `plants.csv` 的特徵欄位，表單上會提醒。照片的新增、刪除請用「管理照片」，資料表裡的 `photos` 只能改說明、作者、授權等文字欄位。改完記得 commit。
 
+**手動修改與調查腳本。** 調查腳本（`survey_species.py`、`survey_hybrids.py`）會重新產生特徵欄位、文字欄與引用。要讓手動修改長期保留：
+
+- `plants.csv` 的儲存格：寫進 `project_plan/survey/manual_overrides.csv`（`plant_id, field, value, reason, date`）。腳本每次執行最後都會套用；特徵欄位在 `features.csv` 標為「人工調整」，網站的提示會顯示理由。
+- 引用（`citations.csv`）：寫進調查腳本裡該品種的 block。
+
+腳本把上次產生的結果存在 `project_plan/survey/generated/`。執行時若發現 `plants.csv` 或 `citations.csv` 有沒記錄的手動修改、而且這次會被覆蓋，就**整批不寫入**並列出差異。這時可以加 `--adopt` 把 `plants.csv` 的修改自動收錄進 `manual_overrides.csv`（之後補上理由），或加 `--force` 確定覆蓋。`generated/` 要跟著 commit。
+
 ### 用 Excel 編輯的注意事項
 
 存檔時請選 **「CSV UTF-8（逗號分隔）」**，否則中文會變成亂碼。

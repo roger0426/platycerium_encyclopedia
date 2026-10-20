@@ -12,12 +12,12 @@ Writes:
   project_plan/survey/search_log.csv         fields with no summary after the search limit; only the 18 species' rows
 Rows are replaced in place (survey_common.replace_rows), so hybrid / cultivar rows written by survey_hybrids.py are kept.
 Summary rules shared with survey_hybrids.py live in survey_common.py.
-usage: python3 project_plan/survey/survey_species.py .
+usage: python3 project_plan/survey/survey_species.py . [--adopt | --force]  (manual edits: see survey_common.flush)
 """
 import os, sys
 from collections import defaultdict
 
-from survey_common import (FIELDS, SCALE, TEMP, T1_TEXT, CULT, DIFF_REGIONS, VERSION, CH, SH, FH, LH, LBL_FORM, LBL_BROWN, LBL_FRINGE,
+from survey_common import (flush, FIELDS, SCALE, TEMP, T1_TEXT, CULT, DIFF_REGIONS, VERSION, CH, SH, FH, LH, LBL_FORM, LBL_BROWN, LBL_FRINGE,
                            LBL_POST, LBL_SPORE, num, rw, write, replace_rows, source_meta, feature_rows, plant_text as _plant_text)
 
 ROOT = sys.argv[1]
@@ -714,3 +714,4 @@ write(os.path.join(ROOT, "data/plants.csv"), ph, [[r.get(k, "") for k in ph] for
 
 print({f: sum(1 for sp in SPECIES if summary[sp].get(f)) for f in FIELDS})
 print("citations", len(C), {u: sum(1 for x in C if x[5] == u) for u in ("summary", "reference", "excluded")})
+flush(sys.argv[2:])
