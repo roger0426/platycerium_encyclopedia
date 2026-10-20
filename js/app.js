@@ -2294,7 +2294,7 @@
 
   /* ---------------- 比較 ---------------- */
   // 已選的品種（有順序）存在 localStorage；比較頁以網址 #/compare/a,b,c 為準，方便分享
-  const CMP_MAX = 6;
+  const CMP_MAX = 8;
   let onCompare = false;
   const loadJSON = (key, fallback) => {
     try { return JSON.parse(localStorage.getItem(key)) ?? fallback; } catch (e) { return fallback; }
