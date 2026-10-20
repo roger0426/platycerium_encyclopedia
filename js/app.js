@@ -2556,6 +2556,30 @@
   window.addEventListener("resize", hideCmpTip);
   document.addEventListener("keydown", (e) => { if (e.key === "Escape") hideCmpTip(); });
 
+  // 滑鼠滾輪在表格上時，把一次滾動拆給頁面與表格：
+  // 往下先捲頁面直到表格底部進入畫面，再捲表格，表格到底後剩下的給頁面；
+  // 往上先捲表格，到頂後剩下的給頁面。
+  // 瀏覽器原生的 scroll chaining 在同一次觸控板手勢中會鎖定在表格上，表格到頂了頁面也不動，所以自己分配
+  app.addEventListener("wheel", (e) => {
+    const wrap = e.target.closest?.(".cmp-wrap");
+    if (!wrap || e.ctrlKey || Math.abs(e.deltaY) <= Math.abs(e.deltaX)) return; // 橫向捲動、縮放交給瀏覽器
+    let dy = e.deltaY * (e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? innerHeight : 1);
+    let page = 0, table = 0;
+    if (dy > 0) {
+      const pageRoom = document.documentElement.scrollHeight - innerHeight - window.scrollY;
+      const toView = Math.min(dy, pageRoom, Math.max(0, Math.ceil(wrap.getBoundingClientRect().bottom - innerHeight)));
+      page += toView; dy -= toView;
+      table = Math.min(dy, wrap.scrollHeight - wrap.clientHeight - wrap.scrollTop);
+      page += dy - table;
+    } else {
+      table = Math.max(dy, -wrap.scrollTop);
+      page = dy - table;
+    }
+    e.preventDefault();
+    if (table) wrap.scrollTop += table;
+    if (page) window.scrollBy(0, page);
+  }, { passive: false });
+
   function cmpHeadCell(it, i, n) {
     const href = `#/p/${encodeURIComponent(it.id)}`;
     const isBase = state.cmpBase === it.id;
