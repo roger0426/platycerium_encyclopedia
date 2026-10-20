@@ -2656,16 +2656,89 @@
     if (refocus) app.querySelector("#cmp-q")?.focus(); // focusin 會重新顯示建議清單
   }
 
-  // 加入品種：有輸入就搜尋，沒輸入就列出目前篩選結果
+  // 特徵相似度：每個欄位差距縮放到 0–1，只算兩邊都有值的欄位，取平均後換成 0–1 的相似度
+  let simRanges = null, simItems = null; // 資料重新載入（ITEMS 換新）時重算溫度等欄位的範圍
+  const simFields = () => {
+    if (simRanges && simItems === ITEMS) return simRanges;
+    simItems = ITEMS;
+    const span = (get) => {
+      const vs = ITEMS.map(get).filter((v) => v != null);
+      return Math.max(1, Math.max(...vs) - Math.min(...vs));
+    };
+    const num = (get, range) => (a, b) => {
+      const va = get(a), vb = get(b);
+      return va == null || vb == null ? null : Math.abs(va - vb) / range;
+    };
+    const same = (key) => (a, b) => (a[key] && b[key] ? Number(a[key] !== b[key]) : null);
+    const size = (it) => SIZE_RANK[it.size] ?? null, split = (it) => it.split?.mid ?? null;
+    simRanges = [
+      ...SCORE_FIELDS.map((k) => num((it) => it[k], 5)),
+      num(size, 3),
+      num((it) => it.min_temp, span((it) => it.min_temp)),
+      num((it) => it.max_temp, span((it) => it.max_temp)),
+      num(split, span(split)),
+      same("region"),
+      same("shield_form"),
+      (a, b) => { // 孢子葉姿態：1 − Jaccard
+        if (!a.posture.length || !b.posture.length) return null;
+        const both = a.posture.filter((p) => b.posture.includes(p)).length;
+        return 1 - both / new Set([...a.posture, ...b.posture]).size;
+      }
+    ];
+    return simRanges;
+  };
+  // 共同欄位少時往 0.5 收斂，避免資料很少的品種因為「剛好沒差異」排到前面；少於 3 欄視為無法比較
+  function similarity(a, b) {
+    const ds = simFields().map((f) => f(a, b)).filter((d) => d != null);
+    if (ds.length < 3) return null;
+    const s = 1 - ds.reduce((x, y) => x + y, 0) / ds.length;
+    return (s * ds.length + 0.5) / (ds.length + 1);
+  }
+  // 品系一路往上找到最源頭的 base；原生種、雜交種就是自己
+  const rootOf = (it, depth = 0) => (it.base && BY_ID.has(it.base) && depth < 10 ? rootOf(BY_ID.get(it.base), depth + 1) : it.id);
+  const SIM_PER_ROOT = 6, SIM_MAX = 12;
+  // 與比較清單的相似度（有基準時只跟基準比），同一家族（同源頭 base）最多 SIM_PER_ROOT 筆
+  function similarList() {
+    const refs = (state.cmpBase ? [state.cmpBase] : state.compare).map((id) => BY_ID.get(id)).filter(Boolean);
+    const scored = [];
+    for (const it of ITEMS) {
+      if (inCompare(it.id)) continue;
+      const sims = refs.map((r) => similarity(it, r)).filter((s) => s != null);
+      if (sims.length) scored.push({ it, sim: sims.reduce((x, y) => x + y, 0) / sims.length });
+    }
+    scored.sort((a, b) => b.sim - a.sim);
+    const perRoot = new Map();
+    return scored.filter(({ it }) => {
+      const r = rootOf(it), n = perRoot.get(r) || 0;
+      perRoot.set(r, n + 1);
+      return n < SIM_PER_ROOT;
+    });
+  }
+
+  // 加入品種：有輸入就搜尋；沒輸入時，已選品種就推薦特徵相似的，否則列出目前篩選結果
   function showSuggestions() {
     const box = app.querySelector("#cmp-sugg"), input = app.querySelector("#cmp-q");
     if (!box || input.disabled) return;
     const q = state.cmpQ.trim().toLowerCase();
-    const pool = q ? byRelevance(ITEMS.filter((it) => searchText(it).includes(q)), q) : visibleList();
-    const list = pool.filter((it) => !inCompare(it.id)).slice(0, 8);
-    box.innerHTML = (q ? "" : `<div class="cmp-sugg-h">${activeFeatCount() || state.q || state.type !== "all" || state.region !== "all" ? "來自目前的篩選結果" : "所有品種"}</div>`) +
+    let list, head = "", note = "", max = 8, sims = new Map();
+    if (q) list = byRelevance(ITEMS.filter((it) => searchText(it).includes(q) && !inCompare(it.id)), q);
+    else if (state.compare.length) {
+      const scored = similarList();
+      list = scored.map((s) => s.it);
+      sims = new Map(scored.map((s) => [s.it.id, s.sim]));
+      max = SIM_MAX;
+      head = state.cmpBase ? `與基準「${titleOf(BY_ID.get(state.cmpBase))}」特徵相似` : "與已選品種特徵相似";
+      note = "依栽培條件與外觀特徵估算，僅供參考；部分品種資料尚有缺漏，相似度可能有誤差。";
+    } else {
+      list = visibleList().filter((it) => !inCompare(it.id));
+      head = activeFeatCount() || state.q || state.type !== "all" || state.region !== "all" ? "來自目前的篩選結果" : "所有品種";
+    }
+    list = list.slice(0, max);
+    const sub = (it) => esc(it.name) + (sims.has(it.id) ? ` · 相似度 ${Math.round(sims.get(it.id) * 100)}%` : "");
+    box.innerHTML = (head ? `<div class="cmp-sugg-h">${esc(head)}</div>` : "") +
+      (note ? `<div class="cmp-sugg-note">${icon("info")}${esc(note)}</div>` : "") +
       (list.length ? list.map((it, i) => `<button type="button" role="option" data-cmp-add="${esc(it.id)}" ${i === 0 ? `aria-selected="true"` : ""}>
-          <img src="${esc(coverOf(it))}" alt=""><span><b>${esc(titleOf(it))}</b><i>${esc(it.name)}</i></span>
+          <img src="${esc(coverOf(it))}" alt=""><span><b>${esc(titleOf(it))}</b><i>${sub(it)}</i></span>
           <span class="badge ${it.type}">${TYPE_LABEL[it.type]}</span></button>`).join("")
         : `<div class="cmp-sugg-h">找不到符合的品種</div>`);
     box.hidden = false;
