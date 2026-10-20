@@ -380,9 +380,46 @@
     return sortValue(s, it) == null ? "未知" : s.hint(it);
   };
 
+  // 搜尋相關性：名稱 > 別名 > 親本、選拔來源 > 其他欄位（產地、育種者…）；
+  // 同一層再分完全相符 > 開頭相符 > 某個字開頭相符 > 包含
+  const normName = (s) => (s || "").toLowerCase().replace(/^(p\.|platycerium)\s*/, "")
+    .replace(/['‘’×]/g, "").replace(/\s+/g, " ").trim();
+  function nameRank(names, q) {
+    let best = 0;
+    for (const raw of names) {
+      const n = normName(raw);
+      if (!n) continue;
+      if (n === q) return 4;
+      if (n.startsWith(q)) best = Math.max(best, 3);
+      else if (n.split(/[\s\-–(（]/).some((w) => w.startsWith(q))) best = Math.max(best, 2);
+      else if (n.includes(q)) best = Math.max(best, 1);
+    }
+    return best;
+  }
+  function relevance(it, q) {
+    const base = baseOf(it);
+    const tiers = [
+      [it.id, it.name, it.zh, shortZh(it), it.en],
+      it.aka,
+      [...it.parents.map((p) => BY_ID.get(p)?.name || p), base?.name, base?.zh]
+    ];
+    for (let i = 0; i < tiers.length; i++) {
+      const r = nameRank(tiers[i], q);
+      if (r) return (tiers.length - i) * 10 + r;
+    }
+    return 0;
+  }
+  // 依相關性排序，同分維持原本順序（sort 是穩定排序）
+  function byRelevance(list, query) {
+    const q = normName(query);
+    if (!q) return list;
+    const rel = new Map(list.map((it) => [it.id, relevance(it, q)]));
+    return [...list].sort((a, b) => rel.get(b.id) - rel.get(a.id));
+  }
+
   function sortList(list) {
     const s = sortDef();
-    if (s.key === "default") return list;
+    if (s.key === "default") return byRelevance(list, state.q);
     const sign = state.dir === "asc" ? 1 : -1;
     const order = new Map(ITEMS.map((it, i) => [it.id, i]));
     return [...list].sort((a, b) => {
@@ -697,6 +734,8 @@
     const dirBtn = app.querySelector("#sort-dir");
     const [ascLbl, descLbl] = s.dirLabels || ["由低到高", "由高到低"];
     dirBtn.disabled = s.key === "default";
+    // 有搜尋字時，預設順序改為依相關性
+    app.querySelector('#sort option[value="default"]').textContent = state.q.trim() ? "相關性" : "預設順序";
     dirBtn.innerHTML = `${state.dir === "asc" ? "↑" : "↓"} ${state.dir === "asc" ? ascLbl : descLbl}`;
     dirBtn.setAttribute("aria-label", `排序方向：${state.dir === "asc" ? ascLbl : descLbl}，點選切換`);
 
@@ -2622,7 +2661,7 @@
     const box = app.querySelector("#cmp-sugg"), input = app.querySelector("#cmp-q");
     if (!box || input.disabled) return;
     const q = state.cmpQ.trim().toLowerCase();
-    const pool = q ? ITEMS.filter((it) => searchText(it).includes(q)) : visibleList();
+    const pool = q ? byRelevance(ITEMS.filter((it) => searchText(it).includes(q)), q) : visibleList();
     const list = pool.filter((it) => !inCompare(it.id)).slice(0, 8);
     box.innerHTML = (q ? "" : `<div class="cmp-sugg-h">${activeFeatCount() || state.q || state.type !== "all" || state.region !== "all" ? "來自目前的篩選結果" : "所有品種"}</div>`) +
       (list.length ? list.map((it, i) => `<button type="button" role="option" data-cmp-add="${esc(it.id)}" ${i === 0 ? `aria-selected="true"` : ""}>
