@@ -2088,6 +2088,9 @@
           if (e.sourceEvent) { userMoved = true; hideTip(); }
         });
       svg.call(zoom).on("dblclick.zoom", null);
+      // 滾輪在關係圖範圍內一律只縮放圖，不捲頁面：
+      // d3-zoom 在已縮到上下限時不會擋下滾輪，頁面就會跟著捲
+      box.addEventListener("wheel", (e) => e.preventDefault(), { passive: false });
 
       sim = d3.forceSimulation()
         .force("link", d3.forceLink().id((d) => d.id).distance(85).strength(1))
